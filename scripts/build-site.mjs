@@ -39,7 +39,6 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
       <a class="brand" href="${prefix}index.html" aria-label="Dolphin Systems home">
-        <img class="brand-mark" src="${prefix}${brandMark}" alt="" width="38" height="38">
         <span>Dolphin<span class="brand-light">Systems</span></span>
       </a>
       <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
@@ -52,7 +51,7 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <main id="main"${article ? ' class="article-main"' : ''}>${body}</main>
   <footer class="site-footer">
     <div class="shell footer-main">
-      <div><a class="brand" href="${prefix}index.html"><img class="brand-mark" src="${prefix}${brandMark}" alt="" width="38" height="38"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p></div>
+      <div><a class="brand" href="${prefix}index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p></div>
       <div class="footer-links"><a href="${prefix}services.html">Services</a><a href="${prefix}products.html">Products</a><a href="${prefix}research.html">Research</a><a href="${prefix}about.html">About</a><a href="${prefix}blog/">Blog</a><a href="${prefix}contact.html">Contact</a></div>
       <div class="footer-contact"><span>Have a system in mind?</span><a href="mailto:${email}">${email} <span aria-hidden="true">↗</span></a></div>
     </div>
