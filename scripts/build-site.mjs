@@ -27,9 +27,10 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${escapeHtml(description)}">
-  <meta name="theme-color" content="#f7f9f8">
+  <meta name="theme-color" content="#f7f9fd">
   <title>${escapeHtml(pageTitle)}</title>
-  <link rel="icon" type="image/svg+xml" href="${prefix}assets/favicon.svg">
+  <link rel="icon" type="image/png" href="${prefix}assets/dolphin-emblem.png">
+  <link rel="apple-touch-icon" href="${prefix}assets/dolphin-emblem.png">
   <link rel="stylesheet" href="${prefix}assets/site.css">
   <script src="${prefix}assets/site.js" defer></script>
 </head>
@@ -38,7 +39,7 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <header class="site-header" id="site-header">
     <div class="shell header-inner">
       <a class="brand" href="${prefix}index.html" aria-label="Dolphin Systems home">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <img class="brand-mark" src="${prefix}assets/dolphin-emblem.png" alt="" width="38" height="38">
         <span>Dolphin<span class="brand-light">Systems</span></span>
       </a>
       <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
@@ -51,7 +52,7 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <main id="main"${article ? ' class="article-main"' : ''}>${body}</main>
   <footer class="site-footer">
     <div class="shell footer-main">
-      <div><a class="brand" href="${prefix}index.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p></div>
+      <div><a class="brand" href="${prefix}index.html"><img class="brand-mark" src="${prefix}assets/dolphin-emblem.png" alt="" width="38" height="38"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p></div>
       <div class="footer-links"><a href="${prefix}services.html">Services</a><a href="${prefix}products.html">Products</a><a href="${prefix}research.html">Research</a><a href="${prefix}about.html">About</a><a href="${prefix}blog/">Blog</a><a href="${prefix}contact.html">Contact</a></div>
       <div class="footer-contact"><span>Have a system in mind?</span><a href="mailto:${email}">${email} <span aria-hidden="true">↗</span></a></div>
     </div>
