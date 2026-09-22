@@ -1,6 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Dolphin Systems</title>
-  <rect width="64" height="64" rx="15" fill="#255de5"/>
-  <path d="M18 14v36h12c12 0 21-7.5 21-18S42 14 30 14H18Z" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M20 35c5.5-7 11-7 16.5 0 4 5 8.5 5 13.5.5" fill="none" stroke="#b8d1ff" stroke-width="4.5" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="bg" x1="8" y1="56" x2="56" y2="8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b163f"/>
+      <stop offset=".48" stop-color="#1667ff"/>
+      <stop offset="1" stop-color="#39e6ff"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="17" y1="48" x2="49" y2="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".52" stop-color="#d9f8ff"/>
+      <stop offset="1" stop-color="#7af0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#071226"/>
+  <path d="M8 45V19c0-6.1 4.9-11 11-11h26c6.1 0 11 4.9 11 11v26c0 6.1-4.9 11-11 11H19C12.9 56 8 51.1 8 45Z" fill="url(#bg)"/>
+  <path d="M18 46V18h13.6c9 0 15.9 5.8 15.9 14s-6.9 14-15.9 14H18Z" fill="none" stroke="url(#mark)" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M22 36c4.9-6.1 10.5-6 16.6.4 3 3.1 6.1 4.2 9.4 3.2" fill="none" stroke="#071226" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
+  <path d="M22 36c4.9-6.1 10.5-6 16.6.4 3 3.1 6.1 4.2 9.4 3.2" fill="none" stroke="#9ff7ff" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M30 18v-5.5M42.2 23.3h6.3M42.2 40.7h6.3M30 46v5.5" fill="none" stroke="#9ff7ff" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="30" cy="12.5" r="2.4" fill="#fff"/>
+  <circle cx="50" cy="23.3" r="2.4" fill="#fff"/>
+  <circle cx="50" cy="40.7" r="2.4" fill="#fff"/>
+  <circle cx="30" cy="51.5" r="2.4" fill="#fff"/>
 </svg>
