@@ -16,7 +16,6 @@ img,svg{max-width:100%}
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.055em;white-space:nowrap}
 .brand-light{font-weight:500;margin-left:5px}
 .brand-mark{width:38px;height:38px;display:block;object-fit:contain;flex:none;border-radius:7px}
-.site-header .brand-mark{mix-blend-mode:multiply}
 .site-nav{display:flex;align-items:center;gap:29px;font-size:14px;font-weight:600}
 .site-nav>a:not(.nav-contact){color:#4c5b73;transition:color .2s}
 .site-nav>a:hover,.site-nav>a[aria-current]{color:var(--accent)}
