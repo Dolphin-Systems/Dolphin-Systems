@@ -1,0 +1,20 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "dolphin-systems-caretaker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-22",
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": ["0 13 * * *"]
+  },
+  "vars": {
+    "SITE_URL": "https://dolphinsystems.net/",
+    "GITHUB_OWNER": "Dolphin-Systems",
+    "GITHUB_REPO": "Dolphin-Systems",
+    "GITHUB_BRANCH": "main",
+    "BLOG_MODEL": "gpt-6-astra",
+    "CREATE_ISSUES_ON_FAILURE": "true"
+  }
+}
