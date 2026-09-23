@@ -96,43 +96,70 @@ async function runCaretaker(env, options = {}) {
 
 async function handleLilaMessage(env, body) {
   requireEnv(env, ['DEEPSEEK_API_KEY']);
-  if (!env.LILA_STORE) return { ok: false, error: 'storage_not_configured' };
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
 
   const conversationId = String(body.conversationId || crypto.randomUUID());
   const userMessage = String(body.message || '').trim().slice(0, 1200);
   if (!userMessage) return { ok: false, error: 'message_required' };
 
   const now = new Date().toISOString();
-  const existing = await env.LILA_STORE.get(`chat:${conversationId}`, 'json');
-  const chat = existing || { id: conversationId, createdAt: now, messages: [], lead: {} };
-  chat.updatedAt = now;
-  chat.messages.push({ role: 'user', content: userMessage, at: now });
-  chat.messages = chat.messages.slice(-24);
+  await db.prepare(
+    'INSERT INTO conversations (id, created_at, updated_at) VALUES (?1, ?2, ?2) ' +
+    'ON CONFLICT(id) DO UPDATE SET updated_at = ?2'
+  ).bind(conversationId, now).run();
+  await db.prepare(
+    'INSERT INTO messages (conversation_id, role, content, created_at) VALUES (?1, ?2, ?3, ?4)'
+  ).bind(conversationId, 'user', userMessage, now).run();
 
-  const ai = await askLila(env, chat);
-  chat.messages.push({ role: 'assistant', content: ai.reply, at: new Date().toISOString() });
-  chat.lead = {
-    ...chat.lead,
+  const history = await getRecentMessages(db, conversationId, 24);
+  const ai = await askLila(env, history);
+  const repliedAt = new Date().toISOString();
+  await db.prepare(
+    'INSERT INTO messages (conversation_id, role, content, created_at) VALUES (?1, ?2, ?3, ?4)'
+  ).bind(conversationId, 'assistant', ai.reply, repliedAt).run();
+
+  const lead = {
     ...(ai.lead || {}),
-    summary: ai.summary || chat.lead.summary || '',
+    summary: ai.summary || '',
     relevant: ai.relevant !== false,
-    updatedAt: new Date().toISOString(),
+    updatedAt: repliedAt,
   };
-
-  await env.LILA_STORE.put(`chat:${conversationId}`, JSON.stringify(chat));
-  if (chat.lead.relevant && (chat.lead.name || chat.lead.email || chat.lead.phone || chat.lead.summary)) {
-    await env.LILA_STORE.put(`lead:${conversationId}`, JSON.stringify({
-      id: conversationId,
-      updatedAt: chat.updatedAt,
-      lead: chat.lead,
-      transcript: chat.messages,
-    }));
+  if (lead.relevant && (lead.name || lead.email || lead.phone || lead.summary)) {
+    await saveLead(db, conversationId, lead);
   }
+  await db.prepare('UPDATE conversations SET updated_at = ?2 WHERE id = ?1')
+    .bind(conversationId, repliedAt).run();
 
-  return { ok: true, conversationId, reply: ai.reply, lead: chat.lead };
+  return { ok: true, conversationId, reply: ai.reply, lead };
 }
 
-async function askLila(env, chat) {
+async function getRecentMessages(db, conversationId, limit) {
+  const rows = await db.prepare(
+    'SELECT role, content, created_at AS at FROM messages WHERE conversation_id = ?1 ORDER BY id DESC LIMIT ?2'
+  ).bind(conversationId, limit).all();
+  return (rows.results || []).reverse();
+}
+
+async function saveLead(db, conversationId, lead) {
+  await db.prepare(
+    `INSERT INTO leads (conversation_id, name, email, phone, company, problem, tools, outcome, timeline, budget, summary, relevant, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)
+     ON CONFLICT(conversation_id) DO UPDATE SET
+       name = excluded.name, email = excluded.email, phone = excluded.phone, company = excluded.company,
+       problem = excluded.problem, tools = excluded.tools, outcome = excluded.outcome,
+       timeline = excluded.timeline, budget = excluded.budget, summary = excluded.summary,
+       relevant = excluded.relevant, updated_at = excluded.updated_at`
+  ).bind(
+    conversationId,
+    lead.name || null, lead.email || null, lead.phone || null, lead.company || null,
+    lead.problem || null, lead.tools || null, lead.outcome || null,
+    lead.timeline || null, lead.budget || null,
+    lead.summary || '', lead.relevant ? 1 : 0, lead.updatedAt
+  ).run();
+}
+
+async function askLila(env, messages) {
   const response = await fetch(`${env.AI_API_BASE || 'https://api.deepseek.com'}/chat/completions`, {
     method: 'POST',
     headers: {
@@ -155,7 +182,7 @@ async function askLila(env, chat) {
             'lead keys: name, email, phone, company, problem, tools, outcome, timeline, budget.',
           ].join(' '),
         },
-        ...chat.messages.map((message) => ({ role: message.role, content: message.content })),
+        ...messages.map((message) => ({ role: message.role, content: message.content })),
       ],
       response_format: { type: 'json_object' },
       temperature: 0.55,
@@ -173,10 +200,34 @@ async function askLila(env, chat) {
 }
 
 async function listLeads(env) {
-  if (!env.LILA_STORE) return [];
-  const listed = await env.LILA_STORE.list({ prefix: 'lead:', limit: 50 });
-  const leads = await Promise.all(listed.keys.map((key) => env.LILA_STORE.get(key.name, 'json')));
-  return leads.filter(Boolean).sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+  const db = env.LEADS_DB;
+  if (!db) return [];
+  const rows = await db.prepare(
+    `SELECT l.conversation_id AS id, l.name, l.email, l.phone, l.company, l.problem, l.tools,
+            l.outcome, l.timeline, l.budget, l.summary, l.relevant, l.updated_at AS updatedAt,
+            c.created_at AS createdAt
+     FROM leads l
+     JOIN conversations c ON c.id = l.conversation_id
+     ORDER BY l.updated_at DESC
+     LIMIT 50`
+  ).all();
+  const leads = [];
+  for (const row of rows.results || []) {
+    const transcript = await getRecentMessages(db, row.id, 100);
+    leads.push({
+      id: row.id,
+      updatedAt: row.updatedAt,
+      createdAt: row.createdAt,
+      lead: {
+        name: row.name, email: row.email, phone: row.phone, company: row.company,
+        problem: row.problem, tools: row.tools, outcome: row.outcome,
+        timeline: row.timeline, budget: row.budget,
+        summary: row.summary, relevant: row.relevant === 1,
+      },
+      transcript,
+    });
+  }
+  return leads;
 }
 
 async function checkWebsite(siteUrl) {
