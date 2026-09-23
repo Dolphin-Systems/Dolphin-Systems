@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const email = 'hello@dolphinsystems.com';
 const brandMark = 'assets/brand-mark.svg?v=20260922-text-favicon';
+const assetVersion = '20260923-lila';
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -31,8 +32,8 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <meta name="theme-color" content="#f7f9fd">
   <title>${escapeHtml(pageTitle)}</title>
   <link rel="icon" type="image/svg+xml" href="${prefix}${brandMark}">
-  <link rel="stylesheet" href="${prefix}assets/site.css">
-  <script src="${prefix}assets/site.js" defer></script>
+  <link rel="stylesheet" href="${prefix}assets/site.css?v=${assetVersion}">
+  <script src="${prefix}assets/site.js?v=${assetVersion}" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
