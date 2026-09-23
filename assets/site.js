@@ -29,6 +29,7 @@ document.querySelectorAll('[data-year]').forEach((element) => {
 });
 
 const lilaApi = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev/api/lila/message';
+const humanApi = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev/api/human';
 
 function typingDelay(text) {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
@@ -52,6 +53,8 @@ function createLilaChat() {
           <strong>Lila</strong>
           <span>Dolphin Systems</span>
         </div>
+        <button class="lila-human" type="button" aria-label="Chat with a human" title="Chat with a human">👤</button>
+        <button class="lila-back" type="button" hidden>← Lila</button>
         <button class="lila-close" type="button" aria-label="Close chat">×</button>
       </div>
       <div class="lila-messages" aria-live="polite"></div>
@@ -71,7 +74,11 @@ function createLilaChat() {
   const messages = widget.querySelector('.lila-messages');
   const form = widget.querySelector('.lila-form');
   const input = widget.querySelector('.lila-input');
+  const humanBtn = widget.querySelector('.lila-human');
+  const backBtn = widget.querySelector('.lila-back');
+  const hpField = widget.querySelector('.lila-hp');
   let conversationId = localStorage.getItem('lilaConversationId') || '';
+  let humanMode = false, humanTimer = null, lastMsgId = 0;
 
   function addMessage(text, sender) {
     const bubble = document.createElement('div');
@@ -93,6 +100,63 @@ function createLilaChat() {
     messages.scrollTop = messages.scrollHeight;
   }
 
+  function setHumanMode(on){
+    humanMode = on;
+    humanBtn.classList.toggle('is-active', on);
+    backBtn.hidden = !on;
+    if(on){ startHumanPoll(); } else { stopHumanPoll(); }
+  }
+  function startHumanPoll(){
+    stopHumanPoll();
+    const poll = () => {
+      if(!humanMode || !conversationId) return;
+      fetch(humanApi + '/messages?conversationId=' + encodeURIComponent(conversationId) + '&since=' + lastMsgId)
+        .then((r) => r.json())
+        .then((data) => {
+          if(!data.ok) return;
+          if(data.status === 'closed' && humanMode){
+            addMessage('Ritik ended the chat. You are back with Lila.', 'bot');
+            setHumanMode(false);
+            return;
+          }
+          (data.messages || []).forEach((m) => {
+            lastMsgId = Math.max(lastMsgId, m.id || 0);
+            if(m.role === 'human') addMessage(m.content, 'human');
+          });
+        })
+        .catch(() => {});
+    };
+    poll();
+    humanTimer = setInterval(poll, 3000);
+  }
+  function stopHumanPoll(){ if(humanTimer) clearInterval(humanTimer); humanTimer = null; }
+  function requestHuman(){
+    if(humanMode) return;
+    fetch(humanApi + '/request', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ conversationId, website: hpField.value || '' }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if(!data.ok){
+          addMessage('Could not connect you right now. Please email hello' + '@' + 'dolphinsystems.net instead.', 'bot');
+          return;
+        }
+        conversationId = data.conversationId;
+        localStorage.setItem('lilaConversationId', conversationId);
+        lastMsgId = 0;
+        setHumanMode(true);
+        addMessage('Connecting you to Ritik \u2014 he has been notified and will join shortly.', 'bot');
+      })
+      .catch(() => addMessage('Connection failed. Please try again.', 'bot'));
+  }
+  humanBtn.addEventListener('click', requestHuman);
+  backBtn.addEventListener('click', () => {
+    setHumanMode(false);
+    addMessage('You are back with Lila.', 'bot');
+  });
+
   function openChat() {
     panel.classList.add('is-open');
     launcher.setAttribute('aria-expanded', 'true');
@@ -100,11 +164,13 @@ function createLilaChat() {
       addMessage('Hi, I am Lila. What is your name, and what email or phone number should Dolphin Systems use if this looks like a fit?', 'bot');
     }
     input.focus();
+    if(humanMode) startHumanPoll();
   }
 
   function closeChat() {
     panel.classList.remove('is-open');
     launcher.setAttribute('aria-expanded', 'false');
+    stopHumanPoll();
   }
 
   launcher.addEventListener('click', () => {
@@ -128,6 +194,14 @@ function createLilaChat() {
     if (!value) return;
     input.value = '';
     addMessage(value, 'user');
+    if(humanMode){
+      fetch(humanApi + '/message', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ conversationId, message: value, website: hpField.value || '' }),
+      }).catch(() => addMessage('Message failed to send. Please try again.', 'bot'));
+      return;
+    }
     setTyping(true);
     fetch(lilaApi, {
       method: 'POST',
