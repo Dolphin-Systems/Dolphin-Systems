@@ -1,0 +1,60 @@
+{
+  "slug": "2026-09-23-stop-automating-symptoms-fix-the-process-first",
+  "title": "Stop Automating Symptoms: Fix the Process First",
+  "description": "A practical framework for deciding what to automate, what to fix, and what to leave alone — so automation reduces operational load instead of hiding it.",
+  "date": "2026-09-23",
+  "category": "Workflow Automation",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most automation projects fail for a predictable reason: teams automate a process before they understand it. The result is a faster version of a broken workflow — more volume, more errors, and more places for things to go wrong quietly. Before you connect tools or build a workflow, separate the work into three categories: steps that are broken, steps that are manual but sound, and steps that should not exist at all."
+    },
+    {
+      "type": "heading",
+      "text": "Diagnose before you automate"
+    },
+    {
+      "type": "paragraph",
+      "text": "A process is a candidate for automation only when it is stable, repeatable, and well-defined. If the same input produces different outputs depending on who handles it, automation will lock in that inconsistency. Map the current state first: every step, every handoff, every decision point, and every system touched. This usually takes a few hours and prevents weeks of rework."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Broken step: inconsistent rules, missing data, unclear ownership. Fix the process before automating it.",
+        "Manual but sound step: stable rules, clear inputs and outputs. Good automation candidate.",
+        "Unnecessary step: exists only because of a legacy constraint or an approval nobody uses. Remove it.",
+        "Integration gap: two systems that should share data but don't. Solve with a defined sync, not manual copying."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Design for failure, not just for speed"
+    },
+    {
+      "type": "paragraph",
+      "text": "Reliable automation assumes things will break. Every workflow needs three things: a clear trigger, explicit error handling, and a visible record of what happened. If a sync fails at 2 a.m., someone should know by 8 a.m. — without digging through logs. Build alerts for failed runs, define retry behavior, and log inputs and outputs so problems can be traced to a specific step rather than blamed on \"the system.\""
+    },
+    {
+      "type": "list",
+      "items": [
+        "Trigger: define the exact event that starts the workflow and what data it must carry.",
+        "Validation: reject malformed inputs at the start rather than passing bad data downstream.",
+        "Error handling: retry transient failures, route permanent failures to a human queue.",
+        "Observability: log each run with timestamps, status, and the record it touched.",
+        "Ownership: name the person responsible for monitoring and fixing the workflow."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Measure operational load, not just time saved"
+    },
+    {
+      "type": "paragraph",
+      "text": "Hours saved is a weak metric because it ignores the cost of maintaining the automation. Track the full picture: how many manual touches were eliminated, how many errors reached a customer, how often someone had to intervene, and how long it takes to onboard a new employee into the process. A workflow that saves ten hours a week but requires five hours of maintenance and debugging is not a win. A workflow that saves four hours and runs untouched for months is."
+    },
+    {
+      "type": "paragraph",
+      "text": "The goal is not maximum automation. It is minimum operational friction. Automate the stable, remove the unnecessary, and keep humans in the loop where judgment actually matters. That sequence — fix, simplify, then automate — is what makes systems reliable enough to trust."
+    }
+  ]
+}
