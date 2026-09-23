@@ -407,32 +407,34 @@ function adminPage() {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dolphin Systems Caretaker</title>
   <style>
-    :root{color-scheme:light;--ink:#071329;--muted:#5b6578;--line:#dbe4f3;--blue:#1458e8;--soft:#f6f9ff;--good:#0d8f62}
-    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8fbff,#eef5ff)}
-    main{width:min(1120px,calc(100% - 32px));margin:36px auto}
-    .top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}
-    h1{font-size:34px;margin:0 0 8px;letter-spacing:-.03em}p{color:var(--muted);line-height:1.55}
-    .panel{background:white;border:1px solid var(--line);border-radius:8px;padding:22px;margin:16px 0;box-shadow:0 18px 40px rgba(20,88,232,.08)}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--soft)}.metric b{display:block;font-size:20px}.metric span{font-size:12px;color:var(--muted)}
-    label{display:block;font-weight:700;margin-bottom:8px}input,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit}
-    textarea{min-height:130px;resize:vertical}select{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit;background:white}button{border:0;border-radius:8px;background:var(--blue);color:white;font-weight:700;padding:12px 16px;cursor:pointer}
-    button.secondary{background:#071329}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    :root{color-scheme:light;--ink:#071329;--muted:#647089;--line:#dbe4f2;--blue:#185cff;--soft:#f5f8ff;--good:#0d8f62;--dark:#0c1833}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#eef4ff}
+    body:before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 18% 0,rgba(24,92,255,.18),transparent 32%),radial-gradient(circle at 100% 18%,rgba(83,239,255,.22),transparent 28%);pointer-events:none}
+    main{position:relative;width:min(1180px,calc(100% - 32px));margin:30px auto 48px}
+    .top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px;background:var(--dark);color:#fff;border-radius:14px;padding:24px;box-shadow:0 24px 70px rgba(12,24,51,.18)}
+    h1{font-size:34px;margin:0 0 6px;letter-spacing:-.04em}p{color:var(--muted);line-height:1.55}.top p{color:#bfd0ee;margin:0}
+    .panel{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0;box-shadow:0 18px 45px rgba(20,88,232,.08)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{border:1px solid var(--line);border-radius:12px;padding:16px;background:white}.metric b{display:block;font-size:22px;letter-spacing:-.03em}.metric span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+    label{display:block;font-weight:800;margin-bottom:8px}input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;background:#fbfdff}
+    textarea{min-height:128px;resize:vertical}button{border:0;border-radius:10px;background:var(--blue);color:white;font-weight:800;padding:12px 16px;cursor:pointer}
+    button.secondary{background:#0c1833}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.quick button{background:#e9f0ff;color:var(--ink)}.quick button.active{background:var(--blue);color:white}
-    pre{white-space:pre-wrap;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto}
-    .status{font-size:14px;color:var(--muted)}.manager{border-left:4px solid var(--blue)}.ok{color:var(--good)}@media(max-width:800px){.grid,.metric-grid,.quick{grid-template-columns:1fr}}
+    pre{white-space:pre-wrap;background:#0c1833;color:#dbe8ff;border:1px solid #263b66;border-radius:12px;padding:14px;overflow:auto;min-height:160px}
+    .status{font-size:14px;color:var(--muted)}.manager{border-left:5px solid var(--blue)}.ok{color:var(--good)}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.pill{display:inline-flex;align-items:center;border-radius:999px;background:#e9f0ff;color:var(--blue);font-size:12px;font-weight:800;padding:6px 10px}
+    @media(max-width:800px){.top{align-items:flex-start;flex-direction:column}.grid,.metric-grid,.quick{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <main>
     <div class="top">
       <div>
-        <h1>Dolphin Systems Caretaker</h1>
-        <p>Control website checks and automated blog publishing.</p>
+        <h1>Caretaker Dashboard</h1>
+        <p>Manage Dolphin Systems publishing, health checks, and blog direction.</p>
       </div>
       <button class="secondary" id="refresh">Refresh</button>
     </div>
     <section class="panel manager">
-      <label for="token">Admin token</label>
+      <div class="section-title"><label for="token">Admin token</label><span class="pill">Manager access</span></div>
       <input id="token" type="password" autocomplete="current-password" placeholder="Paste ADMIN_TOKEN">
       <p class="status">Saved only in this browser's local storage. This is the manager panel for the site caretaker.</p>
     </section>
@@ -443,7 +445,7 @@ function adminPage() {
       <div class="metric"><b>--</b><span>Last post</span></div>
     </section>
     <section class="panel">
-      <label for="instructions">Instruction</label>
+      <div class="section-title"><label for="instructions">Manager instruction</label><span class="pill">Natural language</span></div>
       <textarea id="instructions" placeholder="Example: Write one practical blog post every day about automation and system reliability."></textarea>
       <div class="actions">
         <button id="save">Save instruction</button>

@@ -78,8 +78,9 @@ h3{font-size:27px;line-height:1.14}
 .lila-chat{position:fixed;right:22px;bottom:22px;z-index:200;font-family:'DM Sans',Arial,sans-serif}
 .lila-launcher{display:flex;align-items:center;gap:10px;border:0;border-radius:999px;background:var(--ink);color:#fff;box-shadow:0 18px 40px rgba(18,44,92,.22);padding:13px 17px;font-size:14px;font-weight:700;cursor:pointer}
 .lila-panel{position:absolute;right:0;bottom:58px;width:min(360px,calc(100vw - 32px));height:520px;max-height:calc(100vh - 110px);background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 28px 80px rgba(18,44,92,.22);overflow:hidden;display:none;grid-template-rows:auto 1fr auto}.lila-panel.is-open{display:grid}
-.lila-header{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--night);color:#fff;padding:16px}
-.lila-header strong{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:19px;letter-spacing:-.04em}.lila-header span{display:block;color:#c8d8f2;font-size:12px}
+.lila-header{display:flex;align-items:center;gap:12px;background:var(--night);color:#fff;padding:13px 14px;min-height:70px}
+.lila-header .lila-avatar{width:40px;height:40px;font-size:17px;box-shadow:0 0 0 6px rgba(123,242,255,.12)}
+.lila-header strong{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:19px;letter-spacing:-.04em}.lila-header span:not(.lila-avatar){display:block;color:#c8d8f2;font-size:12px}
 .lila-close{border:1px solid #536b96;background:transparent;color:#fff;border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:22px;line-height:1}
 .lila-messages{display:flex;flex-direction:column;gap:10px;padding:15px;overflow:auto;background:#f7f9fd}
 .lila-message{max-width:86%;border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.45;white-space:pre-line}
