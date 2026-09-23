@@ -1371,16 +1371,17 @@ var TITLES = {
   leads:['Leads','Every visitor Lila talked to, organized.'],
   chats:['Chat logs','Every conversation, searchable end to end.'],
   comments:['Comments','Blog comments, newest first. Delete spam here.'],
-  caretaker:['Caretaker','Publishing, health checks and blog direction.']
+  caretaker:['Caretaker','Publishing, health checks and blog direction.'],
+  catalog:['Catalog','Products and services, with ratings.']
 };
 function setView(v){
   state.view = v;
   $$('.nav button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view') === v); });
   $$('.view').forEach(function(s){ s.classList.remove('active'); });
   $('#view-' + v).classList.add('active');
+  document.body.classList.remove('nav-open');
   $('#viewTitle').textContent = TITLES[v][0];
   $('#viewSub').textContent = TITLES[v][1];
-  document.body.classList.remove('nav-open');
   if(v === 'leads' && !state.leads.length) loadLeads();
   if(v === 'chats' && !state.chats.length) loadChats();
   if(v === 'comments' && !state.commentsLoaded) loadComments();
