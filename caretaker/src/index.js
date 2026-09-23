@@ -718,7 +718,16 @@ async function handleLilaMessage(env, body, request) {
     const leadRow = await db.prepare('SELECT name FROM leads WHERE conversation_id = ?1').bind(conversationId).first();
     if (leadRow && leadRow.name) knownName = String(leadRow.name).slice(0, 80);
   } catch (e) {}
-  const ai = await askLila(env, history, knownName);
+  let ai;
+  try {
+    ai = await askLila(env, history, knownName);
+  } catch (e) {
+    // AI hiccup: stay conversational, keep the lead warm, never hard-fail the chat.
+    ai = {
+      reply: (knownName ? 'Thanks ' + knownName + '! ' : '') + "My brain glitched for a second — could you say that once more? In the meantime, what's the workflow or system you'd most like improved?",
+      relevant: true, lead: {}, summary: '',
+    };
+  }
   const repliedAt = new Date().toISOString();
   await db.prepare(
     'INSERT INTO messages (conversation_id, role, content, created_at) VALUES (?1, ?2, ?3, ?4)'

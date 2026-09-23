@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const email = 'hello@dolphinsystems.net';
 const brandMark = 'assets/brand-mark.svg?v=20260923-ds-favicon';
-const assetVersion = '20260923-reactions3';
+const assetVersion = '20260923-gate1';
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
