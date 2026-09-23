@@ -1,5 +1,5 @@
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8' };
-const HTML_HEADERS = { 'content-type': 'text/html; charset=utf-8' };
+const HTML_HEADERS = { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' };
 const SETTINGS_PATH = 'caretaker/settings.json';
 const CORS_HEADERS = {
   'access-control-allow-origin': '*',
