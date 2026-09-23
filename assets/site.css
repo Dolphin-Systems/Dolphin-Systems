@@ -40,6 +40,7 @@ h3{font-size:27px;line-height:1.14}
 .button-outline-light{border:1px solid #7489b3;color:#fff}.button-outline-light:hover{border-color:#bad0fc}
 .text-arrow{font-size:19px;font-weight:400;line-height:1}
 .hero{min-height:660px;padding-block:112px 106px;display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:7%}
+.system-board-img{width:100%;max-width:650px;height:auto;display:block}
 .hero-copy h1{max-width:640px;margin-top:26px}
 .hero-copy>p,.page-hero>p{max-width:560px;color:#54647a;font-size:19px;line-height:1.65}
 .hero-actions{display:flex;align-items:center;gap:22px;margin-top:34px}
