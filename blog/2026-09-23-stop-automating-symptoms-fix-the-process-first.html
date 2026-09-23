@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical framework for deciding what to automate, what to fix, and what to leave alone — so automation reduces operational load instead of hiding it.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>Stop Automating Symptoms: Fix the Process First — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand-mark.svg?v=20260922-text-favicon">
+  <link rel="stylesheet" href="../assets/site.css?v=20260923-lila-ai">
+  <script src="../assets/site.js?v=20260923-lila-ai" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../services.html">Services</a><a href="../products.html">Products</a><a href="../research.html">Research</a><a href="../about.html">About</a><a href="../blog/" aria-current="page">Blog</a>
+        <a class="nav-contact" href="../contact.html">Let's talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="article-main"><article class="shell article" data-post-slug="2026-09-23-stop-automating-symptoms-fix-the-process-first"><a class="back-link" href="./">← All articles</a><div class="article-heading"><div class="blog-thumb" style="--thumb-a:227;--thumb-b:187;--thumb-angle:122deg" aria-hidden="true"><span></span><i></i><b></b></div><span class="kicker">Workflow Automation</span><h1>Stop Automating Symptoms: Fix the Process First</h1><p>A practical framework for deciding what to automate, what to fix, and what to leave alone — so automation reduces operational load instead of hiding it.</p><time datetime="2026-09-23">2026-09-23</time></div><div class="article-content"><p>Most automation projects fail for a predictable reason: teams automate a process before they understand it. The result is a faster version of a broken workflow — more volume, more errors, and more places for things to go wrong quietly. Before you connect tools or build a workflow, separate the work into three categories: steps that are broken, steps that are manual but sound, and steps that should not exist at all.</p><h2>Diagnose before you automate</h2><p>A process is a candidate for automation only when it is stable, repeatable, and well-defined. If the same input produces different outputs depending on who handles it, automation will lock in that inconsistency. Map the current state first: every step, every handoff, every decision point, and every system touched. This usually takes a few hours and prevents weeks of rework.</p><ul><li>Broken step: inconsistent rules, missing data, unclear ownership. Fix the process before automating it.</li><li>Manual but sound step: stable rules, clear inputs and outputs. Good automation candidate.</li><li>Unnecessary step: exists only because of a legacy constraint or an approval nobody uses. Remove it.</li><li>Integration gap: two systems that should share data but don&#39;t. Solve with a defined sync, not manual copying.</li></ul><h2>Design for failure, not just for speed</h2><p>Reliable automation assumes things will break. Every workflow needs three things: a clear trigger, explicit error handling, and a visible record of what happened. If a sync fails at 2 a.m., someone should know by 8 a.m. — without digging through logs. Build alerts for failed runs, define retry behavior, and log inputs and outputs so problems can be traced to a specific step rather than blamed on &quot;the system.&quot;</p><ul><li>Trigger: define the exact event that starts the workflow and what data it must carry.</li><li>Validation: reject malformed inputs at the start rather than passing bad data downstream.</li><li>Error handling: retry transient failures, route permanent failures to a human queue.</li><li>Observability: log each run with timestamps, status, and the record it touched.</li><li>Ownership: name the person responsible for monitoring and fixing the workflow.</li></ul><h2>Measure operational load, not just time saved</h2><p>Hours saved is a weak metric because it ignores the cost of maintaining the automation. Track the full picture: how many manual touches were eliminated, how many errors reached a customer, how often someone had to intervene, and how long it takes to onboard a new employee into the process. A workflow that saves ten hours a week but requires five hours of maintenance and debugging is not a win. A workflow that saves four hours and runs untouched for months is.</p><p>The goal is not maximum automation. It is minimum operational friction. Automate the stable, remove the unnecessary, and keep humans in the loop where judgment actually matters. That sequence — fix, simplify, then automate — is what makes systems reliable enough to trust.</p></div><section class="blog-engage" aria-label="Article reactions and comments"><div><h2>Was this useful?</h2><p>Leave a quick reaction or note for yourself. This basic version stores feedback in your browser.</p></div><div class="reaction-row"><button type="button" data-reaction="useful">Useful <span>0</span></button><button type="button" data-reaction="sharp">Sharp <span>0</span></button><button type="button" data-reaction="more">More like this <span>0</span></button></div><form class="comment-form"><label for="comment-2026-09-23-stop-automating-symptoms-fix-the-process-first">Comment</label><textarea id="comment-2026-09-23-stop-automating-symptoms-fix-the-process-first" placeholder="Write a thought or question"></textarea><button type="submit">Save comment</button></form><div class="comment-list"></div></section><div class="article-end"><a class="inline-link" href="./">More from the blog <span class="text-arrow" aria-hidden="true">↗</span></a></div></article></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p></div>
+      <div class="footer-links"><a href="../services.html">Services</a><a href="../products.html">Products</a><a href="../research.html">Research</a><a href="../about.html">About</a><a href="../blog/">Blog</a><a href="../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="mailto:hello@dolphinsystems.com">hello@dolphinsystems.com <span aria-hidden="true">↗</span></a><button class="chat-link" type="button" data-open-lila><span class="chat-icon" aria-hidden="true">L</span> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
