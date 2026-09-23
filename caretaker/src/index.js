@@ -1245,7 +1245,7 @@ $('#exportBtn').onclick = function(){
     rows.push([item.id, l.name||'', l.email||'', l.phone||'', l.company||'', l.problem||'', l.tools||'',
       l.outcome||'', l.timeline||'', l.budget||'', l.summary||'', item.status, item.notes||'', item.createdAt||'', item.updatedAt||'']);
   });
-  var csv = rows.map(function(r){ return r.map(function(c){ return '"' + String(c).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var csv = rows.map(function(r){ return r.map(function(c){ return '"' + String(c).replace(/"/g,'""') + '"'; }).join(','); }).join('\\n');
   var a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv' }));
   a.download = 'dolphin-leads.csv'; a.click();
