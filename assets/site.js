@@ -212,7 +212,7 @@ function setupBlogEngagement() {
     commentList.innerHTML = comments.length
       ? comments.map((c) => {
           const when = c.created_at ? new Date(c.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
-          return `<div class="comment"><div class="comment-head"><b>${escHtml(c.name)}</b><time>${escHtml(when)}</time></div><p>${escHtml(c.body)}</p></div>`;
+          return `<div class="comment"><div class="comment-bubble"><b>${escHtml(c.name)}</b><p>${escHtml(c.body)}</p></div><div class="comment-meta">${escHtml(when)}</div></div>`;
         }).join('')
       : '<p class="empty-comment">No comments yet. Start the conversation.</p>';
   }
