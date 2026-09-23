@@ -57,6 +57,7 @@ function createLilaChat() {
       <div class="lila-messages" aria-live="polite"></div>
       <form class="lila-form">
         <input class="lila-input" type="text" autocomplete="off" placeholder="Tell Lila what you need">
+        <input class="lila-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit">Send</button>
       </form>
     </div>
@@ -131,7 +132,7 @@ function createLilaChat() {
     fetch(lilaApi, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ conversationId, message: value }),
+      body: JSON.stringify({ conversationId, message: value, website: form.querySelector('.lila-hp').value || '' }),
     })
       .then((response) => response.json())
       .then((data) => {

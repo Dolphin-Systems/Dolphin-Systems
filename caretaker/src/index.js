@@ -28,9 +28,10 @@ export default {
     }
 
     if (url.pathname === '/api/lila/message' && request.method === 'POST') {
-      const body = await request.json();
-      const result = await handleLilaMessage(env, body);
-      return json(result, result.ok ? 200 : 400, CORS_HEADERS);
+      const body = await request.json().catch(() => ({}));
+      const result = await handleLilaMessage(env, body, request);
+      const status = result.status || (result.ok ? 200 : 400);
+      return json(result, status, CORS_HEADERS);
     }
 
     if (url.pathname === '/api/leads') {
@@ -208,7 +209,43 @@ async function runCaretaker(env, options = {}) {
   return { ok: true, checks, publish };
 }
 
-async function handleLilaMessage(env, body) {
+
+// ---- Spam protection ----
+const SPAM_KEYWORDS = [
+  'seo', 'backlink', 'search engine optimization', 'rank on google', 'first page of google',
+  'page one of google', 'increase your traffic', 'website traffic', 'guest post', 'link exchange',
+  'crypto', 'bitcoin', 'forex', 'binary option', 'casino', 'viagra', 'cialis', 'loan offer',
+  'dear friend', 'business proposal', 'inheritance', 'beneficiary', 'funds transfer',
+  'work from home', 'make money', 'marketing agency', 'web design services', 'app development services',
+  'whatsapp me', 'telegram me', 'contact me on', 'kindly reply',
+  'you won', 'congratulations',
+];
+function spamScore(text) {
+  const t = String(text || '').toLowerCase();
+  let score = 0;
+  if (!t.trim()) return 0;
+  const links = t.match(/https?:\/\/[^\s]+|www\.[^\s]+|[a-z0-9-]+\.(com|net|org|io|xyz|top|site|online|click|link)\b/g) || [];
+  score += Math.min(links.length, 3);
+  for (const kw of SPAM_KEYWORDS) if (t.includes(kw)) score += 2;
+  if (/(.)\1{5,}/.test(t)) score += 1;
+  const letters = t.match(/[a-z]/g) || [];
+  const caps = (String(text).match(/[A-Z]/g) || []).length;
+  if (letters.length > 30 && caps / letters.length > 0.6) score += 1;
+  return score;
+}
+function isSpamMessage(text) { return spamScore(text) >= 4; }
+
+async function hitRateLimit(db, ip) {
+  const now = Date.now();
+  const windowStart = now - 60000;
+  await db.prepare('DELETE FROM rate_limits WHERE ts < ?1').bind(now - 3600000).run().catch(() => {});
+  await db.prepare('INSERT INTO rate_limits (ip, ts) VALUES (?1, ?2)').bind(ip, now).run().catch(() => {});
+  const row = await db.prepare('SELECT COUNT(*) AS n FROM rate_limits WHERE ip = ?1 AND ts >= ?2')
+    .bind(ip, windowStart).all().catch(() => ({ results: [{ n: 0 }] }));
+  return (row.results && row.results[0] ? row.results[0].n : 0) > 12;
+}
+
+async function handleLilaMessage(env, body, request) {
   requireEnv(env, ['DEEPSEEK_API_KEY']);
   const db = env.LEADS_DB;
   if (!db) return { ok: false, error: 'storage_not_configured' };
@@ -216,6 +253,37 @@ async function handleLilaMessage(env, body) {
   const conversationId = String(body.conversationId || crypto.randomUUID());
   const userMessage = String(body.message || '').trim().slice(0, 1200);
   if (!userMessage) return { ok: false, error: 'message_required' };
+  const clientIp = (request && request.headers.get('cf-connecting-ip')) || 'unknown';
+
+  // Honeypot: invisible field only bots fill.
+  if (String(body.website || '').trim()) {
+    const hpNow = new Date().toISOString();
+    await db.prepare(
+      'INSERT INTO conversations (id, created_at, updated_at) VALUES (?1, ?2, ?2) ' +
+      'ON CONFLICT(id) DO UPDATE SET updated_at = ?2'
+    ).bind(conversationId, hpNow).run();
+    await saveSpamLead(db, conversationId, userMessage, 'honeypot');
+    return { ok: true, conversationId, reply: 'Thanks for reaching out. If you have a workflow or automation need, tell me a bit about it.', lead: { relevant: false } };
+  }
+
+  // Rate limit: max 12 messages/minute per IP.
+  if (await hitRateLimit(db, clientIp)) {
+    return { ok: false, error: 'rate_limited', status: 429 };
+  }
+
+  // Content spam scoring.
+  if (isSpamMessage(userMessage)) {
+    const now = new Date().toISOString();
+    await db.prepare(
+      'INSERT INTO conversations (id, created_at, updated_at) VALUES (?1, ?2, ?2) ' +
+      'ON CONFLICT(id) DO UPDATE SET updated_at = ?2'
+    ).bind(conversationId, now).run();
+    await db.prepare(
+      'INSERT INTO messages (conversation_id, role, content, created_at) VALUES (?1, ?2, ?3, ?4)'
+    ).bind(conversationId, 'user', userMessage, now).run();
+    await saveSpamLead(db, conversationId, userMessage, 'content');
+    return { ok: true, conversationId, reply: 'Thanks for reaching out. If you have a workflow or automation need, tell me a bit about it.', lead: { relevant: false } };
+  }
 
   const now = new Date().toISOString();
   await db.prepare(
@@ -255,6 +323,16 @@ async function getRecentMessages(db, conversationId, limit) {
   return (rows.results || []).reverse();
 }
 
+async function saveSpamLead(db, conversationId, message, source) {
+  const now = new Date().toISOString();
+  const excerpt = String(message || '').slice(0, 300);
+  await db.prepare(
+    `INSERT INTO leads (conversation_id, name, email, phone, company, problem, tools, outcome, timeline, budget, summary, relevant, status, updated_at)
+     VALUES (?1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ?2, 0, 'spam', ?3)
+     ON CONFLICT(conversation_id) DO UPDATE SET summary = excluded.summary, relevant = 0, status = 'spam', updated_at = excluded.updated_at`
+  ).bind(conversationId, `[spam:${source}] ${excerpt}`, now).run();
+}
+
 async function saveLead(db, conversationId, lead) {
   await db.prepare(
     `INSERT INTO leads (conversation_id, name, email, phone, company, problem, tools, outcome, timeline, budget, summary, relevant, updated_at)
@@ -292,6 +370,7 @@ async function askLila(env, messages) {
             'Start by asking for name and email or phone if missing, but do it naturally.',
             'Ask specific follow-up questions about problem, tools, desired outcome, timeline, and budget only when useful.',
             'Prevent useless chat: if irrelevant, politely redirect to business/workflow needs.',
+            'If a message is spam, advertising, or an unsolicited pitch (SEO offers, crypto, loans, marketing services), set relevant to false and extract no lead.',
             'Return only JSON with keys: reply, relevant, lead, summary.',
             'lead keys: name, email, phone, company, problem, tools, outcome, timeline, budget.',
           ].join(' '),
@@ -346,7 +425,7 @@ async function listLeads(env) {
   return leads;
 }
 
-const LEAD_STATUSES = ['new', 'contacted', 'qualified', 'won', 'lost'];
+const LEAD_STATUSES = ['new', 'contacted', 'qualified', 'won', 'lost', 'spam'];
 
 async function updateLead(env, conversationId, body) {
   const db = env.LEADS_DB;
@@ -982,7 +1061,7 @@ select{background:var(--panel);border:1px solid var(--line);border-radius:12px;c
 .pill.contacted{color:#67e8f9;border-color:rgba(34,211,238,.45);background:rgba(34,211,238,.10)}
 .pill.qualified{color:#fcd34d;border-color:rgba(251,191,36,.45);background:rgba(251,191,36,.10)}
 .pill.won{color:#6ee7b7;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10)}
-.pill.lost{color:#9aa5c4;border-color:var(--line2);background:rgba(90,104,137,.12)}
+.pill.lost{color:#9aa5c4;border-color:var(--line2);background:rgba(90,104,137,.12)}.pill.spam{color:#fca5a5;border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.10)}
 .pill.leadtag{color:var(--violet);border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.10)}
 .empty{text-align:center;padding:70px 20px;color:var(--muted);border:1px dashed var(--line2);border-radius:var(--radius);grid-column:1/-1}
 .empty .big{font-size:40px;margin-bottom:12px}
@@ -1309,8 +1388,8 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
 <script>
 var $ = function(s){ return document.querySelector(s); };
 var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
-var STATUSES = ['new','contacted','qualified','won','lost'];
-var STATUS_LABEL = { new:'New', contacted:'Contacted', qualified:'Qualified', won:'Won', lost:'Lost' };
+var STATUSES = ['new','contacted','qualified','won','lost','spam'];
+var STATUS_LABEL = { new:'New', contacted:'Contacted', qualified:'Qualified', won:'Won', lost:'Lost', spam:'Spam' };
 var state = { leads:[], chats:[], comments:[], commentsLoaded:false, view:'leads', leadFilter:'all', leadQuery:'', leadSort:'newest',
   chatQuery:'', activeChatId:null, activeLeadId:null, settings:{}, transcriptCache:{} };
 
