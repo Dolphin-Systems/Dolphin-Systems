@@ -89,6 +89,44 @@ export default {
       return json(result, result.ok ? 200 : 400);
     }
 
+    // ---- Blog engagement (public, CORS-enabled) ----
+    if (url.pathname.startsWith('/api/blog/') && url.pathname.endsWith('/engagement') && request.method === 'GET') {
+      const slug = url.pathname.slice('/api/blog/'.length, -'/engagement'.length);
+      if (!validBlogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400, CORS_HEADERS);
+      return json(await getBlogEngagement(env, slug), 200, CORS_HEADERS);
+    }
+
+    if (url.pathname.startsWith('/api/blog/') && url.pathname.endsWith('/comments') && request.method === 'POST') {
+      const slug = url.pathname.slice('/api/blog/'.length, -'/comments'.length);
+      if (!validBlogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400, CORS_HEADERS);
+      const body = await request.json().catch(() => ({}));
+      const result = await addBlogComment(env, request, slug, body);
+      return json(result, result.ok ? 200 : (result.status || 400), CORS_HEADERS);
+    }
+
+    if (url.pathname.startsWith('/api/blog/') && url.pathname.endsWith('/reactions') && request.method === 'POST') {
+      const slug = url.pathname.slice('/api/blog/'.length, -'/reactions'.length);
+      if (!validBlogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400, CORS_HEADERS);
+      const body = await request.json().catch(() => ({}));
+      const result = await addBlogReaction(env, slug, body);
+      return json(result, result.ok ? 200 : 400, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/blog/comments' && request.method === 'GET') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const rows = await env.LEADS_DB.prepare(
+        'SELECT id, post_slug, name, body, created_at FROM blog_comments ORDER BY created_at DESC LIMIT 100'
+      ).all();
+      return json({ ok: true, comments: rows.results || [] });
+    }
+
+    if (url.pathname.startsWith('/api/blog/comments/') && request.method === 'DELETE') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const id = decodeURIComponent(url.pathname.slice('/api/blog/comments/'.length));
+      await env.LEADS_DB.prepare('DELETE FROM blog_comments WHERE id = ?').bind(id).run();
+      return json({ ok: true });
+    }
+
     return json({ ok: false, error: 'not_found' }, 404);
   },
 
@@ -297,6 +335,64 @@ async function deleteLead(env, conversationId) {
   await db.prepare('DELETE FROM leads WHERE conversation_id = ?1').bind(conversationId).run();
   await db.prepare('DELETE FROM conversations WHERE id = ?1').bind(conversationId).run();
   return { ok: true };
+}
+
+const BLOG_REACTIONS = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+
+function validBlogSlug(slug) {
+  return typeof slug === 'string' && /^[a-z0-9][a-z0-9-]{0,79}$/.test(slug);
+}
+
+function blogClientIp(request) {
+  return request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '';
+}
+
+async function getBlogEngagement(env, slug) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  const [comments, reactions] = await Promise.all([
+    db.prepare('SELECT id, name, body, created_at FROM blog_comments WHERE post_slug = ?1 ORDER BY created_at DESC LIMIT 100').bind(slug).all(),
+    db.prepare('SELECT reaction, count FROM blog_reactions WHERE post_slug = ?1').bind(slug).all(),
+  ]);
+  const counts = {};
+  for (const r of reactions.results || []) counts[r.reaction] = r.count;
+  return { ok: true, reactions: counts, comments: comments.results || [] };
+}
+
+async function addBlogComment(env, request, slug, body) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  const name = String(body.name || '').trim().slice(0, 40);
+  const text = String(body.body || '').trim().slice(0, 1000);
+  if (!name) return { ok: false, error: 'name_required' };
+  if (!text) return { ok: false, error: 'comment_required' };
+  const ip = blogClientIp(request);
+  const recent = await db.prepare(
+    "SELECT COUNT(*) AS n FROM blog_comments WHERE ip = ?1 AND created_at > datetime('now','-10 minutes')"
+  ).bind(ip || 'unknown').first();
+  if (recent && recent.n >= 3) return { ok: false, error: 'slow_down', status: 429 };
+  const id = crypto.randomUUID();
+  await db.prepare(
+    'INSERT INTO blog_comments (id, post_slug, name, body, ip) VALUES (?1, ?2, ?3, ?4, ?5)'
+  ).bind(id, slug, name, text, ip).run();
+  const row = await db.prepare(
+    'SELECT id, name, body, created_at FROM blog_comments WHERE id = ?1'
+  ).bind(id).first();
+  return { ok: true, comment: row };
+}
+
+async function addBlogReaction(env, slug, body) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  const reaction = String(body.reaction || '').toLowerCase();
+  if (!BLOG_REACTIONS.includes(reaction)) return { ok: false, error: 'bad_reaction' };
+  await db.prepare(
+    'INSERT INTO blog_reactions (post_slug, reaction, count) VALUES (?1, ?2, 1) ON CONFLICT(post_slug, reaction) DO UPDATE SET count = count + 1'
+  ).bind(slug, reaction).run();
+  const rows = await db.prepare('SELECT reaction, count FROM blog_reactions WHERE post_slug = ?1').bind(slug).all();
+  const counts = {};
+  for (const r of rows.results || []) counts[r.reaction] = r.count;
+  return { ok: true, reactions: counts };
 }
 
 async function listConversations(env) {
@@ -869,6 +965,7 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
     <nav class="nav">
       <button data-view="leads" class="active"><span class="ico">▣</span>Leads<span class="count" id="navLeadCount">–</span></button>
       <button data-view="chats"><span class="ico">💬</span>Chat logs<span class="count" id="navChatCount">–</span></button>
+      <button data-view="comments"><span class="ico">💭</span>Comments</button>
       <button data-view="caretaker"><span class="ico">⚙</span>Caretaker</button>
     </nav>
     <div class="side-foot"><span class="dot" id="connDot"></span><span id="connText">Not connected</span></div>
@@ -916,6 +1013,14 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
         <div class="chat-list" id="chatList"></div>
         <div class="chat-viewer" id="chatViewer"><div class="viewer-empty">Select a conversation to read the full chat log.</div></div>
       </div>
+    </section>
+
+    <!-- COMMENTS -->
+    <section class="view" id="view-comments">
+      <div class="toolbar">
+        <div class="search"><span class="ico">⌕</span><input id="commentSearch" type="text" placeholder="Search comments…"></div>
+      </div>
+      <div class="grid" id="commentGrid"></div>
     </section>
 
     <!-- CARETAKER -->
@@ -1032,7 +1137,7 @@ var $ = function(s){ return document.querySelector(s); };
 var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
 var STATUSES = ['new','contacted','qualified','won','lost'];
 var STATUS_LABEL = { new:'New', contacted:'Contacted', qualified:'Qualified', won:'Won', lost:'Lost' };
-var state = { leads:[], chats:[], view:'leads', leadFilter:'all', leadQuery:'', leadSort:'newest',
+var state = { leads:[], chats:[], comments:[], commentsLoaded:false, view:'leads', leadFilter:'all', leadQuery:'', leadSort:'newest',
   chatQuery:'', activeChatId:null, activeLeadId:null, settings:{}, transcriptCache:{} };
 
 function esc(s){
@@ -1092,6 +1197,7 @@ async function api(path, options){
 var TITLES = {
   leads:['Leads','Every visitor Lila talked to, organized.'],
   chats:['Chat logs','Every conversation, searchable end to end.'],
+  comments:['Comments','Blog comments, newest first. Delete spam here.'],
   caretaker:['Caretaker','Publishing, health checks and blog direction.']
 };
 function setView(v){
@@ -1104,6 +1210,7 @@ function setView(v){
   document.body.classList.remove('nav-open');
   if(v === 'leads' && !state.leads.length) loadLeads();
   if(v === 'chats' && !state.chats.length) loadChats();
+  if(v === 'comments' && !state.commentsLoaded) loadComments();
 }
 $$('.nav button').forEach(function(b){ b.onclick = function(){ setView(b.getAttribute('data-view')); }; });
 $('#menuBtn').onclick = function(){ document.body.classList.toggle('nav-open'); };
@@ -1305,6 +1412,42 @@ async function openChat(id){
     if(window.innerWidth <= 640){ v.scrollIntoView({behavior:'smooth',block:'start'}); }
   } catch(e){ v.innerHTML = '<div class="viewer-empty">Failed to load: ' + esc(e.message) + '</div>'; }
 }
+/* ---------- comments ---------- */
+async function loadComments(){
+  state.commentsLoaded = true;
+  try {
+    var data = await api('/api/blog/comments');
+    state.comments = data.comments || [];
+  } catch(e){ state.comments = []; toast('Comments: ' + e.message); }
+  renderComments();
+}
+function renderComments(){
+  var q = ($('#commentSearch').value || '').toLowerCase();
+  var list = (state.comments || []).filter(function(c){
+    return !q || (c.name + ' ' + c.body + ' ' + c.post_slug).toLowerCase().indexOf(q) >= 0;
+  });
+  var g = $('#commentGrid');
+  if(!list.length){ g.innerHTML = '<div class="empty-state"><b>No comments yet.</b><p>New blog comments will appear here.</p></div>'; return; }
+  g.innerHTML = list.map(function(c){
+    return '<div class="card"><div class="card-top"><div class="avatar">' + esc(initials(c.name)) + '</div>' +
+      '<div class="who"><b>' + esc(c.name) + '</b><small>' + esc(c.post_slug) + ' · ' + esc(fmtDT(c.created_at)) + '</small></div>' +
+      '<button class="icon-btn danger" data-del-comment="' + esc(c.id) + '" title="Delete comment">✕</button></div>' +
+      '<p class="summary">' + esc(c.body) + '</p></div>';
+  }).join('');
+  g.querySelectorAll('[data-del-comment]').forEach(function(b){
+    b.onclick = function(){ deleteComment(b.getAttribute('data-del-comment')); };
+  });
+}
+async function deleteComment(id){
+  if(!confirm('Delete this comment?')) return;
+  try {
+    await api('/api/blog/comments/' + encodeURIComponent(id), { method:'DELETE' });
+    state.comments = (state.comments || []).filter(function(c){ return c.id !== id; });
+    renderComments();
+    toast('Comment deleted');
+  } catch(e){ toast('Failed: ' + e.message); }
+}
+$('#commentSearch').oninput = renderComments;
 /* ---------- caretaker ---------- */
 function paintCaretaker(data){
   var s = data.settings || {};

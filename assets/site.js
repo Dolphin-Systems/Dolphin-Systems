@@ -160,46 +160,154 @@ function setupBlogEngagement() {
   if (!article || !panel) return;
 
   const slug = article.getAttribute('data-post-slug');
-  const key = `dolphin-blog-engage:${slug}`;
-  const state = JSON.parse(localStorage.getItem(key) || '{"reactions":{},"comments":[]}');
-  const commentList = panel.querySelector('.comment-list');
+  const API = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev';
+  const EMOJI = { like: '👍', love: '❤️', haha: '😂', wow: '😮', sad: '😢', angry: '😡' };
+  const LABEL = { like: 'Like', love: 'Love', haha: 'Haha', wow: 'Wow', sad: 'Sad', angry: 'Angry' };
+  const ORDER = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+  const summary = panel.querySelector('#reactionSummary');
+  const likeBtn = panel.querySelector('#likeBtn');
+  const picker = panel.querySelector('#reactionPicker');
+  const commentList = panel.querySelector('#commentList');
+  const commentCount = panel.querySelector('#commentCount');
+  const form = panel.querySelector('#commentForm');
+  const formError = panel.querySelector('#commentError');
 
-  function save() {
-    localStorage.setItem(key, JSON.stringify(state));
+  const myKey = `dolphin-blog-reaction:${slug}`;
+  let myReaction = null;
+  try { myReaction = localStorage.getItem(myKey); } catch (e) { /* ignore */ }
+  let counts = {};
+  let comments = [];
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
-  function render() {
-    panel.querySelectorAll('[data-reaction]').forEach((button) => {
-      const reaction = button.getAttribute('data-reaction');
-      button.querySelector('span').textContent = state.reactions[reaction] || 0;
-    });
-    commentList.innerHTML = state.comments.length
-      ? state.comments.map((comment) => `<p>${comment}</p>`).join('')
-      : '<p class="empty-comment">No local comments yet.</p>';
+  function totalReactions() {
+    return ORDER.reduce((n, r) => n + (counts[r] || 0), 0);
   }
 
-  panel.querySelectorAll('[data-reaction]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const reaction = button.getAttribute('data-reaction');
-      state.reactions[reaction] = (state.reactions[reaction] || 0) + 1;
-      save();
-      render();
+  function renderReactions() {
+    const total = totalReactions();
+    const top = ORDER.filter((r) => counts[r] > 0).slice(0, 3);
+    summary.innerHTML = total
+      ? `<span class="reaction-emojis">${top.map((r) => EMOJI[r]).join('')}</span><span>${total}</span>`
+      : '<span class="reaction-none">Be the first to react.</span>';
+    const emoji = panel.querySelector('.like-emoji');
+    const label = panel.querySelector('.like-label');
+    if (myReaction && EMOJI[myReaction]) {
+      emoji.textContent = EMOJI[myReaction];
+      label.textContent = LABEL[myReaction];
+      likeBtn.classList.add('reacted');
+    } else {
+      emoji.textContent = EMOJI.like;
+      label.textContent = 'Like';
+      likeBtn.classList.remove('reacted');
+    }
+  }
+
+  function renderComments() {
+    commentCount.textContent = comments.length ? `(${comments.length})` : '';
+    commentList.innerHTML = comments.length
+      ? comments.map((c) => {
+          const when = c.created_at ? new Date(c.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+          return `<div class="comment"><div class="comment-head"><b>${escHtml(c.name)}</b><time>${escHtml(when)}</time></div><p>${escHtml(c.body)}</p></div>`;
+        }).join('')
+      : '<p class="empty-comment">No comments yet. Start the conversation.</p>';
+  }
+
+  async function sendReaction(reaction) {
+    if (myReaction === reaction) { closePicker(); return; }
+    try {
+      const res = await fetch(`${API}/api/blog/${encodeURIComponent(slug)}/reactions`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ reaction }),
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'failed');
+      counts = data.reactions || {};
+      myReaction = reaction;
+      try { localStorage.setItem(myKey, reaction); } catch (e) { /* ignore */ }
+      renderReactions();
+    } catch (e) { /* silent: reactions are best-effort */ }
+    closePicker();
+  }
+
+  function openPicker() {
+    picker.hidden = false;
+    likeBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closePicker() {
+    picker.hidden = true;
+    likeBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Desktop: hover opens the picker, like Facebook. Touch: long-press opens it.
+  let pressTimer = null;
+  likeBtn.addEventListener('click', () => {
+    if (!picker.hidden) { closePicker(); return; }
+    sendReaction('like');
+  });
+  likeBtn.addEventListener('mouseenter', openPicker);
+  panel.querySelector('.reaction-picker-wrap').addEventListener('mouseleave', closePicker);
+  likeBtn.addEventListener('touchstart', () => {
+    pressTimer = setTimeout(openPicker, 450);
+  }, { passive: true });
+  likeBtn.addEventListener('touchend', () => clearTimeout(pressTimer));
+  likeBtn.addEventListener('touchmove', () => clearTimeout(pressTimer));
+  picker.querySelectorAll('[data-reaction]').forEach((b) => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sendReaction(b.getAttribute('data-reaction'));
     });
   });
+  document.addEventListener('click', (e) => {
+    if (!panel.querySelector('.reaction-picker-wrap').contains(e.target)) closePicker();
+  });
 
-  panel.querySelector('.comment-form').addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const textarea = event.currentTarget.querySelector('textarea');
-    const value = textarea.value.trim();
-    if (!value) return;
-    state.comments.unshift(value.replace(/[<>]/g, ''));
-    state.comments = state.comments.slice(0, 8);
-    textarea.value = '';
-    save();
-    render();
+    formError.hidden = true;
+    const name = panel.querySelector('#commentName').value.trim();
+    const body = panel.querySelector('#commentBody').value.trim();
+    if (!name || !body) return;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      const res = await fetch(`${API}/api/blog/${encodeURIComponent(slug)}/comments`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name, body }),
+      });
+      const data = await res.json();
+      if (!data.ok) {
+        throw new Error(data.error === 'slow_down' ? 'You are commenting too fast. Wait a bit and try again.' : 'Could not post your comment.');
+      }
+      comments.unshift(data.comment);
+      panel.querySelector('#commentBody').value = '';
+      renderComments();
+    } catch (e) {
+      formError.textContent = e.message;
+      formError.hidden = false;
+    } finally {
+      btn.disabled = false;
+    }
   });
 
-  render();
+  (async () => {
+    try {
+      const res = await fetch(`${API}/api/blog/${encodeURIComponent(slug)}/engagement`);
+      const data = await res.json();
+      if (data.ok) {
+        counts = data.reactions || {};
+        comments = data.comments || [];
+      }
+    } catch (e) { /* offline: keep empty state */ }
+    renderReactions();
+    renderComments();
+  })();
 }
 
 setupBlogEngagement();
