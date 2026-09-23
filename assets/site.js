@@ -155,6 +155,10 @@ function createLilaChat() {
 
 createLilaChat();
 
+document.querySelectorAll('[data-email-show]').forEach(function(s){
+  var p = (s.getAttribute('data-email-show') || '').split('|');
+  if (p.length === 2) s.textContent = p[0] + '@' + p[1];
+});
 document.querySelectorAll('[data-email-link]').forEach(function(a){
   a.addEventListener('click', function(e){
     e.preventDefault();
