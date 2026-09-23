@@ -776,6 +776,12 @@ async function askLila(env, messages) {
       authorization: `Bearer ${env.DEEPSEEK_API_KEY}`,
       'content-type': 'application/json',
     },
+    // Identity gate: if we already know this visitor, tell Lila so she doesn't re-ask.
+    let knownName = '';
+    try {
+      const leadRow = await db.prepare('SELECT name FROM leads WHERE conversation_id = ?1').bind(conversationId).first();
+      if (leadRow && leadRow.name) knownName = String(leadRow.name).slice(0, 80);
+    } catch (e) {}
     body: JSON.stringify({
       model: env.BLOG_MODEL || 'deepseek-chat',
       messages: [
@@ -786,6 +792,7 @@ async function askLila(env, messages) {
             'Dolphin Systems wants clients for automation, integrations, AI workflows, dashboards, and systems cleanup.',
             'Read the whole conversation and keep context.',
             'Start by asking for name and email or phone if missing, but do it naturally.',
+            ...(knownName ? ['The visitor already identified as ' + knownName + ' with contact on file. Greet them by name and never ask for name, email, or phone again.'] : []),
             'Ask specific follow-up questions about problem, tools, desired outcome, timeline, and budget only when useful.',
             'Prevent useless chat: if irrelevant, politely redirect to business/workflow needs.',
             'If a message is spam, advertising, or an unsolicited pitch (SEO offers, crypto, loans, marketing services), set relevant to false and extract no lead.',
