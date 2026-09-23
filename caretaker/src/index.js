@@ -1369,10 +1369,11 @@ html{-webkit-text-size-adjust:100%}
 button{-webkit-tap-highlight-color:transparent}
 .transcript,.chat-list,.drawer-body,.mini-transcript{-webkit-overflow-scrolling:touch}
 body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
 body:before{content:'';position:fixed;inset:0;pointer-events:none;
   background:radial-gradient(600px 320px at 12% -4%,rgba(59,130,246,.16),transparent 60%),
              radial-gradient(700px 380px at 95% 8%,rgba(34,211,238,.10),transparent 60%);}
-.app{position:relative;display:flex;min-height:100vh}
+.app{position:relative;display:flex;min-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
 /* ---------- sidebar ---------- */
 .sidebar{width:250px;flex-shrink:0;background:rgba(10,15,30,.85);border-right:1px solid var(--line);
   padding:22px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;backdrop-filter:blur(8px)}
