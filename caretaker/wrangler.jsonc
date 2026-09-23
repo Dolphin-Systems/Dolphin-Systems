@@ -9,9 +9,11 @@
   "triggers": {
     "crons": ["0 13 * * *"]
   },
-  "kv_namespaces": [
+  "d1_databases": [
     {
-      "binding": "LILA_STORE"
+      "binding": "LEADS_DB",
+      "database_name": "dolphin-systems-leads",
+      "database_id": "REPLACE_WITH_D1_ID"
     }
   ],
   "vars": {
