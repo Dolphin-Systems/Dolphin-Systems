@@ -1524,7 +1524,8 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
   padding:13px 22px;border-radius:999px;z-index:70;transition:.3s;box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0}
 .toast.show{transform:translate(-50%,0);opacity:1}
 @media(max-width:960px){
-  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:.25s;z-index:55;height:100vh}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:.25s;z-index:55;height:100vh;
+    padding-top:calc(22px + env(safe-area-inset-top));padding-bottom:calc(22px + env(safe-area-inset-bottom));padding-left:calc(16px + env(safe-area-inset-left))}
   body.nav-open .sidebar{transform:none}
   .main{padding:18px 16px calc(60px + env(safe-area-inset-bottom))}
   .stats{grid-template-columns:repeat(2,1fr)}
