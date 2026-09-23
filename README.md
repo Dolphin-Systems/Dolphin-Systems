@@ -20,7 +20,7 @@ The Cloudflare Worker in `caretaker/` can check the live site daily and generate
 
 Required Cloudflare secrets:
 
-- `OPENAI_API_KEY`
+- `DEEPSEEK_API_KEY`
 - `GITHUB_TOKEN`
 - `ADMIN_TOKEN`
 

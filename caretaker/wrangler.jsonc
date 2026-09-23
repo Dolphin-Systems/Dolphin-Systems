@@ -14,7 +14,8 @@
     "GITHUB_OWNER": "Dolphin-Systems",
     "GITHUB_REPO": "Dolphin-Systems",
     "GITHUB_BRANCH": "main",
-    "BLOG_MODEL": "gpt-6-astra",
+    "AI_API_BASE": "https://api.deepseek.com",
+    "BLOG_MODEL": "deepseek-chat",
     "CREATE_ISSUES_ON_FAILURE": "true"
   }
 }

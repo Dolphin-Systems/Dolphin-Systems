@@ -4,7 +4,7 @@
     "build": "node scripts/build-site.mjs",
     "caretaker:dev": "wrangler dev --config caretaker/wrangler.jsonc",
     "caretaker:deploy": "wrangler deploy --config caretaker/wrangler.jsonc",
-    "caretaker:secret:openai": "wrangler secret put OPENAI_API_KEY --config caretaker/wrangler.jsonc",
+    "caretaker:secret:deepseek": "wrangler secret put DEEPSEEK_API_KEY --config caretaker/wrangler.jsonc",
     "caretaker:secret:github": "wrangler secret put GITHUB_TOKEN --config caretaker/wrangler.jsonc",
     "caretaker:secret:admin": "wrangler secret put ADMIN_TOKEN --config caretaker/wrangler.jsonc"
   },

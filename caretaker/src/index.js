@@ -62,7 +62,7 @@ async function checkWebsite(siteUrl) {
 }
 
 async function generateBlogPost(env) {
-  requireEnv(env, ['OPENAI_API_KEY']);
+  requireEnv(env, ['DEEPSEEK_API_KEY']);
 
   const today = new Date().toISOString().slice(0, 10);
   const prompt = [
@@ -75,61 +75,29 @@ async function generateBlogPost(env) {
     'Do not mention that AI wrote it. Do not invent customer names or case studies.',
   ].join('\n');
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await fetch(`${env.AI_API_BASE || 'https://api.deepseek.com'}/chat/completions`, {
     method: 'POST',
     headers: {
-      authorization: `Bearer ${env.OPENAI_API_KEY}`,
+      authorization: `Bearer ${env.DEEPSEEK_API_KEY}`,
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      model: env.BLOG_MODEL || 'gpt-6-astra',
-      input: prompt,
-      text: {
-        format: {
-          type: 'json_schema',
-          name: 'blog_post',
-          strict: true,
-          schema: {
-            type: 'object',
-            additionalProperties: false,
-            required: ['title', 'description', 'category', 'body'],
-            properties: {
-              title: { type: 'string', minLength: 8, maxLength: 90 },
-              description: { type: 'string', minLength: 30, maxLength: 180 },
-              category: { type: 'string', minLength: 3, maxLength: 32 },
-              body: {
-                type: 'array',
-                minItems: 4,
-                maxItems: 9,
-                items: {
-                  type: 'object',
-                  additionalProperties: false,
-                  required: ['type'],
-                  properties: {
-                    type: { enum: ['paragraph', 'heading', 'list'] },
-                    text: { type: 'string' },
-                    items: {
-                      type: 'array',
-                      minItems: 2,
-                      maxItems: 6,
-                      items: { type: 'string' },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+      model: env.BLOG_MODEL || 'deepseek-chat',
+      messages: [
+        { role: 'system', content: 'You write concise, practical company blog posts and return only valid JSON.' },
+        { role: 'user', content: prompt },
+      ],
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`OpenAI request failed: ${response.status} ${await response.text()}`);
+    throw new Error(`AI request failed: ${response.status} ${await response.text()}`);
   }
 
   const data = await response.json();
-  const text = data.output_text || extractOutputText(data);
+  const text = data.choices?.[0]?.message?.content || '';
   const generated = JSON.parse(text);
   const slug = uniqueDatedSlug(generated.title);
 
@@ -237,14 +205,6 @@ function uniqueDatedSlug(title) {
     .slice(0, 58)
     .replace(/-+$/g, '');
   return `${date}-${titleSlug || 'systems-note'}`;
-}
-
-function extractOutputText(data) {
-  return (data.output || [])
-    .flatMap((item) => item.content || [])
-    .filter((part) => part.type === 'output_text' && part.text)
-    .map((part) => part.text)
-    .join('\n');
 }
 
 function requireEnv(env, keys) {

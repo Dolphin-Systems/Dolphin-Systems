@@ -3,7 +3,7 @@
 Cloudflare Worker for daily website care:
 
 - checks `https://dolphinsystems.net/`
-- generates one automation/systems blog post with the OpenAI API
+- generates one automation/systems blog post with the DeepSeek API
 - commits the post JSON to `content/posts/`
 - lets GitHub Actions rebuild the static blog pages
 
@@ -12,7 +12,7 @@ Cloudflare Worker for daily website care:
 Set these in Cloudflare. Do not commit them.
 
 ```bash
-npx wrangler secret put OPENAI_API_KEY --config caretaker/wrangler.jsonc
+npx wrangler secret put DEEPSEEK_API_KEY --config caretaker/wrangler.jsonc
 npx wrangler secret put GITHUB_TOKEN --config caretaker/wrangler.jsonc
 npx wrangler secret put ADMIN_TOKEN --config caretaker/wrangler.jsonc
 ```
