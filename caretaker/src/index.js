@@ -975,6 +975,7 @@ select{background:var(--panel);border:1px solid var(--line);border-radius:12px;c
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card .meta{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
 .stars{color:#c7d2e8;font-size:15px;letter-spacing:1px}.stars .on{color:#f5a623}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:4px}.card-top .who{display:block;flex:1;min-width:0;margin-bottom:0}.card-top .who b{display:block;font-size:16px;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.card-top .who small{display:block;font-size:12px;color:var(--faint);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.card-actions{display:flex;gap:8px;flex:none}.icon-btn{width:38px;height:38px;flex:none;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--ink);border-radius:11px;cursor:pointer;font-size:15px;transition:.15s}.icon-btn:hover{border-color:var(--blue);color:#fff;transform:translateY(-1px)}.icon-btn.danger{color:var(--bad);border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08)}.icon-btn.danger:hover{border-color:var(--bad);background:rgba(248,113,113,.16);color:var(--bad);transform:translateY(-1px)}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
   padding:5px 11px;border-radius:999px;border:1px solid}
 .pill.new{color:#93c5fd;border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.12)}
@@ -1645,12 +1646,13 @@ function renderCatalog(){
   if(!list.length){ g.innerHTML = '<div class="empty-state"><b>No items.</b><p>Add your first product or service with the button above.</p></div>'; return; }
   g.innerHTML = list.map(function(i){
     var r = i.rating || { count: 0, average: 0 };
+    var ratingText = r.count ? esc(String(r.average)) + ' average · ' + esc(String(r.count)) + ' rating' + (r.count === 1 ? '' : 's') : 'No ratings yet';
     return '<div class="card"><div class="card-top"><div class="avatar">' + esc(i.icon || '◈') + '</div>' +
       '<div class="who"><b>' + esc(i.title) + '</b><small>' + esc(i.kind) + ' · /' + esc(i.slug) + '</small></div>' +
-      '<button class="icon-btn" data-edit-item="' + esc(i.slug) + '" title="Edit">✎</button>' +
-      '<button class="icon-btn danger" data-del-item="' + esc(i.slug) + '" title="Delete">✕</button></div>' +
+      '<div class="card-actions"><button class="icon-btn" data-edit-item="' + esc(i.slug) + '" title="Edit" aria-label="Edit ' + esc(i.title) + '">✎</button>' +
+      '<button class="icon-btn danger" data-del-item="' + esc(i.slug) + '" title="Delete" aria-label="Delete ' + esc(i.title) + '">✕</button></div></div>' +
       '<p class="summary">' + esc((i.body || '').slice(0, 160)) + ((i.body || '').length > 160 ? '…' : '') + '</p>' +
-      '<div class="meta">' + catalogStars(r.average) + '<span>' + esc(String(r.average)) + ' · ' + esc(String(r.count)) + ' ratings</span></div></div>';
+      '<div class="meta">' + catalogStars(r.average) + '<span>' + ratingText + '</span></div></div>';
   }).join('');
   g.querySelectorAll('[data-edit-item]').forEach(function(b){ b.onclick = function(){ openCatalogForm(b.getAttribute('data-edit-item')); }; });
   g.querySelectorAll('[data-del-item]').forEach(function(b){ b.onclick = function(){ deleteCatalogItem(b.getAttribute('data-del-item')); }; });
