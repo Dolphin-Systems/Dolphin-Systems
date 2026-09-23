@@ -328,27 +328,51 @@ function setupBlogEngagement() {
   }
 
   function openPicker() {
-    picker.hidden = false;
+    if (picker.hidden) {
+      picker.hidden = false;
+      picker.classList.remove('open');
+      void picker.offsetWidth; // restart the pop animation
+      picker.classList.add('open');
+    }
     likeBtn.setAttribute('aria-expanded', 'true');
   }
   function closePicker() {
     picker.hidden = true;
+    picker.classList.remove('open');
     likeBtn.setAttribute('aria-expanded', 'false');
   }
 
-  // Desktop: hover opens the picker, like Facebook. Touch: long-press opens it.
-  let pressTimer = null;
+  // Desktop: hover opens the picker, like Facebook. Touch: long-press (or press-and-slide) opens it.
+  let pressTimer = null, longPressFired = false, suppressClick = false;
   likeBtn.addEventListener('click', () => {
+    if (suppressClick) { suppressClick = false; return; }
     if (!picker.hidden) { closePicker(); return; }
     sendReaction('like');
   });
   likeBtn.addEventListener('mouseenter', openPicker);
   panel.querySelector('.reaction-picker-wrap').addEventListener('mouseleave', closePicker);
   likeBtn.addEventListener('touchstart', () => {
-    pressTimer = setTimeout(openPicker, 450);
+    longPressFired = false;
+    pressTimer = setTimeout(() => {
+      longPressFired = true;
+      openPicker();
+      if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    }, 450);
   }, { passive: true });
-  likeBtn.addEventListener('touchend', () => clearTimeout(pressTimer));
-  likeBtn.addEventListener('touchmove', () => clearTimeout(pressTimer));
+  likeBtn.addEventListener('touchmove', () => clearTimeout(pressTimer), { passive: true });
+  likeBtn.addEventListener('touchcancel', () => { clearTimeout(pressTimer); longPressFired = false; });
+  likeBtn.addEventListener('touchend', (e) => {
+    clearTimeout(pressTimer);
+    if (longPressFired) {
+      suppressClick = true;
+      e.preventDefault(); // swallow the synthetic click so the picker stays open
+      const t = e.changedTouches[0];
+      const el = t && document.elementFromPoint(t.clientX, t.clientY);
+      const rb = el && el.closest ? el.closest('[data-reaction]') : null;
+      if (rb) sendReaction(rb.getAttribute('data-reaction'));
+      longPressFired = false;
+    }
+  }, { passive: false });
   picker.querySelectorAll('[data-reaction]').forEach((b) => {
     b.addEventListener('click', (e) => {
       e.stopPropagation();
