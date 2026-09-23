@@ -55,11 +55,19 @@ const lilaReplies = [
   },
 ];
 
+const lowValuePatterns = [
+  /^\s*(hi|hello|hey|yo|sup|ok|okay|thanks|thank you|lol|haha|test)\s*$/i,
+  /^\s*.{1,2}\s*$/,
+];
+
 function getLilaReply(message) {
   const lower = message.toLowerCase();
+  if (lowValuePatterns.some((pattern) => pattern.test(message))) {
+    return 'Hi, I can help if you tell me what system, workflow, tool, or handoff you want Dolphin Systems to improve.';
+  }
   const found = lilaReplies.find((reply) => reply.match.some((word) => lower.includes(word)));
   if (found) return found.text;
-  return 'I am Lila from Dolphin Systems. We help companies make complex systems easier to run through automation, integrations, and clearer workflows. What are you trying to improve?';
+  return 'I want to keep this useful. Share a concrete business problem, such as a manual process, disconnected tools, unclear reporting, or a workflow you want automated.';
 }
 
 function typingDelay(text) {
@@ -74,11 +82,12 @@ function createLilaChat() {
   widget.className = 'lila-chat';
   widget.innerHTML = `
     <button class="lila-launcher" type="button" aria-expanded="false" aria-controls="lila-panel">
-      <span class="lila-dot" aria-hidden="true"></span>
+      <span class="lila-avatar" aria-hidden="true">L</span>
       <span>Chat with Lila</span>
     </button>
-    <div class="lila-panel" id="lila-panel" hidden>
+    <div class="lila-panel" id="lila-panel">
       <div class="lila-header">
+        <span class="lila-avatar" aria-hidden="true">L</span>
         <div>
           <strong>Lila</strong>
           <span>Dolphin Systems</span>
@@ -123,7 +132,7 @@ function createLilaChat() {
   }
 
   function openChat() {
-    panel.hidden = false;
+    panel.classList.add('is-open');
     launcher.setAttribute('aria-expanded', 'true');
     if (!messages.children.length) {
       addMessage('Hi, I am Lila. Dolphin Systems helps companies simplify complex work with automation, integrations, and better system design. What are you working on?', 'bot');
@@ -132,15 +141,24 @@ function createLilaChat() {
   }
 
   function closeChat() {
-    panel.hidden = true;
+    panel.classList.remove('is-open');
     launcher.setAttribute('aria-expanded', 'false');
   }
 
   launcher.addEventListener('click', () => {
-    if (panel.hidden) openChat();
+    if (!panel.classList.contains('is-open')) openChat();
     else closeChat();
   });
   close.addEventListener('click', closeChat);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeChat();
+  });
+  document.querySelectorAll('[data-open-lila]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      openChat();
+    });
+  });
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
