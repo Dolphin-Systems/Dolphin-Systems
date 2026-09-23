@@ -1884,7 +1884,7 @@ $$('.nav button').forEach(function(b){ b.onclick = function(){ setView(b.getAttr
 $('#menuBtn').onclick = function(){ document.body.classList.toggle('nav-open'); };
 $('#navScrim').onclick = function(){ document.body.classList.remove('nav-open'); };
 /* ---------- live chat (human handoff) ---------- */
-state.liveChats = []; state.activeLiveId = null; state.liveTimer = null; state.liveThreadTimer = null; state.pushSub = null;
+state.liveChats = []; state.activeLiveId = null; state.liveLastMsgId = 0; state.liveTimer = null; state.liveThreadTimer = null; state.pushSub = null;
 function liveTimeAgo(iso){ return timeAgo(iso); }
 async function loadLiveChats(){
   try {
@@ -1892,13 +1892,12 @@ async function loadLiveChats(){
     state.liveChats = data.chats || [];
     $('#navLiveCount').textContent = data.pending || 0;
     renderLiveList();
-    if(state.activeLiveId) openLiveChat(state.activeLiveId, true);
   } catch(e){ /* table may not exist until first use */ }
 }
 function renderLiveList(){
   var list = state.liveChats;
   if(!list.length){
-    $('#liveList').innerHTML = '<div class="empty"><div class="big">🎧</div><div>No live chats. When a visitor asks for a human, they appear here.</div></div>';
+    $('#liveList').innerHTML = '<div class="empty"><div class="big">\uD83C\uDFA7</div><div>No live chats. When a visitor asks for a human, they appear here.</div></div>';
     return;
   }
   $('#liveList').innerHTML = list.map(function(c){
@@ -1912,44 +1911,81 @@ function renderLiveList(){
   }).join('');
   $$('#liveList .chat-row').forEach(function(r){ r.onclick = function(){ openLiveChat(r.getAttribute('data-id')); }; });
 }
-async function openLiveChat(id, silent){
+function liveBubble(m){
+  var cls = m.role === 'human' ? 'human' : 'lila';
+  var who = m.role === 'human' ? 'You' : (m.role === 'user' ? 'Visitor' : 'Lila');
+  return '<div class="bubble ' + cls + '"><b style="font-size:11px;opacity:.75">' + who + '</b><div style="margin-top:4px">' + esc(m.content) + '</div><small>' + esc(liveTimeAgo(m.created_at)) + '</small></div>';
+}
+function liveScrollBottom(force){
+  var t = $('#liveTranscript');
+  if(!t) return;
+  if(force || (t.scrollHeight - t.scrollTop - t.clientHeight < 140)) t.scrollTop = t.scrollHeight;
+}
+async function openLiveChat(id){
   state.activeLiveId = id;
+  state.liveLastMsgId = 0;
   renderLiveList();
   try {
     var data = await api('/api/human/thread/' + encodeURIComponent(id));
     if(!data.ok) return;
-    var msgs = (data.messages || []).map(function(m){
-      var cls = m.role === 'human' ? 'human' : (m.role === 'user' ? 'lila' : 'lila');
-      var who = m.role === 'human' ? 'You' : (m.role === 'user' ? 'Visitor' : 'Lila');
-      return '<div class="bubble ' + cls + '"><b style="font-size:11px;opacity:.75">' + who + '</b><div style="margin-top:4px">' + esc(m.content) + '</div><small>' + esc(liveTimeAgo(m.created_at)) + '</small></div>';
-    }).join('');
+    var msgs = data.messages || [];
+    msgs.forEach(function(m){ state.liveLastMsgId = Math.max(state.liveLastMsgId, m.id || 0); });
     $('#liveViewer').innerHTML =
       '<div class="chat-head"><span class="live-status-dot' + (data.chat.status === 'active' ? ' active' : '') + '"></span>' +
-      '<div><b>Visitor</b><small>' + esc(data.chat.status) + ' · ' + esc(liveTimeAgo(data.chat.updated_at)) + '</small></div>' +
+      '<div><b>Visitor</b><small>' + esc(data.chat.status) + ' \u00B7 ' + esc(liveTimeAgo(data.chat.updated_at)) + '</small></div>' +
       '<button class="btn" id="liveCloseBtn" type="button" style="margin-left:auto">End chat</button></div>' +
-      '<div class="transcript" id="liveTranscript">' + (msgs || '<div class="viewer-empty">No messages yet.</div>') + '</div>' +
-      '<div class="live-reply"><input id="liveReplyInput" type="text" placeholder="Reply as Ritik…" maxlength="2000" autocomplete="off">' +
+      '<div class="transcript" id="liveTranscript">' + (msgs.map(liveBubble).join('') || '<div class="viewer-empty">No messages yet.</div>') + '</div>' +
+      '<div class="live-reply"><input id="liveReplyInput" type="text" placeholder="Reply as Ritik\u2026" maxlength="2000" autocomplete="off">' +
       '<button class="btn btn-primary" id="liveReplySend" type="button">Send</button></div>';
-    var t = $('#liveTranscript'); t.scrollTop = t.scrollHeight;
+    liveScrollBottom(true);
     $('#liveReplySend').onclick = sendLiveReply;
     $('#liveReplyInput').addEventListener('keydown', function(e){ if(e.key === 'Enter') sendLiveReply(); });
     $('#liveCloseBtn').onclick = async function(){
       try { await api('/api/human/close', { method: 'POST', body: JSON.stringify({ conversationId: id }) }); } catch(e){}
       state.activeLiveId = null;
+      state.liveLastMsgId = 0;
       $('#liveViewer').innerHTML = '<div class="viewer-empty">Chat ended.</div>';
       loadLiveChats();
     };
-    if(!silent) $('#liveReplyInput').focus();
   } catch(e){ toast('Could not load chat'); }
+}
+/* Incremental poll: appends only new messages, never rebuilds the input. */
+async function pollLiveThread(){
+  var id = state.activeLiveId;
+  if(!id || !$('#liveTranscript')) return;
+  try {
+    var data = await api('/api/human/thread/' + encodeURIComponent(id));
+    if(!data.ok || state.activeLiveId !== id) return;
+    if(data.chat.status === 'closed'){
+      state.activeLiveId = null;
+      state.liveLastMsgId = 0;
+      $('#liveViewer').innerHTML = '<div class="viewer-empty">Chat ended.</div>';
+      loadLiveChats();
+      return;
+    }
+    var fresh = (data.messages || []).filter(function(m){ return (m.id || 0) > state.liveLastMsgId; });
+    if(fresh.length){
+      var t = $('#liveTranscript');
+      var empty = t.querySelector('.viewer-empty');
+      if(empty) empty.remove();
+      fresh.forEach(function(m){
+        state.liveLastMsgId = Math.max(state.liveLastMsgId, m.id || 0);
+        t.insertAdjacentHTML('beforeend', liveBubble(m));
+      });
+      liveScrollBottom(false);
+    }
+  } catch(e){ /* silent: next poll retries */ }
 }
 async function sendLiveReply(){
   var input = $('#liveReplyInput');
+  if(!input) return;
   var text = (input.value || '').trim();
   if(!text || !state.activeLiveId) return;
   input.value = '';
+  input.focus();
   try {
     await api('/api/human/reply', { method: 'POST', body: JSON.stringify({ conversationId: state.activeLiveId, message: text }) });
-    openLiveChat(state.activeLiveId, true);
+    pollLiveThread();
     loadLiveChats();
   } catch(e){ toast('Reply failed: ' + e.message); input.value = text; }
 }
@@ -1957,17 +1993,17 @@ function startLivePolling(){
   stopLivePolling();
   state.liveTimer = setInterval(function(){
     if(state.view === 'live') loadLiveChats();
-  }, 5000);
+  }, 8000);
   state.liveThreadTimer = setInterval(function(){
-    if(state.view === 'live' && state.activeLiveId && document.visibilityState === 'visible') openLiveChat(state.activeLiveId, true);
-  }, 4000);
+    if(state.view === 'live' && state.activeLiveId && document.visibilityState === 'visible') pollLiveThread();
+  }, 3000);
 }
 function stopLivePolling(){
   if(state.liveTimer) clearInterval(state.liveTimer);
   if(state.liveThreadTimer) clearInterval(state.liveThreadTimer);
   state.liveTimer = state.liveThreadTimer = null;
 }
-$('#liveRefreshBtn').onclick = function(){ loadLiveChats(); };
+$('#liveRefreshBtn').onclick = function(){ loadLiveChats(); if(state.activeLiveId) pollLiveThread(); };
 /* ---------- push notifications ---------- */
 function urlB64ToU8(s){
   s = s.replace(/-/g, '+').replace(/_/g, '/');
@@ -1978,14 +2014,15 @@ function urlB64ToU8(s){
 }
 function updatePushBtn(){
   var btn = $('#pushBtn');
+  if(!btn) return;
   var on = !!state.pushSub;
-  btn.textContent = on ? '🔔 Notifications on' : '🔔 Enable notifications';
+  btn.textContent = on ? '\uD83D\uDD14 Notifications on' : '\uD83D\uDD14 Enable notifications';
   btn.classList.toggle('push-on', on);
 }
 async function setupPush(){
   var btn = $('#pushBtn');
   if(!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)){
-    btn.style.display = 'none'; return;
+    if(btn) btn.style.display = 'none'; return;
   }
   try {
     var reg = await navigator.serviceWorker.ready;
@@ -2019,7 +2056,6 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('/admin/sw.js', { scope: '/admin/' }).catch(function(){});
   });
 }
-
 /* ---------- leads ---------- */
 function statusPill(s){ return '<span class="pill ' + s + '">' + STATUS_LABEL[s] + '</span>'; }
 function renderChips(){
