@@ -1,0 +1,3 @@
+ALTER TABLE leads ADD COLUMN status TEXT NOT NULL DEFAULT 'new';
+ALTER TABLE leads ADD COLUMN notes TEXT NOT NULL DEFAULT '';
+CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(status);
