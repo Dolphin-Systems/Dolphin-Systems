@@ -713,7 +713,12 @@ async function handleLilaMessage(env, body, request) {
   ).bind(conversationId, 'user', userMessage, now).run();
 
   const history = await getRecentMessages(db, conversationId, 24);
-  const ai = await askLila(env, history);
+  let knownName = '';
+  try {
+    const leadRow = await db.prepare('SELECT name FROM leads WHERE conversation_id = ?1').bind(conversationId).first();
+    if (leadRow && leadRow.name) knownName = String(leadRow.name).slice(0, 80);
+  } catch (e) {}
+  const ai = await askLila(env, history, knownName);
   const repliedAt = new Date().toISOString();
   await db.prepare(
     'INSERT INTO messages (conversation_id, role, content, created_at) VALUES (?1, ?2, ?3, ?4)'
@@ -769,19 +774,13 @@ async function saveLead(db, conversationId, lead) {
   ).run();
 }
 
-async function askLila(env, messages) {
+async function askLila(env, messages, knownName) {
   const response = await fetch(`${env.AI_API_BASE || 'https://api.deepseek.com'}/chat/completions`, {
     method: 'POST',
     headers: {
       authorization: `Bearer ${env.DEEPSEEK_API_KEY}`,
       'content-type': 'application/json',
     },
-    // Identity gate: if we already know this visitor, tell Lila so she doesn't re-ask.
-    let knownName = '';
-    try {
-      const leadRow = await db.prepare('SELECT name FROM leads WHERE conversation_id = ?1').bind(conversationId).first();
-      if (leadRow && leadRow.name) knownName = String(leadRow.name).slice(0, 80);
-    } catch (e) {}
     body: JSON.stringify({
       model: env.BLOG_MODEL || 'deepseek-chat',
       messages: [
