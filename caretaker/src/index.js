@@ -788,9 +788,9 @@ select{background:var(--panel);border:1px solid var(--line);border-radius:12px;c
 .kv div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .kv small{display:block;font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:700}
 .kv span{font-size:13px}
-textarea,input[type=text]{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--ink);
+textarea,input[type=text],input[type=password]{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--ink);
   font:inherit;font-size:13.5px;padding:12px;outline:none;resize:vertical}
-textarea:focus,input[type=text]:focus{border-color:var(--blue)}
+textarea:focus,input[type=text]:focus,input[type=password]:focus{border-color:var(--blue)}
 .mini-transcript{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto;padding:4px}
 /* ---------- caretaker ---------- */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
