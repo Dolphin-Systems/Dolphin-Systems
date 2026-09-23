@@ -1,10 +1,16 @@
 const JSON_HEADERS = { 'content-type': 'application/json; charset=utf-8' };
 const HTML_HEADERS = { 'content-type': 'text/html; charset=utf-8' };
 const SETTINGS_PATH = 'caretaker/settings.json';
+const CORS_HEADERS = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET, POST, OPTIONS',
+  'access-control-allow-headers': 'content-type, authorization',
+};
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (request.method === 'OPTIONS') return new Response(null, { headers: CORS_HEADERS });
 
     if (url.pathname === '/health') {
       return json({ ok: true, service: 'dolphin-systems-caretaker' });
@@ -19,6 +25,18 @@ export default {
       const settings = await readSettings(env);
       const checks = await checkWebsite(env.SITE_URL);
       return json({ ok: true, checks, settings });
+    }
+
+    if (url.pathname === '/api/lila/message' && request.method === 'POST') {
+      const body = await request.json();
+      const result = await handleLilaMessage(env, body);
+      return json(result, result.ok ? 200 : 400, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/leads') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const leads = await listLeads(env);
+      return json({ ok: true, leads });
     }
 
     if ((url.pathname === '/generate' || url.pathname === '/api/generate') && request.method === 'POST') {
@@ -74,6 +92,91 @@ async function runCaretaker(env, options = {}) {
   }
 
   return { ok: true, checks, publish };
+}
+
+async function handleLilaMessage(env, body) {
+  requireEnv(env, ['DEEPSEEK_API_KEY']);
+  if (!env.LILA_STORE) return { ok: false, error: 'storage_not_configured' };
+
+  const conversationId = String(body.conversationId || crypto.randomUUID());
+  const userMessage = String(body.message || '').trim().slice(0, 1200);
+  if (!userMessage) return { ok: false, error: 'message_required' };
+
+  const now = new Date().toISOString();
+  const existing = await env.LILA_STORE.get(`chat:${conversationId}`, 'json');
+  const chat = existing || { id: conversationId, createdAt: now, messages: [], lead: {} };
+  chat.updatedAt = now;
+  chat.messages.push({ role: 'user', content: userMessage, at: now });
+  chat.messages = chat.messages.slice(-24);
+
+  const ai = await askLila(env, chat);
+  chat.messages.push({ role: 'assistant', content: ai.reply, at: new Date().toISOString() });
+  chat.lead = {
+    ...chat.lead,
+    ...(ai.lead || {}),
+    summary: ai.summary || chat.lead.summary || '',
+    relevant: ai.relevant !== false,
+    updatedAt: new Date().toISOString(),
+  };
+
+  await env.LILA_STORE.put(`chat:${conversationId}`, JSON.stringify(chat));
+  if (chat.lead.relevant && (chat.lead.name || chat.lead.email || chat.lead.phone || chat.lead.summary)) {
+    await env.LILA_STORE.put(`lead:${conversationId}`, JSON.stringify({
+      id: conversationId,
+      updatedAt: chat.updatedAt,
+      lead: chat.lead,
+      transcript: chat.messages,
+    }));
+  }
+
+  return { ok: true, conversationId, reply: ai.reply, lead: chat.lead };
+}
+
+async function askLila(env, chat) {
+  const response = await fetch(`${env.AI_API_BASE || 'https://api.deepseek.com'}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${env.DEEPSEEK_API_KEY}`,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: env.BLOG_MODEL || 'deepseek-chat',
+      messages: [
+        {
+          role: 'system',
+          content: [
+            'You are Lila, a warm client-intake assistant for Dolphin Systems.',
+            'Dolphin Systems wants clients for automation, integrations, AI workflows, dashboards, and systems cleanup.',
+            'Read the whole conversation and keep context.',
+            'Start by asking for name and email or phone if missing, but do it naturally.',
+            'Ask specific follow-up questions about problem, tools, desired outcome, timeline, and budget only when useful.',
+            'Prevent useless chat: if irrelevant, politely redirect to business/workflow needs.',
+            'Return only JSON with keys: reply, relevant, lead, summary.',
+            'lead keys: name, email, phone, company, problem, tools, outcome, timeline, budget.',
+          ].join(' '),
+        },
+        ...chat.messages.map((message) => ({ role: message.role, content: message.content })),
+      ],
+      response_format: { type: 'json_object' },
+      temperature: 0.55,
+    }),
+  });
+  if (!response.ok) throw new Error(`Lila AI request failed: ${response.status} ${await response.text()}`);
+  const data = await response.json();
+  const parsed = JSON.parse(data.choices?.[0]?.message?.content || '{}');
+  return {
+    reply: String(parsed.reply || 'Can you tell me a bit more about what workflow or system you want improved?'),
+    relevant: parsed.relevant !== false,
+    lead: parsed.lead || {},
+    summary: String(parsed.summary || ''),
+  };
+}
+
+async function listLeads(env) {
+  if (!env.LILA_STORE) return [];
+  const listed = await env.LILA_STORE.list({ prefix: 'lead:', limit: 50 });
+  const leads = await Promise.all(listed.keys.map((key) => env.LILA_STORE.get(key.name, 'json')));
+  return leads.filter(Boolean).sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
 }
 
 async function checkWebsite(siteUrl) {
@@ -395,8 +498,8 @@ function decodeBase64(value) {
   return new TextDecoder().decode(bytes);
 }
 
-function json(value, status = 200) {
-  return new Response(JSON.stringify(value, null, 2), { status, headers: JSON_HEADERS });
+function json(value, status = 200, headers = {}) {
+  return new Response(JSON.stringify(value, null, 2), { status, headers: { ...JSON_HEADERS, ...headers } });
 }
 
 function adminPage() {
@@ -420,7 +523,7 @@ function adminPage() {
     button.secondary{background:#0c1833}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.quick button{background:#e9f0ff;color:var(--ink)}.quick button.active{background:var(--blue);color:white}
     pre{white-space:pre-wrap;background:#0c1833;color:#dbe8ff;border:1px solid #263b66;border-radius:12px;padding:14px;overflow:auto;min-height:160px}
-    .status{font-size:14px;color:var(--muted)}.manager{border-left:5px solid var(--blue)}.ok{color:var(--good)}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.pill{display:inline-flex;align-items:center;border-radius:999px;background:#e9f0ff;color:var(--blue);font-size:12px;font-weight:800;padding:6px 10px}
+    .status{font-size:14px;color:var(--muted)}.manager{border-left:5px solid var(--blue)}.ok{color:var(--good)}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.pill{display:inline-flex;align-items:center;border-radius:999px;background:#e9f0ff;color:var(--blue);font-size:12px;font-weight:800;padding:6px 10px}.lead-list{display:grid;gap:10px}.lead{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fbfdff}.lead b{display:block;margin-bottom:5px}.lead p{margin:4px 0;font-size:14px}.lead small{color:var(--muted)}
     @media(max-width:800px){.top{align-items:flex-start;flex-direction:column}.grid,.metric-grid,.quick{grid-template-columns:1fr}}
   </style>
 </head>
@@ -476,6 +579,10 @@ function adminPage() {
       <textarea id="blogSystemPrompt" placeholder="Tell the blog writer how to sound and what client impression to create."></textarea>
     </section>
     <section class="panel">
+      <div class="section-title"><label>Client leads from Lila</label><button class="secondary" id="loadLeads" type="button">Load leads</button></div>
+      <div class="lead-list" id="leadList"><p class="status">No leads loaded yet.</p></div>
+    </section>
+    <section class="panel">
       <label>Status</label>
       <pre id="output">Enter your admin token, then refresh.</pre>
     </section>
@@ -487,6 +594,7 @@ function adminPage() {
     const blogSystemPrompt = document.querySelector('#blogSystemPrompt');
     const output = document.querySelector('#output');
     const metrics = document.querySelector('#metrics');
+    const leadList = document.querySelector('#leadList');
     let settings = {};
     token.value = localStorage.getItem('caretakerAdminToken') || '';
     token.addEventListener('input', () => localStorage.setItem('caretakerAdminToken', token.value));
@@ -557,6 +665,17 @@ function adminPage() {
         resetLastPublishedAt: true
       }) });
       paint(data);
+    };
+    document.querySelector('#loadLeads').onclick = async () => {
+      const data = await api('/api/leads');
+      const leads = data.leads || [];
+      leadList.innerHTML = leads.length ? leads.map((item) => {
+        const lead = item.lead || {};
+        return '<article class="lead"><b>' + (lead.name || 'Unknown visitor') + '</b>'
+          + '<p>' + [lead.email, lead.phone, lead.company].filter(Boolean).join(' · ') + '</p>'
+          + '<p>' + (lead.summary || lead.problem || 'No summary yet.') + '</p>'
+          + '<small>' + new Date(item.updatedAt).toLocaleString() + '</small></article>';
+      }).join('') : '<p class="status">No stored leads yet.</p>';
     };
   </script>
 </body>

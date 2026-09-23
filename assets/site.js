@@ -28,69 +28,7 @@ document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
 
-const lowValuePatterns = [
-  /^\s*(hi|hello|hey|yo|sup|ok|okay|thanks|thank you|lol|haha|test)\s*$/i,
-  /^\s*.{1,2}\s*$/,
-];
-
-function createLeadState() {
-  return {
-    problem: '',
-    tools: '',
-    outcome: '',
-    timeline: '',
-    contactIntent: false,
-    messages: 0,
-  };
-}
-
-function includesAny(text, words) {
-  return words.some((word) => text.includes(word));
-}
-
-function readMessage(message, state) {
-  const lower = message.toLowerCase();
-  state.messages += 1;
-  if (includesAny(lower, ['email', 'call', 'meeting', 'contact', 'hire', 'quote', 'estimate', 'client', 'work with'])) state.contactIntent = true;
-  if (includesAny(lower, ['zapier', 'hubspot', 'salesforce', 'notion', 'slack', 'airtable', 'google', 'sheet', 'sheets', 'excel', 'api', 'crm', 'website', 'shopify', 'stripe'])) state.tools = message;
-  if (includesAny(lower, ['automate', 'manual', 'slow', 'stuck', 'handoff', 'workflow', 'process', 'integrat', 'dashboard', 'report', 'data', 'ai', 'agent'])) state.problem = message;
-  if (includesAny(lower, ['want', 'need', 'goal', 'so that', 'reduce', 'save', 'faster', 'simple', 'simpler', 'visibility', 'track'])) state.outcome = message;
-  if (includesAny(lower, ['today', 'week', 'month', 'asap', 'urgent', 'soon', 'quarter', 'deadline'])) state.timeline = message;
-}
-
-function nextQuestion(state) {
-  if (!state.problem) return 'What work is painful right now: a manual task, disconnected tools, unclear reporting, or a process that keeps getting stuck?';
-  if (!state.tools) return 'Which tools or systems are involved today? For example CRM, spreadsheets, email, Slack, Notion, website forms, APIs, or something custom.';
-  if (!state.outcome) return 'What would a good outcome look like: less manual work, faster response time, cleaner data, better visibility, or a full workflow automation?';
-  if (!state.timeline) return 'When would you want this improved: this week, this month, or just exploring options?';
-  return '';
-}
-
-function summarizeLead(state) {
-  return [
-    'Here is the useful shape of the request:',
-    state.problem ? `Problem: ${state.problem}` : '',
-    state.tools ? `Tools: ${state.tools}` : '',
-    state.outcome ? `Outcome: ${state.outcome}` : '',
-    state.timeline ? `Timeline: ${state.timeline}` : '',
-  ].filter(Boolean).join('\n');
-}
-
-function getLilaReply(message, state) {
-  if (lowValuePatterns.some((pattern) => pattern.test(message))) {
-    return 'Hi. I can help turn this into a clear client request. What workflow, tool, or handoff do you want Dolphin Systems to improve?';
-  }
-  readMessage(message, state);
-  const question = nextQuestion(state);
-  if (question) {
-    const acknowledgement = state.problem
-      ? 'Got it. That sounds like a systems/workflow problem Dolphin Systems can help clarify.'
-      : 'I want to make this precise enough to be useful.';
-    return `${acknowledgement}\n\n${question}`;
-  }
-  const summary = summarizeLead(state);
-  return `${summary}\n\nThis is enough to start a useful conversation. Send this to hello@dolphinsystems.com, or tell me one more constraint I should add before you reach out.`;
-}
+const lilaApi = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev/api/lila/message';
 
 function typingDelay(text) {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
@@ -104,12 +42,12 @@ function createLilaChat() {
   widget.className = 'lila-chat';
   widget.innerHTML = `
     <button class="lila-launcher" type="button" aria-expanded="false" aria-controls="lila-panel">
-      <span class="lila-avatar" aria-hidden="true">L</span>
+      <img class="lila-avatar" src="${new URL('assets/lila-avatar.png', document.baseURI).href}" alt="" width="38" height="38">
       <span>Chat with Lila</span>
     </button>
     <div class="lila-panel" id="lila-panel">
       <div class="lila-header">
-        <span class="lila-avatar" aria-hidden="true">L</span>
+        <img class="lila-avatar" src="${new URL('assets/lila-avatar.png', document.baseURI).href}" alt="" width="42" height="42">
         <div>
           <strong>Lila</strong>
           <span>Dolphin Systems</span>
@@ -132,7 +70,7 @@ function createLilaChat() {
   const messages = widget.querySelector('.lila-messages');
   const form = widget.querySelector('.lila-form');
   const input = widget.querySelector('.lila-input');
-  const leadState = createLeadState();
+  let conversationId = localStorage.getItem('lilaConversationId') || '';
 
   function addMessage(text, sender) {
     const bubble = document.createElement('div');
@@ -158,7 +96,7 @@ function createLilaChat() {
     panel.classList.add('is-open');
     launcher.setAttribute('aria-expanded', 'true');
     if (!messages.children.length) {
-      addMessage('Hi, I am Lila. I help shape a messy idea into a clear Dolphin Systems client request. What workflow, system, or tool problem are you trying to fix?', 'bot');
+      addMessage('Hi, I am Lila. What is your name, and what email or phone number should Dolphin Systems use if this looks like a fit?', 'bot');
     }
     input.focus();
   }
@@ -189,12 +127,28 @@ function createLilaChat() {
     if (!value) return;
     input.value = '';
     addMessage(value, 'user');
-    const reply = getLilaReply(value, leadState);
     setTyping(true);
-    window.setTimeout(() => {
+    fetch(lilaApi, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ conversationId, message: value }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.conversationId) {
+          conversationId = data.conversationId;
+          localStorage.setItem('lilaConversationId', conversationId);
+        }
+        const reply = data.reply || 'I had trouble reading that. Can you tell me the workflow, tools, and outcome you want?';
+        window.setTimeout(() => {
+          setTyping(false);
+          addMessage(reply, 'bot');
+        }, typingDelay(reply));
+      })
+      .catch(() => {
       setTyping(false);
-      addMessage(reply, 'bot');
-    }, typingDelay(reply));
+        addMessage('I am having trouble reaching my backend. You can still email hello@dolphinsystems.com with your name, contact, workflow problem, tools, and desired outcome.', 'bot');
+      });
   });
 }
 

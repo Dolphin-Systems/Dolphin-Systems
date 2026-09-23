@@ -9,6 +9,11 @@
   "triggers": {
     "crons": ["0 13 * * *"]
   },
+  "kv_namespaces": [
+    {
+      "binding": "LILA_STORE"
+    }
+  ],
   "vars": {
     "SITE_URL": "https://dolphinsystems.net/",
     "GITHUB_OWNER": "Dolphin-Systems",
