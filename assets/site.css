@@ -82,7 +82,7 @@ h3{font-size:27px;line-height:1.14}
 .lila-header{display:flex;align-items:center;gap:12px;background:var(--night);color:#fff;padding:13px 14px;min-height:70px}
 .lila-header .lila-avatar{width:42px;height:42px;box-shadow:0 0 0 6px rgba(123,242,255,.12)}
 .lila-header strong{display:block;font-family:'Space Grotesk',Arial,sans-serif;font-size:19px;letter-spacing:-.04em}.lila-header span:not(.lila-avatar){display:block;color:#c8d8f2;font-size:12px}
-.lila-close{border:1px solid #536b96;background:transparent;color:#fff;border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:22px;line-height:1}
+.lila-close{border:1px solid #536b96;background:transparent;color:#fff;border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:22px;line-height:1;margin-left:auto}
 .lila-messages{display:flex;flex-direction:column;gap:10px;padding:15px;overflow:auto;background:#f7f9fd}
 .lila-message{max-width:86%;border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.45;white-space:pre-line}
 .lila-message-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink)}
