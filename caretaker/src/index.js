@@ -258,6 +258,7 @@ async function listHumanChats(env) {
   await ensureHumanTables(db);
   const rows = await db.prepare(
     'SELECT h.conversation_id, h.status, h.created_at, h.updated_at, ' +
+    '(SELECT name FROM leads WHERE conversation_id = h.conversation_id) AS visitor_name, ' +
     '(SELECT content FROM messages WHERE conversation_id = h.conversation_id ORDER BY id DESC LIMIT 1) AS last_message, ' +
     "(SELECT COUNT(*) FROM messages WHERE conversation_id = h.conversation_id AND role = 'user') AS user_count, " +
     "(SELECT COUNT(*) FROM messages WHERE conversation_id = h.conversation_id AND role = 'human') AS human_count " +
@@ -269,7 +270,7 @@ async function listHumanChats(env) {
 
 async function getHumanThread(env, conversationId) {
   const db = env.LEADS_DB;
-  const chat = await db.prepare('SELECT conversation_id, status, created_at, updated_at FROM human_chats WHERE conversation_id = ?1')
+  const chat = await db.prepare("SELECT h.conversation_id, h.status, h.created_at, h.updated_at, (SELECT name FROM leads WHERE conversation_id = h.conversation_id) AS visitor_name FROM human_chats h WHERE h.conversation_id = ?1")
     .bind(conversationId).first();
   if (!chat) return { ok: false, error: 'not_found' };
   const msgs = await db.prepare(
@@ -317,6 +318,13 @@ export default {
     if (url.pathname === '/api/lila/message' && request.method === 'POST') {
       const body = await request.json().catch(() => ({}));
       const result = await handleLilaMessage(env, body, request);
+      const status = result.status || (result.ok ? 200 : 400);
+      return json(result, status, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/lila/identify' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const result = await handleLilaIdentify(env, body, request);
       const status = result.status || (result.ok ? 200 : 400);
       return json(result, status, CORS_HEADERS);
     }
@@ -619,6 +627,40 @@ async function hitRateLimit(db, ip) {
   const row = await db.prepare('SELECT COUNT(*) AS n FROM rate_limits WHERE ip = ?1 AND ts >= ?2')
     .bind(ip, windowStart).all().catch(() => ({ results: [{ n: 0 }] }));
   return (row.results && row.results[0] ? row.results[0].n : 0) > 12;
+}
+
+async function handleLilaIdentify(env, body, request) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  const clientIp = (request && request.headers.get('cf-connecting-ip')) || 'unknown';
+
+  // Honeypot: pretend success, persist nothing.
+  if (String(body.website || '').trim()) {
+    return { ok: true, conversationId: crypto.randomUUID(), name: 'Guest' };
+  }
+  if (await hitRateLimit(db, clientIp)) {
+    return { ok: false, error: 'rate_limited', status: 429 };
+  }
+
+  const name = String(body.name || '').trim().slice(0, 80);
+  const contact = String(body.contact || '').trim().slice(0, 120);
+  if (!name) return { ok: false, error: 'name_required' };
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact);
+  const digits = contact.replace(/\D/g, '');
+  const phoneOk = digits.length >= 7 && digits.length <= 15;
+  if (!emailOk && !phoneOk) return { ok: false, error: 'contact_invalid' };
+
+  const conversationId = crypto.randomUUID();
+  const now = new Date().toISOString();
+  await db.prepare(
+    'INSERT INTO conversations (id, created_at, updated_at) VALUES (?1, ?2, ?2)'
+  ).bind(conversationId, now).run();
+  await db.prepare(
+    `INSERT INTO leads (conversation_id, name, email, phone, company, problem, tools, outcome, timeline, budget, summary, relevant, status, updated_at)
+     VALUES (?1, ?2, ?3, ?4, NULL, NULL, NULL, NULL, NULL, NULL, 'Chat session started (identity gate)', 1, 'new', ?5)
+     ON CONFLICT(conversation_id) DO UPDATE SET name = excluded.name, email = excluded.email, phone = excluded.phone, updated_at = excluded.updated_at`
+  ).bind(conversationId, name, emailOk ? contact : null, !emailOk && phoneOk ? contact : null, now).run();
+  return { ok: true, conversationId, name };
 }
 
 async function handleLilaMessage(env, body, request) {
@@ -1906,7 +1948,7 @@ function renderLiveList(){
     var label = c.status === 'pending' ? 'waiting' : 'active';
     return '<button class="chat-row' + (state.activeLiveId === c.conversation_id ? ' active' : '') + '" data-id="' + esc(c.conversation_id) + '">' +
       '<div style="display:flex;align-items:center;gap:8px"><span class="live-status-dot' + (c.status === 'active' ? ' active' : '') + '"></span>' +
-      '<b style="font-size:13.5px">Visitor</b><span class="pill ' + (c.status === 'pending' ? 'new' : 'qualified') + '">' + label + '</span>' +
+      '<b style="font-size:13.5px">' + esc(c.visitor_name || 'Visitor') + '</b><span class="pill ' + (c.status === 'pending' ? 'new' : 'qualified') + '">' + label + '</span>' +
       '<span style="margin-left:auto;font-size:11px;color:var(--faint)">' + esc(c.user_count + c.human_count + ' msgs') + '</span></div>' +
       '<div class="prev">' + esc(c.last_message || 'No messages yet') + '</div>' +
       '<div class="rowmeta"><span>' + esc(liveTimeAgo(c.updated_at)) + '</span></div></button>';
@@ -1934,7 +1976,7 @@ async function openLiveChat(id){
     msgs.forEach(function(m){ state.liveLastMsgId = Math.max(state.liveLastMsgId, m.id || 0); });
     $('#liveViewer').innerHTML =
       '<div class="chat-head"><span class="live-status-dot' + (data.chat.status === 'active' ? ' active' : '') + '"></span>' +
-      '<div><b>Visitor</b><small>' + esc(data.chat.status) + ' \u00B7 ' + esc(liveTimeAgo(data.chat.updated_at)) + '</small></div>' +
+      '<div><b>' + esc(data.chat.visitor_name || 'Visitor') + '</b><small>' + esc(data.chat.status) + ' \u00B7 ' + esc(liveTimeAgo(data.chat.updated_at)) + '</small></div>' +
       '<button class="btn" id="liveCloseBtn" type="button" style="margin-left:auto">End chat</button></div>' +
       '<div class="transcript" id="liveTranscript">' + (msgs.map(liveBubble).join('') || '<div class="viewer-empty">No messages yet.</div>') + '</div>' +
       '<div class="live-reply"><input id="liveReplyInput" type="text" placeholder="Reply as Ritik\u2026" maxlength="2000" autocomplete="off">' +

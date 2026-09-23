@@ -58,6 +58,15 @@ function createLilaChat() {
         <button class="lila-close" type="button" aria-label="Close chat">×</button>
       </div>
       <div class="lila-messages" aria-live="polite"></div>
+      <div class="lila-gate" hidden>
+        <strong>Before we start</strong>
+        <p>Every chat is private. Share your details so we can follow up.</p>
+        <label>Your name<input class="lila-gate-name" type="text" autocomplete="name" maxlength="80" placeholder="Jane Smith"></label>
+        <label>Email or phone<input class="lila-gate-contact" type="text" inputmode="email" autocomplete="email" maxlength="120" placeholder="jane@company.com"></label>
+        <input class="lila-gate-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="lila-gate-error" role="alert" hidden></div>
+        <button class="lila-gate-start" type="button">Start chat</button>
+      </div>
       <form class="lila-form">
         <input class="lila-input" type="text" autocomplete="off" placeholder="Tell Lila what you need">
         <input class="lila-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -79,6 +88,62 @@ function createLilaChat() {
   const hpField = widget.querySelector('.lila-hp');
   let conversationId = localStorage.getItem('lilaConversationId') || '';
   let humanMode = false, humanTimer = null, lastMsgId = 0;
+  let identified = localStorage.getItem('lilaIdentified') === '1' && !!conversationId;
+  let visitorName = localStorage.getItem('lilaVisitorName') || '';
+  const gate = widget.querySelector('.lila-gate');
+  const gateName = widget.querySelector('.lila-gate-name');
+  const gateContact = widget.querySelector('.lila-gate-contact');
+  const gateHp = widget.querySelector('.lila-gate-hp');
+  const gateError = widget.querySelector('.lila-gate-error');
+  const gateStart = widget.querySelector('.lila-gate-start');
+  const identifyApi = lilaApi.replace('/message', '/identify');
+  function showGate(on){
+    gate.hidden = !on;
+    messages.style.display = on ? 'none' : '';
+    form.style.display = on ? 'none' : '';
+  }
+  function validContact(v){
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return true;
+    const d = v.replace(/\D/g, '');
+    return d.length >= 7 && d.length <= 15;
+  }
+  function gateFail(msg){
+    gateError.textContent = msg;
+    gateError.hidden = false;
+    gateStart.disabled = false;
+  }
+  gateStart.addEventListener('click', () => {
+    const name = gateName.value.trim();
+    const contact = gateContact.value.trim();
+    gateError.hidden = true;
+    if (!name) return gateFail('Please enter your name.');
+    if (!validContact(contact)) return gateFail('Please enter a valid email or phone number.');
+    gateStart.disabled = true;
+    fetch(identifyApi, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name, contact, website: gateHp.value || '' }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.ok) {
+          return gateFail(data.error === 'rate_limited' ? 'Too many attempts. Please try again in a minute.' : 'Something went wrong. Please try again.');
+        }
+        conversationId = data.conversationId;
+        identified = true;
+        visitorName = data.name || name;
+        localStorage.setItem('lilaConversationId', conversationId);
+        localStorage.setItem('lilaIdentified', '1');
+        localStorage.setItem('lilaVisitorName', visitorName);
+        lastMsgId = 0;
+        showGate(false);
+        addMessage('Hi ' + visitorName + '! What can I help you with today?', 'bot');
+        input.focus();
+      })
+      .catch(() => gateFail('Connection failed. Please try again.'));
+  });
+  gateContact.addEventListener('keydown', (e) => { if (e.key === 'Enter') gateStart.click(); });
+  gateName.addEventListener('keydown', (e) => { if (e.key === 'Enter') gateContact.focus(); });
 
   function addMessage(text, sender) {
     const bubble = document.createElement('div');
@@ -132,6 +197,7 @@ function createLilaChat() {
   function stopHumanPoll(){ if(humanTimer) clearInterval(humanTimer); humanTimer = null; }
   function requestHuman(){
     if(humanMode) return;
+    if(!identified){ openChat(); return; }
     fetch(humanApi + '/request', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -160,8 +226,14 @@ function createLilaChat() {
   function openChat() {
     panel.classList.add('is-open');
     launcher.setAttribute('aria-expanded', 'true');
+    if (!identified) {
+      showGate(true);
+      gateName.focus();
+      return;
+    }
+    showGate(false);
     if (!messages.children.length) {
-      addMessage('Hi, I am Lila. What is your name, and what email or phone number should Dolphin Systems use if this looks like a fit?', 'bot');
+      addMessage(visitorName ? 'Welcome back, ' + visitorName + '!' : 'Hi, I am Lila. What can I help you with today?', 'bot');
     }
     input.focus();
     if(humanMode) startHumanPoll();
