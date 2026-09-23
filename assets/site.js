@@ -192,18 +192,18 @@ function setupBlogEngagement() {
     const total = totalReactions();
     const top = ORDER.filter((r) => counts[r] > 0).slice(0, 3);
     summary.innerHTML = total
-      ? `<span class="reaction-emojis">${top.map((r) => EMOJI[r]).join('')}</span><span>${total}</span>`
+      ? `<span class="reaction-emojis">${top.map((r) => `<span class="re-stack">${EMOJI[r]}</span>`).join('')}</span><span>${total}</span>`
       : '<span class="reaction-none">Be the first to react.</span>';
     const emoji = panel.querySelector('.like-emoji');
     const label = panel.querySelector('.like-label');
     if (myReaction && EMOJI[myReaction]) {
       emoji.textContent = EMOJI[myReaction];
       label.textContent = LABEL[myReaction];
-      likeBtn.classList.add('reacted');
+      likeBtn.setAttribute('data-my-reaction', myReaction);
     } else {
       emoji.textContent = EMOJI.like;
       label.textContent = 'Like';
-      likeBtn.classList.remove('reacted');
+      likeBtn.removeAttribute('data-my-reaction');
     }
   }
 
