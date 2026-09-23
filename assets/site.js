@@ -147,7 +147,7 @@ function createLilaChat() {
       })
       .catch(() => {
       setTyping(false);
-        addMessage('I am having trouble reaching my backend. You can still email hello@dolphinsystems.com with your name, contact, workflow problem, tools, and desired outcome.', 'bot');
+        addMessage('I am having trouble reaching my backend. You can still email hello@dolphinsystems.net with your name, contact, workflow problem, tools, and desired outcome.', 'bot');
       });
   });
 }
