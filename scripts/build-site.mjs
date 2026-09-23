@@ -57,18 +57,6 @@ function layout({ title, description, key, body, prefix = './', article = false 
     </div>
     <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
   </footer>
-${key === 'contact' ? `  <script>
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_LoadStart = new Date();
-    (function () {
-      const chat = document.createElement('script');
-      chat.async = true;
-      chat.src = 'https://embed.tawk.to/69f65d91b4a1331c31f071f2/1k32og3ur';
-      chat.charset = 'UTF-8';
-      chat.setAttribute('crossorigin', '*');
-      document.head.appendChild(chat);
-    })();
-  </script>` : ''}
 </body>
 </html>
 `;
