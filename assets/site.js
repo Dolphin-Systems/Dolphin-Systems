@@ -148,12 +148,25 @@ function createLilaChat() {
       })
       .catch(() => {
       setTyping(false);
-        addMessage('I am having trouble reaching my backend. You can still email hello@dolphinsystems.net with your name, contact, workflow problem, tools, and desired outcome.', 'bot');
+        addMessage('I am having trouble reaching my backend. You can still email hello' + '@' + 'dolphinsystems.net' + ' with your name, contact, workflow problem, tools, and desired outcome.', 'bot');
       });
   });
 }
 
 createLilaChat();
+
+document.querySelectorAll('[data-email-link]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    var parts = (a.getAttribute('data-email-link') || '').split('|');
+    if (parts.length !== 2) return;
+    var href = 'mailto:' + parts[0] + '@' + parts[1];
+    var sub = a.getAttribute('data-email-subject');
+    if (sub) href += '?subject=' + sub;
+    window.location.href = href;
+  });
+});
+
 
 function setupBlogEngagement() {
   const article = document.querySelector('[data-post-slug]');
