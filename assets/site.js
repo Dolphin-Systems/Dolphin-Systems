@@ -158,3 +158,53 @@ function createLilaChat() {
 }
 
 createLilaChat();
+
+function setupBlogEngagement() {
+  const article = document.querySelector('[data-post-slug]');
+  const panel = document.querySelector('.blog-engage');
+  if (!article || !panel) return;
+
+  const slug = article.getAttribute('data-post-slug');
+  const key = `dolphin-blog-engage:${slug}`;
+  const state = JSON.parse(localStorage.getItem(key) || '{"reactions":{},"comments":[]}');
+  const commentList = panel.querySelector('.comment-list');
+
+  function save() {
+    localStorage.setItem(key, JSON.stringify(state));
+  }
+
+  function render() {
+    panel.querySelectorAll('[data-reaction]').forEach((button) => {
+      const reaction = button.getAttribute('data-reaction');
+      button.querySelector('span').textContent = state.reactions[reaction] || 0;
+    });
+    commentList.innerHTML = state.comments.length
+      ? state.comments.map((comment) => `<p>${comment}</p>`).join('')
+      : '<p class="empty-comment">No local comments yet.</p>';
+  }
+
+  panel.querySelectorAll('[data-reaction]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const reaction = button.getAttribute('data-reaction');
+      state.reactions[reaction] = (state.reactions[reaction] || 0) + 1;
+      save();
+      render();
+    });
+  });
+
+  panel.querySelector('.comment-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const textarea = event.currentTarget.querySelector('textarea');
+    const value = textarea.value.trim();
+    if (!value) return;
+    state.comments.unshift(value.replace(/[<>]/g, ''));
+    state.comments = state.comments.slice(0, 8);
+    textarea.value = '';
+    save();
+    render();
+  });
+
+  render();
+}
+
+setupBlogEngagement();

@@ -35,6 +35,13 @@ export default {
       return json(result, result.ok ? 200 : 400);
     }
 
+    if (url.pathname === '/api/settings' && request.method === 'POST') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const body = await request.json();
+      const result = await updateSettings(env, body);
+      return json(result, result.ok ? 200 : 400);
+    }
+
     return json({ ok: false, error: 'not_found' }, 404);
   },
 
@@ -97,6 +104,7 @@ async function generateBlogPost(env, settings) {
     'Return only valid JSON with this exact shape:',
     '{"title":"","description":"","category":"","body":[{"type":"paragraph","text":""},{"type":"heading","text":""},{"type":"list","items":[""]}]}',
     `Date: ${today}.`,
+    `Blog system prompt: ${settings.blogSystemPrompt || 'Write clear, useful posts for business operators who may become Dolphin Systems clients.'}`,
     `Current topic focus: ${settings.topicFocus || 'workflow automation, integrations, operational clarity, reliable systems, and making complex work simple'}.`,
     `Caretaker instructions: ${settings.instructions || 'Write one useful Dolphin Systems blog post.'}`,
     'Do not mention that AI wrote it. Do not invent customer names or case studies.',
@@ -151,6 +159,25 @@ async function updateInstructions(env, instructions) {
   };
 
   await writeSettings(env, next, 'Update caretaker instructions');
+  return { ok: true, settings: next };
+}
+
+async function updateSettings(env, updates) {
+  const current = await readSettings(env);
+  const cadence = ['daily', 'weekly', 'monthly', 'paused'].includes(updates.blogCadence)
+    ? updates.blogCadence
+    : current.blogCadence || 'daily';
+  const next = {
+    ...current,
+    blogCadence: cadence,
+    blogEnabled: cadence !== 'paused' && updates.blogEnabled !== false,
+    topicFocus: String(updates.topicFocus || current.topicFocus || '').trim(),
+    blogSystemPrompt: String(updates.blogSystemPrompt || current.blogSystemPrompt || '').trim(),
+    instructions: String(updates.instructions || current.instructions || '').trim(),
+    updatedAt: new Date().toISOString(),
+  };
+  if (updates.resetLastPublishedAt === true) next.lastPublishedAt = null;
+  await writeSettings(env, next, 'Update caretaker settings');
   return { ok: true, settings: next };
 }
 
@@ -210,6 +237,7 @@ async function readSettings(env) {
       blogCadence: 'daily',
       blogEnabled: true,
       topicFocus: 'workflow automation, integrations, operational clarity, reliable systems, and making complex work simple',
+      blogSystemPrompt: 'Write clear, useful posts for business operators who may become Dolphin Systems clients. Keep the tone practical, technical, and trustworthy. Avoid hype.',
       lastPublishedAt: null,
       instructions: 'Write one useful Dolphin Systems blog post every day.',
     };
@@ -379,17 +407,19 @@ function adminPage() {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dolphin Systems Caretaker</title>
   <style>
-    :root{color-scheme:light;--ink:#071329;--muted:#5b6578;--line:#dbe4f3;--blue:#1458e8;--soft:#f6f9ff}
+    :root{color-scheme:light;--ink:#071329;--muted:#5b6578;--line:#dbe4f3;--blue:#1458e8;--soft:#f6f9ff;--good:#0d8f62}
     *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8fbff,#eef5ff)}
-    main{width:min(880px,calc(100% - 32px));margin:40px auto}
+    main{width:min(1120px,calc(100% - 32px));margin:36px auto}
     .top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}
     h1{font-size:34px;margin:0 0 8px;letter-spacing:-.03em}p{color:var(--muted);line-height:1.55}
     .panel{background:white;border:1px solid var(--line);border-radius:8px;padding:22px;margin:16px 0;box-shadow:0 18px 40px rgba(20,88,232,.08)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--soft)}.metric b{display:block;font-size:20px}.metric span{font-size:12px;color:var(--muted)}
     label{display:block;font-weight:700;margin-bottom:8px}input,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit}
-    textarea{min-height:130px;resize:vertical}button{border:0;border-radius:8px;background:var(--blue);color:white;font-weight:700;padding:12px 16px;cursor:pointer}
+    textarea{min-height:130px;resize:vertical}select{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit;background:white}button{border:0;border-radius:8px;background:var(--blue);color:white;font-weight:700;padding:12px 16px;cursor:pointer}
     button.secondary{background:#071329}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.quick button{background:#e9f0ff;color:var(--ink)}.quick button.active{background:var(--blue);color:white}
     pre{white-space:pre-wrap;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto}
-    .status{font-size:14px;color:var(--muted)}
+    .status{font-size:14px;color:var(--muted)}.manager{border-left:4px solid var(--blue)}.ok{color:var(--good)}@media(max-width:800px){.grid,.metric-grid,.quick{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -401,10 +431,16 @@ function adminPage() {
       </div>
       <button class="secondary" id="refresh">Refresh</button>
     </div>
-    <section class="panel">
+    <section class="panel manager">
       <label for="token">Admin token</label>
       <input id="token" type="password" autocomplete="current-password" placeholder="Paste ADMIN_TOKEN">
-      <p class="status">Saved only in this browser's local storage.</p>
+      <p class="status">Saved only in this browser's local storage. This is the manager panel for the site caretaker.</p>
+    </section>
+    <section class="metric-grid" id="metrics">
+      <div class="metric"><b>--</b><span>Website</span></div>
+      <div class="metric"><b>--</b><span>Cadence</span></div>
+      <div class="metric"><b>--</b><span>Blog mode</span></div>
+      <div class="metric"><b>--</b><span>Last post</span></div>
     </section>
     <section class="panel">
       <label for="instructions">Instruction</label>
@@ -414,6 +450,29 @@ function adminPage() {
         <button class="secondary" id="generate">Generate one blog now</button>
       </div>
     </section>
+    <section class="grid">
+      <section class="panel">
+        <label>Publishing cadence</label>
+        <div class="quick">
+          <button data-cadence="daily" type="button">Daily</button>
+          <button data-cadence="weekly" type="button">Weekly</button>
+          <button data-cadence="monthly" type="button">Monthly</button>
+          <button data-cadence="paused" type="button">Pause</button>
+        </div>
+        <div class="actions">
+          <button id="saveControls">Save controls</button>
+          <button class="secondary" id="resetDue">Make next run due</button>
+        </div>
+      </section>
+      <section class="panel">
+        <label for="topicFocus">Topic focus</label>
+        <textarea id="topicFocus" placeholder="automation, integrations, operational dashboards, client acquisition"></textarea>
+      </section>
+    </section>
+    <section class="panel">
+      <label for="blogSystemPrompt">Blog system prompt</label>
+      <textarea id="blogSystemPrompt" placeholder="Tell the blog writer how to sound and what client impression to create."></textarea>
+    </section>
     <section class="panel">
       <label>Status</label>
       <pre id="output">Enter your admin token, then refresh.</pre>
@@ -422,7 +481,11 @@ function adminPage() {
   <script>
     const token = document.querySelector('#token');
     const instructions = document.querySelector('#instructions');
+    const topicFocus = document.querySelector('#topicFocus');
+    const blogSystemPrompt = document.querySelector('#blogSystemPrompt');
     const output = document.querySelector('#output');
+    const metrics = document.querySelector('#metrics');
+    let settings = {};
     token.value = localStorage.getItem('caretakerAdminToken') || '';
     token.addEventListener('input', () => localStorage.setItem('caretakerAdminToken', token.value));
 
@@ -441,15 +504,57 @@ function adminPage() {
       return data;
     }
 
+    function paint(data) {
+      settings = data.settings || settings || {};
+      instructions.value = settings.instructions || '';
+      topicFocus.value = settings.topicFocus || '';
+      blogSystemPrompt.value = settings.blogSystemPrompt || '';
+      document.querySelectorAll('[data-cadence]').forEach((button) => button.classList.toggle('active', button.dataset.cadence === settings.blogCadence));
+      const healthy = data.checks && data.checks.ok;
+      metrics.innerHTML = [
+        ['Website', healthy ? 'Healthy' : 'Check'],
+        ['Cadence', settings.blogCadence || '--'],
+        ['Blog mode', settings.blogEnabled === false ? 'Paused' : 'Active'],
+        ['Last post', settings.lastPublishedAt ? new Date(settings.lastPublishedAt).toLocaleDateString() : 'None']
+      ].map(([label, value]) => '<div class="metric"><b class="' + (value === 'Healthy' ? 'ok' : '') + '">' + value + '</b><span>' + label + '</span></div>').join('');
+    }
+
     document.querySelector('#refresh').onclick = async () => {
       const data = await api('/api/status');
-      instructions.value = data.settings.instructions || '';
+      paint(data);
     };
     document.querySelector('#save').onclick = async () => {
-      await api('/api/instructions', { method: 'POST', body: JSON.stringify({ instructions: instructions.value }) });
+      const data = await api('/api/instructions', { method: 'POST', body: JSON.stringify({ instructions: instructions.value }) });
+      paint(data);
     };
     document.querySelector('#generate').onclick = async () => {
       await api('/api/generate', { method: 'POST' });
+    };
+    document.querySelectorAll('[data-cadence]').forEach((button) => {
+      button.onclick = () => {
+        settings.blogCadence = button.dataset.cadence;
+        settings.blogEnabled = button.dataset.cadence !== 'paused';
+        paint({ settings, checks: { ok: true } });
+      };
+    });
+    document.querySelector('#saveControls').onclick = async () => {
+      const data = await api('/api/settings', { method: 'POST', body: JSON.stringify({
+        ...settings,
+        topicFocus: topicFocus.value,
+        blogSystemPrompt: blogSystemPrompt.value,
+        instructions: instructions.value
+      }) });
+      paint(data);
+    };
+    document.querySelector('#resetDue').onclick = async () => {
+      const data = await api('/api/settings', { method: 'POST', body: JSON.stringify({
+        ...settings,
+        topicFocus: topicFocus.value,
+        blogSystemPrompt: blogSystemPrompt.value,
+        instructions: instructions.value,
+        resetLastPublishedAt: true
+      }) });
+      paint(data);
     };
   </script>
 </body>

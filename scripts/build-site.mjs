@@ -123,6 +123,18 @@ function renderBlock(block) {
   throw new Error(`Unsupported post block type: ${block.type}`);
 }
 
+function hashValue(value) {
+  return [...String(value)].reduce((hash, character) => (hash * 31 + character.charCodeAt(0)) % 9973, 7);
+}
+
+function blogThumb(post) {
+  const hash = hashValue(post.slug);
+  const hueA = 205 + (hash % 44);
+  const hueB = 175 + (hash % 70);
+  const angle = 110 + (hash % 90);
+  return `<div class="blog-thumb" style="--thumb-a:${hueA};--thumb-b:${hueB};--thumb-angle:${angle}deg" aria-hidden="true"><span></span><i></i><b></b></div>`;
+}
+
 async function loadPosts() {
   const directory = join(root, 'content', 'posts');
   const names = (await readdir(directory)).filter((name) => name.endsWith('.json'));
@@ -140,12 +152,12 @@ async function loadPosts() {
 async function build() {
   for (const page of pages) await writeFile(join(root, page.file), layout(page), 'utf8');
   const posts = await loadPosts();
-  const cards = posts.length ? posts.map((post) => `<a class="post-card" href="./${escapeHtml(post.slug)}.html"><div><span class="kicker">${escapeHtml(post.category || 'Notes')}</span><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><h2>${escapeHtml(post.title)}</h2><p>${escapeHtml(post.description)}</p><span class="inline-link">Read article ${arrow}</span></a>`).join('') : `<div class="empty-state"><span class="signal-dot"></span><h2>First notes are on the way.</h2><p>We will publish practical thinking about automation, connected systems, and the work behind them.</p></div>`;
+  const cards = posts.length ? posts.map((post) => `<a class="post-card" href="./${escapeHtml(post.slug)}.html">${blogThumb(post)}<div><span class="kicker">${escapeHtml(post.category || 'Notes')}</span><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><h2>${escapeHtml(post.title)}</h2><p>${escapeHtml(post.description)}</p><span class="inline-link">Read article ${arrow}</span></a>`).join('') : `<div class="empty-state"><span class="signal-dot"></span><h2>First notes are on the way.</h2><p>We will publish practical thinking about automation, connected systems, and the work behind them.</p></div>`;
   const blogBody = `<section class="page-hero shell"><span class="kicker">Blog</span><h1>Notes from <em>the work.</em></h1><p>Ideas, observations, and practical lessons about making systems easier to run.</p></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Latest writing</span><h2>${posts.length ? 'From the blog.' : 'A place for useful ideas.'}</h2></div></div><div class="posts-grid">${cards}</div></section><section class="soft-section"><div class="shell split-section"><div><span class="kicker">Keep in touch</span><h2>Have a question worth exploring?</h2></div><div class="body-copy"><p>We are interested in the problems behind the tools. Tell us what you are trying to make work better.</p><a class="inline-link" href="../contact.html">Start a conversation ${arrow}</a></div></div></section>`;
   await mkdir(join(root, 'blog'), { recursive: true });
   await writeFile(join(root, 'blog', 'index.html'), layout({ title: 'Blog', description: 'Practical notes from Dolphin Systems about automation, integrations, and connected work.', key: 'blog', body: blogBody, prefix: '../' }), 'utf8');
   for (const post of posts) {
-    const body = `<article class="shell article"><a class="back-link" href="./">← All articles</a><div class="article-heading"><span class="kicker">${escapeHtml(post.category || 'Notes')}</span><h1>${escapeHtml(post.title)}</h1><p>${escapeHtml(post.description)}</p><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><div class="article-content">${post.body.map(renderBlock).join('')}</div><div class="article-end"><a class="inline-link" href="./">More from the blog ${arrow}</a></div></article>`;
+    const body = `<article class="shell article" data-post-slug="${escapeHtml(post.slug)}"><a class="back-link" href="./">← All articles</a><div class="article-heading">${blogThumb(post)}<span class="kicker">${escapeHtml(post.category || 'Notes')}</span><h1>${escapeHtml(post.title)}</h1><p>${escapeHtml(post.description)}</p><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><div class="article-content">${post.body.map(renderBlock).join('')}</div><section class="blog-engage" aria-label="Article reactions and comments"><div><h2>Was this useful?</h2><p>Leave a quick reaction or note for yourself. This basic version stores feedback in your browser.</p></div><div class="reaction-row"><button type="button" data-reaction="useful">Useful <span>0</span></button><button type="button" data-reaction="sharp">Sharp <span>0</span></button><button type="button" data-reaction="more">More like this <span>0</span></button></div><form class="comment-form"><label for="comment-${escapeHtml(post.slug)}">Comment</label><textarea id="comment-${escapeHtml(post.slug)}" placeholder="Write a thought or question"></textarea><button type="submit">Save comment</button></form><div class="comment-list"></div></section><div class="article-end"><a class="inline-link" href="./">More from the blog ${arrow}</a></div></article>`;
     await writeFile(join(root, 'blog', `${post.slug}.html`), layout({ title: post.title, description: post.description, key: 'blog', body, prefix: '../', article: true }), 'utf8');
   }
   console.log(`Built ${pages.length + 1 + posts.length} pages (${posts.length} blog posts).`);
