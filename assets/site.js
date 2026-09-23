@@ -42,12 +42,12 @@ function createLilaChat() {
   widget.className = 'lila-chat';
   widget.innerHTML = `
     <button class="lila-launcher" type="button" aria-expanded="false" aria-controls="lila-panel">
-      <img class="lila-avatar" src="${new URL('assets/lila-avatar.png', document.baseURI).href}" alt="" width="38" height="38">
+      <img class="lila-avatar" src="${new URL('/assets/lila-avatar.png', document.baseURI).href}" alt="" width="38" height="38">
       <span>Chat with Lila</span>
     </button>
     <div class="lila-panel" id="lila-panel">
       <div class="lila-header">
-        <img class="lila-avatar" src="${new URL('assets/lila-avatar.png', document.baseURI).href}" alt="" width="42" height="42">
+        <img class="lila-avatar" src="${new URL('/assets/lila-avatar.png', document.baseURI).href}" alt="" width="42" height="42">
         <div>
           <strong>Lila</strong>
           <span>Dolphin Systems</span>
