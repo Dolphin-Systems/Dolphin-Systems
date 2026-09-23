@@ -127,6 +127,53 @@ export default {
       return json({ ok: true });
     }
 
+    if (url.pathname === '/api/catalog' && request.method === 'GET') {
+      const kind = url.searchParams.get('kind');
+      return json(await getCatalogList(env, kind), 200, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/catalog' && request.method === 'POST') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const body = await request.json().catch(() => ({}));
+      const result = await createCatalogItem(env, body);
+      return json(result, result.ok ? 200 : 400);
+    }
+
+    if (url.pathname.startsWith('/api/catalog/') && url.pathname.endsWith('/ratings') && request.method === 'POST') {
+      const slug = url.pathname.slice('/api/catalog/'.length, -'/ratings'.length);
+      if (!validCatalogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400, CORS_HEADERS);
+      const body = await request.json().catch(() => ({}));
+      const result = await rateCatalogItem(env, request, slug, body);
+      return json(result, result.ok ? 200 : (result.status || 400), CORS_HEADERS);
+    }
+
+    if (url.pathname.startsWith('/api/catalog/') && request.method === 'GET') {
+      const slug = decodeURIComponent(url.pathname.slice('/api/catalog/'.length));
+      if (!validCatalogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400, CORS_HEADERS);
+      const item = await getCatalogItem(env, slug);
+      if (!item) return json({ ok: false, error: 'not_found' }, 404, CORS_HEADERS);
+      return json({ ok: true, item }, 200, CORS_HEADERS);
+    }
+
+    if (url.pathname.startsWith('/api/catalog/') && request.method === 'PATCH') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const slug = decodeURIComponent(url.pathname.slice('/api/catalog/'.length));
+      if (!validCatalogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400);
+      const body = await request.json().catch(() => ({}));
+      const result = await updateCatalogItem(env, slug, body);
+      return json(result, result.ok ? 200 : 400);
+    }
+
+    if (url.pathname.startsWith('/api/catalog/') && request.method === 'DELETE') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const slug = decodeURIComponent(url.pathname.slice('/api/catalog/'.length));
+      if (!validCatalogSlug(slug)) return json({ ok: false, error: 'bad_slug' }, 400);
+      await env.LEADS_DB.prepare('DELETE FROM catalog_ratings WHERE item_slug = ?').bind(slug).run();
+      const r = await env.LEADS_DB.prepare('DELETE FROM catalog_items WHERE slug = ?').bind(slug).run();
+      if (!r.meta || r.meta.changes === 0) return json({ ok: false, error: 'not_found' }, 404);
+      return json({ ok: true });
+    }
+
     return json({ ok: false, error: 'not_found' }, 404);
   },
 
@@ -338,6 +385,94 @@ async function deleteLead(env, conversationId) {
 }
 
 const BLOG_REACTIONS = ['like', 'love', 'haha', 'wow', 'sad', 'angry'];
+
+function validCatalogSlug(slug) {
+  return typeof slug === 'string' && /^[a-z0-9][a-z0-9-]{0,79}$/.test(slug);
+}
+
+function cleanCatalogText(s, max) {
+  const t = String(s == null ? '' : s).trim();
+  return t.length > max ? t.slice(0, max) : t;
+}
+
+async function catalogRatingMap(env, slugs) {
+  const map = {};
+  if (!slugs.length) return map;
+  const placeholders = slugs.map(() => '?').join(',');
+  const rows = await env.LEADS_DB.prepare(
+    `SELECT item_slug, COUNT(*) AS n, AVG(rating) AS avg FROM catalog_ratings WHERE item_slug IN (${placeholders}) GROUP BY item_slug`
+  ).bind(...slugs).all();
+  for (const r of (rows.results || [])) {
+    map[r.item_slug] = { count: r.n, average: r.avg == null ? 0 : Math.round(r.avg * 10) / 10 };
+  }
+  return map;
+}
+
+async function getCatalogList(env, kind) {
+  const where = (kind === 'product' || kind === 'service') ? 'WHERE kind = ?' : '';
+  const rows = await env.LEADS_DB.prepare(
+    `SELECT slug, kind, title, kicker, icon, body, created_at FROM catalog_items ${where} ORDER BY created_at ASC`
+  ).bind(...(where ? [kind] : [])).all();
+  const items = rows.results || [];
+  const ratings = await catalogRatingMap(env, items.map((i) => i.slug));
+  return { ok: true, items: items.map((i) => ({ ...i, rating: ratings[i.slug] || { count: 0, average: 0 } })) };
+}
+
+async function getCatalogItem(env, slug) {
+  const row = await env.LEADS_DB.prepare(
+    'SELECT slug, kind, title, kicker, icon, body, created_at FROM catalog_items WHERE slug = ?'
+  ).bind(slug).first();
+  if (!row) return null;
+  const ratings = await catalogRatingMap(env, [slug]);
+  return { ...row, rating: ratings[slug] || { count: 0, average: 0 } };
+}
+
+async function createCatalogItem(env, body) {
+  const slug = cleanCatalogText(body.slug, 80).toLowerCase();
+  const kind = body.kind === 'service' ? 'service' : 'product';
+  const title = cleanCatalogText(body.title, 120);
+  if (!validCatalogSlug(slug)) return { ok: false, error: 'bad_slug' };
+  if (!title) return { ok: false, error: 'title_required' };
+  const kicker = cleanCatalogText(body.kicker, 40);
+  const icon = cleanCatalogText(body.icon, 8);
+  const text = cleanCatalogText(body.body, 5000);
+  try {
+    await env.LEADS_DB.prepare(
+      'INSERT INTO catalog_items (slug, kind, title, kicker, icon, body) VALUES (?, ?, ?, ?, ?, ?)'
+    ).bind(slug, kind, title, kicker, icon, text).run();
+  } catch (e) {
+    return { ok: false, error: 'slug_taken' };
+  }
+  return { ok: true, item: await getCatalogItem(env, slug) };
+}
+
+async function updateCatalogItem(env, slug, body) {
+  const fields = [];
+  const values = [];
+  if (body.title !== undefined) { const t = cleanCatalogText(body.title, 120); if (!t) return { ok: false, error: 'title_required' }; fields.push('title = ?'); values.push(t); }
+  if (body.kind !== undefined) { fields.push('kind = ?'); values.push(body.kind === 'service' ? 'service' : 'product'); }
+  if (body.kicker !== undefined) { fields.push('kicker = ?'); values.push(cleanCatalogText(body.kicker, 40)); }
+  if (body.icon !== undefined) { fields.push('icon = ?'); values.push(cleanCatalogText(body.icon, 8)); }
+  if (body.body !== undefined) { fields.push('body = ?'); values.push(cleanCatalogText(body.body, 5000)); }
+  if (!fields.length) return { ok: false, error: 'nothing_to_update' };
+  values.push(slug);
+  const r = await env.LEADS_DB.prepare(`UPDATE catalog_items SET ${fields.join(', ')} WHERE slug = ?`).bind(...values).run();
+  if (!r.meta || r.meta.changes === 0) return { ok: false, error: 'not_found' };
+  return { ok: true, item: await getCatalogItem(env, slug) };
+}
+
+async function rateCatalogItem(env, request, slug, body) {
+  const rating = Number(body.rating);
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) return { ok: false, error: 'bad_rating', status: 400 };
+  const item = await env.LEADS_DB.prepare('SELECT slug FROM catalog_items WHERE slug = ?').bind(slug).first();
+  if (!item) return { ok: false, error: 'not_found', status: 404 };
+  const ip = blogClientIp(request) || 'unknown';
+  await env.LEADS_DB.prepare(
+    'INSERT INTO catalog_ratings (item_slug, ip, rating) VALUES (?, ?, ?) ON CONFLICT(item_slug, ip) DO UPDATE SET rating = excluded.rating, created_at = strftime(\'%Y-%m-%dT%H:%M:%fZ\',\'now\')'
+  ).bind(slug, ip, rating).run();
+  const ratings = await catalogRatingMap(env, [slug]);
+  return { ok: true, rating: ratings[slug] || { count: 0, average: 0 } };
+}
 
 function validBlogSlug(slug) {
   return typeof slug === 'string' && /^[a-z0-9][a-z0-9-]{0,79}$/.test(slug);
@@ -839,6 +974,7 @@ select{background:var(--panel);border:1px solid var(--line);border-radius:12px;c
 .card .summary{font-size:13px;color:var(--muted);line-height:1.55;margin:10px 0;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card .meta{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--faint)}
+.stars{color:#c7d2e8;font-size:15px;letter-spacing:1px}.stars .on{color:#f5a623}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
   padding:5px 11px;border-radius:999px;border:1px solid}
 .pill.new{color:#93c5fd;border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.12)}
@@ -966,6 +1102,7 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
       <button data-view="leads" class="active"><span class="ico">▣</span>Leads<span class="count" id="navLeadCount">–</span></button>
       <button data-view="chats"><span class="ico">💬</span>Chat logs<span class="count" id="navChatCount">–</span></button>
       <button data-view="comments"><span class="ico">💭</span>Comments</button>
+      <button data-view="catalog"><span class="ico">🗂</span>Catalog</button>
       <button data-view="caretaker"><span class="ico">⚙</span>Caretaker</button>
     </nav>
     <div class="side-foot"><span class="dot" id="connDot"></span><span id="connText">Not connected</span></div>
@@ -1021,6 +1158,42 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
         <div class="search"><span class="ico">⌕</span><input id="commentSearch" type="text" placeholder="Search comments…"></div>
       </div>
       <div class="grid" id="commentGrid"></div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="view" id="view-catalog">
+      <div class="toolbar">
+        <div class="seg" id="catalogKindSeg">
+          <button data-kind="" type="button" class="active">All</button>
+          <button data-kind="product" type="button">Products</button>
+          <button data-kind="service" type="button">Services</button>
+        </div>
+        <button class="btn primary" id="addItemBtn" type="button">+ Add item</button>
+      </div>
+      <div class="panel" id="catalogFormPanel" style="display:none">
+        <h3 id="catalogFormTitle">Add item</h3>
+        <div class="two">
+          <div><label for="cfKind">Type</label>
+            <select id="cfKind"><option value="product">Product</option><option value="service">Service</option></select></div>
+          <div><label for="cfSlug">Slug (url name)</label>
+            <input type="text" id="cfSlug" placeholder="flowtrack" maxlength="80"></div>
+        </div>
+        <label for="cfTitle">Title</label>
+        <input type="text" id="cfTitle" placeholder="Item title" maxlength="120">
+        <div class="two">
+          <div><label for="cfKicker">Kicker</label>
+            <input type="text" id="cfKicker" placeholder="SAMPLE 01" maxlength="40"></div>
+          <div><label for="cfIcon">Icon (one emoji or symbol)</label>
+            <input type="text" id="cfIcon" placeholder="◉" maxlength="8"></div>
+        </div>
+        <label for="cfBody">Description</label>
+        <textarea id="cfBody" placeholder="What this is, in a few sentences." maxlength="5000"></textarea>
+        <div class="row">
+          <button class="btn primary" id="saveItemBtn" type="button">Save item</button>
+          <button class="btn ghost" id="cancelItemBtn" type="button">Cancel</button>
+        </div>
+      </div>
+      <div class="grid" id="catalogGrid"></div>
     </section>
 
     <!-- CARETAKER -->
@@ -1211,6 +1384,7 @@ function setView(v){
   if(v === 'leads' && !state.leads.length) loadLeads();
   if(v === 'chats' && !state.chats.length) loadChats();
   if(v === 'comments' && !state.commentsLoaded) loadComments();
+  if(v === 'catalog' && !state.catalogLoaded){ state.catalogLoaded = true; loadCatalog(); }
 }
 $$('.nav button').forEach(function(b){ b.onclick = function(){ setView(b.getAttribute('data-view')); }; });
 $('#menuBtn').onclick = function(){ document.body.classList.toggle('nav-open'); };
@@ -1448,6 +1622,101 @@ async function deleteComment(id){
   } catch(e){ toast('Failed: ' + e.message); }
 }
 $('#commentSearch').oninput = renderComments;
+/* ---------- catalog ---------- */
+state.catalog = [];
+state.catalogKind = '';
+state.catalogEditing = null;
+function catalogStars(avg){
+  var s = '';
+  for(var i = 1; i <= 5; i++) s += '<span class="' + (i <= Math.round(avg) ? 'on' : '') + '">★</span>';
+  return '<span class="stars">' + s + '</span>';
+}
+async function loadCatalog(){
+  try {
+    var data = await api('/api/catalog');
+    state.catalog = data.items || [];
+  } catch(e){ state.catalog = []; toast('Catalog: ' + e.message); }
+  renderCatalog();
+}
+function renderCatalog(){
+  var list = (state.catalog || []).filter(function(i){ return !state.catalogKind || i.kind === state.catalogKind; });
+  var g = $('#catalogGrid');
+  if(!list.length){ g.innerHTML = '<div class="empty-state"><b>No items.</b><p>Add your first product or service with the button above.</p></div>'; return; }
+  g.innerHTML = list.map(function(i){
+    var r = i.rating || { count: 0, average: 0 };
+    return '<div class="card"><div class="card-top"><div class="avatar">' + esc(i.icon || '◈') + '</div>' +
+      '<div class="who"><b>' + esc(i.title) + '</b><small>' + esc(i.kind) + ' · /' + esc(i.slug) + '</small></div>' +
+      '<button class="icon-btn" data-edit-item="' + esc(i.slug) + '" title="Edit">✎</button>' +
+      '<button class="icon-btn danger" data-del-item="' + esc(i.slug) + '" title="Delete">✕</button></div>' +
+      '<p class="summary">' + esc((i.body || '').slice(0, 160)) + ((i.body || '').length > 160 ? '…' : '') + '</p>' +
+      '<div class="meta">' + catalogStars(r.average) + '<span>' + esc(String(r.average)) + ' · ' + esc(String(r.count)) + ' ratings</span></div></div>';
+  }).join('');
+  g.querySelectorAll('[data-edit-item]').forEach(function(b){ b.onclick = function(){ openCatalogForm(b.getAttribute('data-edit-item')); }; });
+  g.querySelectorAll('[data-del-item]').forEach(function(b){ b.onclick = function(){ deleteCatalogItem(b.getAttribute('data-del-item')); }; });
+}
+function openCatalogForm(slug){
+  state.catalogEditing = slug || null;
+  var item = slug ? (state.catalog || []).find(function(i){ return i.slug === slug; }) : null;
+  $('#catalogFormTitle').textContent = item ? 'Edit item' : 'Add item';
+  $('#cfKind').value = item ? item.kind : 'product';
+  $('#cfSlug').value = item ? item.slug : '';
+  $('#cfSlug').disabled = !!item;
+  $('#cfTitle').value = item ? item.title : '';
+  $('#cfKicker').value = item ? (item.kicker || '') : '';
+  $('#cfIcon').value = item ? (item.icon || '') : '';
+  $('#cfBody').value = item ? (item.body || '') : '';
+  $('#catalogFormPanel').style.display = '';
+  $('#catalogFormPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function closeCatalogForm(){
+  state.catalogEditing = null;
+  $('#catalogFormPanel').style.display = 'none';
+}
+async function saveCatalogItem(){
+  var editing = state.catalogEditing;
+  var payload = {
+    kind: $('#cfKind').value,
+    slug: $('#cfSlug').value.trim().toLowerCase(),
+    title: $('#cfTitle').value.trim(),
+    kicker: $('#cfKicker').value.trim(),
+    icon: $('#cfIcon').value.trim(),
+    body: $('#cfBody').value.trim()
+  };
+  if(!payload.title){ toast('Title is required'); return; }
+  if(!editing && !payload.slug){ toast('Slug is required'); return; }
+  try {
+    if(editing){
+      delete payload.slug;
+      await api('/api/catalog/' + encodeURIComponent(editing), { method: 'PATCH', body: JSON.stringify(payload) });
+      toast('Item updated');
+    } else {
+      await api('/api/catalog', { method: 'POST', body: JSON.stringify(payload) });
+      toast('Item added');
+    }
+    closeCatalogForm();
+    await loadCatalog();
+  } catch(e){ toast('Failed: ' + e.message); }
+}
+async function deleteCatalogItem(slug){
+  if(!confirm('Delete this item and its ratings?')) return;
+  try {
+    await api('/api/catalog/' + encodeURIComponent(slug), { method: 'DELETE' });
+    state.catalog = (state.catalog || []).filter(function(i){ return i.slug !== slug; });
+    renderCatalog();
+    toast('Item deleted');
+  } catch(e){ toast('Failed: ' + e.message); }
+}
+$('#addItemBtn').onclick = function(){ openCatalogForm(null); };
+$('#cancelItemBtn').onclick = closeCatalogForm;
+$('#saveItemBtn').onclick = saveCatalogItem;
+$('#catalogKindSeg').querySelectorAll('button').forEach(function(b){
+  b.onclick = function(){
+    $('#catalogKindSeg').querySelectorAll('button').forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active');
+    state.catalogKind = b.getAttribute('data-kind');
+    renderCatalog();
+  };
+});
 /* ---------- caretaker ---------- */
 function paintCaretaker(data){
   var s = data.settings || {};

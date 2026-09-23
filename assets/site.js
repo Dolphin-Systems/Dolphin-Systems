@@ -311,3 +311,89 @@ function setupBlogEngagement() {
 }
 
 setupBlogEngagement();
+
+function setupCatalogGrid() {
+  const grid = document.getElementById('sampleGrid');
+  if (!grid) return;
+  const kind = grid.getAttribute('data-kind') || 'product';
+  const API = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev';
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function stars(avg) {
+    let s = '';
+    for (let i = 1; i <= 5; i++) s += `<span class="${i <= Math.round(avg) ? 'on' : ''}">★</span>`;
+    return `<span class="card-stars">${s}</span>`;
+  }
+  fetch(`${API}/api/catalog?kind=${encodeURIComponent(kind)}`)
+    .then((r) => r.json())
+    .then((data) => {
+      const items = (data && data.items) || [];
+      if (!items.length) return;
+      grid.innerHTML = items.map((it) => {
+        const r = it.rating || { count: 0, average: 0 };
+        const blurb = (it.body || '').length > 140 ? it.body.slice(0, 140).trimEnd() + '…' : (it.body || '');
+        return `<a class="product-card" href="item.html?slug=${encodeURIComponent(it.slug)}">` +
+          `<span class="product-icon" aria-hidden="true">${esc(it.icon || '◈')}</span>` +
+          `<span class="kicker">${esc(it.kicker || '')}</span><h3>${esc(it.title)}</h3><p>${esc(blurb)}</p>` +
+          `<div class="card-rating">${stars(r.average)}<span class="rating-text">${esc(String(r.average))} (${esc(String(r.count))})</span></div></a>`;
+      }).join('');
+    })
+    .catch(() => { /* keep static fallback */ });
+}
+
+function setupCatalogItem() {
+  const root = document.getElementById('catalogItem');
+  if (!root) return;
+  const slug = new URLSearchParams(window.location.search).get('slug');
+  const API = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev';
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  if (!slug) { root.innerHTML = '<p>Item not found.</p>'; return; }
+  const ratedKey = `dolphin-catalog-rated:${slug}`;
+  let myRating = 0;
+  try { myRating = Number(localStorage.getItem(ratedKey) || 0); } catch (e) { /* ignore */ }
+
+  function render(item) {
+    const r = item.rating || { count: 0, average: 0 };
+    const paras = String(item.body || '').split(/\n{2,}|\n/).filter((p) => p.trim()).map((p) => `<p>${esc(p.trim())}</p>`).join('');
+    root.innerHTML =
+      `<span class="kicker">${esc(item.kicker || '')}</span><h1>${esc(item.title)}</h1>` +
+      `<div class="rating-summary" aria-live="polite">${renderStars(r.average, true)}<span class="rating-text">${esc(String(r.average))} average · ${esc(String(r.count))} rating${r.count === 1 ? '' : 's'}</span></div>` +
+      `<div class="body-copy">${paras}</div>` +
+      `<div class="rate-box"><span class="rate-label">${myRating ? `You rated this ${myRating}/5` : 'Rate this:'}</span><div class="rate-stars" role="radiogroup" aria-label="Rate this item">${[1, 2, 3, 4, 5].map((n) =>
+        `<button type="button" data-rate="${n}" role="radio" aria-checked="${myRating === n}" aria-label="${n} star${n === 1 ? '' : 's'}" ${myRating ? 'disabled' : ''}>★</button>`).join('')}</div></div>`;
+    if (!myRating) {
+      root.querySelectorAll('[data-rate]').forEach((b) => {
+        b.addEventListener('click', async () => {
+          const n = Number(b.getAttribute('data-rate'));
+          b.disabled = true;
+          try {
+            const res = await fetch(`${API}/api/catalog/${encodeURIComponent(slug)}/ratings`, {
+              method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ rating: n }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              myRating = n;
+              try { localStorage.setItem(ratedKey, String(n)); } catch (e) { /* ignore */ }
+              render({ ...item, rating: data.rating });
+            } else { b.disabled = false; }
+          } catch (e) { b.disabled = false; }
+        });
+      });
+    }
+  }
+  function renderStars(avg, big) {
+    let s = '';
+    for (let i = 1; i <= 5; i++) s += `<span class="${i <= Math.round(avg) ? 'on' : ''}">★</span>`;
+    return `<span class="item-stars">${s}</span>`;
+  }
+  fetch(`${API}/api/catalog/${encodeURIComponent(slug)}`)
+    .then((r) => { if (!r.ok) throw new Error('nf'); return r.json(); })
+    .then((data) => { document.title = `${data.item.title} — Dolphin Systems`; render(data.item); })
+    .catch(() => { root.innerHTML = '<p>Could not load this item.</p>'; });
+}
+
+setupCatalogGrid();
+setupCatalogItem();
