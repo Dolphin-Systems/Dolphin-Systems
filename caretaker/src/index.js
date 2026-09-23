@@ -669,6 +669,9 @@ function adminPage() {
 }
 *{box-sizing:border-box}
 html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+button{-webkit-tap-highlight-color:transparent}
+.transcript,.chat-list,.drawer-body,.mini-transcript{-webkit-overflow-scrolling:touch}
 body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
 body:before{content:'';position:fixed;inset:0;pointer-events:none;
   background:radial-gradient(600px 320px at 12% -4%,rgba(59,130,246,.16),transparent 60%),
@@ -816,14 +819,44 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
 @media(max-width:960px){
   .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:.25s;z-index:55;height:100vh}
   body.nav-open .sidebar{transform:none}
-  .main{padding:18px 16px 60px}
+  .main{padding:18px 16px calc(60px + env(safe-area-inset-bottom))}
   .stats{grid-template-columns:repeat(2,1fr)}
   .chat-layout{grid-template-columns:1fr}
   .chat-list{max-height:300px}
   .two{grid-template-columns:1fr}
   .menu-btn{display:inline-flex !important}
+  .nav-scrim{display:block;position:fixed;inset:0;background:rgba(3,6,15,.6);z-index:54;opacity:0;pointer-events:none;transition:.25s}
+  body.nav-open .nav-scrim{opacity:1;pointer-events:auto}
 }
 .menu-btn{display:none}
+.nav-scrim{display:none}
+/* ---------- phone polish ---------- */
+@media(max-width:640px){
+  input,textarea,select{font-size:16px !important}
+  .topbar{gap:10px;margin-bottom:16px}
+  .topbar h1{font-size:19px}
+  .topbar p{display:none}
+  .topbar .btn{padding:9px 12px}
+  .stats{gap:10px;margin-bottom:14px}
+  .stat{padding:14px}
+  .stat b{font-size:22px}
+  .stat span{font-size:10px}
+  .toolbar{gap:8px;margin-bottom:12px}
+  .search{flex:1 1 100%;min-width:0}
+  .chip{padding:10px 16px}
+  .btn{min-height:44px}
+  .grid{grid-template-columns:1fr}
+  .card{padding:16px}
+  .card .contact,.card .summary{word-break:break-word}
+  .seg{grid-template-columns:repeat(2,1fr)}
+  .panel{padding:16px}
+  .drawer{width:100%;border-left:0;padding-top:env(safe-area-inset-top)}
+  .drawer-foot{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+  .bubble{max-width:88%}
+  .modal{padding:14px}
+  .modal .box{padding:22px}
+  .toast{bottom:calc(20px + env(safe-area-inset-bottom));max-width:calc(100vw - 32px)}
+}
 </style>
 </head>
 <body>
@@ -840,6 +873,7 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
     </nav>
     <div class="side-foot"><span class="dot" id="connDot"></span><span id="connText">Not connected</span></div>
   </aside>
+  <div class="nav-scrim" id="navScrim"></div>
 
   <main class="main">
     <header class="topbar">
@@ -1073,6 +1107,7 @@ function setView(v){
 }
 $$('.nav button').forEach(function(b){ b.onclick = function(){ setView(b.getAttribute('data-view')); }; });
 $('#menuBtn').onclick = function(){ document.body.classList.toggle('nav-open'); };
+$('#navScrim').onclick = function(){ document.body.classList.remove('nav-open'); };
 /* ---------- leads ---------- */
 function statusPill(s){ return '<span class="pill ' + s + '">' + STATUS_LABEL[s] + '</span>'; }
 function renderChips(){
@@ -1267,6 +1302,7 @@ async function openChat(id){
     v.innerHTML = html;
     var t = v.querySelector('.transcript');
     t.scrollTop = t.scrollHeight;
+    if(window.innerWidth <= 640){ v.scrollIntoView({behavior:'smooth',block:'start'}); }
   } catch(e){ v.innerHTML = '<div class="viewer-empty">Failed to load: ' + esc(e.message) + '</div>'; }
 }
 /* ---------- caretaker ---------- */
@@ -1330,7 +1366,7 @@ function boot(){
     if(state.view === 'chats') loadChats();
   }
 }
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeDrawer(); $('#tokenModal').classList.remove('show'); } });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeDrawer(); document.body.classList.remove('nav-open'); $('#tokenModal').classList.remove('show'); } });
 boot();
 </script>
 </body>
