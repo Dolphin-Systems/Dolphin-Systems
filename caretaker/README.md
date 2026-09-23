@@ -31,3 +31,19 @@ The cron is daily at `13:00 UTC`. Manual generation is available with:
 curl -X POST "https://dolphin-systems-caretaker.<your-subdomain>.workers.dev/generate" \
   -H "Authorization: Bearer $ADMIN_TOKEN"
 ```
+
+## Admin panel
+
+Open the deployed Worker URL in a browser:
+
+```text
+https://dolphin-systems-caretaker.ritikyadav.workers.dev/admin
+```
+
+Paste `ADMIN_TOKEN` into the password field. The panel can:
+
+- show current website/caretaker status
+- save natural-language instructions
+- trigger one blog post immediately
+
+Instructions are stored in `caretaker/settings.json`. The Worker wakes daily, reads those settings, and decides whether it should publish based on the saved cadence. For example, "write a blog post every day" sets daily publishing; "pause blog posts" pauses publishing.

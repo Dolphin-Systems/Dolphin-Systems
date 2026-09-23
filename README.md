@@ -25,3 +25,9 @@ Required Cloudflare secrets:
 - `ADMIN_TOKEN`
 
 See [caretaker/README.md](caretaker/README.md) for setup and deploy commands.
+
+Admin panel:
+
+```text
+https://dolphin-systems-caretaker.ritikyadav.workers.dev/admin
+```
