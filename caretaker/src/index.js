@@ -35,13 +35,13 @@ const PWA_MANIFEST = `{
   "background_color": "#070b16",
   "theme_color": "#070b16",
   "icons": [
-    { "src": "/admin/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/admin/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/admin/icon-192.png?v=3", "sizes": "192x192", "type": "image/png" },
+    { "src": "/admin/icon-512.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }`;
 const PWA_SW = `
-const CACHE = 'dolphin-admin-v1';
-const CORE = ['/admin/manifest.json', '/admin/icon-192.png', '/admin/icon-512.png', '/admin/apple-touch-icon.png'];
+const CACHE = 'dolphin-admin-v2';
+const CORE = ['/admin/manifest.json', '/admin/icon-192.png?v=3', '/admin/icon-512.png?v=3', '/admin/apple-touch-icon.png?v=3'];
 self.addEventListener('install', function(e){
   e.waitUntil(caches.open(CACHE).then(function(c){ return c.addAll(CORE); }).then(function(){ return self.skipWaiting(); }));
 });
@@ -64,8 +64,8 @@ self.addEventListener('push', function(e){
   try { data = e.data ? e.data.json() : {}; } catch (err) {}
   e.waitUntil(self.registration.showNotification(data.title || 'Dolphin Admin', {
     body: data.body || 'You have a new chat request.',
-    icon: '/admin/icon-192.png',
-    badge: '/admin/icon-192.png',
+    icon: '/admin/icon-192.png?v=3',
+    badge: '/admin/icon-192.png?v=3',
     tag: 'human-chat',
     renotify: true,
     data: { url: data.url || '/admin' }
@@ -1352,7 +1352,7 @@ function adminPage() {
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Dolphin Admin">
-<link rel="apple-touch-icon" href="/admin/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/admin/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/svg+xml" href="/admin/favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="/admin/icon-192.png">
 <style>
