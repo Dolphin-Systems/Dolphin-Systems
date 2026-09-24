@@ -1,0 +1,127 @@
+{
+  "slug": "2026-09-24-how-to-evaluate-an-automation-platform-release",
+  "title": "How to Evaluate an Automation Platform Release",
+  "description": "A practical framework for assessing new automation platform features before they touch production workflows, from release notes to rollback plans.",
+  "date": "2026-09-24",
+  "category": "Automation Strategy",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Every few weeks, an automation platform you depend on ships a release: a new AI step, a revised connector, a changed execution limit. The release notes land in your inbox, someone on the team forwards them with a \"this looks useful,\" and the temptation is to wire it into a live workflow the same afternoon. That is usually a mistake — not because the feature is bad, but because a release note describes what shipped, not whether it is ready for your process."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is the evergreen version of our scheduled news post. Rather than summarizing a specific announcement we could not independently verify at publication time, here is the evaluation method we use when a platform update actually matters to a production system."
+    },
+    {
+      "type": "heading",
+      "text": "Start With What Actually Shipped"
+    },
+    {
+      "type": "paragraph",
+      "text": "Release communication mixes three different things: features that are generally available, features in limited or beta access, and features that are announced but not yet usable. Before anything else, sort the announcement into those buckets using the primary source — the vendor's own changelog, release notes, or documentation — not a summary post or a social thread."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Generally available: documented, supported, and usable on your plan today.",
+        "Limited or beta: may require an allowlist, a specific plan tier, or a region. Check access requirements explicitly.",
+        "Announced or roadmap: no committed date you can plan against. Treat it as noise until it ships."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If you cannot find the feature in official documentation, assume it is not ready for production, regardless of how the announcement was worded."
+    },
+    {
+      "type": "heading",
+      "text": "Map the Change to a Real Workflow"
+    },
+    {
+      "type": "paragraph",
+      "text": "A feature only has value relative to a process. Pick one workflow where the change could plausibly help, and write down what the current version does: trigger, steps, data touched, systems written to, and where humans intervene. Then ask what the new capability would replace or simplify."
+    },
+    {
+      "type": "paragraph",
+      "text": "For example, if a platform adds a native document-extraction step, the relevant question is not \"is this impressive?\" but \"does this remove a manual re-entry step in our invoice intake, and what happens to the fields it gets wrong?\" If the answer is vague, the feature is not yet a priority."
+    },
+    {
+      "type": "heading",
+      "text": "Test in Isolation Before You Commit"
+    },
+    {
+      "type": "paragraph",
+      "text": "Never evaluate a new capability by editing a production workflow in place. Build a parallel version that runs on a copy of the data, or use a sandbox environment if the platform provides one. Run it against real edge cases, not just the happy path: malformed inputs, missing fields, duplicate records, and the unusual customer request that breaks assumptions."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Run at least a week of real or realistic data through the test version.",
+        "Log every input and output so you can compare against the current process.",
+        "Deliberately feed it bad data and see how it fails.",
+        "Confirm what happens on timeout, rate limit, or partial failure."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The goal is not to prove the feature works. It is to find out how it fails before your customers do."
+    },
+    {
+      "type": "heading",
+      "text": "Check the Operational Edges"
+    },
+    {
+      "type": "paragraph",
+      "text": "New features often arrive with new constraints. Read the documentation for limits, quotas, and pricing changes that apply specifically to the new capability. A step that is free during preview may be metered afterward. A connector that works on one plan may require an upgrade on another."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Execution limits: timeouts, payload sizes, concurrency, or step counts.",
+        "Cost model: per-task, per-token, per-seat, or per-integration pricing.",
+        "Data handling: where data is processed, retention, and whether it leaves your region.",
+        "Support status: is the feature covered by support, or explicitly experimental?"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These details rarely appear in the announcement. They live in the docs, and they are usually what determines whether a feature is practical."
+    },
+    {
+      "type": "heading",
+      "text": "Decide With a Rollback Plan"
+    },
+    {
+      "type": "paragraph",
+      "text": "If the test version holds up, migrate deliberately. Keep the old workflow intact and run the new one in parallel or behind a manual switch until you have confidence. Define in advance what would trigger a rollback: an error rate above a threshold, a data mismatch, or a failure mode you did not anticipate."
+    },
+    {
+      "type": "paragraph",
+      "text": "Document the change — what was replaced, who owns it, and how to revert. A release that is easy to adopt but hard to undo is a liability, not an upgrade."
+    },
+    {
+      "type": "heading",
+      "text": "A Practical Takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Treat every platform release as a candidate, not a mandate. Verify what shipped from the primary source, map it to a specific workflow, test it against real edge cases, check the operational limits, and keep a rollback path. Most releases will not pass all five gates, and that is fine — the ones that do are worth adopting with confidence."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "paragraph",
+      "text": "How long should I test a new platform feature before using it in production? It depends on volume and risk. A low-risk internal notification might need a few days; anything touching customer data, money, or compliance should run in parallel for at least a full business cycle so you see month-end or peak-load behavior."
+    },
+    {
+      "type": "paragraph",
+      "text": "What if the vendor says a feature is generally available but I cannot find documentation? Ask support for the specific docs and access requirements. If they cannot point you to official documentation, treat the feature as unavailable for production and revisit when that changes."
+    },
+    {
+      "type": "paragraph",
+      "text": "Should I adopt a new feature just because a competitor might? No. Adoption decisions should be tied to a measured problem in your own workflow. A feature that solves someone else's bottleneck adds maintenance cost to yours without a return."
+    }
+  ]
+}
