@@ -1,0 +1,126 @@
+{
+  "slug": "2026-09-26-ai-agents-vs-chatbots-vs-deterministic-automation",
+  "title": "AI Agents vs. Chatbots vs. Deterministic Automation",
+  "description": "Chatbots, AI agents, and deterministic automation solve different problems. Learn how to choose the right architecture for each step in a workflow.",
+  "date": "2026-09-26",
+  "category": "Automation Strategy",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most teams asking for an \"AI agent\" don't actually need one for every step. They need a clear-eyed answer to a simpler question: which parts of this workflow should be predictable, and which parts genuinely require judgment? Confusing chatbots, AI agents, and deterministic automation leads to systems that are either too rigid to be useful or too unpredictable to trust."
+    },
+    {
+      "type": "paragraph",
+      "text": "This article breaks down the three architectures, compares how they handle tools, state, autonomy, and approvals, and walks through a customer request from intake to resolution to show where each one belongs."
+    },
+    {
+      "type": "heading",
+      "text": "Three Architectures, Three Jobs"
+    },
+    {
+      "type": "paragraph",
+      "text": "A chatbot is a conversational interface. It maps user input to a response, usually within a single session. It may call a tool or look something up, but its primary output is text for a human to read. State is typically limited to the conversation thread. Autonomy is low: the human decides what to do next."
+    },
+    {
+      "type": "paragraph",
+      "text": "An AI agent is a system that pursues a goal across multiple steps. It can call tools, inspect results, and decide what to do next based on what it finds. State may persist across steps, and the agent may act with varying degrees of autonomy depending on how it's configured. The key distinction is that the sequence of actions isn't fully predetermined at design time."
+    },
+    {
+      "type": "paragraph",
+      "text": "Deterministic automation is a fixed sequence of steps: trigger, transform, route, write, notify. Given the same input, it produces the same output. There's no model deciding what happens next. This is what tools like Zapier, Make, n8n, and custom scripts do well. It's boring, and boring is the point."
+    },
+    {
+      "type": "heading",
+      "text": "Comparing Tools, State, Autonomy, and Approvals"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tools: Chatbots typically use a small set of retrieval or lookup functions. Agents use a broader toolset and choose among them dynamically. Deterministic automation uses only the specific integrations wired into the workflow.",
+        "State: Chatbots hold conversational context. Agents maintain task state across steps, sometimes across sessions. Deterministic automation holds state in the workflow itself, often in a database or queue.",
+        "Autonomy: Chatbots respond. Agents decide and act. Deterministic automation executes a pre-approved path with no runtime judgment.",
+        "Approvals: Chatbots rarely need approval gates because they don't take action. Agents often need them, because the next action isn't known in advance. Deterministic automation embeds approvals as explicit steps in the flow.",
+        "Failure modes: Chatbots produce bad answers. Agents can take wrong actions. Deterministic automation fails loudly when an API changes or a field is missing."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "A Customer Request, Step by Step"
+    },
+    {
+      "type": "paragraph",
+      "text": "Consider a support request that arrives by email. The customer says their invoice looks wrong and asks for a correction. Here's how a well-designed system might handle it, with each step assigned to the architecture that fits."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Intake and parsing: Deterministic. Pull the email, extract sender, subject, and body, and create a ticket. No judgment required.",
+        "Classification: AI agent or model-assisted step. Decide whether this is billing, technical, or general. This benefits from language understanding, but the output should be a constrained label, not free text.",
+        "Data gathering: Deterministic. Look up the customer record, recent invoices, and payment history via API calls.",
+        "Draft response: AI agent or model-assisted step. Generate a draft that references the actual invoice data. The draft is a proposal, not a sent message.",
+        "Approval: Deterministic. Route the draft to a human if the amount exceeds a threshold or the customer is flagged. Otherwise, allow auto-send.",
+        "CRM update and logging: Deterministic. Write the resolution, timestamp, and agent decisions to the CRM and an audit log."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Notice that the model-assisted steps are bounded. They produce structured outputs that deterministic steps can validate. The agent doesn't get to decide whether to issue a refund; it decides how to phrase a draft that a human or a rule will approve."
+    },
+    {
+      "type": "heading",
+      "text": "Implementation Considerations"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by mapping the workflow and marking each step as \"needs judgment\" or \"does not need judgment.\" Most steps fall into the second category. Resist the urge to hand those to a model because it feels more modern."
+    },
+    {
+      "type": "paragraph",
+      "text": "For the steps that do need judgment, constrain the output. Ask for a label from a fixed list, a structured JSON object, or a draft with a known schema. Validate it before passing it downstream. If validation fails, route to a human rather than retrying indefinitely."
+    },
+    {
+      "type": "paragraph",
+      "text": "Keep an audit trail of every model decision, including the input, the output, and the model version. When something goes wrong, you'll want to know whether the model changed, the prompt changed, or the input data changed."
+    },
+    {
+      "type": "heading",
+      "text": "Limitations"
+    },
+    {
+      "type": "paragraph",
+      "text": "Agents are not reliable at long-horizon tasks with many dependent steps. Error rates compound. A step that succeeds 95% of the time will fail about 40% of the time across ten sequential steps. Deterministic steps don't have this problem in the same way, because failures are usually obvious and localized."
+    },
+    {
+      "type": "paragraph",
+      "text": "Chatbots are easy to build and easy to over-trust. A chatbot that answers confidently but incorrectly erodes user trust faster than one that says \"I don't know.\" Design for graceful failure."
+    },
+    {
+      "type": "paragraph",
+      "text": "Deterministic automation breaks when the underlying API changes. This is a maintenance cost, not a design flaw, but it needs an owner. Someone has to watch the logs and update the workflow when a field is renamed or a rate limit changes."
+    },
+    {
+      "type": "heading",
+      "text": "Practical Takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Default to deterministic automation. Add model-assisted steps only where judgment is genuinely required, and bound those steps with structured outputs and validation. Add agentic behavior only when the sequence of steps can't be known in advance, and then add approval gates for anything with real consequences. The goal isn't to use the most advanced architecture. It's to build a system that does the right thing reliably, and that a human can debug when it doesn't."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Can a chatbot be an agent? Yes, if it can take actions across multiple steps and decide what to do next. The distinction is about capability, not interface. A chatbot that only answers questions is not an agent."
+    },
+    {
+      "type": "paragraph",
+      "text": "How do I know if a step needs a model? Ask whether a new employee could handle it with a written rulebook. If yes, it's deterministic. If it requires interpreting ambiguous language or making a judgment call, a model may help."
+    },
+    {
+      "type": "paragraph",
+      "text": "What's the biggest mistake teams make? Automating a process before fixing it. If the manual process is inconsistent or poorly documented, automation will scale the inconsistency. Map the process first, then decide which steps to automate and how."
+    }
+  ]
+}
