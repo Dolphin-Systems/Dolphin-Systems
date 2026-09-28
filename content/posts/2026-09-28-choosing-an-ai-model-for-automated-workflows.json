@@ -1,0 +1,107 @@
+{
+  "slug": "2026-09-28-choosing-an-ai-model-for-automated-workflows",
+  "title": "Choosing an AI Model for Automated Workflows",
+  "description": "A practical framework for selecting an AI model for automated workflows: tool calling, latency, cost, reliability, and when a deterministic step beats an LLM.",
+  "date": "2026-09-28",
+  "category": "Guides",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Picking an AI model for an automated workflow is not the same decision as picking a model to chat with. In a chat window, a slow or occasionally wrong answer is an annoyance. Inside a workflow, that same answer can block an invoice, create a duplicate record, or leave a customer waiting on a reply that never gets sent. The model is one component in a chain of systems that must hand work to each other reliably."
+    },
+    {
+      "type": "paragraph",
+      "text": "This guide is a fallback topic, not a news report. No verified platform release landed in the window we checked for this post, so instead of dressing up speculation as news, here is a framework you can apply the next time a model choice comes up."
+    },
+    {
+      "type": "heading",
+      "text": "Start with the job, not the model"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before comparing anything, write down what the step actually has to do. \"Use AI\" is not a job description. Useful job descriptions look like: classify an inbound email into one of six categories; extract a purchase order number and line items from a PDF; draft a reply that a human will review; decide whether a support ticket is a billing issue or a technical issue. Each of those has different tolerances for latency, cost, and error."
+    },
+    {
+      "type": "paragraph",
+      "text": "A classification step that runs 5,000 times a day has different economics than a summarization step that runs twice a week. A step whose output is reviewed by a person has different risk than a step that writes directly to a production database. Naming the job first keeps the comparison grounded in your constraints instead of a leaderboard."
+    },
+    {
+      "type": "heading",
+      "text": "The five criteria that actually matter"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tool calling and structured output: Can the model reliably return JSON matching a schema, and can it call functions your workflow exposes? If your workflow needs the model to fetch a record or trigger an action, this is a hard requirement, not a nice-to-have.",
+        "Latency: What is the acceptable response time for this step? A synchronous step in a customer-facing flow has a very different budget than a nightly batch job.",
+        "Cost per run: Estimate tokens in, tokens out, and retries. A cheap model that fails and retries twice can cost more than a slightly more expensive model that succeeds once.",
+        "Reliability on your inputs: How does the model handle messy real-world data, unusual formatting, or partial information? Test with your own examples, not with a demo dataset.",
+        "Operational fit: Does the provider offer the availability, data handling terms, and regional options your business requires? This is often the deciding factor, not benchmark scores."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Where a deterministic step beats an LLM"
+    },
+    {
+      "type": "paragraph",
+      "text": "A common mistake is reaching for a model where a rule would do. If a field must match a regex, validate it with a regex. If a status must move from \"pending\" to \"approved\" only when a manager clicks a button, that is a workflow rule, not a reasoning problem. Models are useful for ambiguity: unstructured text, inconsistent formats, and judgment calls that are hard to express as rules."
+    },
+    {
+      "type": "paragraph",
+      "text": "A practical pattern is to use deterministic code for anything that can be specified exactly, and reserve the model for the parts that genuinely require interpretation. This reduces cost, reduces failure modes, and makes the system easier to test."
+    },
+    {
+      "type": "heading",
+      "text": "A worked example"
+    },
+    {
+      "type": "paragraph",
+      "text": "Suppose you are automating invoice intake. The workflow receives PDFs by email, extracts key fields, matches them against purchase orders, and routes exceptions to a person. A reasonable split looks like this: a parser extracts raw text; a model handles the messy extraction of vendor name, invoice number, and total when the layout varies; deterministic code validates that the total matches the line items and that the invoice number is unique; a model drafts a summary for the reviewer; a human approves anything that fails validation."
+    },
+    {
+      "type": "paragraph",
+      "text": "The model is doing two jobs: extraction from inconsistent documents and drafting. Everything else is code. If you swap models later, you only need to re-test those two steps, not the whole pipeline."
+    },
+    {
+      "type": "heading",
+      "text": "Testing before you commit"
+    },
+    {
+      "type": "paragraph",
+      "text": "Build a small evaluation set from your own historical data. Fifty to a hundred real examples is often enough to see meaningful differences. For each candidate model, measure accuracy on the task, the rate of malformed structured output, latency, and cost per run. Run the same set more than once; model outputs vary between calls, and a single pass can mislead you."
+    },
+    {
+      "type": "paragraph",
+      "text": "Also test the failure path. What happens when the model returns something invalid, times out, or refuses? A workflow that handles those cases gracefully is more valuable than one that scores slightly higher on a clean test set."
+    },
+    {
+      "type": "heading",
+      "text": "Limitations to keep in mind"
+    },
+    {
+      "type": "paragraph",
+      "text": "No model choice removes the need for validation, logging, and human review where the stakes are high. Model behavior can change when providers update versions, so pin versions where the provider allows it and re-run your evaluation set after any change. Cost estimates based on today's pricing can shift. And a model that works well in a prototype may behave differently under production volume, especially if you are hitting rate limits."
+    },
+    {
+      "type": "heading",
+      "text": "Practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Define the job, list your constraints, test candidates on your own data, and keep deterministic code wherever it fits. Treat the model as one replaceable component in a larger system, and design the surrounding workflow so a model swap is a contained change rather than a rewrite."
+    },
+    {
+      "type": "heading",
+      "text": "FAQ"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Should I always use the largest model available? No. Larger models are often slower and more expensive. Use the smallest model that meets your accuracy and reliability requirements for that specific step.",
+        "How often should I re-evaluate my model choice? Re-run your evaluation set whenever the provider changes the model version, when your input data shifts, or on a regular schedule such as quarterly.",
+        "What if my workflow needs the model to take actions? Use tool calling with a strict allowlist, validate every argument before execution, and require human approval for actions that are hard to reverse."
+      ]
+    }
+  ]
+}
