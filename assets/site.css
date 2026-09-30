@@ -125,7 +125,8 @@ a.product-card{text-decoration:none;color:inherit;display:block;transition:box-s
 /* ---- Tool Lab ---- */
 .tool-logo{display:inline-flex;flex:none}
 .tool-logo svg{width:44px;height:44px;display:block}
-.tool-card .tool-price{display:block;margin-top:10px;font-weight:700}
+.tool-card .tool-price{font-weight:700}
+.tool-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
 .tool-open{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-weight:600;color:var(--accent)}
 .tool-open svg{width:14px;height:14px;flex:none}
 .lab-strip{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:space-between;margin:30px 0}

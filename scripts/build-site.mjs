@@ -196,8 +196,8 @@ function toolCard(tool, base, index) {
     `<span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span>` +
     `<span class="kicker">TOOL ${String(index + 1).padStart(2, '0')}</span>` +
     `<h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.tagline)}</p>` +
-    `<span class="tool-price">$${Number(tool.pricing.monthly)}/mo</span>` +
-    `<span class="tool-open">Open tool ${lockIcon}</span></a>`;
+    `<span class="tool-foot"><span class="tool-price">$${Number(tool.pricing.monthly)}/mo</span>` +
+    `<span class="tool-open">Open tool ${lockIcon}</span></span></a>`;
 }
 
 function toolLabSection(tools) {
