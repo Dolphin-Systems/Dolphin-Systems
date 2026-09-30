@@ -150,20 +150,17 @@ async function ensureToolTables(db) {
 }
 
 function generateToolPin() {
-  const alphabet = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-  const bytes = crypto.getRandomValues(new Uint8Array(8));
-  let s = '';
-  for (const b of bytes) s += alphabet[b % alphabet.length];
-  return 'DS' + s;
+  const bytes = crypto.getRandomValues(new Uint8Array(3));
+  const n = ((bytes[0] << 16) | (bytes[1] << 8) | bytes[2]) % 1000000;
+  return String(n).padStart(6, '0');
 }
 
 function formatToolPin(pin) {
-  const p = String(pin || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-  return p.length === 10 ? `${p.slice(0, 2)}-${p.slice(2, 6)}-${p.slice(6)}` : p;
+  return String(pin || '').replace(/\D/g, '').slice(0, 6);
 }
 
 function normalizeToolPin(pin) {
-  return String(pin || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  return String(pin || '').replace(/\D/g, '').slice(0, 6);
 }
 
 async function handleToolVerify(env, body, request) {
@@ -174,7 +171,7 @@ async function handleToolVerify(env, body, request) {
   if (await hitRateLimit(db, clientIp)) return { ok: false, error: 'rate_limited', status: 429 };
   const slug = String(body.slug || '').trim().toLowerCase().slice(0, 80);
   const pin = normalizeToolPin(body.pin);
-  if (!/^DS[A-Z0-9]{8}$/.test(pin)) return { ok: false, error: 'invalid_pin' };
+  if (!/^\d{6}$/.test(pin)) return { ok: false, error: 'invalid_pin' };
   const row = await db.prepare(
     'SELECT tool_slug, months, expires_at, revoked FROM tool_pins WHERE pin = ?'
   ).bind(pin).first().catch(() => null);

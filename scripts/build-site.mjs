@@ -227,7 +227,7 @@ function toolSharedCss() {
 .tool-lock-ico{font-size:40px}
 .tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
 #pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
-#pinInput{font-size:18px;letter-spacing:2px;text-transform:uppercase;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
 .tool-request-card{padding:34px;background:#f7f9fd}
 .tool-request-card h3{margin:0 0 10px}
 .steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
@@ -339,7 +339,7 @@ function toolPageBody(tool) {
   `<div class="tool-lock-wrap"><div id="toolLocked">` +
   `<div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3>` +
   `<p>Enter the access PIN you received after subscribing.</p>` +
-  `<form id="pinForm"><input id="pinInput" type="text" placeholder="DS-XXXX-XXXX" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form>` +
+  `<form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form>` +
   `<p class="form-error" id="pinError" hidden></p></div>` +
   `<div class="tool-request-card"><h3>Don't have a PIN yet?</h3>` +
   `<ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol>` +
