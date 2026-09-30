@@ -1,0 +1,147 @@
+{
+  "slug": "2026-09-30-apis-webhooks-and-integrations-in-plain-english",
+  "title": "APIs, Webhooks, and Integrations in Plain English",
+  "description": "A practical explainer of APIs, webhooks, and integrations using an order-to-invoice example, covering requests, responses, authentication, and rate limits.",
+  "date": "2026-09-30",
+  "category": "Explainer",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most operational headaches blamed on \"bad software\" are actually integration problems. An order lands in one system, the invoice lives in another, and someone copies data between them by hand. When you ask why the systems don't just talk to each other, the answer is usually a shrug and the word \"API.\" This article explains APIs, webhooks, and integrations in plain English, using a concrete order-to-invoice example you can map onto your own stack."
+    },
+    {
+      "type": "heading",
+      "text": "The order-to-invoice problem"
+    },
+    {
+      "type": "paragraph",
+      "text": "Picture a small distributor. A customer orders through an online store. The order needs to become an invoice in the accounting system, a fulfillment task in a warehouse tool, and a row in a reporting spreadsheet. Today, a person exports a CSV from the store, imports it into accounting, retypes the order number into the warehouse tool, and pastes totals into the spreadsheet. Each step is slow, and each step is a chance to introduce an error."
+    },
+    {
+      "type": "paragraph",
+      "text": "An integration replaces those manual steps with software that moves data automatically. To understand how, you need three concepts: APIs, webhooks, and the integration layer that connects them."
+    },
+    {
+      "type": "heading",
+      "text": "APIs: asking another system for something"
+    },
+    {
+      "type": "paragraph",
+      "text": "An API (application programming interface) is a defined way for one system to ask another system to do something. Think of it as a service counter. You make a request, the other system processes it, and it returns a response. The request specifies what you want, and the response tells you what happened."
+    },
+    {
+      "type": "paragraph",
+      "text": "In the order-to-invoice example, your integration might send a request to the accounting system that says, in effect, \"create an invoice for order 1042, customer Acme, total $1,240.\" The accounting API responds with the new invoice ID or an error message. The integration then stores that ID so the order and the invoice stay linked."
+    },
+    {
+      "type": "paragraph",
+      "text": "Requests come in common shapes. A GET request retrieves data, a POST creates something, a PUT or PATCH updates it, and a DELETE removes it. Most modern APIs return JSON, a structured text format that is easy for software to read. The important operational point is that an API call is a conversation with a defined contract: if you send the wrong fields or the wrong format, the system will reject the request."
+    },
+    {
+      "type": "heading",
+      "text": "Webhooks: the other system telling you something happened"
+    },
+    {
+      "type": "paragraph",
+      "text": "APIs are pull-based. Your system asks. Webhooks are push-based. The other system tells you. A webhook is a URL you register with a service, along with the events you care about. When that event occurs, the service sends an HTTP request to your URL with a payload describing what happened."
+    },
+    {
+      "type": "paragraph",
+      "text": "In the order example, the store can fire a webhook the moment an order is paid. Your integration receives that payload, validates it, and triggers the invoice-creation API call. This is often faster and cheaper than polling the store's API every few minutes asking, \"Any new orders?\" Polling wastes requests when nothing has changed and adds delay when something has."
+    },
+    {
+      "type": "paragraph",
+      "text": "Webhooks introduce their own realities. Deliveries can arrive out of order, be retried, or occasionally be missed if your endpoint is down. A reliable integration verifies the webhook signature, checks whether it has already processed that event ID, and returns a success response quickly before doing slow work in the background."
+    },
+    {
+      "type": "heading",
+      "text": "Authentication: proving who you are"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every API call and webhook endpoint needs a way to confirm identity. Common approaches include API keys, OAuth tokens, and signed requests. API keys are simple shared secrets. OAuth lets a user grant limited access without sharing a password, and tokens typically expire and refresh. Webhook signatures prove that a payload actually came from the sender and was not altered in transit."
+    },
+    {
+      "type": "paragraph",
+      "text": "From an operations standpoint, credentials are the most common source of silent failures. A token expires, a key is rotated, and the integration stops working without an obvious error. Store credentials in a secrets manager rather than in spreadsheets or source code, and monitor authentication failures as a first-class alert."
+    },
+    {
+      "type": "heading",
+      "text": "Rate limits: the speed limit you didn't see"
+    },
+    {
+      "type": "paragraph",
+      "text": "APIs usually enforce rate limits, which cap how many requests you can make in a given window. Limits protect the provider and keep traffic fair. If you exceed them, you get an error, often with a Retry-After header telling you when to try again."
+    },
+    {
+      "type": "paragraph",
+      "text": "This matters at scale. A workflow that works fine for ten orders a day may fail at a thousand. Good integrations handle rate limits with exponential backoff, batching where the API supports it, and queues that smooth out bursts. They also log rate-limit responses so you can see whether a limit is a temporary spike or a structural constraint."
+    },
+    {
+      "type": "heading",
+      "text": "A simple text architecture diagram"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here is the order-to-invoice flow as a text diagram:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Store checkout -> webhook event \"order.paid\" -> integration endpoint",
+        "Integration validates signature and deduplicates event ID",
+        "Integration calls Accounting API: POST /invoices",
+        "Accounting API responds with invoice ID or error",
+        "Integration stores invoice ID and updates order record",
+        "Integration calls Warehouse API: POST /fulfillment-task"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Notice that the integration is not just a pipe. It validates, deduplicates, stores references, and handles failure. That is where reliability lives."
+    },
+    {
+      "type": "heading",
+      "text": "What to watch for in practice"
+    },
+    {
+      "type": "paragraph",
+      "text": "Three limitations deserve attention. First, APIs change. Providers deprecate endpoints and alter response fields, so integrations need versioning and monitoring. Second, webhooks are not guaranteed. Treat every event as potentially duplicated or delayed. Third, integrations accumulate. A dozen point-to-point connections become hard to maintain, which is why shared logging and ownership matter as much as the code itself."
+    },
+    {
+      "type": "paragraph",
+      "text": "A practical takeaway: before automating a handoff, write down the contract. What triggers it, what data moves, who owns the receiving record, and what happens when the call fails? If you can answer those four questions, you can build an integration that survives contact with real operations."
+    },
+    {
+      "type": "heading",
+      "text": "Glossary"
+    },
+    {
+      "type": "list",
+      "items": [
+        "API: a defined interface for one system to request actions or data from another.",
+        "Endpoint: a specific URL where an API accepts requests.",
+        "Request/response: the message you send and the result the system returns.",
+        "Webhook: an automatic HTTP notification sent when an event occurs.",
+        "Payload: the data carried in a request, response, or webhook.",
+        "Authentication: proving identity, often with keys, tokens, or signatures."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Frequently asked questions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Do I need webhooks if I already have API access? Not always, but webhooks usually reduce delay and wasted requests. If the provider does not offer them, polling on a sensible interval is a reasonable fallback."
+    },
+    {
+      "type": "paragraph",
+      "text": "What is the most common cause of integration failures? Expired or rotated credentials, followed by unhandled rate limits and schema changes. Monitoring authentication and error rates catches most of these early."
+    },
+    {
+      "type": "paragraph",
+      "text": "How do I know an integration is reliable? It handles duplicates, retries safely, logs every failure, and has a clear owner. Reliability is less about the happy path and more about what happens when a call fails."
+    }
+  ]
+}
