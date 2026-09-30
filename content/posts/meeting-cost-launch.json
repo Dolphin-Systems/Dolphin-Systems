@@ -1,0 +1,54 @@
+{
+  "slug": "meeting-cost-launch",
+  "title": "MeetingCost: see what your meetings really cost",
+  "description": "Add attendees with hourly rates, start the timer, and watch the real cost tick up live.",
+  "date": "2026-09-30",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Meetings feel free. They are not. MeetingCost puts the real number on screen while the meeting is happening."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Add each attendee with their hourly rate. Start the timer. A big ticker shows the running cost, updating every second, with a per-person breakdown underneath."
+    },
+    {
+      "type": "heading",
+      "text": "Why it helps"
+    },
+    {
+      "type": "paragraph",
+      "text": "A visible cost changes behavior. Agendas get tighter. Invite lists get shorter. Meetings end on time."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Daily standups that drift",
+        "Client calls with five people on them",
+        "Workshops that run long",
+        "Any recurring meeting nobody questioned"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add attendees and set hourly rates (presets included)",
+        "Enter minutes manually or start the live timer",
+        "Watch the ticker \u2014 pause or reset anytime"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "MeetingCost is $8 a month, or $40 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}

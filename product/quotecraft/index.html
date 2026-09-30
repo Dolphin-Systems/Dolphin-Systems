@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="QuoteCraft — Client quotes in minutes. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>QuoteCraft — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260923-gate1">
+  <script src="../../assets/site.js?v=20260923-gate1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:18px;letter-spacing:2px;text-transform:uppercase;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#4F46E5" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QuoteCraft logo"><rect x="13" y="7" width="30" height="50" rx="5" fill="#4F46E5"/><path d="M35 7h8v8z" fill="#312E81"/><rect x="19" y="17" width="18" height="3.5" rx="1.75" fill="#FFFFFF" opacity="0.95"/><rect x="19" y="25" width="18" height="3.5" rx="1.75" fill="#FFFFFF" opacity="0.6"/><rect x="19" y="33" width="11" height="3.5" rx="1.75" fill="#FFFFFF" opacity="0.6"/><g transform="rotate(45 47 46)"><rect x="44" y="32" width="6" height="22" rx="3" fill="#C7D2FE"/><path d="M44 54h6l-3 7z" fill="#EEF2FF"/></g></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>QuoteCraft</h1><p>Client quotes in minutes.</p></div></div><div class="tool-price-pills"><span><b>$15</b>/month</span><span><b>$75</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>QuoteCraft builds clean client quotes with line items, discount, and tax. Totals update as you type, and you can print the quote or save it as a PDF. Built for freelancers, agencies, and anyone who prices custom work.</p><ul class="tool-features"><li>Line items with quantity and unit pricing</li><li>Live subtotal, discount, and tax totals</li><li>Print-ready quote document / save as PDF</li><li>Save and reload quotes in your browser</li><li>Auto-generated quote numbers</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock QuoteCraft.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" placeholder="DS-XXXX-XXXX" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $15</option><option value="6">6 months — $75 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-quotecraft { color: #1e1b4b; max-width: 860px; }
+.tool-app-quotecraft .qc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.tool-app-quotecraft label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; }
+.tool-app-quotecraft input[type="text"], .tool-app-quotecraft input[type="number"], .tool-app-quotecraft input[type="date"], .tool-app-quotecraft textarea { border: 1px solid #c7d2fe; border-radius: 8px; padding: 8px 10px; font-size: 14px; width: 100%; box-sizing: border-box; }
+.tool-app-quotecraft .qc-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.tool-app-quotecraft .qc-table th { text-align: left; font-size: 12px; color: #4c4a8a; padding: 6px; }
+.tool-app-quotecraft .qc-table td { padding: 4px; border-top: 1px solid #e0e7ff; }
+.tool-app-quotecraft .qc-qty, .tool-app-quotecraft .qc-price { max-width: 90px; }
+.tool-app-quotecraft .qc-linetotal { font-weight: 700; white-space: nowrap; }
+.tool-app-quotecraft .qc-remove { background: none; border: none; color: #b91c1c; font-size: 20px; cursor: pointer; }
+.tool-app-quotecraft .qc-btn { background: #4F46E5; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.tool-app-quotecraft .qc-btn:hover { background: #4338ca; }
+.tool-app-quotecraft .qc-btn-ghost { background: #eef2ff; color: #4F46E5; }
+.tool-app-quotecraft .qc-btn-ghost:hover { background: #e0e7ff; }
+.tool-app-quotecraft .qc-totals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; align-items: end; }
+.tool-app-quotecraft .qc-totals > div { display: flex; justify-content: space-between; align-items: center; }
+.tool-app-quotecraft .qc-grand { font-size: 20px; background: #eef2ff; border-radius: 10px; padding: 10px 14px; grid-column: 1 / -1; }
+.tool-app-quotecraft .qc-notes { margin: 10px 0; }
+.tool-app-quotecraft .qc-actions { display: flex; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+.tool-app-quotecraft .qc-saved { list-style: none; padding: 0; margin: 8px 0; }
+.tool-app-quotecraft .qc-saved li { display: flex; justify-content: space-between; align-items: center; background: #f5f7ff; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 14px; }
+.tool-app-quotecraft .qc-saved button.qc-load { background: none; border: none; color: #4F46E5; font-weight: 700; cursor: pointer; text-align: left; }
+.tool-app-quotecraft .qc-saved button.qc-del { background: none; border: none; color: #b91c1c; cursor: pointer; font-size: 18px; }
+.tool-app-quotecraft .tool-print-doc { display: none; }
+@media print {
+  .tool-app-quotecraft .qc-screen { display: none !important; }
+  .tool-app-quotecraft .tool-print-doc { display: block !important; color: #000; }
+  .tool-app-quotecraft .tool-print-doc table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .tool-app-quotecraft .tool-print-doc th, .tool-app-quotecraft .tool-print-doc td { border: 1px solid #999; padding: 6px; text-align: left; font-size: 13px; }
+}</style><div class="tool-app-quotecraft" id="toolAppRoot">
+  <div class="qc-screen">
+    <div class="qc-grid">
+      <label>Your business<input id="qc-biz" type="text" placeholder="Acme Co."></label>
+      <label>Client<input id="qc-client" type="text" placeholder="Client name"></label>
+      <label>Quote #<input id="qc-number" type="text" readonly></label>
+      <label>Date<input id="qc-date" type="date"></label>
+      <label>Valid until<input id="qc-valid" type="date"></label>
+    </div>
+    <table class="qc-table">
+      <thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Total</th><th></th></tr></thead>
+      <tbody id="qc-lines"></tbody>
+    </table>
+    <button id="qc-addline" class="qc-btn qc-btn-ghost" type="button">+ Add line</button>
+    <div class="qc-totals">
+      <div><span>Subtotal</span><strong id="qc-subtotal">$0.00</strong></div>
+      <label>Discount %<input id="qc-discount" type="number" min="0" max="100" value="0"></label>
+      <label>Tax %<input id="qc-tax" type="number" min="0" max="100" value="0"></label>
+      <div class="qc-grand"><span>Total</span><strong id="qc-total">$0.00</strong></div>
+    </div>
+    <label class="qc-notes">Notes<textarea id="qc-notes" rows="3" placeholder="Payment terms, thank-you note..."></textarea></label>
+    <div class="qc-actions">
+      <button id="qc-print" class="qc-btn" type="button">Print / Save PDF</button>
+      <button id="qc-save" class="qc-btn qc-btn-ghost" type="button">Save quote</button>
+    </div>
+    <h4>Saved quotes</h4>
+    <ul id="qc-saved" class="qc-saved"></ul>
+  </div>
+  <div class="tool-print-doc" id="qc-printdoc" aria-hidden="true"></div>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { n = parseFloat(n); return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  var root = $('toolAppRoot');
+  var linesBody = $('qc-lines');
+  var LS_KEY = 'toolapp-quotecraft-quotes';
+  function newNumber() { return 'QC-2026-' + Math.floor(1000 + Math.random() * 9000); }
+  function addLine(desc, qty, price) {
+    var tr = document.createElement('tr');
+    tr.className = 'qc-line';
+    tr.innerHTML =
+      '<td><input type="text" class="qc-desc" placeholder="Service or item" value="' + esc(desc) + '"></td>' +
+      '<td><input type="number" class="qc-qty" min="0" step="1" value="' + (qty == null ? 1 : qty) + '"></td>' +
+      '<td><input type="number" class="qc-price" min="0" step="0.01" value="' + (price == null ? 0 : price) + '"></td>' +
+      '<td class="qc-linetotal">$0.00</td>' +
+      '<td><button type="button" class="qc-remove" aria-label="Remove line">×</button></td>';
+    linesBody.appendChild(tr);
+    recalc();
+  }
+  function readLines() {
+    var out = [];
+    var rows = linesBody.querySelectorAll('tr.qc-line');
+    for (var i = 0; i < rows.length; i++) {
+      out.push({
+        d: rows[i].querySelector('.qc-desc').value,
+        q: parseFloat(rows[i].querySelector('.qc-qty').value) || 0,
+        p: parseFloat(rows[i].querySelector('.qc-price').value) || 0
+      });
+    }
+    return out;
+  }
+  function totals() {
+    var lines = readLines();
+    var sub = 0, i;
+    for (i = 0; i < lines.length; i++) sub += lines[i].q * lines[i].p;
+    var disc = Math.min(100, Math.max(0, parseFloat($('qc-discount').value) || 0));
+    var tax = Math.min(100, Math.max(0, parseFloat($('qc-tax').value) || 0));
+    return { lines: lines, sub: sub, disc: disc, tax: tax, total: sub * (1 - disc / 100) * (1 + tax / 100) };
+  }
+  function recalc() {
+    var t = totals();
+    var rows = linesBody.querySelectorAll('tr.qc-line');
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].querySelector('.qc-linetotal').textContent = money(t.lines[i].q * t.lines[i].p);
+    }
+    $('qc-subtotal').textContent = money(t.sub);
+    $('qc-total').textContent = money(t.total);
+    renderPrintDoc(t);
+  }
+  function renderPrintDoc(t) {
+    var rowsHtml = '';
+    for (var i = 0; i < t.lines.length; i++) {
+      var l = t.lines[i];
+      rowsHtml += '<tr><td>' + esc(l.d) + '</td><td>' + l.q + '</td><td>' + money(l.p) + '</td><td>' + money(l.q * l.p) + '</td></tr>';
+    }
+    var notesHtml = $('qc-notes').value
+      ? '<p><strong>Notes:</strong><br>' + esc($('qc-notes').value).replace(/\n/g, '<br>') + '</p>' : '';
+    $('qc-printdoc').innerHTML =
+      '<h1>' + esc($('qc-biz').value || 'Quote') + '</h1>' +
+      '<p><strong>Quote:</strong> ' + esc($('qc-number').value) + '<br>' +
+      '<strong>Date:</strong> ' + esc($('qc-date').value) + '<br>' +
+      '<strong>Valid until:</strong> ' + esc($('qc-valid').value) + '<br>' +
+      '<strong>Prepared for:</strong> ' + esc($('qc-client').value) + '</p>' +
+      '<table><thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Line total</th></tr></thead>' +
+      '<tbody>' + rowsHtml + '</tbody></table>' +
+      '<p><strong>Subtotal:</strong> ' + money(t.sub) + '<br>' +
+      '<strong>Discount:</strong> ' + t.disc + '%<br>' +
+      '<strong>Tax:</strong> ' + t.tax + '%</p>' +
+      '<h2>Total: ' + money(t.total) + '</h2>' + notesHtml;
+  }
+  function getQuotes() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; }
+  }
+  function setQuotes(q) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(q)); } catch (e) {}
+  }
+  function saveQuote() {
+    var t = totals();
+    var q = getQuotes();
+    q.unshift({
+      number: $('qc-number').value, biz: $('qc-biz').value, client: $('qc-client').value,
+      date: $('qc-date').value, valid: $('qc-valid').value, disc: t.disc, tax: t.tax,
+      notes: $('qc-notes').value, lines: t.lines, total: t.total,
+      savedAt: new Date().toISOString()
+    });
+    setQuotes(q.slice(0, 50));
+    renderSaved();
+  }
+  function renderSaved() {
+    var q = getQuotes();
+    var ul = $('qc-saved');
+    ul.innerHTML = '';
+    if (!q.length) {
+      var li = document.createElement('li');
+      li.textContent = 'No saved quotes yet.';
+      ul.appendChild(li);
+      return;
+    }
+    q.forEach(function (item, idx) {
+      var li = document.createElement('li');
+      var load = document.createElement('button');
+      load.type = 'button';
+      load.className = 'qc-load';
+      load.setAttribute('data-idx', idx);
+      load.textContent = item.number + ' — ' + (item.client || 'No client') + ' — ' + money(item.total);
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'qc-del';
+      del.setAttribute('data-idx', idx);
+      del.setAttribute('aria-label', 'Delete quote');
+      del.textContent = '×';
+      li.appendChild(load);
+      li.appendChild(del);
+      ul.appendChild(li);
+    });
+  }
+  function loadQuote(idx) {
+    var item = getQuotes()[idx];
+    if (!item) return;
+    $('qc-number').value = item.number;
+    $('qc-biz').value = item.biz || '';
+    $('qc-client').value = item.client || '';
+    $('qc-date').value = item.date || '';
+    $('qc-valid').value = item.valid || '';
+    $('qc-discount').value = item.disc || 0;
+    $('qc-tax').value = item.tax || 0;
+    $('qc-notes').value = item.notes || '';
+    linesBody.innerHTML = '';
+    (item.lines || []).forEach(function (l) { addLine(l.d, l.q, l.p); });
+    if (!(item.lines || []).length) addLine('', 1, 0);
+    recalc();
+  }
+  root.addEventListener('input', function () { recalc(); });
+  root.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.id === 'qc-addline') { addLine('', 1, 0); return; }
+    if (t.id === 'qc-print') { recalc(); window.print(); return; }
+    if (t.id === 'qc-save') { saveQuote(); return; }
+    if (t.classList && t.classList.contains('qc-remove')) { t.closest('tr').remove(); recalc(); return; }
+    if (t.classList && t.classList.contains('qc-load')) { loadQuote(parseInt(t.getAttribute('data-idx'), 10)); return; }
+    if (t.classList && t.classList.contains('qc-del')) {
+      var q = getQuotes();
+      q.splice(parseInt(t.getAttribute('data-idx'), 10), 1);
+      setQuotes(q);
+      renderSaved();
+    }
+  });
+  (function init() {
+    $('qc-number').value = newNumber();
+    var today = new Date();
+    $('qc-date').value = today.toISOString().slice(0, 10);
+    $('qc-valid').value = new Date(today.getTime() + 30 * 864e5).toISOString().slice(0, 10);
+    addLine('Service', 1, 0);
+    addLine('', 1, 0);
+    renderSaved();
+    recalc();
+  })();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="quotecraft";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$15<small>/month</small></div><ul><li>Full access to QuoteCraft</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#4F46E5"><h3>6 months</h3><div class="plan-price">$75<small> one-time</small></div><ul><li>Full access to QuoteCraft</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks QuoteCraft on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/quotecraft-launch.html">Read the QuoteCraft launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>

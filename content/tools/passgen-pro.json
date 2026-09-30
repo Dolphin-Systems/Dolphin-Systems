@@ -1,0 +1,73 @@
+{
+  "slug": "passgen-pro",
+  "name": "PassGen Pro",
+  "tagline": "Passwords you'll never have to remember.",
+  "description": "PassGen Pro creates strong passwords you don't have to invent or remember. Choose random characters or a memorable passphrase, check the strength meter, and copy with one click. Nothing is stored — history lives only in your open tab.",
+  "features": [
+    "Random passwords, 8–64 characters",
+    "Memorable passphrases from 3–8 words",
+    "Entropy-based strength meter",
+    "One-click copy to clipboard",
+    "Private history of your last 10 (never stored)"
+  ],
+  "pricing": {
+    "monthly": 6,
+    "six_month": 30
+  },
+  "accent": "#10B981",
+  "logo": "<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"PassGen Pro logo\"><path d=\"M32 5l19 7.5V26c0 12.5-8.2 21.8-19 26C21.2 47.8 13 38.5 13 26V12.5z\" fill=\"#10B981\"/><circle cx=\"32\" cy=\"25\" r=\"6.5\" fill=\"#ECFDF5\"/><rect x=\"29.2\" y=\"28\" width=\"5.6\" height=\"11\" rx=\"2.8\" fill=\"#ECFDF5\"/></svg>",
+  "app_html": "<div class=\"tool-app-passgen-pro\" id=\"toolAppRoot\">\n  <div class=\"pg-output-wrap\">\n    <input id=\"pg-output\" type=\"text\" readonly placeholder=\"Your password will appear here\">\n    <button id=\"pg-copy\" class=\"pg-btn\" type=\"button\">Copy</button>\n  </div>\n  <div class=\"pg-meter\"><div class=\"pg-meter-fill\" id=\"pg-meterfill\"></div></div>\n  <div class=\"pg-strength\" id=\"pg-strength\">Press Generate</div>\n  <div class=\"pg-modes\">\n    <button id=\"pg-mode-random\" class=\"pg-btn pg-btn-ghost pg-active\" type=\"button\">Random</button>\n    <button id=\"pg-mode-pass\" class=\"pg-btn pg-btn-ghost\" type=\"button\">Passphrase</button>\n  </div>\n  <div class=\"pg-random-opts\" id=\"pg-randomopts\">\n    <label>Length: <span id=\"pg-lenval\">20</span><input id=\"pg-length\" type=\"range\" min=\"8\" max=\"64\" value=\"20\"></label>\n    <label class=\"pg-check\"><input id=\"pg-upper\" type=\"checkbox\" checked> Uppercase (A-Z)</label>\n    <label class=\"pg-check\"><input id=\"pg-lower\" type=\"checkbox\" checked> Lowercase (a-z)</label>\n    <label class=\"pg-check\"><input id=\"pg-digits\" type=\"checkbox\" checked> Digits (0-9)</label>\n    <label class=\"pg-check\"><input id=\"pg-symbols\" type=\"checkbox\" checked> Symbols (!@#$...)</label>\n    <label class=\"pg-check\"><input id=\"pg-ambiguous\" type=\"checkbox\"> Exclude ambiguous (i, l, 1, L, o, 0, O)</label>\n  </div>\n  <div class=\"pg-pass-opts\" id=\"pg-passopts\" hidden>\n    <label>Words: <span id=\"pg-wordsval\">4</span><input id=\"pg-words\" type=\"range\" min=\"3\" max=\"8\" value=\"4\"></label>\n  </div>\n  <button id=\"pg-generate\" class=\"pg-btn pg-btn-big\" type=\"button\">Generate</button>\n  <h4>History <span class=\"pg-hint\">(click to copy — kept only in this tab, never stored)</span></h4>\n  <ul id=\"pg-history\" class=\"pg-history\"></ul>\n</div>",
+  "app_css": ".tool-app-passgen-pro { max-width: 560px; color: #064e3b; }\n.tool-app-passgen-pro .pg-output-wrap { display: flex; gap: 8px; margin-bottom: 10px; }\n.tool-app-passgen-pro #pg-output { flex: 1; border: 2px solid #6ee7b7; border-radius: 10px; padding: 12px; font-family: monospace; font-size: 16px; min-width: 0; }\n.tool-app-passgen-pro .pg-btn { background: #10b981; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-weight: 700; cursor: pointer; white-space: nowrap; }\n.tool-app-passgen-pro .pg-btn:hover { background: #059669; }\n.tool-app-passgen-pro .pg-btn-ghost { background: #d1fae5; color: #065f46; }\n.tool-app-passgen-pro .pg-btn-ghost.pg-active { background: #10b981; color: #fff; }\n.tool-app-passgen-pro .pg-btn-big { width: 100%; margin: 12px 0; font-size: 16px; }\n.tool-app-passgen-pro .pg-meter { height: 10px; background: #d1fae5; border-radius: 5px; overflow: hidden; margin-bottom: 4px; }\n.tool-app-passgen-pro .pg-meter-fill { height: 100%; width: 0; border-radius: 5px; transition: width 0.3s; background: #9ca3af; }\n.tool-app-passgen-pro .pg-meter-fill.pg-w { background: #ef4444; }\n.tool-app-passgen-pro .pg-meter-fill.pg-f { background: #f59e0b; }\n.tool-app-passgen-pro .pg-meter-fill.pg-s { background: #3b82f6; }\n.tool-app-passgen-pro .pg-meter-fill.pg-e { background: #10b981; }\n.tool-app-passgen-pro .pg-strength { font-size: 13px; font-weight: 700; margin-bottom: 12px; }\n.tool-app-passgen-pro .pg-modes { display: flex; gap: 8px; margin-bottom: 12px; }\n.tool-app-passgen-pro .pg-random-opts label, .tool-app-passgen-pro .pg-pass-opts label { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 8px; }\n.tool-app-passgen-pro input[type=\"range\"] { accent-color: #10b981; }\n.tool-app-passgen-pro .pg-history { list-style: none; padding: 0; margin: 0; }\n.tool-app-passgen-pro .pg-history li { margin-bottom: 6px; }\n.tool-app-passgen-pro .pg-history button { width: 100%; text-align: left; font-family: monospace; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 8px 10px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.tool-app-passgen-pro .pg-history button:hover { background: #d1fae5; }\n.tool-app-passgen-pro .pg-hint { font-weight: 400; font-size: 12px; color: #6b7280; }",
+  "app_js": "(function () {\n  'use strict';\n  function $(id) { return document.getElementById(id); }\n  var WORDS = ['apple','river','mango','tiger','cloud','stone','piano','forest',\n    'ocean','lemon','eagle','train','garden','moon','star','horse',\n    'window','bread','cheese','water','fire','snow','rain','leaf',\n    'bird','fish','tree','flower','grass','sun','sky','night',\n    'cat','dog','house','car','bike','road','bridge','castle',\n    'knight','queen','king','dragon','wizard','pirate','robot','rocket',\n    'planet','comet','whale','shark','wolf','bear','fox','owl',\n    'frog','crab','shell','grape','peach','melon','honey','ember'];\n  var mode = 'random';\n  var history = [];\n  function randInts(n) {\n    var a = new Uint32Array(n);\n    (window.crypto || window.msCrypto).getRandomValues(a);\n    return a;\n  }\n  function strip(s, chars) {\n    var out = '';\n    for (var i = 0; i < s.length; i++) {\n      if (chars.indexOf(s[i]) === -1) out += s[i];\n    }\n    return out;\n  }\n  function generate() {\n    var out, bits;\n    if (mode === 'random') {\n      var up = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';\n      var lo = 'abcdefghijklmnopqrstuvwxyz';\n      var dg = '0123456789';\n      var sy = '!@#$%^&*()-_=+[]{};:,.<>?';\n      if ($('pg-ambiguous').checked) {\n        var amb = 'il1Lo0O';\n        up = strip(up, amb); lo = strip(lo, amb); dg = strip(dg, amb);\n      }\n      var sets = [];\n      if ($('pg-upper').checked) sets.push(up);\n      if ($('pg-lower').checked) sets.push(lo);\n      if ($('pg-digits').checked) sets.push(dg);\n      if ($('pg-symbols').checked) sets.push(sy);\n      if (!sets.length) sets.push(lo);\n      var chars = sets.join('');\n      var len = parseInt($('pg-length').value, 10) || 16;\n      var r = randInts(len);\n      var s = '';\n      for (var i = 0; i < len; i++) s += chars.charAt(r[i] % chars.length);\n      out = s;\n      bits = len * (Math.log(chars.length) / Math.LN2);\n    } else {\n      var n = parseInt($('pg-words').value, 10) || 4;\n      var r2 = randInts(n);\n      var parts = [];\n      for (var j = 0; j < n; j++) parts.push(WORDS[r2[j] % WORDS.length]);\n      out = parts.join('-');\n      bits = n * (Math.log(WORDS.length) / Math.LN2);\n    }\n    $('pg-output').value = out;\n    showStrength(bits);\n    pushHistory(out);\n  }\n  function showStrength(bits) {\n    var label, pct, cls;\n    if (bits < 40) { label = 'Weak'; pct = 25; cls = 'pg-w'; }\n    else if (bits < 60) { label = 'Fair'; pct = 50; cls = 'pg-f'; }\n    else if (bits < 90) { label = 'Strong'; pct = 75; cls = 'pg-s'; }\n    else { label = 'Excellent'; pct = 100; cls = 'pg-e'; }\n    $('pg-strength').textContent = label + ' · about ' + Math.round(bits) + ' bits of entropy';\n    var f = $('pg-meterfill');\n    f.style.width = pct + '%';\n    f.className = 'pg-meter-fill ' + cls;\n  }\n  function flashCopied() {\n    var b = $('pg-copy');\n    var old = b.textContent;\n    b.textContent = 'Copied ✓';\n    setTimeout(function () { b.textContent = old; }, 1200);\n  }\n  function copyText(t) {\n    function fallback() {\n      var ta = document.createElement('textarea');\n      ta.value = t;\n      ta.style.position = 'fixed';\n      ta.style.opacity = '0';\n      document.body.appendChild(ta);\n      ta.select();\n      try { document.execCommand('copy'); } catch (e) {}\n      document.body.removeChild(ta);\n      flashCopied();\n    }\n    if (navigator.clipboard && navigator.clipboard.writeText) {\n      navigator.clipboard.writeText(t).then(flashCopied, fallback);\n    } else {\n      fallback();\n    }\n  }\n  function renderHistory() {\n    var ul = $('pg-history');\n    ul.innerHTML = '';\n    history.forEach(function (h) {\n      var li = document.createElement('li');\n      var b = document.createElement('button');\n      b.type = 'button';\n      b.textContent = h;\n      b.title = 'Click to copy';\n      b.addEventListener('click', function () { copyText(h); });\n      li.appendChild(b);\n      ul.appendChild(li);\n    });\n  }\n  function pushHistory(t) {\n    history.unshift(t);\n    history = history.slice(0, 10);\n    renderHistory();\n  }\n  function setMode(m) {\n    mode = m;\n    $('pg-mode-random').classList.toggle('pg-active', m === 'random');\n    $('pg-mode-pass').classList.toggle('pg-active', m === 'pass');\n    $('pg-randomopts').hidden = (m !== 'random');\n    $('pg-passopts').hidden = (m !== 'pass');\n  }\n  $('pg-generate').addEventListener('click', generate);\n  $('pg-copy').addEventListener('click', function () {\n    var v = $('pg-output').value;\n    if (v) copyText(v);\n  });\n  $('pg-mode-random').addEventListener('click', function () { setMode('random'); });\n  $('pg-mode-pass').addEventListener('click', function () { setMode('pass'); });\n  $('pg-length').addEventListener('input', function () { $('pg-lenval').textContent = $('pg-length').value; });\n  $('pg-words').addEventListener('input', function () { $('pg-wordsval').textContent = $('pg-words').value; });\n  setMode('random');\n  generate();\n})();",
+  "blog": {
+    "title": "PassGen Pro: passwords you'll never have to remember",
+    "description": "Generate strong random passwords or memorable passphrases, with a strength meter and one-click copy.",
+    "category": "Tool launch",
+    "body": [
+      {
+        "type": "paragraph",
+        "text": "Most passwords are weak because humans have to invent and remember them. PassGen Pro removes the human from that job."
+      },
+      {
+        "type": "heading",
+        "text": "What it does"
+      },
+      {
+        "type": "paragraph",
+        "text": "It generates strong passwords with your browser's secure random generator. Pick random characters or a memorable passphrase. A strength meter scores every result by entropy, and one click copies it."
+      },
+      {
+        "type": "heading",
+        "text": "Two modes"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Random: 8 to 64 characters from the sets you choose",
+          "Passphrase: 3 to 8 common words joined with dashes — easy to type, hard to crack",
+          "Optional filter for ambiguous characters like 1, l, and 0"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "How to use it"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Choose random or passphrase mode",
+          "Set length or word count",
+          "Generate, check the strength meter, copy"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Your last 10 passwords stay in a private history in the open tab. Click any of them to copy it again. Nothing is stored or sent anywhere."
+      },
+      {
+        "type": "paragraph",
+        "text": "PassGen Pro is $6 a month, or $30 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+      }
+    ]
+  }
+}

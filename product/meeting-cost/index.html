@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MeetingCost — See what your meetings really cost. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>MeetingCost — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260923-gate1">
+  <script src="../../assets/site.js?v=20260923-gate1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:18px;letter-spacing:2px;text-transform:uppercase;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#F59E0B" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MeetingCost logo"><circle cx="32" cy="32" r="25" fill="#F59E0B"/><circle cx="32" cy="32" r="19.5" fill="#FFFBEB"/><g fill="#92400E"><rect x="31" y="15.5" width="2" height="4" rx="1"/><rect x="31" y="44.5" width="2" height="4" rx="1"/><rect x="15.5" y="31" width="4" height="2" rx="1"/><rect x="44.5" y="31" width="4" height="2" rx="1"/></g><rect x="30.6" y="20" width="2.8" height="13" rx="1.4" fill="#92400E"/><rect x="30.6" y="30.6" width="12" height="2.8" rx="1.4" fill="#92400E"/><circle cx="32" cy="32" r="2.6" fill="#92400E"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>MeetingCost</h1><p>See what your meetings really cost.</p></div></div><div class="tool-price-pills"><span><b>$8</b>/month</span><span><b>$40</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>MeetingCost shows the real price of a meeting while it happens. Add each attendee with their hourly rate, start the timer, and watch the cost tick up live. Useful for standups, client calls, and workshops.</p><ul class="tool-features"><li>Unlimited attendees with hourly rates</li><li>One-click preset rates (25–250/hr)</li><li>Live cost ticker, updated every second</li><li>Manual minutes entry or live timer</li><li>Per-attendee running cost breakdown</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock MeetingCost.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" placeholder="DS-XXXX-XXXX" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $8</option><option value="6">6 months — $40 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-meeting-cost { max-width: 640px; color: #451a03; }
+.tool-app-meeting-cost .mc-ticker-wrap { background: #fffbeb; border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 14px; }
+.tool-app-meeting-cost .mc-ticker-label { font-size: 13px; font-weight: 600; color: #92400e; }
+.tool-app-meeting-cost .mc-ticker { font-size: 44px; font-weight: 800; color: #b45309; font-variant-numeric: tabular-nums; }
+.tool-app-meeting-cost .mc-elapsed { font-size: 16px; color: #92400e; font-variant-numeric: tabular-nums; }
+.tool-app-meeting-cost .mc-controls { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 14px; }
+.tool-app-meeting-cost .mc-btn { background: #f59e0b; color: #fff; border: none; border-radius: 10px; padding: 9px 16px; font-weight: 700; cursor: pointer; }
+.tool-app-meeting-cost .mc-btn:hover { background: #d97706; }
+.tool-app-meeting-cost .mc-btn-ghost { background: #fef3c7; color: #92400e; }
+.tool-app-meeting-cost .mc-btn-ghost:hover { background: #fde68a; }
+.tool-app-meeting-cost .mc-min { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; }
+.tool-app-meeting-cost .mc-min input { border: 1px solid #fcd34d; border-radius: 8px; padding: 8px; width: 90px; }
+.tool-app-meeting-cost .mc-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+.tool-app-meeting-cost .mc-row .mc-name { flex: 1; min-width: 110px; border: 1px solid #fcd34d; border-radius: 8px; padding: 8px; }
+.tool-app-meeting-cost .mc-ratewrap { display: flex; align-items: center; gap: 2px; font-size: 14px; }
+.tool-app-meeting-cost .mc-row .mc-rate { width: 64px; border: 1px solid #fcd34d; border-radius: 8px; padding: 8px; }
+.tool-app-meeting-cost .mc-presets button { border: 1px solid #fcd34d; background: #fff; border-radius: 6px; padding: 4px 8px; font-size: 12px; cursor: pointer; margin-right: 4px; }
+.tool-app-meeting-cost .mc-presets button:hover { background: #fef3c7; }
+.tool-app-meeting-cost .mc-rowcost { font-weight: 700; min-width: 70px; text-align: right; font-variant-numeric: tabular-nums; }
+.tool-app-meeting-cost .mc-del { background: none; border: none; color: #b91c1c; font-size: 20px; cursor: pointer; }</style><div class="tool-app-meeting-cost" id="toolAppRoot">
+  <div class="mc-ticker-wrap">
+    <div class="mc-ticker-label">This meeting has cost</div>
+    <div class="mc-ticker" id="mc-ticker">$0.00</div>
+    <div class="mc-elapsed" id="mc-elapsed">00:00:00</div>
+  </div>
+  <div class="mc-controls">
+    <button id="mc-start" class="mc-btn" type="button">Start</button>
+    <button id="mc-pause" class="mc-btn mc-btn-ghost" type="button">Pause</button>
+    <button id="mc-reset" class="mc-btn mc-btn-ghost" type="button">Reset</button>
+    <label class="mc-min">Minutes<input id="mc-minutes" type="number" min="0" value="0"></label>
+  </div>
+  <h4>Attendees</h4>
+  <div id="mc-attendees"></div>
+  <button id="mc-add" class="mc-btn mc-btn-ghost" type="button">+ Add attendee</button>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    function p(x) { return (x < 10 ? '0' : '') + x; }
+    return p(Math.floor(s / 3600)) + ':' + p(Math.floor((s % 3600) / 60)) + ':' + p(s % 60);
+  }
+  var list = $('mc-attendees');
+  var elapsed = 0;
+  var timer = null;
+  function addAttendee(name, rate) {
+    var row = document.createElement('div');
+    row.className = 'mc-row';
+    var presets = [25, 50, 100, 150, 250].map(function (r) {
+      return '<button type="button" data-rate="' + r + '">$' + r + '</button>';
+    }).join('');
+    row.innerHTML =
+      '<input type="text" class="mc-name" placeholder="Name" value="' + esc(name) + '">' +
+      '<span class="mc-ratewrap">$<input type="number" class="mc-rate" min="0" step="1" value="' + (rate == null ? 100 : rate) + '">/hr</span>' +
+      '<span class="mc-presets">' + presets + '</span>' +
+      '<span class="mc-rowcost">$0.00</span>' +
+      '<button type="button" class="mc-del" aria-label="Remove attendee">×</button>';
+    list.appendChild(row);
+    tick();
+  }
+  function tick() {
+    var total = 0;
+    var rows = list.querySelectorAll('.mc-row');
+    for (var i = 0; i < rows.length; i++) {
+      var rate = parseFloat(rows[i].querySelector('.mc-rate').value) || 0;
+      var cost = (rate / 3600) * elapsed;
+      total += cost;
+      rows[i].querySelector('.mc-rowcost').textContent = money(cost);
+    }
+    $('mc-ticker').textContent = money(total);
+    $('mc-elapsed').textContent = fmt(elapsed);
+  }
+  function start() {
+    if (timer) return;
+    timer = setInterval(function () { elapsed += 1; tick(); }, 1000);
+  }
+  function pause() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  list.addEventListener('input', function () { tick(); });
+  list.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('mc-del')) { t.closest('.mc-row').remove(); tick(); return; }
+    var r = t.getAttribute ? t.getAttribute('data-rate') : null;
+    if (r) {
+      var row = t.closest('.mc-row');
+      if (row) { row.querySelector('.mc-rate').value = r; tick(); }
+    }
+  });
+  $('mc-add').addEventListener('click', function () { addAttendee('', 100); });
+  $('mc-start').addEventListener('click', start);
+  $('mc-pause').addEventListener('click', pause);
+  $('mc-reset').addEventListener('click', function () { pause(); elapsed = 0; $('mc-minutes').value = 0; tick(); });
+  $('mc-minutes').addEventListener('change', function () {
+    var m = Math.max(0, parseFloat($('mc-minutes').value) || 0);
+    elapsed = Math.round(m * 60);
+    tick();
+  });
+  addAttendee('You', 100);
+  addAttendee('Teammate', 75);
+  tick();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="meeting-cost";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$8<small>/month</small></div><ul><li>Full access to MeetingCost</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#F59E0B"><h3>6 months</h3><div class="plan-price">$40<small> one-time</small></div><ul><li>Full access to MeetingCost</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks MeetingCost on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/meeting-cost-launch.html">Read the MeetingCost launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>

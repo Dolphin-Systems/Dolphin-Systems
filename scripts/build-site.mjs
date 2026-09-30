@@ -77,6 +77,7 @@ const pages = [
     </section>
     <section class="statement"><div class="shell statement-grid"><span class="kicker">The idea</span><p>Good systems make the next step obvious. We find the gaps between your tools and processes, then build a better way for work to move.</p></div></section>
     <section class="section shell"><div class="section-heading"><div><span class="kicker">What we do</span><h2>Practical systems for real work.</h2></div><a class="inline-link" href="./services.html">All services ${arrow}</a></div><div class="service-preview"><a href="./services.html#automation"><span class="service-num">01</span><h3>Automation</h3><p>Give repeatable work a dependable path from trigger to result.</p>${arrow}</a><a href="./services.html#integrations"><span class="service-num">02</span><h3>Integrations</h3><p>Move information between the tools your team already uses.</p>${arrow}</a><a href="./services.html#architecture"><span class="service-num">03</span><h3>System design</h3><p>Make the whole workflow visible before adding another tool.</p>${arrow}</a></div></section>
+    <!--TOOL_LAB-->
     <section class="feature-band"><div class="shell feature-grid"><div><span class="kicker kicker-light">How we think</span><h2>See the whole system. Fix the right part.</h2><p>A useful solution begins with the actual handoffs, decisions, and constraints. That is where we start.</p><a class="button button-outline-light" href="./about.html">Our approach ${arrow}</a></div><div class="feature-diagram" aria-hidden="true"><div class="diagram-line"><span>Understand</span><b>01</b></div><div class="diagram-line"><span>Design</span><b>02</b></div><div class="diagram-line"><span>Build</span><b>03</b></div><div class="diagram-line"><span>Improve</span><b>04</b></div></div></div></section>
     <section class="section shell"><div class="section-heading"><div><span class="kicker">Explore</span><h2>More ways to move forward.</h2></div></div><div class="explore-grid"><a class="explore-card" href="./products.html"><span class="kicker">Products</span><h3>Tools shaped by recurring problems.</h3><p>Where reusable software can make work simpler.</p>${arrow}</a><a class="explore-card" href="./research.html"><span class="kicker">Research</span><h3>Questions behind better systems.</h3><p>What we are examining as technology and work change.</p>${arrow}</a><a class="explore-card" href="./blog/"><span class="kicker">Blog</span><h3>Notes from the work.</h3><p>Ideas and practical lessons as they are published.</p>${arrow}</a></div></section>${cta}`,
   },
@@ -91,6 +92,7 @@ const pages = [
     file: 'products.html', key: 'products', title: 'Products',
     description: 'Explore the product areas Dolphin Systems is developing around workflows, visibility, and connected operations.',
     body: `<section class="page-hero shell"><span class="kicker">Products</span><h1>Useful tools begin with <em>a recurring problem.</em></h1><p>Some challenges call for a tailored system. Others point to a tool many teams could use. This is where our product thinking lives.</p></section>
+    <!--LIVE_TOOLS-->
     <section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Product directions</span><h2>Where we are focusing.</h2></div><p class="section-aside">These are areas of work, not a catalog of released products.</p></div><div class="product-grid"><article class="product-card"><span class="product-icon" aria-hidden="true">↗︎</span><span class="kicker">01 / FLOW</span><h3>Workflow tools</h3><p>Clear steps, handoffs, and approvals for work that currently gets lost between people and platforms.</p></article><article class="product-card"><span class="product-icon" aria-hidden="true">◫</span><span class="kicker">02 / VIEW</span><h3>Operational views</h3><p>A useful picture of what is moving, what is stuck, and what needs attention.</p></article><article class="product-card"><span class="product-icon" aria-hidden="true">⌁</span><span class="kicker">03 / CONNECT</span><h3>Connection layers</h3><p>Small, dependable bridges between systems that were not designed to work together.</p></article></div></section>
     <section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Sample cards</span><h2>Sample products.</h2></div><p class="section-aside">Example offerings, to show what a finished product could look like.</p></div><div class="product-grid" id="sampleGrid" data-kind="product"><a class="product-card" href="item.html?slug=flowtrack"><span class="product-icon" aria-hidden="true">◉</span><span class="kicker">SAMPLE 01</span><h3>FlowTrack</h3><p>A sample operations dashboard that follows every task from request to done, so nothing gets lost between people.</p></a><a class="product-card" href="item.html?slug=syncbridge"><span class="product-icon" aria-hidden="true">⇄</span><span class="kicker">SAMPLE 02</span><h3>SyncBridge</h3><p>A sample integration layer that moves data between your CRM, inbox, and spreadsheets without manual copying.</p></a><a class="product-card" href="item.html?slug=pulsereport"><span class="product-icon" aria-hidden="true">◈</span><span class="kicker">SAMPLE 03</span><h3>PulseReport</h3><p>A sample weekly summary of what moved, what got stuck, and what needs attention, in one clear page.</p></a></div></section><section class="soft-section"><div class="shell split-section"><div><span class="kicker">Our product filter</span><h2>Build what holds up in daily use.</h2></div><div class="body-copy"><p>A product should make a repeated task easier to perform and easier to understand. We pay attention to setup, exceptions, ownership, and what happens when something fails.</p><p>When a product is ready for public use, this page will include its name, purpose, and a direct way to try it.</p><a class="inline-link" href="./contact.html">Discuss a product need ${arrow}</a></div></div></section>${cta}`,
   },
@@ -163,11 +165,245 @@ async function loadPosts() {
   return posts.sort((a, b) => b.date.localeCompare(a.date));
 }
 
+// ---- Tool Lab ----
+const TOOL_API = 'https://dolphin-systems-caretaker.ritikyadav.workers.dev';
+
+async function loadTools() {
+  const directory = join(root, 'content', 'tools');
+  let names = [];
+  try {
+    names = (await readdir(directory)).filter((name) => name.endsWith('.json'));
+  } catch (e) { return []; }
+  const tools = [];
+  for (const name of names) {
+    const tool = JSON.parse(await readFile(join(directory, name), 'utf8'));
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tool.slug) || `${tool.slug}.json` !== name) throw new Error(`Invalid tool slug or filename: ${name}`);
+    for (const field of ['name', 'tagline', 'description', 'accent', 'logo', 'app_html', 'app_css', 'app_js']) {
+      if (!tool[field]) throw new Error(`Tool ${name} is missing field: ${field}`);
+    }
+    if (!tool.pricing || !tool.pricing.monthly || !tool.pricing.six_month) throw new Error(`Tool ${name} is missing pricing`);
+    if (!Array.isArray(tool.features) || !tool.features.length) throw new Error(`Tool ${name} is missing features`);
+    tools.push(tool);
+  }
+  return tools.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function toolCard(tool, prefix, index) {
+  return `<a class="product-card tool-card" href="${prefix}product/${escapeHtml(tool.slug)}/">` +
+    `<span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo}</span>` +
+    `<span class="kicker">TOOL ${String(index + 1).padStart(2, '0')}</span>` +
+    `<h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.tagline)}</p>` +
+    `<span class="tool-price">$${Number(tool.pricing.monthly)}/mo</span>` +
+    `<span class="inline-link">Open tool ${arrow}</span></a>`;
+}
+
+function toolLabSection(tools) {
+  if (!tools.length) return '';
+  const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
+  return `<section class="section shell"><div class="section-heading"><div><span class="kicker">The tool lab</span><h2>New tools, built for real work.</h2></div><a class="inline-link" href="./product/">All tools ${arrow}</a></div><div class="product-grid">${cards}</div></section>`;
+}
+
+function liveToolsSection(tools) {
+  if (!tools.length) return '';
+  const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
+  return `<section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Live tools</span><h2>Ready to use today.</h2></div><p class="section-aside">Real working tools. Each one unlocks with a personal access PIN — 1 or 6 months.</p></div><div class="product-grid">${cards}</div></section>`;
+}
+
+function toolSharedCss() {
+  return `
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:18px;letter-spacing:2px;text-transform:uppercase;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}`;
+}
+
+function toolLockJs(slug) {
+  return `(function(){
+var SLUG=${JSON.stringify(slug)};
+var API=${JSON.stringify(TOOL_API)};
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();`;
+}
+
+function toolPageBody(tool) {
+  const monthly = Number(tool.pricing.monthly);
+  const sixMo = Number(tool.pricing.six_month);
+  const savePct = Math.round((1 - sixMo / (monthly * 6)) * 100);
+  const features = tool.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
+  const appJs = String(tool.app_js).replace(/<\/(script)/gi, '<\\/$1');
+  return `<style>${toolSharedCss()}</style>` +
+  `<section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a>` +
+  `<div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo}</span>` +
+  `<div><span class="kicker">Dolphin Systems tool</span><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(tool.tagline)}</p></div></div>` +
+  `<div class="tool-price-pills"><span><b>$${monthly}</b>/month</span><span><b>$${sixMo}</b>/6 months <em>save ${savePct}%</em></span></div></section>` +
+  `<section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div>` +
+  `<div class="body-copy"><p>${escapeHtml(tool.description)}</p><ul class="tool-features">${features}</ul></div></div></section>` +
+  `<section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock ${escapeHtml(tool.name)}.</h2></div></div>` +
+  `<div class="tool-lock-wrap"><div id="toolLocked">` +
+  `<div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3>` +
+  `<p>Enter the access PIN you received after subscribing.</p>` +
+  `<form id="pinForm"><input id="pinInput" type="text" placeholder="DS-XXXX-XXXX" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form>` +
+  `<p class="form-error" id="pinError" hidden></p></div>` +
+  `<div class="tool-request-card"><h3>Don't have a PIN yet?</h3>` +
+  `<ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol>` +
+  `<form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required>` +
+  `<input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required>` +
+  `<select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $${monthly}</option><option value="6">6 months — $${sixMo} (save ${savePct}%)</option></select>` +
+  `<input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">` +
+  `<button class="button button-dark" type="submit">Request access</button></form>` +
+  `<p class="form-note" id="reqMsg" hidden></p></div>` +
+  `</div><div id="toolApp" hidden><style>${tool.app_css}</style>${tool.app_html}<script>${appJs}</script><p class="tool-expiry" id="toolExpiry"></p></div></div>` +
+  `<script>${toolLockJs(tool.slug)}</script></section>` +
+  `<section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div>` +
+  `<div class="tool-pricing-grid">` +
+  `<div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$${monthly}<small>/month</small></div><ul><li>Full access to ${escapeHtml(tool.name)}</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div>` +
+  `<div class="tool-plan featured" style="--plan-accent:${escapeHtml(tool.accent)}"><h3>6 months</h3><div class="plan-price">$${sixMo}<small> one-time</small></div><ul><li>Full access to ${escapeHtml(tool.name)}</li><li>Save ${savePct}% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div>` +
+  `</div></div></section>` +
+  `<section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div>` +
+  `<div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details>` +
+  `<details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details>` +
+  `<details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks ${escapeHtml(tool.name)} on any device with a browser.</p></details></div></section>` +
+  `<section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div>` +
+  `<div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/${escapeHtml(tool.slug)}-launch.html">Read the ${escapeHtml(tool.name)} launch notes ${arrow}</a></div></div></section>${cta}`;
+}
+
+function toolIndexBody(tools) {
+  const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
+  return `<section class="page-hero shell"><span class="kicker">The tool lab</span><h1>Small tools. <em>Real work.</em></h1>` +
+  `<p>Useful software for recurring jobs, released regularly. Each tool is subscription-based and unlocks with a personal access PIN.</p></section>` +
+  `<section class="section shell section-tight"><div class="product-grid">${cards}</div></section>` +
+  `<section class="soft-section"><div class="shell split-section"><div><span class="kicker">How it works</span><h2>Three steps to any tool.</h2></div>` +
+  `<div class="steps"><div><b>01</b><p>Request access on the tool's page.</p></div><div><b>02</b><p>Pay for 1 or 6 months.</p></div><div><b>03</b><p>Enter your PIN. The tool unlocks.</p></div></div></div></section>${cta}`;
+}
+
 async function build() {
   await mkdir(join(root, 'blog'), { recursive: true });
   await mkdir(join(root, 'products'), { recursive: true });
   await mkdir(join(root, 'services'), { recursive: true });
-  for (const page of pages) await writeFile(join(root, page.file), layout(page), 'utf8');
+  await mkdir(join(root, 'product'), { recursive: true });
+  const tools = await loadTools();
+  const labSection = toolLabSection(tools);
+  const liveSection = liveToolsSection(tools);
+  for (const page of pages) {
+    let html = layout(page);
+    if (page.file === 'index.html') html = html.replace('<!--TOOL_LAB-->', labSection);
+    if (page.file === 'products.html') html = html.replace('<!--LIVE_TOOLS-->', liveSection);
+    await writeFile(join(root, page.file), html, 'utf8');
+  }
+  for (const tool of tools) {
+    await mkdir(join(root, 'product', tool.slug), { recursive: true });
+    await writeFile(join(root, 'product', tool.slug, 'index.html'), layout({
+      title: tool.name,
+      description: `${tool.name} — ${tool.tagline} A Dolphin Systems subscription tool.`,
+      key: 'products',
+      body: toolPageBody(tool),
+      prefix: '../../',
+    }), 'utf8');
+  }
+  await writeFile(join(root, 'product', 'index.html'), layout({
+    title: 'Tool lab',
+    description: 'The Dolphin Systems tool lab: small subscription tools for recurring work.',
+    key: 'products',
+    body: `<style>${toolSharedCss()}</style>` + toolIndexBody(tools),
+    prefix: '../',
+  }), 'utf8');
   const posts = await loadPosts();
   const cards = posts.length ? posts.map((post) => `<a class="post-card" href="./${escapeHtml(post.slug)}.html">${blogThumb(post)}<div><span class="kicker">${escapeHtml(post.category || 'Notes')}</span><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><h2>${escapeHtml(post.title)}</h2><p>${escapeHtml(post.description)}</p><span class="inline-link">Read article ${arrow}</span></a>`).join('') : `<div class="empty-state"><span class="signal-dot"></span><h2>First notes are on the way.</h2><p>We will publish practical thinking about automation, connected systems, and the work behind them.</p></div>`;
   const blogBody = `<section class="page-hero shell"><span class="kicker">Blog</span><h1>Notes from <em>the work.</em></h1><p>Ideas, observations, and practical lessons about making systems easier to run.</p></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Latest writing</span><h2>${posts.length ? 'From the blog.' : 'A place for useful ideas.'}</h2></div></div><div class="posts-grid">${cards}</div></section><section class="soft-section"><div class="shell split-section"><div><span class="kicker">Keep in touch</span><h2>Have a question worth exploring?</h2></div><div class="body-copy"><p>We are interested in the problems behind the tools. Tell us what you are trying to make work better.</p><a class="inline-link" href="../contact.html">Start a conversation ${arrow}</a></div></div></section>`;
@@ -176,7 +412,7 @@ async function build() {
     const body = `<article class="shell article" data-post-slug="${escapeHtml(post.slug)}"><a class="back-link" href="./">← All articles</a><div class="article-heading">${blogThumb(post)}<span class="kicker">${escapeHtml(post.category || 'Notes')}</span><h1>${escapeHtml(post.title)}</h1><p>${escapeHtml(post.description)}</p><time datetime="${post.date}">${escapeHtml(post.date)}</time></div><div class="article-content">${post.body.map(renderBlock).join('')}</div><section class="blog-engage" aria-label="Reactions and comments"><div class="engage-reactions"><div class="reaction-pick"><div class="reaction-picker-wrap"><button type="button" class="like-btn" id="likeBtn" aria-haspopup="true" aria-expanded="false"><span class="like-emoji">👍</span> <span class="like-label">Like</span></button><div class="reaction-picker" id="reactionPicker" role="menu" hidden><button type="button" data-reaction="like" data-label="Like" aria-label="Like">👍</button><button type="button" data-reaction="love" data-label="Love" aria-label="Love">❤️</button><button type="button" data-reaction="haha" data-label="Haha" aria-label="Haha">😂</button><button type="button" data-reaction="wow" data-label="Wow" aria-label="Wow">😮</button><button type="button" data-reaction="sad" data-label="Sad" aria-label="Sad">😢</button><button type="button" data-reaction="angry" data-label="Angry" aria-label="Angry">😡</button></div></div><div class="reaction-summary" id="reactionSummary" aria-live="polite"></div></div></div></div><div class="engage-comments"><h2>Comments <span class="comment-count" id="commentCount"></span></h2><div class="comment-list" id="commentList"><p class="empty-comment">Loading comments…</p></div><form class="comment-form" id="commentForm"><input type="text" id="commentName" maxlength="40" placeholder="Your name" autocomplete="name" required><textarea id="commentBody" maxlength="1000" placeholder="Write a comment…" required></textarea><button type="submit">Post comment</button><p class="form-error" id="commentError" hidden></p></form></div></section><div class="article-end"><a class="inline-link" href="./">More from the blog ${arrow}</a></div></article>`;
     await writeFile(join(root, 'blog', `${post.slug}.html`), layout({ title: post.title, description: post.description, key: 'blog', body, prefix: '../', article: true }), 'utf8');
   }
-  console.log(`Built ${pages.length + 1 + posts.length} pages (${posts.length} blog posts).`);
+  console.log(`Built ${pages.length + 2 + posts.length + tools.length} pages (${posts.length} blog posts, ${tools.length} tools).`);
 }
 
 await build();

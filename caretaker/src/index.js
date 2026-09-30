@@ -140,6 +140,138 @@ async function ensureHumanTables(db) {
   await db.prepare('CREATE TABLE IF NOT EXISTS push_subscriptions (endpoint TEXT PRIMARY KEY, p256dh TEXT NOT NULL, auth TEXT NOT NULL, created_at TEXT NOT NULL)').run();
   await db.prepare('CREATE TABLE IF NOT EXISTS app_meta (key TEXT PRIMARY KEY, value TEXT)').run();
 }
+
+// ---- Tool Lab: PIN-gated subscriptions ----
+async function ensureToolTables(db) {
+  await db.prepare(
+    'CREATE TABLE IF NOT EXISTS tool_pins (pin TEXT PRIMARY KEY, tool_slug TEXT NOT NULL DEFAULT \'*\', months INTEGER NOT NULL DEFAULT 1, customer_name TEXT, customer_contact TEXT, note TEXT, created_at INTEGER NOT NULL, expires_at INTEGER NOT NULL, revoked INTEGER NOT NULL DEFAULT 0)'
+  ).run();
+  await db.prepare('CREATE INDEX IF NOT EXISTS idx_tool_pins_expires ON tool_pins(expires_at)').run();
+}
+
+function generateToolPin() {
+  const alphabet = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+  const bytes = crypto.getRandomValues(new Uint8Array(8));
+  let s = '';
+  for (const b of bytes) s += alphabet[b % alphabet.length];
+  return 'DS' + s;
+}
+
+function formatToolPin(pin) {
+  const p = String(pin || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  return p.length === 10 ? `${p.slice(0, 2)}-${p.slice(2, 6)}-${p.slice(6)}` : p;
+}
+
+function normalizeToolPin(pin) {
+  return String(pin || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+}
+
+async function handleToolVerify(env, body, request) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured', status: 500 };
+  await ensureToolTables(db);
+  const clientIp = (request && request.headers.get('cf-connecting-ip')) || 'unknown';
+  if (await hitRateLimit(db, clientIp)) return { ok: false, error: 'rate_limited', status: 429 };
+  const slug = String(body.slug || '').trim().toLowerCase().slice(0, 80);
+  const pin = normalizeToolPin(body.pin);
+  if (!/^DS[A-Z0-9]{8}$/.test(pin)) return { ok: false, error: 'invalid_pin' };
+  const row = await db.prepare(
+    'SELECT tool_slug, months, expires_at, revoked FROM tool_pins WHERE pin = ?'
+  ).bind(pin).first().catch(() => null);
+  if (!row) return { ok: false, error: 'invalid_pin' };
+  if (row.revoked) return { ok: false, error: 'revoked' };
+  if (row.tool_slug !== '*' && row.tool_slug !== slug) return { ok: false, error: 'wrong_tool' };
+  if (Number(row.expires_at) <= Date.now()) return { ok: false, error: 'expired' };
+  return { ok: true, expires_at: Number(row.expires_at), months: Number(row.months) };
+}
+
+async function handleToolRequest(env, body, request) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured', status: 500 };
+  await ensureToolTables(db);
+  if (String(body.website || '').trim()) return { ok: true };
+  const clientIp = (request && request.headers.get('cf-connecting-ip')) || 'unknown';
+  if (await hitRateLimit(db, clientIp)) return { ok: false, error: 'rate_limited', status: 429 };
+  const name = String(body.name || '').trim().slice(0, 80);
+  const contact = String(body.contact || '').trim().slice(0, 120);
+  const slug = String(body.slug || '').trim().toLowerCase().slice(0, 80);
+  const plan = String(body.plan || '1') === '6' ? '6-month' : '1-month';
+  if (!name) return { ok: false, error: 'name_required' };
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact);
+  const digits = contact.replace(/\D/g, '');
+  const phoneOk = digits.length >= 7 && digits.length <= 15;
+  if (!emailOk && !phoneOk) return { ok: false, error: 'contact_invalid' };
+  const conversationId = crypto.randomUUID();
+  const now = new Date().toISOString();
+  const toolLabel = slug ? `Tool access request: ${slug} (${plan})` : `Tool access request (${plan})`;
+  await db.prepare(
+    'INSERT INTO conversations (id, created_at, updated_at) VALUES (?1, ?2, ?2)'
+  ).bind(conversationId, now).run();
+  await db.prepare(
+    `INSERT INTO leads (conversation_id, name, email, phone, company, problem, tools, outcome, timeline, budget, summary, relevant, status, updated_at)
+     VALUES (?1, ?2, ?3, ?4, NULL, NULL, NULL, NULL, NULL, NULL, ?5, 1, 'new', ?6)
+     ON CONFLICT(conversation_id) DO UPDATE SET name = excluded.name, email = excluded.email, phone = excluded.phone, summary = excluded.summary, updated_at = excluded.updated_at`
+  ).bind(conversationId, name, emailOk ? contact : null, !emailOk && phoneOk ? contact : null, toolLabel, now).run();
+  try {
+    await notifyAdmins(db, { title: 'New tool access request', body: `${name} wants access to ${slug || 'the tool lab'}`, url: '/admin' });
+  } catch (e) { /* notify best-effort */ }
+  return { ok: true };
+}
+
+async function adminCreateToolPin(env, body) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  await ensureToolTables(db);
+  const tool_slug = String(body.tool_slug || '*').trim().toLowerCase().slice(0, 80) || '*';
+  const months = body.months === 6 ? 6 : 1;
+  const customer_name = String(body.customer_name || '').trim().slice(0, 80) || null;
+  const customer_contact = String(body.customer_contact || '').trim().slice(0, 120) || null;
+  const note = String(body.note || '').trim().slice(0, 200) || null;
+  const now = Date.now();
+  const expires_at = now + months * 30 * 24 * 3600 * 1000;
+  let pin = null;
+  for (let i = 0; i < 8 && !pin; i++) {
+    const candidate = generateToolPin();
+    const exists = await db.prepare('SELECT pin FROM tool_pins WHERE pin = ?').bind(candidate).first().catch(() => null);
+    if (!exists) pin = candidate;
+  }
+  if (!pin) return { ok: false, error: 'pin_generation_failed' };
+  await db.prepare(
+    'INSERT INTO tool_pins (pin, tool_slug, months, customer_name, customer_contact, note, created_at, expires_at, revoked) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, 0)'
+  ).bind(pin, tool_slug, months, customer_name, customer_contact, note, now, expires_at).run();
+  return { ok: true, pin: formatToolPin(pin), tool_slug, months, expires_at };
+}
+
+async function adminListToolPins(env) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  await ensureToolTables(db);
+  const rows = await db.prepare(
+    'SELECT pin, tool_slug, months, customer_name, customer_contact, note, created_at, expires_at, revoked FROM tool_pins ORDER BY created_at DESC LIMIT 200'
+  ).all().catch(() => ({ results: [] }));
+  const pins = (rows.results || []).map((r) => ({
+    pin: formatToolPin(r.pin),
+    tool_slug: r.tool_slug,
+    months: r.months,
+    customer_name: r.customer_name,
+    customer_contact: r.customer_contact,
+    note: r.note,
+    created_at: r.created_at,
+    expires_at: r.expires_at,
+    revoked: !!r.revoked,
+  }));
+  return { ok: true, pins };
+}
+
+async function adminRevokeToolPin(env, pinParam) {
+  const db = env.LEADS_DB;
+  if (!db) return { ok: false, error: 'storage_not_configured' };
+  await ensureToolTables(db);
+  const pin = normalizeToolPin(pinParam);
+  const r = await db.prepare('UPDATE tool_pins SET revoked = 1 WHERE pin = ?').bind(pin).run();
+  if (!r.meta || r.meta.changes === 0) return { ok: false, error: 'not_found' };
+  return { ok: true };
+}
 async function getVapidKeys(db) {
   const row = await db.prepare("SELECT value FROM app_meta WHERE key = 'vapid_jwk'").first().catch(() => null);
   if (row && row.value) {
@@ -557,6 +689,40 @@ await ensureHumanTables(env.LEADS_DB);
       const r = await env.LEADS_DB.prepare('DELETE FROM catalog_items WHERE slug = ?').bind(slug).run();
       if (!r.meta || r.meta.changes === 0) return json({ ok: false, error: 'not_found' }, 404);
       return json({ ok: true });
+    }
+
+    // ---- Tool Lab: PIN-gated subscriptions ----
+    if (url.pathname === '/api/tools/verify' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const result = await handleToolVerify(env, body, request);
+      const status = result.status || (result.ok ? 200 : 400);
+      return json(result, status, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/tools/request' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const result = await handleToolRequest(env, body, request);
+      const status = result.status || (result.ok ? 200 : 400);
+      return json(result, status, CORS_HEADERS);
+    }
+
+    if (url.pathname === '/api/admin/tool-pins' && request.method === 'GET') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      return json(await adminListToolPins(env));
+    }
+
+    if (url.pathname === '/api/admin/tool-pins' && request.method === 'POST') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const body = await request.json().catch(() => ({}));
+      const result = await adminCreateToolPin(env, body);
+      return json(result, result.ok ? 200 : 400);
+    }
+
+    if (url.pathname.startsWith('/api/admin/tool-pins/') && request.method === 'DELETE') {
+      if (!isAuthorized(request, env)) return json({ ok: false, error: 'unauthorized' }, 401);
+      const pin = decodeURIComponent(url.pathname.slice('/api/admin/tool-pins/'.length));
+      const result = await adminRevokeToolPin(env, pin);
+      return json(result, result.ok ? 200 : 400);
     }
 
     return json({ ok: false, error: 'not_found' }, 404);
@@ -1558,6 +1724,11 @@ textarea:focus,input[type=text]:focus,input[type=password]:focus{border-color:va
 .mini-transcript{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto;padding:4px}
 /* ---------- caretaker ---------- */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
+.pin-big{font-size:34px;font-weight:800;letter-spacing:4px;background:#0f172a;color:#fff;display:inline-block;padding:12px 22px;border-radius:12px;margin:6px 0}
+.pin-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.pin-card b{font-size:18px;letter-spacing:2px}
+.pin-card.expired{opacity:.55}
+.pin-card.revoked{opacity:.45;border-style:dashed}
 .panel h3{margin:0 0 4px;font-size:16px;letter-spacing:-.02em}
 .panel .sub{font-size:13px;color:var(--muted);margin:0 0 16px}
 .panel label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:16px 0 8px}
@@ -1637,6 +1808,7 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
       <button data-view="live"><span class="ico">🎧</span>Live chat<span class="count" id="navLiveCount">–</span></button>
       <button data-view="comments"><span class="ico">💭</span>Comments</button>
       <button data-view="catalog"><span class="ico">🗂</span>Catalog</button>
+      <button data-view="pins"><span class="ico">🔑</span>Tool PINs</button>
       <button data-view="caretaker"><span class="ico">⚙</span>Caretaker</button>
     </nav>
     <div class="side-foot"><span class="dot" id="connDot"></span><span id="connText">Not connected</span></div>
@@ -1744,6 +1916,34 @@ pre.out{background:#05080f;border:1px solid var(--line);border-radius:12px;paddi
         </div>
       </div>
       <div class="grid" id="catalogGrid"></div>
+    </section>
+
+    <!-- TOOL PINS -->
+    <section class="view" id="view-pins">
+      <div class="panel">
+        <h3>Generate access PIN</h3>
+        <p class="sub">The customer pays you first — then hand them this PIN. It unlocks the tool until the subscription runs out.</p>
+        <div class="two">
+          <div><label for="pinTool">Tool</label><input type="text" id="pinTool" placeholder="* for all tools, or a slug like quotecraft" maxlength="80"></div>
+          <div><label for="pinMonths">Subscription</label><select id="pinMonths"><option value="1">1 month</option><option value="6">6 months</option></select></div>
+        </div>
+        <div class="two">
+          <div><label for="pinName">Customer name</label><input type="text" id="pinName" maxlength="80" placeholder="Jane"></div>
+          <div><label for="pinContact">Customer contact</label><input type="text" id="pinContact" maxlength="120" placeholder="email or phone"></div>
+        </div>
+        <label for="pinNote">Note (optional)</label>
+        <input type="text" id="pinNote" maxlength="200" placeholder="Paid via Zelle 9/30">
+        <div class="row"><button class="btn primary" id="genPinBtn" type="button">Generate PIN</button></div>
+        <div id="pinResult" style="display:none;margin-top:14px">
+          <div class="pin-big" id="pinCode"></div>
+          <p class="sub" id="pinMeta"></p>
+          <button class="btn" id="copyPinBtn" type="button">Copy PIN</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Issued PINs</h3>
+        <div class="grid" id="pinsGrid"></div>
+      </div>
     </section>
 
     <!-- CARETAKER -->
@@ -1923,7 +2123,8 @@ var TITLES = {
   live:['Live chat','Visitors asking for a human — reply here.'],
   comments:['Comments','Blog comments, newest first. Delete spam here.'],
   caretaker:['Caretaker','Publishing, health checks and blog direction.'],
-  catalog:['Catalog','Products and services, with ratings.']
+  catalog:['Catalog','Products and services, with ratings.'],
+  pins:['Tool PINs','Access codes for the tool lab.']
 };
 function setView(v){
   state.view = v;
@@ -1937,6 +2138,7 @@ function setView(v){
   if(v === 'chats' && !state.chats.length) loadChats();
   if(v === 'comments' && !state.commentsLoaded) loadComments();
   if(v === 'catalog' && !state.catalogLoaded){ state.catalogLoaded = true; loadCatalog(); }
+  if(v === 'pins' && !state.pinsLoaded){ state.pinsLoaded = true; loadPins(); }
   if(v === 'live'){ loadLiveChats(); startLivePolling(); } else { stopLivePolling(); }
 }
 $$('.nav button').forEach(function(b){ b.onclick = function(){ setView(b.getAttribute('data-view')); }; });
@@ -2444,6 +2646,60 @@ $('#catalogKindSeg').querySelectorAll('button').forEach(function(b){
     renderCatalog();
   };
 });
+/* ---------- tool pins ---------- */
+async function loadPins(){
+  var g = $('#pinsGrid');
+  g.innerHTML = '<p class="sub">Loading…</p>';
+  try {
+    var data = await api('/api/admin/tool-pins');
+    var pins = data.pins || [];
+    if(!pins.length){ g.innerHTML = '<p class="sub">No PINs issued yet.</p>'; return; }
+    g.innerHTML = pins.map(function(p){
+      var expired = Number(p.expires_at) <= Date.now();
+      var cls = p.revoked ? 'revoked' : (expired ? 'expired' : '');
+      var when = new Date(Number(p.expires_at)).toLocaleDateString();
+      var who = [p.customer_name, p.customer_contact].filter(Boolean).join(' · ');
+      return '<div class="pin-card ' + cls + '"><b>' + esc(p.pin) + '</b>' +
+        '<span>' + esc(p.tool_slug) + ' · ' + p.months + ' mo · expires ' + esc(when) + (p.revoked ? ' · REVOKED' : expired ? ' · EXPIRED' : '') + '</span>' +
+        (who ? '<span class="sub">' + esc(who) + '</span>' : '') +
+        (p.note ? '<span class="sub">' + esc(p.note) + '</span>' : '') +
+        ((!p.revoked && !expired) ? '<div><button class="btn ghost" data-revoke="' + esc(p.pin) + '" type="button">Revoke</button></div>' : '') +
+        '</div>';
+    }).join('');
+    g.querySelectorAll('[data-revoke]').forEach(function(btn){
+      btn.onclick = async function(){
+        if(!confirm('Revoke PIN ' + btn.getAttribute('data-revoke') + '?')) return;
+        try {
+          await api('/api/admin/tool-pins/' + encodeURIComponent(btn.getAttribute('data-revoke')), { method: 'DELETE' });
+          toast('PIN revoked');
+          loadPins();
+        } catch(e){ toast('Failed: ' + e.message); }
+      };
+    });
+  } catch(e){ g.innerHTML = '<p class="sub">Error: ' + esc(e.message) + '</p>'; }
+}
+$('#genPinBtn').onclick = async function(){
+  try {
+    var data = await api('/api/admin/tool-pins', { method: 'POST', body: JSON.stringify({
+      tool_slug: $('#pinTool').value.trim() || '*',
+      months: parseInt($('#pinMonths').value, 10) || 1,
+      customer_name: $('#pinName').value.trim(),
+      customer_contact: $('#pinContact').value.trim(),
+      note: $('#pinNote').value.trim()
+    })});
+    $('#pinCode').textContent = data.pin;
+    $('#pinMeta').textContent = data.tool_slug + ' · ' + data.months + ' month(s) · expires ' + new Date(Number(data.expires_at)).toLocaleDateString();
+    $('#pinResult').style.display = 'block';
+    $('#pinName').value = ''; $('#pinContact').value = ''; $('#pinNote').value = '';
+    toast('PIN generated');
+    loadPins();
+  } catch(e){ toast('Failed: ' + e.message); }
+};
+$('#copyPinBtn').onclick = function(){
+  var t = $('#pinCode').textContent;
+  if(navigator.clipboard) navigator.clipboard.writeText(t).catch(function(){});
+  toast('PIN copied');
+};
 /* ---------- caretaker ---------- */
 function paintCaretaker(data){
   var s = data.settings || {};

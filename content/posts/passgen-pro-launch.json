@@ -1,0 +1,53 @@
+{
+  "slug": "passgen-pro-launch",
+  "title": "PassGen Pro: passwords you'll never have to remember",
+  "description": "Generate strong random passwords or memorable passphrases, with a strength meter and one-click copy.",
+  "date": "2026-09-30",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most passwords are weak because humans have to invent and remember them. PassGen Pro removes the human from that job."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "It generates strong passwords with your browser's secure random generator. Pick random characters or a memorable passphrase. A strength meter scores every result by entropy, and one click copies it."
+    },
+    {
+      "type": "heading",
+      "text": "Two modes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Random: 8 to 64 characters from the sets you choose",
+        "Passphrase: 3 to 8 common words joined with dashes \u2014 easy to type, hard to crack",
+        "Optional filter for ambiguous characters like 1, l, and 0"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Choose random or passphrase mode",
+        "Set length or word count",
+        "Generate, check the strength meter, copy"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Your last 10 passwords stay in a private history in the open tab. Click any of them to copy it again. Nothing is stored or sent anywhere."
+    },
+    {
+      "type": "paragraph",
+      "text": "PassGen Pro is $6 a month, or $30 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}

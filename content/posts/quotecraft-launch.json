@@ -1,0 +1,51 @@
+{
+  "slug": "quotecraft-launch",
+  "title": "QuoteCraft: client quotes in minutes",
+  "description": "Make a clean, professional quote with line items, tax, and discount \u2014 then print it or save it as a PDF.",
+  "date": "2026-09-30",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Quotes win work. Slow quotes lose it. QuoteCraft exists so a professional quote takes minutes, not an afternoon."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Type your business name and the client's name. Add line items with quantities and prices. The subtotal, discount, and tax update live as you type. Hit print to get a clean quote document, or save it as a PDF."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Freelancers who price custom work",
+        "Agencies sending proposals",
+        "Trades and contractors quoting jobs",
+        "Anyone tired of rebuilding quotes in a spreadsheet"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Fill in your business and client details",
+        "Add a line for each item or service",
+        "Set discount and tax if they apply",
+        "Print, save as PDF, or store the quote in your browser"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "QuoteCraft is $15 a month, or $75 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
