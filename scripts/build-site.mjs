@@ -189,10 +189,10 @@ async function loadTools() {
   return tools.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function toolCard(tool, prefix, index) {
+function toolCard(tool, base, index) {
   const logo = tool.logo.replace('<svg ', '<svg width="44" height="44" ');
   const lockIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>';
-  return `<a class="product-card tool-card" href="${prefix}product/${escapeHtml(tool.slug)}/">` +
+  return `<a class="product-card tool-card" href="${base}${escapeHtml(tool.slug)}/">` +
     `<span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span>` +
     `<span class="kicker">TOOL ${String(index + 1).padStart(2, '0')}</span>` +
     `<h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.tagline)}</p>` +
@@ -211,7 +211,7 @@ function toolLabSection(tools) {
 
 function liveToolsSection(tools) {
   if (!tools.length) return '';
-  const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
+  const cards = tools.map((tool, i) => toolCard(tool, './product/', i)).join('');
   return `<section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Live tools</span><h2>Ready to use today.</h2></div><p class="section-aside">Real working tools. Each one unlocks with a personal access PIN — 1 or 6 months.</p></div><div class="product-grid">${cards}</div></section>`;
 }
 
