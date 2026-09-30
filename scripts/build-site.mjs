@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const email = 'hello@dolphinsystems.net';
 const brandMark = 'assets/brand-mark.svg?v=20260923-ds-favicon';
-const assetVersion = '20260923-gate1';
+const assetVersion = '20260930-toollab';
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -77,9 +77,10 @@ const pages = [
     </section>
     <section class="statement"><div class="shell statement-grid"><span class="kicker">The idea</span><p>Good systems make the next step obvious. We find the gaps between your tools and processes, then build a better way for work to move.</p></div></section>
     <section class="section shell"><div class="section-heading"><div><span class="kicker">What we do</span><h2>Practical systems for real work.</h2></div><a class="inline-link" href="./services.html">All services ${arrow}</a></div><div class="service-preview"><a href="./services.html#automation"><span class="service-num">01</span><h3>Automation</h3><p>Give repeatable work a dependable path from trigger to result.</p>${arrow}</a><a href="./services.html#integrations"><span class="service-num">02</span><h3>Integrations</h3><p>Move information between the tools your team already uses.</p>${arrow}</a><a href="./services.html#architecture"><span class="service-num">03</span><h3>System design</h3><p>Make the whole workflow visible before adding another tool.</p>${arrow}</a></div></section>
-    <!--TOOL_LAB-->
     <section class="feature-band"><div class="shell feature-grid"><div><span class="kicker kicker-light">How we think</span><h2>See the whole system. Fix the right part.</h2><p>A useful solution begins with the actual handoffs, decisions, and constraints. That is where we start.</p><a class="button button-outline-light" href="./about.html">Our approach ${arrow}</a></div><div class="feature-diagram" aria-hidden="true"><div class="diagram-line"><span>Understand</span><b>01</b></div><div class="diagram-line"><span>Design</span><b>02</b></div><div class="diagram-line"><span>Build</span><b>03</b></div><div class="diagram-line"><span>Improve</span><b>04</b></div></div></div></section>
-    <section class="section shell"><div class="section-heading"><div><span class="kicker">Explore</span><h2>More ways to move forward.</h2></div></div><div class="explore-grid"><a class="explore-card" href="./products.html"><span class="kicker">Products</span><h3>Tools shaped by recurring problems.</h3><p>Where reusable software can make work simpler.</p>${arrow}</a><a class="explore-card" href="./research.html"><span class="kicker">Research</span><h3>Questions behind better systems.</h3><p>What we are examining as technology and work change.</p>${arrow}</a><a class="explore-card" href="./blog/"><span class="kicker">Blog</span><h3>Notes from the work.</h3><p>Ideas and practical lessons as they are published.</p>${arrow}</a></div></section>${cta}`,
+    <section class="section shell"><div class="section-heading"><div><span class="kicker">Explore</span><h2>More ways to move forward.</h2></div></div><div class="explore-grid"><a class="explore-card" href="./products.html"><span class="kicker">Products</span><h3>Tools shaped by recurring problems.</h3><p>Where reusable software can make work simpler.</p>${arrow}</a><a class="explore-card" href="./research.html"><span class="kicker">Research</span><h3>Questions behind better systems.</h3><p>What we are examining as technology and work change.</p>${arrow}</a><a class="explore-card" href="./blog/"><span class="kicker">Blog</span><h3>Notes from the work.</h3><p>Ideas and practical lessons as they are published.</p>${arrow}</a></div></section>
+    <!--TOOL_LAB-->
+    ${cta}`,
   },
   {
     file: 'services.html', key: 'services', title: 'Services',
@@ -189,18 +190,23 @@ async function loadTools() {
 }
 
 function toolCard(tool, prefix, index) {
+  const logo = tool.logo.replace('<svg ', '<svg width="44" height="44" ');
+  const lockIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>';
   return `<a class="product-card tool-card" href="${prefix}product/${escapeHtml(tool.slug)}/">` +
-    `<span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo}</span>` +
+    `<span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span>` +
     `<span class="kicker">TOOL ${String(index + 1).padStart(2, '0')}</span>` +
     `<h3>${escapeHtml(tool.name)}</h3><p>${escapeHtml(tool.tagline)}</p>` +
     `<span class="tool-price">$${Number(tool.pricing.monthly)}/mo</span>` +
-    `<span class="inline-link">Open tool ${arrow}</span></a>`;
+    `<span class="tool-open">Open tool ${lockIcon}</span></a>`;
 }
 
 function toolLabSection(tools) {
   if (!tools.length) return '';
-  const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
-  return `<section class="section shell"><div class="section-heading"><div><span class="kicker">The tool lab</span><h2>New tools, built for real work.</h2></div><a class="inline-link" href="./product/">All tools ${arrow}</a></div><div class="product-grid">${cards}</div></section>`;
+  const items = tools.map((tool) => {
+    const logo = tool.logo.replace('<svg ', '<svg width="30" height="30" ');
+    return `<a href="./product/${escapeHtml(tool.slug)}/"><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span><span><b>${escapeHtml(tool.name)}</b><i>$${Number(tool.pricing.monthly)}/mo</i></span></a>`;
+  }).join('');
+  return `<section class="shell"><div class="lab-strip"><div class="lab-strip-head"><span class="kicker">The tool lab</span><p>Small paid utilities we also sell — each unlocks with a PIN.</p></div><div class="lab-items">${items}</div><a class="lab-link" href="./product/">All tools</a></div></section>`;
 }
 
 function liveToolsSection(tools) {
@@ -330,7 +336,7 @@ function toolPageBody(tool) {
   const appJs = String(tool.app_js).replace(/<\/(script)/gi, '<\\/$1');
   return `<style>${toolSharedCss()}</style>` +
   `<section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a>` +
-  `<div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo}</span>` +
+  `<div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo.replace('<svg ', '<svg width="84" height="84" ')}</span>` +
   `<div><span class="kicker">Dolphin Systems tool</span><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(tool.tagline)}</p></div></div>` +
   `<div class="tool-price-pills"><span><b>$${monthly}</b>/month</span><span><b>$${sixMo}</b>/6 months <em>save ${savePct}%</em></span></div></section>` +
   `<section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div>` +

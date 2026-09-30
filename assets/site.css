@@ -121,3 +121,19 @@ h3{font-size:27px;line-height:1.14}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 a.product-card{text-decoration:none;color:inherit;display:block;transition:box-shadow .15s,transform .15s}a.product-card:hover{box-shadow:0 10px 28px rgba(15,23,42,.12);transform:translateY(-2px)}.card-rating{display:flex;align-items:center;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}.card-stars{color:#c7d2e8;font-size:16px;letter-spacing:1px}.card-stars .on{color:#f5a623}.rating-text{font-size:13px;color:var(--muted)}
 .catalog-item{max-width:720px}.catalog-item h1{margin:10px 0 6px}.rating-summary{display:flex;align-items:center;gap:10px;margin:8px 0 22px}.item-stars{color:#c7d2e8;font-size:22px;letter-spacing:2px}.item-stars .on{color:#f5a623}.rate-box{margin-top:28px;border:1px solid var(--line);border-radius:8px;padding:18px 20px;background:#f3f6fc}.rate-label{font-weight:700;font-size:15px}.rate-stars{display:flex;gap:4px;margin-top:8px}.rate-stars button{border:0;background:transparent;font-size:34px;color:#c7d2e8;cursor:pointer;padding:6px;line-height:1;min-width:44px;min-height:44px}.rate-stars button:hover:not(:disabled),.rate-stars button:focus-visible{color:#f5a623;transform:scale(1.15)}.rate-stars button:disabled{cursor:default}.rate-stars button[aria-checked="true"]{color:#f5a623}
+
+/* ---- Tool Lab ---- */
+.tool-logo{display:inline-flex;flex:none}
+.tool-logo svg{width:44px;height:44px;display:block}
+.tool-card .tool-price{display:block;margin-top:10px;font-weight:700}
+.tool-open{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-weight:600;color:var(--accent)}
+.tool-open svg{width:14px;height:14px;flex:none}
+.lab-strip{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:space-between;margin:30px 0}
+.lab-strip-head .kicker{margin-bottom:2px;display:block}
+.lab-strip-head p{margin:0;color:var(--muted);font-size:14px}
+.lab-items{display:flex;gap:22px;flex-wrap:wrap}
+.lab-items a{display:flex;align-items:center;gap:9px}
+.lab-items .tool-logo svg{width:30px;height:30px}
+.lab-items b{font-size:14px;display:block;line-height:1.3}
+.lab-items i{font-style:normal;font-size:12px;color:var(--muted)}
+.lab-link{font-weight:600;color:var(--accent);font-size:14px;white-space:nowrap}
