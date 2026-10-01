@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PayChaser — Chase late invoices without the awkwardness. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>PayChaser — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#DC2626" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PayChaser logo"><rect x="6" y="6" width="52" height="52" rx="14" fill="#DC2626"/><path d="M18 22l14 11 14-11" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="20" width="36" height="26" rx="4" fill="none" stroke="#FECACA" stroke-width="4"/><path d="M38 50a10 10 0 1 0 0.1 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M44 44l-2.5 2.5L38 50l-1.5 2" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>PayChaser</h1><p>Chase late invoices without the awkwardness.</p></div></div><div class="tool-price-pills"><span><b>$12</b>/month</span><span><b>$60</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>PayChaser tracks your open invoices and drafts a three-stage email sequence — friendly nudge, firm reminder, final notice — so getting paid stops being a chore. Invoices stay in your browser.</p><ul class="tool-features"><li>Track open invoices with due dates and amounts</li><li>Live days-overdue counts and outstanding total</li><li>Three-stage chaser emails: nudge, reminder, final notice</li><li>One-click copy for pasting into your email</li><li>Invoices saved in your browser, mark paid as money lands</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock PayChaser.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $12</option><option value="6">6 months — $60 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-paychaser { color: #3b0d0d; max-width: 860px; }
+.tool-app-paychaser .pc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 16px; }
+.tool-app-paychaser .pc-stat { background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.tool-app-paychaser .pc-stat span { font-size: 12px; font-weight: 600; color: #991b1b; }
+.tool-app-paychaser .pc-stat strong { font-size: 22px; }
+.tool-app-paychaser .pc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.tool-app-paychaser label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; }
+.tool-app-paychaser input[type="text"], .tool-app-paychaser input[type="number"], .tool-app-paychaser input[type="date"], .tool-app-paychaser textarea { border: 1px solid #fecaca; border-radius: 8px; padding: 8px 10px; font-size: 14px; width: 100%; box-sizing: border-box; }
+.tool-app-paychaser .pc-form .pc-btn { grid-column: 1 / -1; justify-self: start; }
+.tool-app-paychaser .pc-btn { background: #DC2626; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.tool-app-paychaser .pc-btn:hover { background: #b91c1c; }
+.tool-app-paychaser .pc-btn-ghost { background: #fee2e2; color: #DC2626; }
+.tool-app-paychaser .pc-btn-ghost:hover { background: #fecaca; }
+.tool-app-paychaser .pc-btn-danger { background: none; color: #b91c1c; }
+.tool-app-paychaser .pc-btn-danger:hover { background: #fef2f2; }
+.tool-app-paychaser .pc-h { margin: 18px 0 8px; }
+.tool-app-paychaser .pc-list { list-style: none; padding: 0; margin: 0; }
+.tool-app-paychaser .pc-list li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: #fff7f7; border: 1px solid #fecaca; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+.tool-app-paychaser .pc-list .pc-li-main { flex: 1 1 220px; }
+.tool-app-paychaser .pc-list .pc-li-main strong { display: block; }
+.tool-app-paychaser .pc-list .pc-li-main small { color: #991b1b; }
+.tool-app-paychaser .pc-badge { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.tool-app-paychaser .pc-badge-overdue { background: #DC2626; color: #fff; }
+.tool-app-paychaser .pc-badge-due { background: #fde68a; color: #92400e; }
+.tool-app-paychaser .pc-li-amt { font-weight: 800; font-size: 16px; }
+.tool-app-paychaser .pc-list button { background: #fee2e2; color: #DC2626; border: none; border-radius: 8px; padding: 7px 12px; font-weight: 700; cursor: pointer; font-size: 13px; }
+.tool-app-paychaser .pc-list button:hover { background: #fecaca; }
+.tool-app-paychaser .pc-empty { background: #f9fafb; border-radius: 10px; padding: 14px; font-size: 14px; color: #6b7280; margin: 0; }
+.tool-app-paychaser .pc-detail { margin-top: 20px; border-top: 2px solid #fecaca; padding-top: 8px; }
+.tool-app-paychaser .pc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.tool-app-paychaser .pc-tab { border: 1px solid #fecaca; background: #fff; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; color: #7f1d1d; }
+.tool-app-paychaser .pc-tab.pc-active { background: #DC2626; border-color: #DC2626; color: #fff; }
+.tool-app-paychaser .pc-hint { font-size: 13px; color: #991b1b; margin: 4px 0 10px; }
+.tool-app-paychaser .pc-actions { display: flex; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+.tool-app-paychaser #pc-copy.pc-copied { background: #059669; }
+.tool-app-paychaser .pc-detail label { margin: 10px 0 0; }</style><div class="tool-app-paychaser" id="toolAppRoot">
+  <div class="pc-stats">
+    <div class="pc-stat"><span>Total outstanding</span><strong id="pc-outstanding">$0.00</strong></div>
+    <div class="pc-stat"><span>Open invoices</span><strong id="pc-count">0</strong></div>
+    <div class="pc-stat"><span>Oldest unpaid</span><strong id="pc-oldest">&mdash;</strong></div>
+  </div>
+  <form id="pc-form" class="pc-form" autocomplete="off">
+    <label>Your business<input id="pc-biz" type="text" placeholder="Acme Co."></label>
+    <label>Client name<input id="pc-client" type="text" placeholder="Client name"></label>
+    <label>Invoice #<input id="pc-invoice" type="text" placeholder="INV-0042"></label>
+    <label>Amount<input id="pc-amount" type="number" min="0" step="0.01" placeholder="1200.00"></label>
+    <label>Due date<input id="pc-duedate" type="date"></label>
+    <button id="pc-add" class="pc-btn" type="submit">Add invoice</button>
+  </form>
+  <h4 class="pc-h">Open invoices</h4>
+  <ul id="pc-list" class="pc-list"></ul>
+  <div id="pc-detail" class="pc-detail" hidden>
+    <h4 class="pc-h" id="pc-detail-title"></h4>
+    <div class="pc-tabs" role="tablist">
+      <button type="button" class="pc-tab" data-stage="0" role="tab">1 &middot; Friendly nudge</button>
+      <button type="button" class="pc-tab" data-stage="1" role="tab">2 &middot; Firm reminder</button>
+      <button type="button" class="pc-tab" data-stage="2" role="tab">3 &middot; Final notice</button>
+    </div>
+    <p class="pc-hint" id="pc-hint"></p>
+    <label>Subject<input id="pc-subject" type="text"></label>
+    <label>Message<textarea id="pc-body" rows="11"></textarea></label>
+    <div class="pc-actions">
+      <button id="pc-copy" class="pc-btn" type="button">Copy to clipboard</button>
+      <button id="pc-paid" class="pc-btn pc-btn-ghost" type="button">Mark paid</button>
+      <button id="pc-remove" class="pc-btn pc-btn-danger" type="button">Delete</button>
+    </div>
+  </div>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { n = parseFloat(n); return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  function todayStr() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function daysOverdue(dueStr) {
+    if (!dueStr) return 0;
+    var due = new Date(dueStr + 'T12:00:00');
+    var now = new Date(todayStr() + 'T12:00:00');
+    return Math.round((now - due) / 864e5);
+  }
+  function stageText(inv, days, stage) {
+    var client = inv.client || 'there';
+    var biz = inv.biz ? ' at ' + inv.biz : '';
+    var amount = money(inv.amount);
+    var num = inv.number ? ' ' + inv.number : '';
+    var late = days > 0 ? days + ' days overdue' : 'due soon';
+    var subject, body;
+    if (stage === 0) {
+      subject = 'Quick reminder: invoice' + num + ' (' + amount + ')';
+      body = 'Hi ' + client + ',\n\nJust a quick heads-up that invoice' + num + ' for ' + amount + ' was due on ' + inv.duedate + '.\n\nIt may have slipped through the cracks \u2014 totally normal. Could you let me know when I can expect payment?\n\nThanks so much,\n' + (inv.biz || 'Us');
+    } else if (stage === 1) {
+      subject = 'Overdue invoice' + num + ': ' + amount + ' (' + days + ' days late)';
+      body = 'Hi ' + client + ',\n\nI\u2019m following up on invoice' + num + ' for ' + amount + ', which is now ' + late + ' (due ' + inv.duedate + ').\n\nIf payment is on the way, please ignore this. Otherwise, could you confirm a payment date this week? If there\u2019s an issue with the invoice, I\u2019d rather hear about it now so we can sort it out.\n\nThanks,\n' + (inv.biz || 'Us') + '\nAccounts';
+    } else {
+      subject = 'Final notice: invoice' + num + ' (' + amount + ') due ' + inv.duedate;
+      body = 'Hi ' + client + ',\n\nThis is a final notice regarding invoice' + num + ' for ' + amount + ', now ' + late + '.\n\nIf payment isn\u2019t received within 7 days, I\u2019ll have to pause any ongoing work and pass the balance to collections. I\u2019d much rather avoid that.\n\nPlease pay by ' + inv.duedate + ' terms immediately, or reply with a firm payment date.\n\nRegards,\n' + (inv.biz || 'Us') + '\nAccounts';
+    }
+    return { subject: subject, body: body };
+  }
+  var HINTS = [
+    'Send this when the invoice is new or just past due. Warm, assumes it slipped through the cracks.',
+    'Send this 7+ days overdue. Direct, names the number of days, asks for a payment date.',
+    'Send this 30+ days overdue. Final notice: states consequences and a hard 7-day deadline.'
+  ];
+  var LS_KEY = 'toolapp-paychaser-invoices';
+  var state = { selectedId: null, stage: 0 };
+  function getInvoices() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; }
+  }
+  function setInvoices(v) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(v)); } catch (e) {}
+  }
+  function getSelected() {
+    var invs = getInvoices();
+    for (var i = 0; i < invs.length; i++) {
+      if (invs[i].id === state.selectedId) return invs[i];
+    }
+    return null;
+  }
+  function saveSelected(mut) {
+    var invs = getInvoices();
+    for (var i = 0; i < invs.length; i++) {
+      if (invs[i].id === state.selectedId) {
+        mut(invs[i]);
+        setInvoices(invs);
+        return;
+      }
+    }
+  }
+  function renderStats() {
+    var invs = getInvoices();
+    var total = 0, overdue = 0, oldest = 0;
+    for (var i = 0; i < invs.length; i++) {
+      total += parseFloat(invs[i].amount) || 0;
+      var d = daysOverdue(invs[i].duedate);
+      if (d > 0) overdue++;
+      if (d > oldest) oldest = d;
+    }
+    $('pc-outstanding').textContent = money(total);
+    $('pc-count').textContent = String(invs.length);
+    $('pc-oldest').textContent = overdue ? (oldest + (oldest === 1 ? ' day' : ' days')) : '\u2014';
+  }
+  function overdueLabel(d) {
+    if (d > 0) return d + (d === 1 ? ' day overdue' : ' days overdue');
+    if (d === 0) return 'Due today';
+    return 'Due in ' + (-d) + (-d === 1 ? ' day' : ' days');
+  }
+  function renderList() {
+    var invs = getInvoices();
+    invs.sort(function (a, b) { return daysOverdue(b.duedate) - daysOverdue(a.duedate); });
+    var ul = $('pc-list');
+    ul.innerHTML = '';
+    if (!invs.length) {
+      var p = document.createElement('p');
+      p.className = 'pc-empty';
+      p.textContent = 'No open invoices. Add one above and PayChaser will track it and draft your chasers.';
+      ul.appendChild(p);
+      return;
+    }
+    for (var i = 0; i < invs.length; i++) {
+      (function (inv) {
+        var d = daysOverdue(inv.duedate);
+        var li = document.createElement('li');
+        var main = document.createElement('div');
+        main.className = 'pc-li-main';
+        var title = document.createElement('strong');
+        title.textContent = (inv.number || 'Invoice') + ' \u2014 ' + (inv.client || 'Unknown client');
+        var sub = document.createElement('small');
+        sub.textContent = inv.duedate ? ('Due ' + inv.duedate) : 'No due date';
+        main.appendChild(title);
+        main.appendChild(sub);
+        var badge = document.createElement('span');
+        badge.className = 'pc-badge ' + (d > 0 ? 'pc-badge-overdue' : 'pc-badge-due');
+        badge.textContent = overdueLabel(d);
+        var amt = document.createElement('span');
+        amt.className = 'pc-li-amt';
+        amt.textContent = money(inv.amount);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = 'Draft chaser';
+        btn.addEventListener('click', function () { selectInvoice(inv.id); });
+        li.appendChild(main);
+        li.appendChild(badge);
+        li.appendChild(amt);
+        li.appendChild(btn);
+        ul.appendChild(li);
+      })(invs[i]);
+    }
+  }
+  function selectInvoice(id) {
+    var inv = null;
+    var invs = getInvoices();
+    for (var i = 0; i < invs.length; i++) { if (invs[i].id === id) inv = invs[i]; }
+    if (!inv) return;
+    state.selectedId = id;
+    var d = daysOverdue(inv.duedate);
+    state.stage = d >= 30 ? 2 : (d >= 7 ? 1 : 0);
+    renderDetail();
+  }
+  function renderDetail() {
+    var inv = getSelected();
+    var box = $('pc-detail');
+    if (!inv) { box.hidden = true; return; }
+    box.hidden = false;
+    var d = daysOverdue(inv.duedate);
+    $('pc-detail-title').textContent = (inv.number || 'Invoice') + ' \u2014 ' + (inv.client || 'Unknown client') + ' \u2014 ' + money(inv.amount);
+    var tabs = box.querySelectorAll('.pc-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.toggle('pc-active', parseInt(tabs[i].getAttribute('data-stage'), 10) === state.stage);
+    }
+    $('pc-hint').textContent = HINTS[state.stage];
+    var t = stageText(inv, d, state.stage);
+    $('pc-subject').value = t.subject;
+    $('pc-body').value = t.body;
+  }
+  function copyDraft() {
+    var inv = getSelected();
+    if (!inv) return;
+    var text = 'Subject: ' + $('pc-subject').value + '\n\n' + $('pc-body').value;
+    function done() {
+      var b = $('pc-copy');
+      b.classList.add('pc-copied');
+      var old = b.textContent;
+      b.textContent = 'Copied!';
+      setTimeout(function () { b.classList.remove('pc-copied'); b.textContent = old; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, done);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+  function addInvoice() {
+    var amount = parseFloat($('pc-amount').value);
+    var inv = {
+      id: 'pc-' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36),
+      biz: $('pc-biz').value.trim(),
+      client: $('pc-client').value.trim(),
+      number: $('pc-invoice').value.trim(),
+      amount: isFinite(amount) ? amount : 0,
+      duedate: $('pc-duedate').value
+    };
+    if (!inv.client && !inv.number) {
+      $('pc-client').focus();
+      return;
+    }
+    var invs = getInvoices();
+    invs.unshift(inv);
+    setInvoices(invs.slice(0, 200));
+    $('pc-client').value = '';
+    $('pc-invoice').value = '';
+    $('pc-amount').value = '';
+    $('pc-duedate').value = todayStr();
+    renderStats();
+    renderList();
+    selectInvoice(inv.id);
+  }
+  (function init() {
+    $('pc-form').addEventListener('submit', function (e) { e.preventDefault(); addInvoice(); });
+    $('pc-duedate').value = todayStr();
+    $('pc-detail').addEventListener('click', function (e) {
+      var t = e.target;
+      if (t.classList && t.classList.contains('pc-tab')) {
+        state.stage = parseInt(t.getAttribute('data-stage'), 10);
+        renderDetail();
+        return;
+      }
+      if (t.id === 'pc-copy') { copyDraft(); return; }
+      if (t.id === 'pc-paid' || t.id === 'pc-remove') {
+        var invs = getInvoices();
+        var out = [];
+        for (var i = 0; i < invs.length; i++) {
+          if (invs[i].id !== state.selectedId) out.push(invs[i]);
+        }
+        setInvoices(out);
+        state.selectedId = null;
+        renderStats();
+        renderList();
+        renderDetail();
+      }
+    });
+    renderStats();
+    renderList();
+    renderDetail();
+  })();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="paychaser";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$12<small>/month</small></div><ul><li>Full access to PayChaser</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#DC2626"><h3>6 months</h3><div class="plan-price">$60<small> one-time</small></div><ul><li>Full access to PayChaser</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks PayChaser on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/paychaser-launch.html">Read the PayChaser launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>

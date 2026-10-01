@@ -1,0 +1,46 @@
+{
+  "slug": "paychaser-launch",
+  "title": "PayChaser: chase late invoices without the awkwardness",
+  "description": "Track open invoices and get a three-stage chaser email — nudge, reminder, final notice — ready to copy and send.",
+  "date": "2026-10-01",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Chasing late invoices is one of the worst parts of freelancing. The invoice sits unpaid, every week you tell yourself you'll send a reminder tomorrow, and the client stays silent. PayChaser takes the awkwardness out of it."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Add your open invoices with the client name, amount, and due date. PayChaser tracks how many days overdue each one is and drafts a three-stage email sequence for any invoice: a friendly nudge, a firm reminder, and a final notice. Copy the draft, paste it into your email, done."
+    },
+    {
+      "type": "heading",
+      "text": "Why three stages"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most late payments aren't malice — they're forgetfulness. Stage one assumes the best and gives the client an easy out. Stage two names the number of days and asks for a payment date. Stage three sets a hard deadline with consequences. Escalating politely gets you paid faster than one angry email."
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add each open invoice with client, amount, and due date",
+        "Open an invoice to see your days-overdue count",
+        "Pick the stage that matches how late it is",
+        "Copy the draft, tweak the tone if you like, and send"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "PayChaser is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
