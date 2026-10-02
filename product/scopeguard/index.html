@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ScopeGuard — Stop giving away free work. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>ScopeGuard — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#DB2777" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ScopeGuard logo"><path d="M32 5 55 13v18c0 14.5-9.8 24.6-23 28C18.8 55.6 9 45.5 9 31V13z" fill="#DB2777"/><path d="M32 10 50 16.5V31c0 11.5-7.6 19.9-18 23.4C21.6 50.9 14 42.5 14 31V16.5z" fill="#FCE7F3"/><path d="M24 32.5l5.5 5.5L41 26.5" fill="none" stroke="#DB2777" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="27" y="44" width="10" height="5" rx="2.5" fill="#DB2777"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>ScopeGuard</h1><p>Stop giving away free work.</p></div></div><div class="tool-price-pills"><span><b>$12</b>/month</span><span><b>$60</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>ScopeGuard keeps fixed-price projects on track: log out-of-scope asks with their hour and dollar impact, approve or reject change orders, and draft the client email in one click. Built for freelancers and micro-agencies who lose money to quiet scope creep.</p><ul class="tool-features"><li>Project scope snapshot: what the fixed price actually covers</li><li>Log out-of-scope asks with automatic hour-to-dollar impact</li><li>Pending / approved / rejected change-order statuses</li><li>Live unbilled-extras total across all asks</li><li>One-click change-order email draft, ready to paste</li><li>Revision round counter with over-limit warning</li><li>Everything saved in your browser — no account needed</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock ScopeGuard.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $12</option><option value="6">6 months — $60 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-scopeguard { color: #3b0764; max-width: 860px; }
+.tool-app-scopeguard .sg-card { background: #fdf2f8; border: 1px solid #f9a8d4; border-radius: 12px; padding: 14px 16px; margin: 12px 0; }
+.tool-app-scopeguard .sg-card h3 { margin: 0 0 4px; font-size: 13px; color: #9d174d; text-transform: uppercase; letter-spacing: 0.04em; }
+.tool-app-scopeguard .sg-big { font-size: 32px; font-weight: 800; color: #be123c; }
+.tool-app-scopeguard .sg-approved { color: #15803d; }
+.tool-app-scopeguard .sg-sub { font-size: 13px; color: #831843; opacity: 0.85; }
+.tool-app-scopeguard .sg-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.tool-app-scopeguard .sg-grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 12px 0; }
+.tool-app-scopeguard .sg-wide { grid-column: 1 / -1; }
+.tool-app-scopeguard label, .tool-app-scopeguard label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; }
+.tool-app-scopeguard input[type="text"], .tool-app-scopeguard input[type="number"], .tool-app-scopeguard select { border: 1px solid #f0abfc; border-radius: 8px; padding: 8px 10px; font-size: 14px; width: 100%; box-sizing: border-box; }
+.tool-app-scopeguard .sg-btn { background: #DB2777; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.tool-app-scopeguard .sg-btn:hover { background: #be185d; }
+.tool-app-scopeguard .sg-btn-ghost { background: #fdf2f8; color: #DB2777; }
+.tool-app-scopeguard .sg-btn-ghost:hover { background: #fce7f3; }
+.tool-app-scopeguard .sg-btn-danger { background: none; color: #b91c1c; padding: 10px 12px; }
+.tool-app-scopeguard .sg-tabs { display: flex; gap: 6px; margin: 14px 0; border-bottom: 2px solid #fbcfe8; }
+.tool-app-scopeguard .sg-tab { background: none; border: none; border-bottom: 3px solid transparent; padding: 8px 12px; font-size: 14px; font-weight: 700; color: #9d174d; cursor: pointer; margin-bottom: -2px; }
+.tool-app-scopeguard .sg-tab-on { border-bottom-color: #DB2777; color: #DB2777; }
+.tool-app-scopeguard .sg-pane h4 { margin: 16px 0 8px; color: #831843; }
+.tool-app-scopeguard .sg-list { list-style: none; padding: 0; margin: 8px 0; }
+.tool-app-scopeguard .sg-list li { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #fff7fb; border: 1px solid #fbcfe8; border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; font-size: 14px; }
+.tool-app-scopeguard .sg-list .sg-li-main { flex: 1; }
+.tool-app-scopeguard .sg-list .sg-li-meta { font-size: 12px; color: #9d174d; white-space: nowrap; }
+.tool-app-scopeguard .sg-status { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 999px; }
+.tool-app-scopeguard .sg-st-pending { background: #fef3c7; color: #92400e; }
+.tool-app-scopeguard .sg-st-approved { background: #dcfce7; color: #166534; }
+.tool-app-scopeguard .sg-st-rejected { background: #fee2e2; color: #991b1b; }
+.tool-app-scopeguard .sg-li-btns { display: flex; gap: 4px; }
+.tool-app-scopeguard .sg-li-btns button { background: #fdf2f8; border: 1px solid #f0abfc; border-radius: 6px; font-size: 12px; font-weight: 700; color: #9d174d; padding: 4px 8px; cursor: pointer; }
+.tool-app-scopeguard .sg-li-btns button.sg-on { background: #DB2777; border-color: #DB2777; color: #fff; }
+.tool-app-scopeguard .sg-x { background: none; border: none; color: #b91c1c; font-size: 18px; cursor: pointer; }
+.tool-app-scopeguard .sg-projects { display: flex; gap: 8px; align-items: center; margin: 12px 0; flex-wrap: wrap; }
+.tool-app-scopeguard .sg-projects select { flex: 1; min-width: 180px; }
+.tool-app-scopeguard .sg-addrow { display: flex; gap: 8px; margin: 8px 0; }
+.tool-app-scopeguard .sg-addrow input { flex: 1; }
+.tool-app-scopeguard .sg-revrow { display: flex; gap: 6px; }
+.tool-app-scopeguard .sg-revrow input { flex: 1; }
+.tool-app-scopeguard .sg-revrow .sg-btn { padding: 8px 12px; }
+.tool-app-scopeguard .sg-actions { margin: 12px 0; }
+.tool-app-scopeguard .sg-badge { background: #DB2777; color: #fff; border-radius: 999px; font-size: 11px; padding: 1px 8px; }
+.tool-app-scopeguard .sg-draft { background: #fff; border: 1px solid #f0abfc; }
+.tool-app-scopeguard .sg-draft pre { white-space: pre-wrap; font-family: inherit; font-size: 14px; margin: 0; }
+.tool-app-scopeguard .sg-over { border-color: #ef4444 !important; }</style><div class="tool-app-scopeguard" id="toolAppRoot">
+  <div class="sg-grid2">
+    <div class="sg-card">
+      <h3>Unbilled extras</h3>
+      <div class="sg-big" id="sg-stat-unbilled">$0.00</div>
+      <div class="sg-sub" id="sg-stat-hours">0 hours across 0 asks</div>
+    </div>
+    <div class="sg-card">
+      <h3>Approved extras</h3>
+      <div class="sg-big sg-approved" id="sg-stat-approved">$0.00</div>
+      <div class="sg-sub">change orders the client said yes to</div>
+    </div>
+  </div>
+  <div class="sg-tabs">
+    <button type="button" class="sg-tab sg-tab-on" data-tab="sg-tab-project">Project</button>
+    <button type="button" class="sg-tab" data-tab="sg-tab-asks">Out-of-scope asks <span id="sg-badge" class="sg-badge"></span></button>
+    <button type="button" class="sg-tab" data-tab="sg-tab-email">Email draft</button>
+  </div>
+  <div id="sg-tab-project" class="sg-pane">
+    <div class="sg-projects">
+      <select id="sg-project" aria-label="Project"></select>
+      <button type="button" id="sg-newproject" class="sg-btn sg-btn-ghost">New project</button>
+      <button type="button" id="sg-delproject" class="sg-btn sg-btn-danger">Delete</button>
+    </div>
+    <div class="sg-grid3">
+      <label>Project name<input id="sg-name" type="text" placeholder="Website redesign"></label>
+      <label>Client<input id="sg-client" type="text" placeholder="Client name"></label>
+      <label>Fixed price ($)<input id="sg-price" type="number" min="0" step="0.01" value="0"></label>
+      <label>Extras rate ($/hr)<input id="sg-rate" type="number" min="0" step="0.01" value="150"></label>
+      <label>Revision limit<input id="sg-revlimit" type="number" min="0" step="1" value="2"></label>
+      <label>Revision used<div class="sg-revrow"><input id="sg-revused" type="number" min="0" step="1" value="0"><button type="button" id="sg-revplus" class="sg-btn sg-btn-ghost">+1</button></div></label>
+    </div>
+    <h4>Scope snapshot — what the fixed price covers</h4>
+    <div class="sg-addrow">
+      <input id="sg-deliv-in" type="text" placeholder="e.g. Homepage design, 2 revision rounds">
+      <button type="button" id="sg-deliv-add" class="sg-btn sg-btn-ghost">+ Add</button>
+    </div>
+    <ul id="sg-deliv" class="sg-list"></ul>
+  </div>
+  <div id="sg-tab-asks" class="sg-pane" hidden>
+    <h4>Log a new ask</h4>
+    <div class="sg-grid3">
+      <label class="sg-wide">What did they ask for?<input id="sg-ask-desc" type="text" placeholder="Can you also add a blog section?"></label>
+      <label>Est. hours<input id="sg-ask-hours" type="number" min="0" step="0.5" value="2"></label>
+    </div>
+    <div class="sg-actions"><button type="button" id="sg-ask-add" class="sg-btn">Log ask</button></div>
+    <h4>Ask log</h4>
+    <ul id="sg-asks" class="sg-list"></ul>
+  </div>
+  <div id="sg-tab-email" class="sg-pane" hidden>
+    <h4>Change-order email draft</h4>
+    <p class="sg-sub">Pick an ask above (or write a custom one) and paste this into your reply. Short, factual, and it ends with a question.</p>
+    <div class="sg-grid3">
+      <label>Use ask<select id="sg-email-ask"></select></label>
+    </div>
+    <div class="sg-card sg-draft">
+      <pre id="sg-draft"></pre>
+    </div>
+    <div class="sg-actions"><button type="button" id="sg-copy" class="sg-btn">Copy draft</button><span id="sg-copied" class="sg-sub"></span></div>
+  </div>
+</div><script>
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { n = parseFloat(n); return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  function num(v, d) { var n = parseFloat(v); return isFinite(n) ? n : (d || 0); }
+  var root = $('toolAppRoot');
+  var LS_KEY = 'toolapp-scopeguard-v1';
+  function blankProject(name) {
+    return { name: name || 'New project', client: '', price: 0, rate: 150,
+      revLimit: 2, revUsed: 0, deliverables: [], asks: [] };
+  }
+  function getState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(LS_KEY));
+      if (s && s.projects && s.projects.length) return s;
+    } catch (e) {}
+    return { projects: [blankProject('My first project')], current: 0 };
+  }
+  function setState(s) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  function cur(s) { return s.projects[s.current]; }
+  function fmtAsk(a, rate) {
+    return esc(a.desc) + ' — ' + a.hours + 'h (' + money(a.hours * rate) + ')';
+  }
+  function refreshStats() {
+    var s = getState(); var p = cur(s);
+    var unbilled = 0, hours = 0, approved = 0, pending = 0;
+    p.asks.forEach(function (a) {
+      var cost = num(a.hours) * num(p.rate);
+      if (a.status === 'approved') { approved += cost; }
+      else if (a.status === 'pending') { unbilled += cost; hours += num(a.hours); pending++; }
+    });
+    $('sg-stat-unbilled').textContent = money(unbilled);
+    $('sg-stat-hours').textContent = hours + ' hours across ' + pending + ' pending asks';
+    $('sg-stat-approved').textContent = money(approved);
+    $('sg-badge').textContent = pending ? pending : '';
+    var over = num(p.revUsed) > num(p.revLimit);
+    $('sg-revused').classList.toggle('sg-over', over);
+  }
+  function renderProjects() {
+    var s = getState();
+    var sel = $('sg-project');
+    sel.innerHTML = '';
+    s.projects.forEach(function (p, i) {
+      var o = document.createElement('option');
+      o.value = i; o.textContent = p.name || ('Project ' + (i + 1));
+      sel.appendChild(o);
+    });
+    sel.value = s.current;
+    var p = cur(s);
+    $('sg-name').value = p.name || '';
+    $('sg-client').value = p.client || '';
+    $('sg-price').value = p.price;
+    $('sg-rate').value = p.rate;
+    $('sg-revlimit').value = p.revLimit;
+    $('sg-revused').value = p.revUsed;
+    renderDeliverables(); renderAsks(); refreshStats();
+  }
+  function saveProjectFromForm() {
+    var s = getState(); var p = cur(s);
+    p.name = $('sg-name').value || 'Untitled project';
+    p.client = $('sg-client').value;
+    p.price = num($('sg-price').value);
+    p.rate = num($('sg-rate').value, 150);
+    p.revLimit = Math.max(0, Math.round(num($('sg-revlimit').value)));
+    p.revUsed = Math.max(0, Math.round(num($('sg-revused').value)));
+    setState(s);
+  }
+  function renderDeliverables() {
+    var s = getState(); var p = cur(s);
+    var ul = $('sg-deliv'); ul.innerHTML = '';
+    if (!p.deliverables.length) {
+      var li0 = document.createElement('li'); li0.textContent = 'Nothing listed yet — write down everything the fixed price covers.'; ul.appendChild(li0); return;
+    }
+    p.deliverables.forEach(function (d, i) {
+      var li = document.createElement('li');
+      var span = document.createElement('span'); span.className = 'sg-li-main'; span.textContent = d;
+      var x = document.createElement('button'); x.type = 'button'; x.className = 'sg-x';
+      x.setAttribute('data-del', i); x.setAttribute('aria-label', 'Remove deliverable'); x.textContent = '×';
+      li.appendChild(span); li.appendChild(x); ul.appendChild(li);
+    });
+  }
+  function renderAsks() {
+    var s = getState(); var p = cur(s);
+    var ul = $('sg-asks'); ul.innerHTML = '';
+    if (!p.asks.length) {
+      var li0 = document.createElement('li'); li0.textContent = 'No asks logged. When the client asks for something extra, log it here before you reply.'; ul.appendChild(li0);
+    } else {
+      p.asks.forEach(function (a, i) {
+        var li = document.createElement('li');
+        var main = document.createElement('div'); main.className = 'sg-li-main';
+        var strong = document.createElement('strong'); strong.textContent = a.desc;
+        var meta = document.createElement('div'); meta.className = 'sg-li-meta';
+        meta.textContent = a.hours + 'h × ' + money(p.rate) + '/hr = ' + money(num(a.hours) * num(p.rate));
+        main.appendChild(strong); main.appendChild(meta);
+        var status = document.createElement('span');
+        status.className = 'sg-status sg-st-' + a.status;
+        status.textContent = a.status;
+        var btns = document.createElement('div'); btns.className = 'sg-li-btns';
+        ['pending', 'approved', 'rejected'].forEach(function (st) {
+          var b = document.createElement('button'); b.type = 'button';
+          b.className = st === a.status ? 'sg-on' : '';
+          b.setAttribute('data-ask', i); b.setAttribute('data-status', st);
+          b.textContent = st === 'pending' ? 'Pending' : (st === 'approved' ? 'Approve' : 'Reject');
+          btns.appendChild(b);
+        });
+        var x = document.createElement('button'); x.type = 'button'; x.className = 'sg-x';
+        x.setAttribute('data-askdel', i); x.setAttribute('aria-label', 'Delete ask'); x.textContent = '×';
+        li.appendChild(main); li.appendChild(status); li.appendChild(btns); li.appendChild(x);
+        ul.appendChild(li);
+      });
+    }
+    renderEmailSelect();
+    refreshStats();
+  }
+  function renderEmailSelect() {
+    var s = getState(); var p = cur(s);
+    var sel = $('sg-email-ask'); sel.innerHTML = '';
+    var pend = [];
+    p.asks.forEach(function (a, i) { if (a.status === 'pending') pend.push([a, i]); });
+    if (!pend.length) {
+      var o = document.createElement('option'); o.textContent = 'No pending asks — log one first'; sel.appendChild(o);
+    } else {
+      pend.forEach(function (pair) {
+        var o = document.createElement('option'); o.value = pair[1]; o.textContent = pair[0].desc + ' (' + money(num(pair[0].hours) * num(p.rate)) + ')';
+        sel.appendChild(o);
+      });
+    }
+    renderDraft();
+  }
+  function renderDraft() {
+    var s = getState(); var p = cur(s);
+    var sel = $('sg-email-ask');
+    var idx = parseInt(sel.value, 10);
+    var a = p.asks[idx];
+    var greet = p.client ? 'Hi ' + p.client + ',' : 'Hi,';
+    var proj = p.name ? ' on ' + p.name : '';
+    var body;
+    if (a) {
+      body = greet + "\n" +
+        'Happy to take this on' + proj + ' — quick note on the impact.\n' +
+        'Adding "' + a.desc + '" is about ' + a.hours + ' extra hours, which comes to ' + money(num(a.hours) * num(p.rate)) + ' on top of the fixed price.\n' +
+        'Want me to go ahead? I\'ll start as soon as you confirm.';
+    } else {
+      body = greet + "\n" +
+        'Happy to take this on — quick note on the impact.\n' +
+        'This falls outside the original scope, so it would be billed as a change order at ' + money(p.rate) + '/hr on top of the fixed price.\n' +
+        'Want me to go ahead? I\'ll start as soon as you confirm.';
+    }
+    $('sg-draft').textContent = body;
+  }
+  function copyDraft() {
+    var text = $('sg-draft').textContent;
+    function done() { $('sg-copied').textContent = 'Copied.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+  root.addEventListener('input', function (e) {
+    var id = e.target.id || '';
+    if (id.indexOf('sg-name') === 0 || id.indexOf('sg-client') === 0 || id.indexOf('sg-price') === 0 ||
+        id.indexOf('sg-rate') === 0 || id.indexOf('sg-revlimit') === 0 || id.indexOf('sg-revused') === 0) {
+      saveProjectFromForm(); renderAsks();
+    }
+    if (id === 'sg-email-ask') renderDraft();
+  });
+  root.addEventListener('change', function (e) {
+    if (e.target.id === 'sg-project') {
+      var s = getState(); s.current = parseInt(e.target.value, 10) || 0; setState(s); renderProjects();
+    }
+  });
+  root.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('sg-tab')) {
+      var panes = root.querySelectorAll('.sg-tab');
+      for (var i = 0; i < panes.length; i++) panes[i].classList.remove('sg-tab-on');
+      t.classList.add('sg-tab-on');
+      var p2 = root.querySelectorAll('.sg-pane');
+      for (var j = 0; j < p2.length; j++) p2[j].hidden = true;
+      $(t.getAttribute('data-tab')).hidden = false;
+      if (t.getAttribute('data-tab') === 'sg-tab-email') renderDraft();
+      return;
+    }
+    if (t.id === 'sg-newproject') {
+      var s = getState();
+      s.projects.push(blankProject('Project ' + (s.projects.length + 1)));
+      s.current = s.projects.length - 1; setState(s); renderProjects(); return;
+    }
+    if (t.id === 'sg-delproject') {
+      var s2 = getState();
+      if (s2.projects.length <= 1) return;
+      s2.projects.splice(s2.current, 1); s2.current = 0; setState(s2); renderProjects(); return;
+    }
+    if (t.id === 'sg-revplus') {
+      var s3 = getState(); cur(s3).revUsed = num(cur(s3).revUsed) + 1;
+      setState(s3); $('sg-revused').value = cur(s3).revUsed; refreshStats(); return;
+    }
+    if (t.id === 'sg-deliv-add') {
+      var val = $('sg-deliv-in').value.trim(); if (!val) return;
+      var s4 = getState(); cur(s4).deliverables.push(val); setState(s4);
+      $('sg-deliv-in').value = ''; renderDeliverables(); return;
+    }
+    if (t.hasAttribute && t.hasAttribute('data-del')) {
+      var s5 = getState(); cur(s5).deliverables.splice(parseInt(t.getAttribute('data-del'), 10), 1);
+      setState(s5); renderDeliverables(); return;
+    }
+    if (t.id === 'sg-ask-add') {
+      var desc = $('sg-ask-desc').value.trim(); if (!desc) { $('sg-ask-desc').focus(); return; }
+      var s6 = getState();
+      cur(s6).asks.push({ desc: desc, hours: num($('sg-ask-hours').value, 1), status: 'pending' });
+      setState(s6); $('sg-ask-desc').value = ''; $('sg-ask-hours').value = '2';
+      renderAsks(); return;
+    }
+    if (t.hasAttribute && t.hasAttribute('data-status')) {
+      var s7 = getState();
+      cur(s7).asks[parseInt(t.getAttribute('data-ask'), 10)].status = t.getAttribute('data-status');
+      setState(s7); renderAsks(); return;
+    }
+    if (t.hasAttribute && t.hasAttribute('data-askdel')) {
+      var s8 = getState(); cur(s8).asks.splice(parseInt(t.getAttribute('data-askdel'), 10), 1);
+      setState(s8); renderAsks(); return;
+    }
+    if (t.id === 'sg-copy') { copyDraft(); return; }
+  });
+  renderProjects();
+})();
+</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="scopeguard";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$12<small>/month</small></div><ul><li>Full access to ScopeGuard</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#DB2777"><h3>6 months</h3><div class="plan-price">$60<small> one-time</small></div><ul><li>Full access to ScopeGuard</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks ScopeGuard on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/scopeguard-launch.html">Read the ScopeGuard launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>

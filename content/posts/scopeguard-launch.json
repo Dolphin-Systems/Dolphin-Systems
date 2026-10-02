@@ -1,0 +1,50 @@
+{
+  "slug": "scopeguard-launch",
+  "title": "ScopeGuard: stop giving away free work",
+  "description": "Log every out-of-scope ask with its hour and dollar impact, then send a clean change-order email \u2014 before you do the work.",
+  "date": "2026-10-02",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "The most expensive sentence in freelancing is \"sure, I can do that too.\" It sounds harmless, and then it costs you three unpaid days. ScopeGuard is built for the moment a client asks for one more thing."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by writing down what your fixed price covers \u2014 the scope snapshot. Then every time a client asks for something extra, log it with an hour estimate. ScopeGuard converts it to dollars instantly, tracks each ask as pending, approved, or rejected, and keeps a running total of unbilled extras. When you are ready to reply, it drafts the change-order email for you: short, factual, and it ends with a question."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Freelance designers, developers, and writers on fixed-price projects",
+        "Micro-agencies where one silent yes can eat the margin",
+        "Anyone who has ever done a week's unpaid work and felt awkward billing for it"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Create a project and list what the fixed price covers",
+        "Log each out-of-scope ask with an hour estimate",
+        "Watch the unbilled total so no ask slips by",
+        "Copy the email draft, send it, and mark the ask approved or rejected"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "ScopeGuard is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
