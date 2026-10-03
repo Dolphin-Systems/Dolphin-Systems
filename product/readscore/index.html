@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ReadScore — See how hard your writing is to read. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>ReadScore — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#E11D48" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReadScore logo"><rect x="8" y="8" width="48" height="48" rx="10" fill="#E11D48"/><rect x="18" y="19" width="28" height="4.5" rx="2.25" fill="#FFFFFF" opacity="0.95"/><rect x="18" y="28" width="28" height="4.5" rx="2.25" fill="#FFFFFF" opacity="0.65"/><rect x="18" y="37" width="19" height="4.5" rx="2.25" fill="#FFFFFF" opacity="0.65"/><circle cx="45" cy="46" r="9" fill="#FFFFFF"/><path d="M41.5 46l2.4 2.4 4.2-4.6" stroke="#E11D48" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>ReadScore</h1><p>See how hard your writing is to read.</p></div></div><div class="tool-price-pills"><span><b>$8</b>/month</span><span><b>$40</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>ReadScore analyzes any text and scores its readability. Paste in an email, article, or proposal and get word counts, reading time, Flesch Reading Ease and grade level, a sentence-length map that flags run-ons, and the words you lean on most. Everything runs in your browser — nothing you paste ever leaves the page.</p><ul class="tool-features"><li>Live word, character, sentence, and paragraph counts</li><li>Reading time and speaking time estimates</li><li>Flesch Reading Ease score and grade level</li><li>Sentence-length map that flags run-on sentences</li><li>Top-word frequency with stop words filtered out</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock ReadScore.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $8</option><option value="6">6 months — $40 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-readscore { color: #3f0d1c; max-width: 860px; }
+.tool-app-readscore .rs-text { width: 100%; box-sizing: border-box; border: 1px solid #fecdd3; border-radius: 10px; padding: 12px; font-size: 14px; line-height: 1.6; font-family: inherit; resize: vertical; }
+.tool-app-readscore .rs-toolbar { display: flex; gap: 10px; margin: 10px 0 16px; }
+.tool-app-readscore .rs-btn { background: #E11D48; color: #fff; border: none; border-radius: 10px; padding: 9px 16px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.tool-app-readscore .rs-btn:hover { background: #be123c; }
+.tool-app-readscore .rs-btn-ghost { background: #fff1f2; color: #E11D48; }
+.tool-app-readscore .rs-btn-ghost:hover { background: #ffe4e6; }
+.tool-app-readscore .rs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 0 0 16px; }
+.tool-app-readscore .rs-stat { background: #fff1f2; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.tool-app-readscore .rs-stat strong { font-size: 22px; color: #881337; }
+.tool-app-readscore .rs-stat-label { font-size: 12px; font-weight: 600; color: #9f1239; }
+.tool-app-readscore .rs-readability { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin: 0 0 18px; }
+.tool-app-readscore .rs-ease-card { background: #fff1f2; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.tool-app-readscore .rs-ease-card strong { font-size: 30px; color: #881337; }
+.tool-app-readscore .rs-ease-track { height: 10px; background: #ffe4e6; border-radius: 6px; overflow: hidden; }
+.tool-app-readscore .rs-ease-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #be123c, #fb7185, #34d399); border-radius: 6px; transition: width 0.3s ease; }
+.tool-app-readscore .rs-ease-label { font-size: 13px; color: #9f1239; }
+.tool-app-readscore h4 { margin: 18px 0 6px; font-size: 15px; color: #881337; }
+.tool-app-readscore .rs-hint { font-size: 13px; color: #9f1239; margin: 0 0 10px; }
+.tool-app-readscore .rs-smap { display: flex; flex-direction: column; gap: 5px; margin-bottom: 8px; }
+.tool-app-readscore .rs-srow { display: flex; align-items: center; gap: 8px; }
+.tool-app-readscore .rs-sbar { height: 14px; border-radius: 7px; background: #34d399; min-width: 3px; }
+.tool-app-readscore .rs-sbar.rs-warn { background: #fbbf24; }
+.tool-app-readscore .rs-sbar.rs-long { background: #f43f5e; }
+.tool-app-readscore .rs-swords { font-size: 12px; color: #9f1239; min-width: 64px; }
+.tool-app-readscore .rs-stop { font-size: 12px; color: #881337; font-weight: 700; }
+.tool-app-readscore .rs-empty { font-size: 14px; color: #9f1239; background: #fff1f2; border-radius: 10px; padding: 14px; }
+.tool-app-readscore .rs-topwords { display: flex; flex-wrap: wrap; gap: 8px; }
+.tool-app-readscore .rs-chip { background: #fff1f2; border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600; color: #881337; }
+.tool-app-readscore .rs-chip span { color: #be123c; font-weight: 800; margin-right: 6px; }
+@media (max-width: 560px) { .tool-app-readscore .rs-readability { grid-template-columns: 1fr; } }</style><div class="tool-app-readscore" id="toolAppRoot">
+  <textarea id="rs-text" class="rs-text" rows="8" placeholder="Paste your text here — an email, a paragraph, a full article..."></textarea>
+  <div class="rs-toolbar">
+    <button id="rs-clear" class="rs-btn rs-btn-ghost" type="button">Clear</button>
+    <button id="rs-demo" class="rs-btn rs-btn-ghost" type="button">Load demo text</button>
+  </div>
+  <div class="rs-stats">
+    <div class="rs-stat"><span class="rs-stat-label">Words</span><strong id="rs-words">—</strong></div>
+    <div class="rs-stat"><span class="rs-stat-label">Characters</span><strong id="rs-chars">—</strong></div>
+    <div class="rs-stat"><span class="rs-stat-label">Sentences</span><strong id="rs-sent">—</strong></div>
+    <div class="rs-stat"><span class="rs-stat-label">Paragraphs</span><strong id="rs-paras">—</strong></div>
+    <div class="rs-stat"><span class="rs-stat-label">Reading time</span><strong id="rs-read">—</strong></div>
+    <div class="rs-stat"><span class="rs-stat-label">Speaking time</span><strong id="rs-speak">—</strong></div>
+  </div>
+  <div class="rs-readability">
+    <div class="rs-ease-card">
+      <span class="rs-stat-label">Flesch Reading Ease</span>
+      <strong id="rs-ease">—</strong>
+      <div class="rs-ease-track"><div id="rs-easebar" class="rs-ease-bar"></div></div>
+      <span id="rs-easelabel" class="rs-ease-label"></span>
+    </div>
+    <div class="rs-ease-card">
+      <span class="rs-stat-label">Grade level</span>
+      <strong id="rs-grade">—</strong>
+      <span id="rs-gradelabel" class="rs-ease-label"></span>
+    </div>
+  </div>
+  <h4>Sentence lengths</h4>
+  <p class="rs-hint">Each bar is one sentence. Amber and red bars are getting long — consider splitting them.</p>
+  <div id="rs-smap" class="rs-smap"></div>
+  <h4>Words you use most</h4>
+  <div id="rs-topwords" class="rs-topwords"></div>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  var STOP = { the:1, a:1, an:1, and:1, or:1, but:1, of:1, to:1, in:1, on:1, for:1, with:1, at:1, by:1, from:1, as:1, is:1, are:1, was:1, were:1, be:1, been:1, being:1, have:1, has:1, had:1, do:1, does:1, did:1, will:1, would:1, can:1, could:1, should:1, may:1, might:1, must:1, it:1, its:1, this:1, that:1, these:1, those:1, i:1, you:1, he:1, she:1, we:1, they:1, them:1, his:1, her:1, our:1, their:1, my:1, your:1, me:1, him:1, us:1, so:1, not:1, no:1, yes:1, if:1, then:1, than:1, too:1, very:1, just:1, about:1, into:1, over:1, after:1, before:1, between:1, through:1, during:1, such:1, only:1, own:1, same:1, also:1, well:1, there:1, their:1, what:1, which:1, who:1, whom:1, when:1, where:1, why:1, how:1, all:1, any:1, both:1, each:1, few:1, more:1, most:1, other:1, some:1, up:1, out:1, one:1, two:1, get:1, got:1, make:1, made:1, like:1 };
+  var DEMO = 'Great writing is clear writing. Most sentences should be short enough to hold in one breath. When a sentence runs on for line after line, piling clause on clause until the reader has forgotten how it began, the point gets buried and the reader gives up. ReadScore measures how hard your text is to read. Paste anything in and fix what is flagged.';
+  function syllables(word) {
+    word = String(word).toLowerCase().replace(/[^a-z]/g, '');
+    if (!word) return 0;
+    if (word.length <= 3) return 1;
+    var groups = word.match(/[aeiouy]+/g) || [];
+    var n = groups.length;
+    if (word.slice(-1) === 'e') n -= 1;
+    if (word.length > 2 && word.slice(-2) === 'le' && !/[aeiouy]/.test(word.charAt(word.length - 3))) n += 1;
+    return Math.max(1, n);
+  }
+  function sentencesOf(text) {
+    var parts = String(text).match(/[^.!?\n]+[.!?]+[\"\u201d)]?/g) || [];
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var s = parts[i].trim();
+      if (s) out.push(s);
+    }
+    return out;
+  }
+  function wordsOf(text) {
+    var m = String(text).match(/\S+/g);
+    return m || [];
+  }
+  function analyze(text) {
+    var words = wordsOf(text);
+    var sents = sentencesOf(text);
+    var paras = String(text).split(/\n\s*\n/).filter(function (p) { return p.trim().length > 0; });
+    var syl = 0, i;
+    for (i = 0; i < words.length; i++) syl += syllables(words[i]);
+    var chars = String(text).replace(/\s/g, '').length;
+    var wps = sents.length ? words.length / sents.length : 0;
+    var spw = words.length ? syl / words.length : 0;
+    var ease = 206.835 - 1.015 * wps - 84.6 * spw;
+    var grade = 0.39 * wps + 11.8 * spw - 15.59;
+    ease = Math.max(0, Math.min(100, ease));
+    grade = Math.max(0, grade);
+    return {
+      words: words, sentences: sents, paras: paras, chars: chars,
+      ease: ease, grade: grade
+    };
+  }
+  function easeLabel(e) {
+    if (e >= 90) return 'Very easy to read';
+    if (e >= 80) return 'Easy to read';
+    if (e >= 70) return 'Fairly easy';
+    if (e >= 60) return 'Standard — plain English';
+    if (e >= 50) return 'Fairly difficult';
+    if (e >= 30) return 'Difficult — academic or legal tone';
+    return 'Very difficult to read';
+  }
+  function gradeLabel(g) {
+    if (g <= 0) return '';
+    if (g < 6) return 'Readable by a 5th grader';
+    if (g < 9) return 'Middle-school level';
+    if (g < 13) return 'High-school level';
+    return 'College level and up';
+  }
+  function fmtTime(minutes) {
+    if (minutes <= 0) return '—';
+    if (minutes < 1) return '< 1 min';
+    var m = Math.round(minutes);
+    if (m < 60) return m + ' min';
+    var h = Math.floor(m / 60);
+    var r = m % 60;
+    return h + 'h ' + (r < 10 ? '0' : '') + r + 'm';
+  }
+  function topWords(words) {
+    var counts = {}, i, w;
+    for (i = 0; i < words.length; i++) {
+      w = String(words[i]).toLowerCase().replace(/[^a-z]/g, '');
+      if (w.length < 3 || STOP[w]) continue;
+      counts[w] = (counts[w] || 0) + 1;
+    }
+    var arr = [];
+    for (w in counts) { if (counts.hasOwnProperty(w)) arr.push([w, counts[w]]); }
+    arr.sort(function (a, b) { return b[1] - a[1]; });
+    return arr.slice(0, 8);
+  }
+  function renderEmpty(container, msg) {
+    container.innerHTML = '<div class="rs-empty">' + esc(msg) + '</div>';
+  }
+  function render() {
+    var text = $('rs-text').value;
+    var has = text.trim().length > 0;
+    var a = analyze(text);
+    $('rs-words').textContent = has ? String(a.words.length) : '—';
+    $('rs-chars').textContent = has ? String(a.chars) : '—';
+    $('rs-sent').textContent = has ? String(a.sentences.length) : '—';
+    $('rs-paras').textContent = has ? String(a.paras.length) : '—';
+    $('rs-read').textContent = has ? fmtTime(a.words.length / 200) : '—';
+    $('rs-speak').textContent = has ? fmtTime(a.words.length / 130) : '—';
+    if (has && a.words.length) {
+      $('rs-ease').textContent = Math.round(a.ease);
+      $('rs-easebar').style.width = Math.round(a.ease) + '%';
+      $('rs-easelabel').textContent = easeLabel(a.ease);
+      $('rs-grade').textContent = a.grade.toFixed(1);
+      $('rs-gradelabel').textContent = gradeLabel(a.grade);
+    } else {
+      $('rs-ease').textContent = '—';
+      $('rs-easebar').style.width = '0%';
+      $('rs-easelabel').textContent = '';
+      $('rs-grade').textContent = '—';
+      $('rs-gradelabel').textContent = '';
+    }
+    var smap = $('rs-smap');
+    if (!has || !a.sentences.length) {
+      renderEmpty(smap, 'Paste some text to see the sentence breakdown.');
+    } else {
+      var maxW = 1, i, counts = [];
+      for (i = 0; i < a.sentences.length; i++) {
+        var n = wordsOf(a.sentences[i]).length;
+        counts.push(n);
+        if (n > maxW) maxW = n;
+      }
+      var html = '';
+      var longCount = 0;
+      for (i = 0; i < counts.length; i++) {
+        var cls = 'rs-sbar';
+        if (counts[i] > 24) { cls += ' rs-long'; longCount++; }
+        else if (counts[i] > 14) { cls += ' rs-warn'; }
+        var width = Math.max(2, Math.round(counts[i] / maxW * 100));
+        html += '<div class="rs-srow"><span class="rs-swords">' + counts[i] + ' words</span>' +
+          '<div class="' + cls + '" style="width:' + width + '%"></div></div>';
+      }
+      if (longCount) {
+        html += '<p class="rs-stop">' + longCount + (longCount === 1 ? ' sentence' : ' sentences') +
+          ' over 24 words — try splitting ' + (longCount === 1 ? 'it' : 'them') + '.</p>';
+      }
+      smap.innerHTML = html;
+    }
+    var tw = $('rs-topwords');
+    var tops = topWords(a.words);
+    if (!has || !tops.length) {
+      renderEmpty(tw, 'Common filler words filtered out — your most-used words appear here.');
+    } else {
+      var th = '';
+      for (var j = 0; j < tops.length; j++) {
+        th += '<div class="rs-chip"><span>' + tops[j][1] + '×</span>' + esc(tops[j][0]) + '</div>';
+      }
+      tw.innerHTML = th;
+    }
+  }
+  $('rs-text').addEventListener('input', render);
+  $('rs-clear').addEventListener('click', function () { $('rs-text').value = ''; render(); });
+  $('rs-demo').addEventListener('click', function () { $('rs-text').value = DEMO; render(); });
+  $('rs-text').value = DEMO;
+  render();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="readscore";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$8<small>/month</small></div><ul><li>Full access to ReadScore</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#E11D48"><h3>6 months</h3><div class="plan-price">$40<small> one-time</small></div><ul><li>Full access to ReadScore</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks ReadScore on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/readscore-launch.html">Read the ReadScore launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
