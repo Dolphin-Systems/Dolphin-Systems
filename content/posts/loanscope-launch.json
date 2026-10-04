@@ -1,0 +1,46 @@
+{
+  "slug": "loanscope-launch",
+  "title": "LoanScope: know your loan before you sign",
+  "description": "Enter the amount, rate, and term to get your real monthly payment, total interest, and payoff date \u2014 plus what an extra payment each month would save.",
+  "category": "Tool launch",
+  "date": "2026-10-04",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most people sign a loan knowing only the monthly payment. The total interest, the real cost, and what an extra $100 a month would do are all guesses. LoanScope turns those guesses into numbers before you sign."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Enter the loan amount, interest rate, term, and start date and LoanScope calculates your monthly payment, total interest, total cost, and exact payoff date. A year-by-year table shows how the balance shrinks, and a principal-vs-interest bar makes the split visual."
+    },
+    {
+      "type": "heading",
+      "text": "The extra-payment answer"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most useful field is the smallest one: extra payment per month. Type in what you could put toward the loan and LoanScope tells you exactly how much interest it saves and how many months it shaves off. No more guessing whether the extra payment is worth it."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Homebuyers comparing mortgage offers",
+        "Anyone refinancing or considering a car loan",
+        "Borrowers deciding if extra payments are worth it",
+        "Couples who want a shared, plain-English view of the loan"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "LoanScope is $9 a month, or $45 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription. Everything runs in your browser \u2014 your loan numbers never leave the page."
+    }
+  ]
+}

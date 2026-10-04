@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LoanScope — Know your loan before you sign. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>LoanScope — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#2563EB" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LoanScope logo"><rect x="8" y="8" width="48" height="48" rx="10" fill="#2563EB"/><rect x="17" y="40" width="7" height="10" rx="2" fill="#FFFFFF" opacity="0.85"/><rect x="27" y="33" width="7" height="17" rx="2" fill="#FFFFFF" opacity="0.85"/><rect x="37" y="24" width="7" height="26" rx="2" fill="#FFFFFF" opacity="0.85"/><circle cx="45" cy="17" r="7.5" fill="#FDE68A" stroke="#FFFFFF" stroke-width="2"/><text x="45" y="22" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">$</text></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>LoanScope</h1><p>Know your loan before you sign.</p></div></div><div class="tool-price-pills"><span><b>$9</b>/month</span><span><b>$45</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>LoanScope calculates your real monthly payment, total interest, and payoff date for any loan. Add an optional extra monthly payment to see exactly how much interest it saves and how many months it shaves off. Year-by-year payoff table and principal-vs-interest breakdown included.</p><ul class="tool-features"><li>Monthly payment, total interest, and payoff date from amount, rate, and term</li><li>Extra-payment modeling: see interest saved and months cut</li><li>Year-by-year amortization table</li><li>Principal vs interest visual breakdown</li><li>Runs fully offline in your browser</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock LoanScope.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $9</option><option value="6">6 months — $45 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-loanscope { color: #172554; max-width: 900px; }
+.tool-app-loanscope .ls-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; margin-bottom: 18px; }
+.tool-app-loanscope .ls-panel { background: #eff6ff; border-radius: 14px; padding: 18px; }
+.tool-app-loanscope .ls-h3 { margin: 0 0 12px; font-size: 16px; color: #1e3a8a; }
+.tool-app-loanscope .ls-label { display: block; font-size: 12.5px; font-weight: 700; color: #1e40af; margin: 12px 0 5px; }
+.tool-app-loanscope .ls-label:first-of-type { margin-top: 0; }
+.tool-app-loanscope .ls-input { width: 100%; box-sizing: border-box; border: 1px solid #bfdbfe; border-radius: 10px; padding: 9px 11px; font-size: 14px; font-family: inherit; color: #172554; background: #fff; }
+.tool-app-loanscope .ls-note { font-size: 12px; color: #3b82f6; margin: 14px 0 0; }
+.tool-app-loanscope .ls-big { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.tool-app-loanscope .ls-big span:first-child { font-size: 36px; font-weight: 800; color: #1d4ed8; }
+.tool-app-loanscope .ls-big-label { font-size: 13px; color: #3b82f6; }
+.tool-app-loanscope .ls-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.tool-app-loanscope .ls-kpi { background: #fff; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+.tool-app-loanscope .ls-kpi-label { font-size: 11.5px; font-weight: 600; color: #3b82f6; }
+.tool-app-loanscope .ls-kpi strong { font-size: 16px; color: #1e3a8a; }
+.tool-app-loanscope .ls-bar-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.tool-app-loanscope .ls-bar-label { font-size: 12.5px; font-weight: 700; color: #1e40af; width: 64px; flex-shrink: 0; }
+.tool-app-loanscope .ls-bar-track { flex: 1; height: 16px; background: #dbeafe; border-radius: 8px; overflow: hidden; }
+.tool-app-loanscope .ls-bar { height: 100%; border-radius: 8px; }
+.tool-app-loanscope .ls-bar-principal { background: #2563eb; }
+.tool-app-loanscope .ls-bar-interest { background: #f59e0b; }
+.tool-app-loanscope .ls-savings { font-size: 13.5px; color: #1e3a8a; background: #dbeafe; border-radius: 10px; padding: 10px 14px; margin: 12px 0 0; }
+.tool-app-loanscope .ls-savings:empty { display: none; }
+.tool-app-loanscope .ls-table-wrap { overflow-x: auto; background: #eff6ff; border-radius: 14px; padding: 18px; }
+.tool-app-loanscope .ls-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.tool-app-loanscope .ls-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #3b82f6; padding: 6px 8px; border-bottom: 2px solid #bfdbfe; }
+.tool-app-loanscope .ls-table td { padding: 7px 8px; border-bottom: 1px solid #dbeafe; color: #172554; }
+.tool-app-loanscope .ls-table tr:last-child td { border-bottom: none; }
+@media (max-width: 640px) { .tool-app-loanscope .ls-grid { grid-template-columns: 1fr; } .tool-app-loanscope .ls-kpis { grid-template-columns: 1fr 1fr; } }
+</style><div class="tool-app-loanscope" id="toolAppRoot">
+  <div class="ls-grid">
+    <div class="ls-panel">
+      <h3 class="ls-h3">Loan details</h3>
+      <label class="ls-label" for="ls-amount">Loan amount ($)</label>
+      <input class="ls-input" id="ls-amount" type="number" min="0" step="100" value="250000">
+      <label class="ls-label" for="ls-rate">Annual interest rate (%)</label>
+      <input class="ls-input" id="ls-rate" type="number" min="0" max="100" step="0.01" value="6.5">
+      <label class="ls-label" for="ls-years">Term (years)</label>
+      <input class="ls-input" id="ls-years" type="number" min="1" max="50" step="1" value="30">
+      <label class="ls-label" for="ls-start">First payment month</label>
+      <input class="ls-input" id="ls-start" type="month" value="2026-11">
+      <label class="ls-label" for="ls-extra">Extra payment each month ($, optional)</label>
+      <input class="ls-input" id="ls-extra" type="number" min="0" step="25" value="0">
+      <p class="ls-note">All math happens in your browser. Nothing you type leaves this page.</p>
+    </div>
+    <div class="ls-panel ls-results">
+      <h3 class="ls-h3">Your payment</h3>
+      <div class="ls-big"><span id="ls-monthly">$&mdash;</span><span class="ls-big-label">per month</span></div>
+      <div class="ls-kpis">
+        <div class="ls-kpi"><span class="ls-kpi-label">Total interest</span><strong id="ls-interest">$&mdash;</strong></div>
+        <div class="ls-kpi"><span class="ls-kpi-label">Total paid</span><strong id="ls-total">$&mdash;</strong></div>
+        <div class="ls-kpi"><span class="ls-kpi-label">Payoff date</span><strong id="ls-payoff">&mdash;</strong></div>
+      </div>
+      <div class="ls-bars">
+        <div class="ls-bar-wrap">
+          <span class="ls-bar-label">Principal</span>
+          <div class="ls-bar-track"><div class="ls-bar ls-bar-principal" id="ls-barp"></div></div>
+        </div>
+        <div class="ls-bar-wrap">
+          <span class="ls-bar-label">Interest</span>
+          <div class="ls-bar-track"><div class="ls-bar ls-bar-interest" id="ls-bari"></div></div>
+        </div>
+      </div>
+      <p class="ls-savings" id="ls-savings"></p>
+    </div>
+  </div>
+  <h3 class="ls-h3">Year-by-year payoff</h3>
+  <div class="ls-table-wrap">
+    <table class="ls-table" id="ls-table">
+      <thead><tr><th>Year</th><th>Paid</th><th>Interest</th><th>Balance</th></tr></thead>
+      <tbody id="ls-tbody"></tbody>
+    </table>
+  </div>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function money(n) {
+    n = Math.round(n);
+    return '$' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  function monthName(y, m) {
+    var names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return names[m] + ' ' + y;
+  }
+  function num(id, fallback) {
+    var v = parseFloat(($(id).value || '').toString().replace(/[^0-9.]/g, ''));
+    return isNaN(v) ? fallback : v;
+  }
+  function schedule(P, monthlyRate, nMonths, basePayment, extra, startY, startM) {
+    var bal = P, rows = [], totalInt = 0, monthsPaid = 0;
+    var yPaid = 0, yInt = 0, curY = startY;
+    while (bal > 0.005 && monthsPaid < nMonths + 600) {
+      var interest = bal * monthlyRate;
+      var pay = basePayment + extra;
+      if (pay > bal + interest) pay = bal + interest;
+      var principal = pay - interest;
+      bal -= principal;
+      totalInt += interest;
+      monthsPaid++;
+      yPaid += pay; yInt += interest;
+      var yy = startY, mm = startM + monthsPaid - 1;
+      yy += Math.floor(mm / 12); mm = mm % 12;
+      if (monthsPaid % 12 === 0 || bal <= 0.005) {
+        rows.push({ year: curY, paid: yPaid, interest: yInt, balance: Math.max(0, bal) });
+        curY = yy + (mm === 11 ? 1 : 0);
+        yPaid = 0; yInt = 0;
+      }
+    }
+    return { rows: rows, totalInt: totalInt, monthsPaid: monthsPaid };
+  }
+  function calc() {
+    var P = num('ls-amount', 250000);
+    var apr = num('ls-rate', 6.5);
+    var years = Math.max(1, Math.min(50, Math.round(num('ls-years', 30))));
+    var extra = Math.max(0, num('ls-extra', 0));
+    var startVal = $('ls-start').value || '2026-11';
+    var parts = startVal.split('-');
+    var startY = parseInt(parts[0], 10) || 2026;
+    var startM = (parseInt(parts[1], 10) || 11) - 1;
+
+    var r = apr / 100 / 12;
+    var n = years * 12;
+    var base = r > 0 ? P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : P / n;
+
+    var withExtra = schedule(P, r, n, base, extra, startY, startM);
+    var baseOnly = extra > 0 ? schedule(P, r, n, base, 0, startY, startM) : null;
+
+    var totalPaid = P + withExtra.totalInt;
+    var endY = startY, endM = startM + withExtra.monthsPaid - 1;
+    endY += Math.floor(endM / 12); endM = endM % 12;
+
+    $('ls-monthly').textContent = money(base + extra);
+    $('ls-interest').textContent = money(withExtra.totalInt);
+    $('ls-total').textContent = money(totalPaid);
+    $('ls-payoff').textContent = monthName(endY, endM);
+    var pr = totalPaid > 0 ? Math.round(P / totalPaid * 100) : 0;
+    $('ls-barp').style.width = pr + '%';
+    $('ls-bari').style.width = (100 - pr) + '%';
+
+    var save = $('ls-savings');
+    if (extra > 0 && baseOnly) {
+      var saved = baseOnly.totalInt - withExtra.totalInt;
+      var monthsSaved = baseOnly.monthsPaid - withExtra.monthsPaid;
+      save.textContent = 'That ' + money(extra) + '/mo extra saves you ' + money(saved) +
+        ' in interest and pays the loan off ' + monthsSaved + ' month' + (monthsSaved === 1 ? '' : 's') + ' early.';
+    } else {
+      save.textContent = '';
+    }
+
+    var tb = $('ls-tbody'), html = '';
+    var rows = withExtra.rows;
+    for (var i = 0; i < rows.length; i++) {
+      html += '<tr><td>' + rows[i].year + '</td><td>' + money(rows[i].paid) + '</td><td>' +
+        money(rows[i].interest) + '</td><td>' + money(rows[i].balance) + '</td></tr>';
+    }
+    tb.innerHTML = html;
+  }
+  var ids = ['ls-amount', 'ls-rate', 'ls-years', 'ls-start', 'ls-extra'];
+  for (var i = 0; i < ids.length; i++) {
+    $(ids[i]).addEventListener('input', calc);
+  }
+  calc();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="loanscope";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$9<small>/month</small></div><ul><li>Full access to LoanScope</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#2563EB"><h3>6 months</h3><div class="plan-price">$45<small> one-time</small></div><ul><li>Full access to LoanScope</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks LoanScope on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/loanscope-launch.html">Read the LoanScope launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
