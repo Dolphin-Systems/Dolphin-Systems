@@ -1,0 +1,51 @@
+{
+  "slug": "liftledger-launch",
+  "title": "LiftLedger: never miss an elevator test date",
+  "description": "Track every unit under contract \u2014 Category 1 annual tests and Category 5 five-year tests \u2014 with overdue flags, due-soon alerts, and a printable compliance summary.",
+  "category": "Tool launch",
+  "date": "2026-10-05",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "A lapsed elevator test is a violation waiting to happen. Under ASME A17.1, every unit needs a Category 1 test every year and a Category 5 full-load test every five years \u2014 and small independent shops still track those cycles on whiteboards, phone calls, and spreadsheets."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Register each unit: building, unit label, type, install date, and your last test dates. LiftLedger works out when the next Category 1 and Category 5 tests land, then shows what's overdue, what's due in the next 30 days, and which five-year tests are coming up in the next 90. Log a test when it's done and the cycles roll forward on their own."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Independent elevator and escalator service companies",
+        "Shops tracking test dates on whiteboards or spreadsheets",
+        "Offices juggling annual Cat 1 and five-year Cat 5 cycles across a portfolio",
+        "Anyone who wants the whole due list in one glance"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Register each unit with its install and last-test dates",
+        "Check the dashboard for overdue and due-soon tests",
+        "Open a unit and log a test when it's done \u2014 the next due date updates automatically",
+        "Print the summary for compliance files, or export your register as JSON"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "LiftLedger is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
