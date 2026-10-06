@@ -1,0 +1,125 @@
+{
+  "slug": "2026-10-06-single-agent-vs-multi-agent-architectures",
+  "title": "Single-Agent vs. Multi-Agent Architectures",
+  "description": "A practical comparison of single-agent and multi-agent AI architectures covering orchestration, handoffs, shared state, latency, cost, and failure modes.",
+  "date": "2026-10-06",
+  "category": "Explainer",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "If you've moved past the demo phase of AI agents, you've probably hit the architecture question: should one agent handle everything, or should you split the work across several? The answer isn't a slogan. It depends on how your tasks decompose, how much state needs to be shared, and how much failure you can tolerate. This article breaks down both approaches with concrete examples and decision criteria."
+    },
+    {
+      "type": "heading",
+      "text": "What a single-agent architecture looks like"
+    },
+    {
+      "type": "paragraph",
+      "text": "A single-agent system is one model instance with a set of tools, a system prompt, and a loop. It receives a request, decides which tool to call, observes the result, and continues until it produces a final answer or hits a stopping condition."
+    },
+    {
+      "type": "paragraph",
+      "text": "Architecture sketch:\n\nUser request -> Agent (model + system prompt + tool list) -> Tool calls -> Observation -> Repeat -> Final output\n\nAll state lives in the conversation history or a scratchpad. There is one decision-maker, one context window, and one failure domain."
+    },
+    {
+      "type": "paragraph",
+      "text": "This works well when the task is bounded, the tools are few, and the steps are sequential. Example: an agent that reads a customer email, looks up the account in a CRM, drafts a reply, and sends it for approval. One agent, three tools, clear sequence."
+    },
+    {
+      "type": "heading",
+      "text": "What a multi-agent architecture looks like"
+    },
+    {
+      "type": "paragraph",
+      "text": "A multi-agent system splits responsibilities across two or more agents, each with its own prompt, tools, and sometimes its own model. Coordination happens through an orchestrator, a message bus, or a shared state store."
+    },
+    {
+      "type": "paragraph",
+      "text": "Architecture sketch:\n\nUser request -> Orchestrator -> [Research Agent] -> [Analysis Agent] -> [Writer Agent] -> Aggregator -> Final output\n\nEach agent specializes. The orchestrator routes work, passes context, and merges results. Handoffs can be sequential, parallel, or hierarchical."
+    },
+    {
+      "type": "paragraph",
+      "text": "This pattern fits tasks that naturally decompose into distinct skill sets. Example: a due-diligence workflow where one agent pulls public records, another summarizes financials, and a third drafts a risk memo. Each agent has different tools and different instructions."
+    },
+    {
+      "type": "heading",
+      "text": "Orchestration and handoffs"
+    },
+    {
+      "type": "paragraph",
+      "text": "In a single-agent system, orchestration is implicit. The model decides what to do next based on the prompt and available tools. There's no routing layer to maintain."
+    },
+    {
+      "type": "paragraph",
+      "text": "In a multi-agent system, orchestration is explicit. You define who talks to whom, what format the handoff takes, and what happens when an agent returns something unexpected. This adds control but also adds code, configuration, and failure points."
+    },
+    {
+      "type": "paragraph",
+      "text": "Handoffs are where most multi-agent bugs live. If Agent A passes a summary to Agent B, and the summary omits a critical field, Agent B may produce a confident but wrong result. Strong schemas and validation at each handoff reduce this risk."
+    },
+    {
+      "type": "heading",
+      "text": "Shared state and context"
+    },
+    {
+      "type": "paragraph",
+      "text": "Single-agent systems keep state in the conversation. This is simple but limited by context window size. Long tasks can overflow, causing the agent to lose earlier details."
+    },
+    {
+      "type": "paragraph",
+      "text": "Multi-agent systems typically externalize state: a database, a queue, or a structured object passed between agents. This scales better for long workflows but requires you to define what state is authoritative and how conflicts are resolved."
+    },
+    {
+      "type": "paragraph",
+      "text": "A practical middle ground: use a single agent for short tasks, and introduce a shared state store only when the workflow exceeds what fits comfortably in one context window."
+    },
+    {
+      "type": "heading",
+      "text": "Latency and cost"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every agent invocation costs tokens and time. A single-agent loop with five tool calls may take 10–30 seconds. A multi-agent pipeline with three agents and multiple handoffs can take two to five times longer, depending on parallelism."
+    },
+    {
+      "type": "paragraph",
+      "text": "Cost follows the same pattern. More agents mean more model calls, more prompt overhead, and more retries when something fails. If your workflow has a tight latency budget or a low cost ceiling, start with one agent and split only when necessary."
+    },
+    {
+      "type": "paragraph",
+      "text": "Parallelism can offset latency in multi-agent systems, but it introduces coordination overhead and makes debugging harder. Measure before you optimize."
+    },
+    {
+      "type": "heading",
+      "text": "Failure modes"
+    },
+    {
+      "type": "paragraph",
+      "text": "Single-agent failures are usually easier to diagnose. The agent either picks the wrong tool, loops, or produces an invalid output. You can trace the conversation and see where it went wrong."
+    },
+    {
+      "type": "paragraph",
+      "text": "Multi-agent failures compound. Agent A returns a plausible but incorrect result. Agent B treats it as ground truth. Agent C produces a final answer that looks fine but is built on a bad foundation. Without validation at each step, errors propagate silently."
+    },
+    {
+      "type": "paragraph",
+      "text": "Common multi-agent failure modes include:\n\n- Handoff schema drift: an agent changes its output format and downstream agents break.\n- Context loss: critical details dropped between agents.\n- Circular delegation: agents pass work back and forth without progress.\n- Cost explosions: retries and redundant calls multiply.\n- Observability gaps: no single place shows the full trace."
+    },
+    {
+      "type": "heading",
+      "text": "Decision questions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before choosing an architecture, answer these questions:\n\n1. Can the task be described in one set of instructions, or does it require genuinely different skill sets?\n2. How much state needs to persist across steps, and does it fit in one context window?\n3. What is the acceptable latency and cost per request?\n4. How will you validate intermediate outputs?\n5. Who owns debugging when something fails at step three of five?\n6. Can you start with one agent and split later without rewriting everything?"
+    },
+    {
+      "type": "heading",
+      "text": "A practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with a single agent. Add tools, tighten the prompt, and measure where it breaks. Split into multiple agents only when you hit a clear limit: context overflow, conflicting instructions, or a need for different models or permissions per step. Multi-agent systems are powerful but they multiply complexity. Treat the split as a deliberate architectural decision, not a default."
+    }
+  ]
+}
