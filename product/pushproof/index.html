@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PushProof — Every push, proven and billed. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>PushProof — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#0284C7" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PushProof logo"><rect x="6" y="6" width="52" height="52" rx="14" fill="#0284C7"/><g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"><path d="M32 16v32M18.2 24l27.6 16M45.8 24L18.2 40"/></g><circle cx="32" cy="32" r="7.5" fill="#FFFFFF"/><path d="M28.5 32l2.5 2.5 5.5-5.5" stroke="#0284C7" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>PushProof</h1><p>Every push, proven and billed.</p></div></div><div class="tool-price-pills"><span><b>$12</b>/month</span><span><b>$60</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>PushProof stamps every snow push with the time, GPS location, and an optional photo, so disputed per-push invoices get settled with evidence. Add properties with per-push rates, group work into storm events, and export billing-ready CSVs.</p><ul class="tool-features"><li>One-tap push logging with GPS and timestamp</li><li>Photo proof per push, straight from the camera</li><li>Storm events group a whole night&#39;s work</li><li>Property roster with per-push rates</li><li>Per-push billing totals plus CSV export</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock PushProof.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $12</option><option value="6">6 months — $60 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-pushproof { color: #0c4a6e; max-width: 860px; }
+.tool-app-pushproof .pp-stats { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+.tool-app-pushproof .pp-stat { flex: 1 1 140px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 10px 14px; }
+.tool-app-pushproof .pp-stat span { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #0369a1; font-weight: 700; }
+.tool-app-pushproof .pp-stat strong { font-size: 20px; color: #0c4a6e; }
+.tool-app-pushproof .pp-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 14px; }
+.tool-app-pushproof .pp-tab { border: 1px solid #bae6fd; background: #fff; color: #0369a1; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.tool-app-pushproof .pp-tab.pp-active { background: #0284C7; border-color: #0284C7; color: #fff; }
+.tool-app-pushproof .pp-card { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+.tool-app-pushproof .pp-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tool-app-pushproof .pp-form-grid .pp-btn { grid-column: 1 / -1; justify-self: start; }
+.tool-app-pushproof label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; color: #075985; }
+.tool-app-pushproof input[type="text"], .tool-app-pushproof input[type="number"], .tool-app-pushproof input[type="file"], .tool-app-pushproof select { border: 1px solid #7dd3fc; border-radius: 8px; padding: 9px 10px; font-size: 14px; width: 100%; box-sizing: border-box; background: #fff; color: #0c4a6e; }
+.tool-app-pushproof .pp-pane .pp-card label { margin-bottom: 10px; }
+.tool-app-pushproof .pp-btn { background: #0284C7; color: #fff; border: none; border-radius: 10px; padding: 12px 20px; font-size: 15px; font-weight: 700; cursor: pointer; }
+.tool-app-pushproof .pp-btn:hover { background: #0369a1; }
+.tool-app-pushproof .pp-btn:disabled { background: #7dd3fc; cursor: wait; }
+.tool-app-pushproof .pp-btn-ghost { background: #e0f2fe; color: #0369a1; }
+.tool-app-pushproof .pp-btn-ghost:hover { background: #bae6fd; }
+.tool-app-pushproof .pp-hint { font-size: 13px; color: #0369a1; margin: 10px 0 0; }
+.tool-app-pushproof .pp-ok { background: #dcfce7; border: 1px solid #86efac; color: #166534; border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 10px 0 0; }
+.tool-app-pushproof .pp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.tool-app-pushproof .pp-list { list-style: none; padding: 0; margin: 0; }
+.tool-app-pushproof .pp-list li { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+.tool-app-pushproof .pp-list .pp-li-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tool-app-pushproof .pp-list .pp-li-title { font-weight: 700; }
+.tool-app-pushproof .pp-list .pp-li-meta { font-size: 12px; color: #0369a1; margin-top: 4px; }
+.tool-app-pushproof .pp-list .pp-li-meta a { color: #0284C7; }
+.tool-app-pushproof .pp-thumb { max-width: 120px; border-radius: 8px; margin-top: 6px; display: block; }
+.tool-app-pushproof .pp-badge { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.tool-app-pushproof .pp-badge.pp-open { background: #fef9c3; color: #854d0e; }
+.tool-app-pushproof .pp-badge.pp-closed { background: #e2e8f0; color: #475569; }
+.tool-app-pushproof .pp-badge.pp-unbilled { background: #ffedd5; color: #9a3412; }
+.tool-app-pushproof .pp-badge.pp-billed { background: #dcfce7; color: #166534; }
+.tool-app-pushproof .pp-del { background: none; border: none; color: #b91c1c; cursor: pointer; font-size: 18px; line-height: 1; }
+.tool-app-pushproof .pp-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.tool-app-pushproof .pp-billtotals { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+.tool-app-pushproof .pp-billtotals div { background: #e0f2fe; border-radius: 8px; padding: 8px 12px; font-size: 13px; }
+.tool-app-pushproof .pp-billtotals strong { display: block; font-size: 18px; }
+.tool-app-pushproof .pp-small { font-size: 12px; color: #0369a1; margin-top: 6px; }
+</style><div class="tool-app-pushproof" id="toolAppRoot">
+  <div class="pp-stats" id="pp-stats"></div>
+  <div class="pp-tabs">
+    <button type="button" class="pp-tab pp-active" data-tab="log">Log push</button>
+    <button type="button" class="pp-tab" data-tab="records">Records</button>
+    <button type="button" class="pp-tab" data-tab="properties">Properties</button>
+    <button type="button" class="pp-tab" data-tab="events">Storms</button>
+    <button type="button" class="pp-tab" data-tab="billing">Billing</button>
+  </div>
+
+  <section class="pp-pane" id="pp-pane-log">
+    <div class="pp-card">
+      <label>Storm event<select id="pp-event"></select></label>
+      <label>Property<select id="pp-prop"></select></label>
+      <label>Salt used (lbs)<input id="pp-salt" type="number" min="0" step="1" placeholder="0"></label>
+      <label>Photo (opens camera)<input id="pp-photo" type="file" accept="image/*" capture="environment"></label>
+      <label>Notes<input id="pp-notes" type="text" placeholder="Drift behind dumpster, gate closed..."></label>
+      <button id="pp-logbtn" class="pp-btn" type="button">Log push now</button>
+      <p class="pp-hint" id="pp-gpsstatus">Tap "Log push now" and the app stamps the push with the time and your GPS location.</p>
+      <p class="pp-ok" id="pp-confirm" hidden></p>
+    </div>
+  </section>
+
+  <section class="pp-pane" id="pp-pane-records" hidden>
+    <div class="pp-row">
+      <label>Storm<select id="pp-rec-event"></select></label>
+      <label>Property<select id="pp-rec-prop"></select></label>
+    </div>
+    <ul id="pp-records" class="pp-list"></ul>
+  </section>
+
+  <section class="pp-pane" id="pp-pane-properties" hidden>
+    <div class="pp-card pp-form-grid">
+      <label>Name<input id="pp-new-name" type="text" placeholder="Maple Grove Plaza"></label>
+      <label>Address<input id="pp-new-addr" type="text" placeholder="4120 Maple St"></label>
+      <label>Rate per push ($)<input id="pp-new-rate" type="number" min="0" step="0.01" placeholder="85"></label>
+      <label>Client contact<input id="pp-new-contact" type="text" placeholder="Name / phone"></label>
+      <button id="pp-addprop" class="pp-btn pp-btn-ghost" type="button">+ Add property</button>
+    </div>
+    <ul id="pp-proplist" class="pp-list"></ul>
+  </section>
+
+  <section class="pp-pane" id="pp-pane-events" hidden>
+    <div class="pp-card pp-form-grid">
+      <label>Storm name<input id="pp-new-event" type="text" placeholder="e.g. Oct 6 blizzard"></label>
+      <button id="pp-addevent" class="pp-btn pp-btn-ghost" type="button">+ Start storm event</button>
+    </div>
+    <ul id="pp-eventlist" class="pp-list"></ul>
+  </section>
+
+  <section class="pp-pane" id="pp-pane-billing" hidden>
+    <div class="pp-card">
+      <label>Storm event<select id="pp-bill-event"></select></label>
+      <div class="pp-billtotals" id="pp-billstats"></div>
+      <div class="pp-actions">
+        <button id="pp-csv" class="pp-btn" type="button">Download CSV</button>
+        <button id="pp-markbilled" class="pp-btn pp-btn-ghost" type="button">Mark all billed</button>
+      </div>
+    </div>
+    <ul id="pp-billlist" class="pp-list"></ul>
+  </section>
+</div>
+<script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { n = parseFloat(n); return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  function fmtTs(ts) {
+    var d = new Date(ts);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  function uid() { return 'x' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
+
+  var K_PROPS = 'toolapp-pushproof-props';
+  var K_EVENTS = 'toolapp-pushproof-events';
+  var K_RECS = 'toolapp-pushproof-records';
+
+  function load(k) { try { return JSON.parse(localStorage.getItem(k)) || []; } catch (e) { return []; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  var root = $('toolAppRoot');
+
+  function propName(id) {
+    var p = load(K_PROPS);
+    for (var i = 0; i < p.length; i++) if (p[i].id === id) return p[i].name;
+    return 'Unknown property';
+  }
+  function propRate(id) {
+    var p = load(K_PROPS);
+    for (var i = 0; i < p.length; i++) if (p[i].id === id) return parseFloat(p[i].rate) || 0;
+    return 0;
+  }
+  function eventName(id) {
+    var ev = load(K_EVENTS);
+    for (var i = 0; i < ev.length; i++) if (ev[i].id === id) return ev[i].name;
+    return 'Unknown storm';
+  }
+  function activeEvent() {
+    var ev = load(K_EVENTS);
+    for (var i = 0; i < ev.length; i++) if (ev[i].status === 'open') return ev[i];
+    return ev.length ? ev[0] : null;
+  }
+  function ensureEvent() {
+    var a = activeEvent();
+    if (a) return a;
+    var d = new Date();
+    a = { id: uid(), name: 'Storm ' + d.toLocaleDateString(), status: 'open', created: Date.now() };
+    var ev = load(K_EVENTS);
+    ev.unshift(a);
+    save(K_EVENTS, ev);
+    return a;
+  }
+
+  function getGPS(cb) {
+    if (!navigator.geolocation) { cb(null, 'GPS not supported on this device.'); return; }
+    var done = false;
+    function fin(pos, err) { if (done) return; done = true; cb(pos, err); }
+    navigator.geolocation.getCurrentPosition(
+      function (p) { fin({ lat: p.coords.latitude, lng: p.coords.longitude, acc: Math.round(p.coords.accuracy || 0) }, null); },
+      function (e) { fin(null, e && e.message ? e.message : 'Location unavailable'); },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+    );
+  }
+
+  function readPhoto(file, cb) {
+    if (!file) { cb(null); return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var max = 800, w = img.width, h = img.height;
+        var scale = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(w * scale));
+        c.height = Math.max(1, Math.round(h * scale));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        try { cb(c.toDataURL('image/jpeg', 0.7)); } catch (e) { cb(null); }
+      };
+      img.onerror = function () { cb(null); };
+      img.src = reader.result;
+    };
+    reader.onerror = function () { cb(null); };
+    reader.readAsDataURL(file);
+  }
+
+  function refreshStats() {
+    var recs = load(K_RECS);
+    var a = activeEvent();
+    var evRecs = a ? recs.filter(function (r) { return r.eventId === a.id; }) : [];
+    var unbilled = 0;
+    recs.forEach(function (r) { if (!r.billed) unbilled += propRate(r.propId); });
+    $('pp-stats').innerHTML =
+      '<div class="pp-stat"><span>Active storm</span><strong>' + esc(a ? a.name : '—') + '</strong></div>' +
+      '<div class="pp-stat"><span>Pushes this storm</span><strong>' + evRecs.length + '</strong></div>' +
+      '<div class="pp-stat"><span>Unbilled total</span><strong>' + money(unbilled) + '</strong></div>';
+  }
+
+  function fillEventSelect(sel, includeAll) {
+    var ev = load(K_EVENTS);
+    var html = includeAll ? '<option value="">All storms</option>' : '';
+    ev.forEach(function (e) {
+      html += '<option value="' + e.id + '"' + (e.status === 'open' ? ' selected' : '') + '>' +
+        esc(e.name) + (e.status === 'closed' ? ' (closed)' : '') + '</option>';
+    });
+    sel.innerHTML = html;
+    if (!includeAll && !ev.length) sel.innerHTML = '<option value="">—</option>';
+  }
+  function fillPropSelect(sel, includeAll) {
+    var p = load(K_PROPS);
+    var html = includeAll ? '<option value="">All properties</option>' : '';
+    p.forEach(function (x) { html += '<option value="' + x.id + '">' + esc(x.name) + '</option>'; });
+    sel.innerHTML = html;
+    if (!includeAll && !p.length) sel.innerHTML = '<option value="">—</option>';
+  }
+  function syncLogSelectors() {
+    var a = ensureEvent();
+    fillEventSelect($('pp-event'), false);
+    $('pp-event').value = a.id;
+    fillPropSelect($('pp-prop'), false);
+  }
+
+  function renderRecords() {
+    fillEventSelect($('pp-rec-event'), true);
+    fillPropSelect($('pp-rec-prop'), true);
+    var evF = $('pp-rec-event').getAttribute('data-sel') || '';
+    var pF = $('pp-rec-prop').getAttribute('data-sel') || '';
+    $('pp-rec-event').value = evF;
+    $('pp-rec-prop').value = pF;
+    var recs = load(K_RECS).filter(function (r) {
+      return (!evF || r.eventId === evF) && (!pF || r.propId === pF);
+    });
+    recs.sort(function (x, y) { return y.ts - x.ts; });
+    var ul = $('pp-records');
+    ul.innerHTML = '';
+    if (!recs.length) {
+      var li0 = document.createElement('li');
+      li0.textContent = 'No pushes logged yet. Go to Log push and stamp the first one.';
+      ul.appendChild(li0);
+      return;
+    }
+    recs.forEach(function (r) {
+      var li = document.createElement('li');
+      var gps = r.lat != null
+        ? '<a href="https://maps.google.com/?q=' + r.lat.toFixed(6) + ',' + r.lng.toFixed(6) + '" target="_blank" rel="noopener">GPS ' +
+          r.lat.toFixed(5) + ', ' + r.lng.toFixed(5) + (r.acc ? ' (±' + r.acc + 'm)' : '') + '</a>'
+        : 'No GPS captured';
+      var photo = r.photo ? '<img class="pp-thumb" src="' + r.photo + '" alt="Push photo">' : '';
+      var badge = r.billed ? '<span class="pp-badge pp-billed">billed</span>' : '<span class="pp-badge pp-unbilled">unbilled</span>';
+      li.innerHTML =
+        '<div class="pp-li-head"><span class="pp-li-title">' + esc(propName(r.propId)) + '</span>' +
+        '<span>' + badge + ' <button type="button" class="pp-del" data-delrec="' + r.id + '" aria-label="Delete record">×</button></span></div>' +
+        '<div class="pp-li-meta">' + esc(fmtTs(r.ts)) + ' · ' + esc(eventName(r.eventId)) + ' · ' + gps +
+        (r.salt ? ' · Salt ' + esc(r.salt) + ' lbs' : '') +
+        (r.notes ? '<br>Notes: ' + esc(r.notes) : '') + '</div>' + photo;
+      ul.appendChild(li);
+    });
+  }
+
+  function renderProps() {
+    var p = load(K_PROPS);
+    var recs = load(K_RECS);
+    var ul = $('pp-proplist');
+    ul.innerHTML = '';
+    if (!p.length) {
+      var li0 = document.createElement('li');
+      li0.textContent = 'Add your first property above to start logging pushes.';
+      ul.appendChild(li0);
+      return;
+    }
+    p.forEach(function (x) {
+      var count = recs.filter(function (r) { return r.propId === x.id; }).length;
+      var li = document.createElement('li');
+      li.innerHTML =
+        '<div class="pp-li-head"><span class="pp-li-title">' + esc(x.name) + '</span>' +
+        '<button type="button" class="pp-del" data-delprop="' + x.id + '" aria-label="Delete property">×</button></div>' +
+        '<div class="pp-li-meta">' + esc(x.addr || 'No address') + ' · ' + money(x.rate) + ' per push · ' +
+        count + ' pushes logged' + (x.contact ? ' · ' + esc(x.contact) : '') + '</div>';
+      ul.appendChild(li);
+    });
+  }
+
+  function renderEvents() {
+    var ev = load(K_EVENTS);
+    var recs = load(K_RECS);
+    var ul = $('pp-eventlist');
+    ul.innerHTML = '';
+    ev.forEach(function (e) {
+      var count = recs.filter(function (r) { return r.eventId === e.id; }).length;
+      var badge = e.status === 'open' ? '<span class="pp-badge pp-open">open</span>' : '<span class="pp-badge pp-closed">closed</span>';
+      var li = document.createElement('li');
+      li.innerHTML =
+        '<div class="pp-li-head"><span class="pp-li-title">' + esc(e.name) + ' ' + badge + '</span>' +
+        '<span><button type="button" class="pp-btn pp-btn-ghost pp-toggleev" data-ev="' + e.id + '" style="padding:6px 12px;font-size:12px">' +
+        (e.status === 'open' ? 'Close storm' : 'Reopen') + '</button> ' +
+        '<button type="button" class="pp-del" data-delev="' + e.id + '" aria-label="Delete storm">×</button></span></div>' +
+        '<div class="pp-li-meta">Started ' + esc(fmtTs(e.created)) + ' · ' + count + ' pushes logged</div>';
+      ul.appendChild(li);
+    });
+    if (!ev.length) {
+      var li0 = document.createElement('li');
+      li0.textContent = 'No storm events yet.';
+      ul.appendChild(li0);
+    }
+  }
+
+  function renderBilling() {
+    fillEventSelect($('pp-bill-event'), false);
+    var sel = $('pp-bill-event');
+    var keep = sel.getAttribute('data-sel');
+    if (keep) sel.value = keep;
+    var evId = sel.value;
+    var recs = load(K_RECS).filter(function (r) { return r.eventId === evId; });
+    var props = load(K_PROPS);
+    var total = 0, billedTotal = 0, totalPushes = 0, unbilledPushes = 0;
+    var ul = $('pp-billlist');
+    ul.innerHTML = '';
+    props.forEach(function (x) {
+      var mine = recs.filter(function (r) { return r.propId === x.id; });
+      if (!mine.length) return;
+      var rate = parseFloat(x.rate) || 0;
+      var amt = mine.length * rate;
+      var b = mine.filter(function (r) { return r.billed; }).length;
+      total += amt; totalPushes += mine.length;
+      unbilledPushes += mine.length - b;
+      billedTotal += b * rate;
+      var li = document.createElement('li');
+      li.innerHTML =
+        '<div class="pp-li-head"><span class="pp-li-title">' + esc(x.name) + '</span><strong>' + money(amt) + '</strong></div>' +
+        '<div class="pp-li-meta">' + mine.length + ' pushes × ' + money(rate) + ' · ' + b + ' billed, ' + (mine.length - b) + ' unbilled</div>';
+      ul.appendChild(li);
+    });
+    if (!ul.children.length) {
+      var li0 = document.createElement('li');
+      li0.textContent = 'No pushes for this storm yet.';
+      ul.appendChild(li0);
+    }
+    $('pp-billstats').innerHTML =
+      '<div><strong>' + totalPushes + '</strong><span>pushes</span></div>' +
+      '<div><strong>' + money(total) + '</strong><span>total</span></div>' +
+      '<div><strong>' + money(total - billedTotal) + '</strong><span>unbilled</span></div>' +
+      '<div class="pp-small">' + unbilledPushes + ' unbilled pushes</div>';
+  }
+
+  function csvCell(v) {
+    v = String(v == null ? '' : v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  }
+  function downloadCSV() {
+    var evId = $('pp-bill-event').value;
+    var recs = load(K_RECS).filter(function (r) { return r.eventId === evId; });
+    recs.sort(function (x, y) { return x.ts - y.ts; });
+    var rows = [['storm', 'property', 'address', 'datetime', 'latitude', 'longitude', 'gps_accuracy_m', 'salt_lbs', 'notes', 'rate_per_push', 'amount', 'billed']];
+    recs.forEach(function (r) {
+      var p = load(K_PROPS);
+      var addr = '', rate = 0;
+      for (var i = 0; i < p.length; i++) if (p[i].id === r.propId) { addr = p[i].addr || ''; rate = parseFloat(p[i].rate) || 0; }
+      rows.push([eventName(evId), propName(r.propId), addr, new Date(r.ts).toISOString(),
+        r.lat != null ? r.lat : '', r.lng != null ? r.lng : '', r.acc != null ? r.acc : '',
+        r.salt || '', r.notes || '', rate.toFixed(2), rate.toFixed(2), r.billed ? 'yes' : 'no']);
+    });
+    var csv = rows.map(function (row) { return row.map(csvCell).join(','); }).join('\r\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'pushproof-' + (eventName(evId).replace(/[^a-z0-9]+/gi, '-').toLowerCase()) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(a.href); }, 500);
+  }
+
+  function logPush() {
+    var propSel = $('pp-prop');
+    if (!propSel.value) {
+      $('pp-gpsstatus').textContent = 'Add a property first — a push has to belong to someone.';
+      return;
+    }
+    var btn = $('pp-logbtn');
+    btn.disabled = true;
+    $('pp-gpsstatus').textContent = 'Capturing GPS and photo…';
+    var photoFile = $('pp-photo').files && $('pp-photo').files[0];
+    var got = 0, gps = null, gpsErr = null, photo = null;
+    function maybeDone() {
+      got++;
+      if (got < 2) return;
+      var recs = load(K_RECS);
+      var rec = {
+        id: uid(), ts: Date.now(),
+        eventId: $('pp-event').value, propId: $('pp-prop').value,
+        lat: gps ? gps.lat : null, lng: gps ? gps.lng : null, acc: gps ? gps.acc : null,
+        salt: $('pp-salt').value || '', notes: $('pp-notes').value || '',
+        photo: photo, billed: false
+      };
+      recs.unshift(rec);
+      save(K_RECS, recs);
+      btn.disabled = false;
+      $('pp-salt').value = '';
+      $('pp-notes').value = '';
+      $('pp-photo').value = '';
+      var c = $('pp-confirm');
+      c.hidden = false;
+      c.textContent = 'Push logged at ' + fmtTs(rec.ts) + (gps ? ' — GPS ' + gps.lat.toFixed(5) + ', ' + gps.lng.toFixed(5) : ' — no GPS (saved anyway)');
+      $('pp-gpsstatus').textContent = gpsErr ? 'GPS note: ' + gpsErr : 'GPS captured' + (gps && gps.acc ? ' (±' + gps.acc + 'm accuracy)' : '') + '.';
+      refreshStats();
+    }
+    getGPS(function (pos, err) { gps = pos; gpsErr = err; maybeDone(); });
+    readPhoto(photoFile, function (data) { photo = data; maybeDone(); });
+  }
+
+  function addProperty() {
+    var name = $('pp-new-name').value.trim();
+    if (!name) { $('pp-new-name').focus(); return; }
+    var p = load(K_PROPS);
+    p.push({ id: uid(), name: name, addr: $('pp-new-addr').value.trim(),
+      rate: parseFloat($('pp-new-rate').value) || 0, contact: $('pp-new-contact').value.trim() });
+    save(K_PROPS, p);
+    $('pp-new-name').value = ''; $('pp-new-addr').value = '';
+    $('pp-new-rate').value = ''; $('pp-new-contact').value = '';
+    renderProps(); syncLogSelectors(); refreshStats();
+  }
+
+  function addEvent() {
+    var name = $('pp-new-event').value.trim();
+    var d = new Date();
+    if (!name) name = 'Storm ' + d.toLocaleDateString();
+    var ev = load(K_EVENTS);
+    ev.forEach(function (e) { e.status = 'closed'; });
+    ev.unshift({ id: uid(), name: name, status: 'open', created: Date.now() });
+    save(K_EVENTS, ev);
+    $('pp-new-event').value = '';
+    renderEvents(); syncLogSelectors(); refreshStats();
+  }
+
+  root.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('pp-tab')) {
+      var tabs = root.querySelectorAll('.pp-tab');
+      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('pp-active');
+      t.classList.add('pp-active');
+      var panes = root.querySelectorAll('.pp-pane');
+      for (var j = 0; j < panes.length; j++) panes[j].hidden = true;
+      var pane = $('pp-pane-' + t.getAttribute('data-tab'));
+      if (pane) pane.hidden = false;
+      return;
+    }
+    if (t.id === 'pp-logbtn') { logPush(); return; }
+    if (t.id === 'pp-addprop') { addProperty(); return; }
+    if (t.id === 'pp-addevent') { addEvent(); return; }
+    if (t.id === 'pp-csv') { downloadCSV(); return; }
+    if (t.id === 'pp-markbilled') {
+      var evId = $('pp-bill-event').value;
+      var recs = load(K_RECS);
+      var n = 0;
+      recs.forEach(function (r) { if (r.eventId === evId && !r.billed) { r.billed = true; n++; } });
+      save(K_RECS, recs);
+      renderBilling(); renderRecords(); refreshStats();
+      return;
+    }
+    if (t.classList && t.classList.contains('pp-toggleev')) {
+      var ev = load(K_EVENTS);
+      ev.forEach(function (x) {
+        if (x.id === t.getAttribute('data-ev')) x.status = x.status === 'open' ? 'closed' : 'open';
+      });
+      save(K_EVENTS, ev);
+      renderEvents(); syncLogSelectors(); refreshStats();
+      return;
+    }
+    var delrec = t.getAttribute && t.getAttribute('data-delrec');
+    if (delrec) {
+      save(K_RECS, load(K_RECS).filter(function (r) { return r.id !== delrec; }));
+      renderRecords(); renderBilling(); refreshStats();
+      return;
+    }
+    var delprop = t.getAttribute && t.getAttribute('data-delprop');
+    if (delprop) {
+      save(K_PROPS, load(K_PROPS).filter(function (x) { return x.id !== delprop; }));
+      renderProps(); syncLogSelectors(); refreshStats();
+      return;
+    }
+    var delev = t.getAttribute && t.getAttribute('data-delev');
+    if (delev) {
+      save(K_EVENTS, load(K_EVENTS).filter(function (x) { return x.id !== delev; }));
+      renderEvents(); syncLogSelectors(); refreshStats();
+    }
+  });
+
+  root.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.id === 'pp-rec-event') { t.setAttribute('data-sel', t.value); renderRecords(); return; }
+    if (t.id === 'pp-rec-prop') { t.setAttribute('data-sel', t.value); renderRecords(); return; }
+    if (t.id === 'pp-bill-event') { t.setAttribute('data-sel', t.value); renderBilling(); }
+  });
+
+  (function init() {
+    ensureEvent();
+    syncLogSelectors();
+    refreshStats();
+    renderRecords();
+    renderProps();
+    renderEvents();
+    renderBilling();
+  })();
+})();
+</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="pushproof";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$12<small>/month</small></div><ul><li>Full access to PushProof</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#0284C7"><h3>6 months</h3><div class="plan-price">$60<small> one-time</small></div><ul><li>Full access to PushProof</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks PushProof on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/pushproof-launch.html">Read the PushProof launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="./contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>

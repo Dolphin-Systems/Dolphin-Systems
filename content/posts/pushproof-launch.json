@@ -1,0 +1,51 @@
+{
+  "slug": "pushproof-launch",
+  "title": "PushProof: every push, proven and billed",
+  "description": "Stamp each snow push with time, GPS, and a photo so disputed per-push invoices get settled with evidence — then export billing-ready CSVs.",
+  "category": "Tool launch",
+  "date": "2026-10-06",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Per-push snow billing dies at one moment: the property manager asks \"prove the push happened\" and you have nothing stamped. PushProof gives you a timestamped, GPS-stamped record for every push, plus the photo to back it up."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Add your properties with their per-push rate. When a storm rolls in, start a storm event. After each push, tap one button: PushProof stamps the time and your GPS location, lets you snap a photo and log salt used. At the end of the storm you get per-property billing totals and a CSV of every push with coordinates."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Independent snow contractors billing per push",
+        "Landscapers running dual-season snow routes",
+        "Drivers who need to prove each push with a timestamp",
+        "Any contractor tired of disputed invoices after a storm"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How it works"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add properties with per-push rates",
+        "Start a storm event when the snow starts",
+        "Log each push: time, GPS, photo, salt",
+        "Download the CSV or mark pushes billed"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "PushProof is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription. Everything runs in your browser — your records and photos stay on your device."
+    }
+  ]
+}
