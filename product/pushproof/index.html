@@ -472,6 +472,9 @@
       c.textContent = 'Push logged at ' + fmtTs(rec.ts) + (gps ? ' — GPS ' + gps.lat.toFixed(5) + ', ' + gps.lng.toFixed(5) : ' — no GPS (saved anyway)');
       $('pp-gpsstatus').textContent = gpsErr ? 'GPS note: ' + gpsErr : 'GPS captured' + (gps && gps.acc ? ' (±' + gps.acc + 'm accuracy)' : '') + '.';
       refreshStats();
+      renderRecords();
+      renderEvents();
+      renderBilling();
     }
     getGPS(function (pos, err) { gps = pos; gpsErr = err; maybeDone(); });
     readPhoto(photoFile, function (data) { photo = data; maybeDone(); });
