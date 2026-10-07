@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CertWatch — Never miss an expired insurance cert again. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>CertWatch — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#0D9488" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CertWatch logo"><path d="M32 5 L54 13 V30 C54 45 44 55 32 59 C20 55 10 45 10 30 V13 Z" fill="#0D9488"/><path d="M32 9.5 L50 15.8 V30 C50 42.2 41.6 50.9 32 54.2 C22.4 50.9 14 42.2 14 30 V15.8 Z" fill="none" stroke="#99F6E4" stroke-width="2" opacity="0.6"/><path d="M23 31.5 L29.5 38 L42 24" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="31" r="13" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.35"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>CertWatch</h1><p>Never miss an expired insurance cert again.</p></div></div><div class="tool-price-pills"><span><b>$9</b>/month</span><span><b>$45</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>CertWatch tracks every vendor and subcontractor&#39;s certificates of insurance in one place. Add vendors, log each coverage with its expiry date, and get a clear dashboard of what&#39;s expired or expiring soon. Export a CSV or print a compliance report for audits — all in your browser.</p><ul class="tool-features"><li>Vendor roster with contact info</li><li>COI records per coverage type with expiry dates</li><li>Expired and expiring-soon dashboard</li><li>30 / 14 / 7-day expiry alert bands</li><li>CSV export and print-ready compliance report</li><li>Data stays in your browser — nothing uploaded</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock CertWatch.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $9</option><option value="6">6 months — $45 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-certwatch { color: #0f3f3a; max-width: 940px; }
+.tool-app-certwatch .cw-h { margin: 18px 0 8px; font-size: 15px; }
+.tool-app-certwatch .cw-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.tool-app-certwatch .cw-stat { background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+.tool-app-certwatch .cw-stat span { font-size: 12px; font-weight: 600; color: #115e59; }
+.tool-app-certwatch .cw-stat strong { font-size: 24px; }
+.tool-app-certwatch .cw-stat.cw-warn { background: #fffbeb; border-color: #fde68a; }
+.tool-app-certwatch .cw-stat.cw-warn strong { color: #b45309; }
+.tool-app-certwatch .cw-stat.cw-bad { background: #fef2f2; border-color: #fecaca; }
+.tool-app-certwatch .cw-stat.cw-bad strong { color: #b91c1c; }
+.tool-app-certwatch .cw-alerts { list-style: none; padding: 0; margin: 8px 0; }
+.tool-app-certwatch .cw-alerts li { padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; font-size: 14px; }
+.tool-app-certwatch .cw-alerts li.cw-exp { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.tool-app-certwatch .cw-alerts li.cw-soon { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.tool-app-certwatch .cw-alerts li.cw-none { background: #f0fdfa; color: #115e59; border: 1px solid #99f6e4; }
+.tool-app-certwatch .cw-cols { display: grid; grid-template-columns: 320px 1fr; gap: 18px; }
+@media (max-width: 760px) { .tool-app-certwatch .cw-cols { grid-template-columns: 1fr; } }
+.tool-app-certwatch .cw-form { display: flex; flex-direction: column; gap: 10px; background: #f8fafc; border-radius: 10px; padding: 12px; margin-bottom: 6px; }
+.tool-app-certwatch label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; }
+.tool-app-certwatch input[type="text"], .tool-app-certwatch input[type="email"], .tool-app-certwatch input[type="date"], .tool-app-certwatch textarea, .tool-app-certwatch select { border: 1px solid #99f6e4; border-radius: 8px; padding: 8px 10px; font-size: 14px; width: 100%; box-sizing: border-box; background: #fff; }
+.tool-app-certwatch .cw-btn { background: #0D9488; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.tool-app-certwatch .cw-btn:hover { background: #0f766e; }
+.tool-app-certwatch .cw-btn-ghost { background: #ccfbf1; color: #0f766e; }
+.tool-app-certwatch .cw-btn-ghost:hover { background: #99f6e4; }
+.tool-app-certwatch .cw-formbtns { display: flex; gap: 8px; }
+.tool-app-certwatch .cw-vendor { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.tool-app-certwatch .cw-vendor-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tool-app-certwatch .cw-vendor-head strong { font-size: 15px; }
+.tool-app-certwatch .cw-vendor-head .cw-contact { font-size: 12px; color: #475569; }
+.tool-app-certwatch .cw-coi { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px; margin-top: 8px; font-size: 13px; }
+.tool-app-certwatch .cw-badge { font-size: 11px; font-weight: 700; border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+.tool-app-certwatch .cw-badge.cw-b-ok { background: #d1fae5; color: #065f46; }
+.tool-app-certwatch .cw-badge.cw-b-warn { background: #fef3c7; color: #92400e; }
+.tool-app-certwatch .cw-badge.cw-b-exp { background: #fee2e2; color: #991b1b; }
+.tool-app-certwatch .cw-coi .cw-meta { color: #475569; font-size: 12px; }
+.tool-app-certwatch .cw-link { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 700; }
+.tool-app-certwatch .cw-edit { color: #0D9488; }
+.tool-app-certwatch .cw-del { color: #b91c1c; }
+.tool-app-certwatch .cw-actions { display: flex; gap: 10px; margin: 18px 0; flex-wrap: wrap; }
+.tool-app-certwatch .tool-print-doc { display: none; }
+@media print {
+  .tool-app-certwatch .cw-screen { display: none !important; }
+  .tool-app-certwatch .tool-print-doc { display: block !important; color: #000; }
+  .tool-app-certwatch .tool-print-doc table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .tool-app-certwatch .tool-print-doc th, .tool-app-certwatch .tool-print-doc td { border: 1px solid #999; padding: 6px; text-align: left; font-size: 13px; }
+}</style><div class="tool-app-certwatch" id="toolAppRoot">
+  <div class="cw-screen">
+    <div class="cw-stats">
+      <div class="cw-stat"><span>Vendors</span><strong id="cw-stat-vendors">0</strong></div>
+      <div class="cw-stat cw-ok"><span>Active COIs</span><strong id="cw-stat-active">0</strong></div>
+      <div class="cw-stat cw-warn"><span>Expiring ≤ 30 days</span><strong id="cw-stat-warn">0</strong></div>
+      <div class="cw-stat cw-bad"><span>Expired</span><strong id="cw-stat-expired">0</strong></div>
+    </div>
+    <h4 class="cw-h">Needs attention</h4>
+    <ul id="cw-alerts" class="cw-alerts"></ul>
+    <div class="cw-cols">
+      <div class="cw-col">
+        <h4 class="cw-h">Add vendor</h4>
+        <form id="cw-vendor-form" class="cw-form">
+          <label>Name<input id="cw-vendor-name" type="text" required maxlength="80" placeholder="Acme Electric"></label>
+          <label>Contact email<input id="cw-vendor-email" type="email" maxlength="80" placeholder="office@example.com"></label>
+          <label>Notes<textarea id="cw-vendor-notes" rows="2" maxlength="300" placeholder="Agent name, phone..."></textarea></label>
+          <button type="submit" class="cw-btn">Add vendor</button>
+        </form>
+        <h4 class="cw-h">Add / update COI</h4>
+        <form id="cw-coi-form" class="cw-form">
+          <label>Vendor<select id="cw-coi-vendor"></select></label>
+          <label>Coverage type<select id="cw-coi-type"><option>General Liability</option><option>Workers' Compensation</option><option>Commercial Auto</option><option>Umbrella / Excess</option><option>Professional Liability</option><option>Builder's Risk</option><option>Other</option></select></label>
+          <label>Insurer<input id="cw-coi-insurer" type="text" maxlength="80" placeholder="Carrier name"></label>
+          <label>Policy #<input id="cw-coi-policy" type="text" maxlength="60" placeholder="POL-12345"></label>
+          <label>Effective<input id="cw-coi-effective" type="date"></label>
+          <label>Expires<input id="cw-coi-expiry" type="date" required></label>
+          <div class="cw-formbtns">
+            <button type="submit" class="cw-btn" id="cw-coi-submit">Add COI</button>
+            <button type="button" class="cw-btn cw-btn-ghost" id="cw-coi-cancel" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </div>
+      <div class="cw-col">
+        <h4 class="cw-h">Vendors &amp; COIs</h4>
+        <div id="cw-vendors"></div>
+      </div>
+    </div>
+    <div class="cw-actions">
+      <button type="button" id="cw-csv" class="cw-btn cw-btn-ghost">Export CSV</button>
+      <button type="button" id="cw-print" class="cw-btn cw-btn-ghost">Print compliance report</button>
+    </div>
+  </div>
+  <div class="tool-print-doc" id="cw-printdoc" aria-hidden="true"></div>
+</div><script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  var LS_KEY = 'toolapp-certwatch-data';
+  var editingCoiId = null;
+  function uid() { return 'id' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
+  function load() {
+    try {
+      var d = JSON.parse(localStorage.getItem(LS_KEY));
+      if (d && d.vendors && d.cois) return d;
+    } catch (e) {}
+    return { vendors: [], cois: [] };
+  }
+  function save(d) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  function parseDate(str) {
+    if (!str) return null;
+    var p = str.split('-');
+    if (p.length !== 3) return null;
+    return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+  }
+  function todayMid() {
+    var t = new Date();
+    return new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  }
+  function daysLeft(expiryStr) {
+    var d = parseDate(expiryStr);
+    if (!d) return null;
+    return Math.round((d.getTime() - todayMid().getTime()) / 864e5);
+  }
+  function fmtDate(str) {
+    var d = parseDate(str);
+    if (!d) return '—';
+    var m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  function statusOf(coi) {
+    var dl = daysLeft(coi.expiry);
+    if (dl == null) return { key: 'warn', label: 'No date', dl: null };
+    if (dl < 0) return { key: 'exp', label: 'Expired ' + Math.abs(dl) + 'd ago', dl: dl };
+    if (dl === 0) return { key: 'exp', label: 'Expires today', dl: dl };
+    if (dl <= 30) return { key: 'warn', label: 'Expires in ' + dl + 'd', dl: dl };
+    return { key: 'ok', label: 'OK · ' + dl + 'd left', dl: dl };
+  }
+  function vendorName(d, id) {
+    for (var i = 0; i < d.vendors.length; i++) {
+      if (d.vendors[i].id === id) return d.vendors[i].name;
+    }
+    return 'Unknown vendor';
+  }
+  function render() {
+    var d = load();
+    var i, st;
+    var expired = 0, warn = 0, active = 0;
+    var alerts = [];
+    for (i = 0; i < d.cois.length; i++) {
+      st = statusOf(d.cois[i]);
+      if (st.key === 'exp') { expired++; alerts.push({ coi: d.cois[i], st: st }); }
+      else if (st.key === 'warn') { warn++; if (st.dl != null && st.dl <= 30) alerts.push({ coi: d.cois[i], st: st }); }
+      else { active++; }
+    }
+    $('cw-stat-vendors').textContent = d.vendors.length;
+    $('cw-stat-active').textContent = active;
+    $('cw-stat-warn').textContent = warn;
+    $('cw-stat-expired').textContent = expired;
+    alerts.sort(function (a, b) { return a.st.dl - b.st.dl; });
+    var al = $('cw-alerts');
+    al.innerHTML = '';
+    if (!alerts.length) {
+      var li0 = document.createElement('li');
+      li0.className = 'cw-none';
+      li0.textContent = d.cois.length ? 'Nothing expiring in the next 30 days. You are covered.' : 'No COIs tracked yet — add a vendor and its first certificate above.';
+      al.appendChild(li0);
+    } else {
+      for (i = 0; i < alerts.length; i++) {
+        var li = document.createElement('li');
+        li.className = alerts[i].st.key === 'exp' ? 'cw-exp' : 'cw-soon';
+        li.textContent = alerts[i].coi.type + ' — ' + vendorName(d, alerts[i].coi.vendorId) + ': ' + alerts[i].st.label;
+        al.appendChild(li);
+      }
+    }
+    var sel = $('cw-coi-vendor');
+    sel.innerHTML = '';
+    for (i = 0; i < d.vendors.length; i++) {
+      var opt = document.createElement('option');
+      opt.value = d.vendors[i].id;
+      opt.textContent = d.vendors[i].name;
+      sel.appendChild(opt);
+    }
+    var box = $('cw-vendors');
+    box.innerHTML = '';
+    if (!d.vendors.length) {
+      var p = document.createElement('p');
+      p.style.color = '#64748b';
+      p.textContent = 'No vendors yet.';
+      box.appendChild(p);
+      return;
+    }
+    for (i = 0; i < d.vendors.length; i++) {
+      (function (v) {
+        var wrap = document.createElement('div');
+        wrap.className = 'cw-vendor';
+        var head = document.createElement('div');
+        head.className = 'cw-vendor-head';
+        var t = document.createElement('div');
+        t.innerHTML = '<strong>' + esc(v.name) + '</strong>' + (v.email ? '<div class="cw-contact">' + esc(v.email) + '</div>' : '');
+        var delV = document.createElement('button');
+        delV.type = 'button';
+        delV.className = 'cw-link cw-del';
+        delV.textContent = 'Remove';
+        delV.onclick = function () {
+          if (!confirm('Remove ' + v.name + ' and all its COIs?')) return;
+          var dd = load();
+          dd.vendors = dd.vendors.filter(function (x) { return x.id !== v.id; });
+          dd.cois = dd.cois.filter(function (x) { return x.vendorId !== v.id; });
+          save(dd); render();
+        };
+        head.appendChild(t);
+        head.appendChild(delV);
+        wrap.appendChild(head);
+        var vcois = d.cois.filter(function (c) { return c.vendorId === v.id; });
+        vcois.sort(function (a, b) {
+          var da = daysLeft(a.expiry), db = daysLeft(b.expiry);
+          return (da == null ? 1e9 : da) - (db == null ? 1e9 : db);
+        });
+        if (!vcois.length) {
+          var none = document.createElement('div');
+          none.className = 'cw-meta';
+          none.style.marginTop = '8px';
+          none.textContent = 'No COIs logged yet.';
+          wrap.appendChild(none);
+        }
+        vcois.forEach(function (c) {
+          var s = statusOf(c);
+          var row = document.createElement('div');
+          row.className = 'cw-coi';
+          var badge = document.createElement('span');
+          badge.className = 'cw-badge cw-b-' + s.key;
+          badge.textContent = s.label;
+          var info = document.createElement('div');
+          n          info.innerHTML = '<strong>' + esc(c.type) + '</strong><div class="cw-meta">' +
+            (c.insurer ? esc(c.insurer) : 'No insurer') +
+            (c.policy ? ' · ' + esc(c.policy) : '') +
+            ' · Expires ' + esc(fmtDate(c.expiry)) + '</div>';
+          var edit = document.createElement('button');
+          edit.type = 'button';
+          edit.className = 'cw-link cw-edit';
+          edit.textContent = 'Edit';
+          edit.onclick = function () { startEdit(c); };
+          var del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'cw-link cw-del';
+          del.textContent = 'Delete';
+          del.onclick = function () {
+            if (!confirm('Delete this COI record?')) return;
+            var dd = load();
+            dd.cois = dd.cois.filter(function (x) { return x.id !== c.id; });
+            save(dd); render();
+          };
+          row.appendChild(badge);
+          row.appendChild(info);
+          row.appendChild(edit);
+          row.appendChild(del);
+          wrap.appendChild(row);
+        });
+        box.appendChild(wrap);
+      })(d.vendors[i]);
+    }
+  }
+  function startEdit(c) {
+    editingCoiId = c.id;
+    $('cw-coi-vendor').value = c.vendorId;
+    $('cw-coi-type').value = c.type;
+    $('cw-coi-insurer').value = c.insurer || '';
+    $('cw-coi-policy').value = c.policy || '';
+    $('cw-coi-effective').value = c.effective || '';
+    $('cw-coi-expiry').value = c.expiry || '';
+    $('cw-coi-submit').textContent = 'Save changes';
+    $('cw-coi-cancel').hidden = false;
+    $('cw-coi-expiry').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function cancelEdit() {
+    editingCoiId = null;
+    $('cw-coi-form').reset();
+    $('cw-coi-submit').textContent = 'Add COI';
+    $('cw-coi-cancel').hidden = true;
+  }
+  function exportCSV() {
+    var d = load();
+    var rows = [['Vendor', 'Contact', 'Coverage', 'Insurer', 'Policy #', 'Effective', 'Expiry', 'Status']];
+    d.cois.forEach(function (c) {
+      var v = null;
+      for (var i = 0; i < d.vendors.length; i++) if (d.vendors[i].id === c.vendorId) v = d.vendors[i];
+      rows.push([
+        v ? v.name : '', v && v.email ? v.email : '', c.type, c.insurer || '',
+        c.policy || '', c.effective || '', c.expiry || '', statusOf(c).label
+      ]);
+    });
+    var csv = rows.map(function (r) {
+      return r.map(function (cell) { return '"' + String(cell).replace(/"/g, '""') + '"'; }).join(',');
+    }).join('\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'certwatch-export.csv';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  function printReport() {
+    var d = load();
+    var rowsHtml = '';
+    var sorted = d.cois.slice().sort(function (a, b) {
+      var da = daysLeft(a.expiry), db = daysLeft(b.expiry);
+      return (da == null ? 1e9 : da) - (db == null ? 1e9 : db);
+    });
+    for (var i = 0; i < sorted.length; i++) {
+      var c = sorted[i];
+      rowsHtml += '<tr><td>' + esc(vendorName(d, c.vendorId)) + '</td><td>' + esc(c.type) + '</td><td>' +
+        esc(c.insurer || '—') + '</td><td>' + esc(c.policy || '—') + '</td><td>' + esc(fmtDate(c.expiry)) +
+        '</td><td>' + esc(statusOf(c).label) + '</td></tr>';
+    }
+    $('cw-printdoc').innerHTML =
+      '<h1>Certificate of Insurance — Compliance Report</h1>' +
+      '<p>Generated ' + esc(new Date().toLocaleDateString()) + ' · ' + d.vendors.length + ' vendors, ' +
+      d.cois.length + ' COIs on file.</p>' +
+      '<table><thead><tr><th>Vendor</th><th>Coverage</th><th>Insurer</th><th>Policy #</th>' +
+      '<th>Expiry</th><th>Status</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>';
+    window.print();
+  }
+  $('cw-vendor-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('cw-vendor-name').value.trim();
+    if (!name) return;
+    var d = load();
+    d.vendors.push({ id: uid(), name: name, email: $('cw-vendor-email').value.trim(), notes: $('cw-vendor-notes').value.trim() });
+    save(d);
+    this.reset();
+    render();
+  });
+  $('cw-coi-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var vendorId = $('cw-coi-vendor').value;
+    var expiry = $('cw-coi-expiry').value;
+    if (!vendorId || !expiry) return;
+    var d = load();
+    var rec = {
+      vendorId: vendorId,
+      type: $('cw-coi-type').value,
+      insurer: $('cw-coi-insurer').value.trim(),
+      policy: $('cw-coi-policy').value.trim(),
+      effective: $('cw-coi-effective').value,
+      expiry: expiry
+    };
+    if (editingCoiId) {
+      rec.id = editingCoiId;
+      for (var i = 0; i < d.cois.length; i++) {
+        if (d.cois[i].id === editingCoiId) { d.cois[i] = rec; break; }
+      }
+      cancelEdit();
+    } else {
+      rec.id = uid();
+      d.cois.push(rec);
+      this.reset();
+    }
+    save(d);
+    render();
+  });
+  $('cw-coi-cancel').addEventListener('click', cancelEdit);
+  $('cw-csv').addEventListener('click', exportCSV);
+  $('cw-print').addEventListener('click', printReport);
+  render();
+})();</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="certwatch";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$9<small>/month</small></div><ul><li>Full access to CertWatch</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#0D9488"><h3>6 months</h3><div class="plan-price">$45<small> one-time</small></div><ul><li>Full access to CertWatch</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks CertWatch on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/certwatch-launch.html">Read the CertWatch launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="../../contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
