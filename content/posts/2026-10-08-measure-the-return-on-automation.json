@@ -1,0 +1,153 @@
+{
+  "slug": "2026-10-08-measure-the-return-on-automation",
+  "title": "Measure the Return on Automation",
+  "description": "A practical guide to defining baselines, tracking time and error rates, and calculating transparent ROI for automation projects without inflated claims.",
+  "date": "2026-10-08",
+  "category": "Guides",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most automation projects are approved on a feeling. Someone says the team is drowning in manual work, a vendor promises efficiency, and the budget gets signed off. Six months later, nobody can say whether the system paid for itself. The problem is not that automation fails to deliver value. It is that teams rarely define what value looks like before they start, so there is nothing to measure against."
+    },
+    {
+      "type": "paragraph",
+      "text": "Return on automation is not a single number. It is a combination of time recovered, errors avoided, exceptions handled, maintenance absorbed, and cost per transaction. If you track those five things, you can build an honest picture of whether a project is working. If you track only one, you are guessing."
+    },
+    {
+      "type": "heading",
+      "text": "Start with a real baseline"
+    },
+    {
+      "type": "paragraph",
+      "text": "You cannot measure improvement without a before. Before you automate anything, record how the process runs today. This does not need to be a formal study. A week of observation and a few honest estimates will do. What matters is that the baseline is specific and written down."
+    },
+    {
+      "type": "paragraph",
+      "text": "For a typical manual process, capture these numbers: how many times the task runs per week, how many minutes each run takes, how often it produces an error that needs correction, how often it hits an exception that a person must handle, and who owns it when it breaks. Multiply the first two to get weekly hours. That is your baseline."
+    },
+    {
+      "type": "heading",
+      "text": "The five metrics that matter"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Baseline time: minutes or hours per transaction before automation.",
+        "Error rate: the percentage of transactions that require correction or rework.",
+        "Exception rate: the percentage of cases that fall outside the normal path and need human judgment.",
+        "Maintenance cost: the ongoing time and money required to keep the automation running.",
+        "Cost per transaction: total cost divided by successful transactions, including maintenance and exception handling."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These five metrics tell a complete story. Time alone is misleading because a fast process that breaks often is worse than a slower one that runs cleanly. Error rate alone ignores the labor spent handling exceptions. Cost per transaction is the summary metric, but it is only meaningful when the other four are visible underneath it."
+    },
+    {
+      "type": "heading",
+      "text": "A transparent hypothetical ROI calculation"
+    },
+    {
+      "type": "paragraph",
+      "text": "The following numbers are illustrative only. They are not based on any specific client or system. Use them as a template for your own estimates."
+    },
+    {
+      "type": "paragraph",
+      "text": "Suppose a team processes 500 invoices per month. Each invoice takes 12 minutes of manual entry, review, and filing. That is 100 hours per month. At a fully loaded internal cost of $35 per hour, the manual cost is $3,500 per month."
+    },
+    {
+      "type": "paragraph",
+      "text": "After automation, the same 500 invoices take 3 minutes each of human review, because the system extracts, validates, and routes the data. That is 25 hours per month, or $875 in labor. The automation platform costs $300 per month to run. Exception handling adds another 5 hours per month, or $175. Total monthly cost after automation is $1,350."
+    },
+    {
+      "type": "paragraph",
+      "text": "Monthly savings are $2,150. If the implementation cost was $8,000, the payback period is roughly 3.7 months. After that, the savings continue as long as the system runs and the process does not change substantially."
+    },
+    {
+      "type": "paragraph",
+      "text": "This calculation is deliberately simple. It excludes onboarding time, training, and the cost of occasional failures. A more conservative version would add a 20 percent buffer to the implementation cost and a 10 percent buffer to the monthly maintenance estimate. Even with those buffers, the payback period remains under five months in this example."
+    },
+    {
+      "type": "heading",
+      "text": "Nonfinancial measures you should not ignore"
+    },
+    {
+      "type": "paragraph",
+      "text": "Some of the most important returns from automation do not appear on a spreadsheet. Cycle time matters. If invoices used to take three days to process and now take four hours, that changes how quickly you can pay vendors, close the month, or respond to disputes. That speed has value even if it is hard to price."
+    },
+    {
+      "type": "paragraph",
+      "text": "Consistency matters too. A manual process produces different results depending on who is doing it and how tired they are. An automated process produces the same result every time, within the limits of its rules. That predictability reduces audit risk and makes it easier to train new people."
+    },
+    {
+      "type": "paragraph",
+      "text": "Finally, consider what your team stops doing. If automation removes repetitive data entry, the people who used to do that work can handle exceptions, improve the process, or take on higher-value tasks. That shift is a real return, even if it does not show up as a line item."
+    },
+    {
+      "type": "heading",
+      "text": "Common measurement mistakes"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Measuring only labor savings and ignoring maintenance, platform costs, and exception handling.",
+        "Using vendor-provided benchmarks instead of your own baseline numbers.",
+        "Comparing a fully loaded hourly cost against a software subscription cost without normalizing the units.",
+        "Assuming the process will not change after automation, when in practice it usually does.",
+        "Forgetting to track who owns the system and what happens when it breaks."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Implementation considerations"
+    },
+    {
+      "type": "paragraph",
+      "text": "Set up measurement before you build. If you automate first and measure later, you will not have a clean baseline. Decide which metrics you will track, where the data will come from, and how often you will review it. A monthly review is usually enough for stable processes. A weekly review makes sense during the first month after launch."
+    },
+    {
+      "type": "paragraph",
+      "text": "Keep the measurement lightweight. If tracking the metrics takes more time than the process itself, you have overbuilt the measurement. A simple spreadsheet with five columns is often sufficient. The goal is visibility, not precision."
+    },
+    {
+      "type": "paragraph",
+      "text": "Build in a review checkpoint at 30, 90, and 180 days. At each checkpoint, compare actual results to the baseline and to your projections. If the numbers are worse than expected, investigate before assuming the automation is broken. Sometimes the process changed, the volume changed, or the exception rate was higher than estimated."
+    },
+    {
+      "type": "heading",
+      "text": "Limitations"
+    },
+    {
+      "type": "paragraph",
+      "text": "ROI calculations are estimates, not guarantees. They depend on assumptions about volume, labor cost, and error rates that may not hold over time. A process that is stable today may become unstable next quarter. A vendor may change pricing. A team member may leave and take undocumented knowledge with them."
+    },
+    {
+      "type": "paragraph",
+      "text": "Automation also has diminishing returns. The first workflow in a category often produces the largest savings. The fifth or tenth workflow may produce smaller gains because the easy wins are already captured. That is normal. It does not mean the later projects are not worth doing, but it does mean the ROI profile changes."
+    },
+    {
+      "type": "heading",
+      "text": "A practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before your next automation project, write down the baseline. Record time, error rate, exception rate, maintenance cost, and cost per transaction. Then build the system, measure the same five things, and compare. If the numbers do not justify the project, say so. That is not a failure. It is a decision made with real information instead of optimism."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently asked questions"
+    },
+    {
+      "type": "paragraph",
+      "text": "How long should I track a baseline before automating? One to two weeks of normal operation is usually enough for a stable process. If the process varies significantly by week or month, track a full cycle."
+    },
+    {
+      "type": "paragraph",
+      "text": "What if I cannot get exact numbers for the baseline? Use ranges and label them as estimates. An approximate baseline is still far better than no baseline. Update it as better data becomes available."
+    },
+    {
+      "type": "paragraph",
+      "text": "Should I include my own time in the ROI calculation? Yes, if you are spending time maintaining or monitoring the system. That time is a real cost, even if it does not appear on an invoice."
+    }
+  ]
+}
