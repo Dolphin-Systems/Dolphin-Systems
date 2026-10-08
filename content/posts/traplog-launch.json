@@ -1,0 +1,51 @@
+{
+  "slug": "traplog-launch",
+  "title": "TrapLog: your wildlife control log, inspection-ready",
+  "description": "Log every control activity with the fields state inspectors ask for \u2014 species, method, disposition, client \u2014 then print a daily log or export a CSV for your annual report.",
+  "category": "Tool launch",
+  "date": "2026-10-08",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "The log is the license. In several states, nuisance wildlife control operators must keep a daily record of every control activity \u2014 client, address, date, provider, species, number removed, method, disposition \u2014 current at the business location and ready for inspection. Paper notebooks fall behind, and a stale log at inspection time means violations, fines, and in Iowa, a blocked permit renewal. TrapLog exists so the record is never the thing that sinks you."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Log each control activity the day it happens, with the fields inspectors ask for. Species, control method, and disposition come as picklists built for wildlife work, so entries take seconds. Search and filter the log by date, client, or species, print an inspection-ready daily log, and export a CSV when annual-report time comes."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Licensed nuisance wildlife control operators",
+        "Wildlife removal companies running 1\u20135 techs",
+        "Pest companies with a wildlife division",
+        "Anyone still tracking control activities in a notebook"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Log each day's control activities as you finish them",
+        "Use the filters to find any past activity in seconds",
+        "Print the daily log when an inspector asks",
+        "Export a CSV for your annual activity report"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Your data stays in your browser \u2014 nothing is uploaded anywhere. TrapLog is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}

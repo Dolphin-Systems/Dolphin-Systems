@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TrapLog — Your daily wildlife control log, inspection-ready. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>TrapLog — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:#15803D" aria-hidden="true"><svg width="84" height="84" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TrapLog logo"><circle cx="32" cy="32" r="29" fill="#15803D"/><circle cx="32" cy="32" r="29" fill="none" stroke="#065F46" stroke-width="2"/><ellipse cx="32" cy="40" rx="11" ry="9" fill="#FFFFFF" opacity="0.92"/><circle cx="18" cy="26" r="5.5" fill="#FFFFFF" opacity="0.92"/><circle cx="27" cy="19" r="5.5" fill="#FFFFFF" opacity="0.92"/><circle cx="37" cy="19" r="5.5" fill="#FFFFFF" opacity="0.92"/><circle cx="46" cy="26" r="5.5" fill="#FFFFFF" opacity="0.92"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>TrapLog</h1><p>Your daily wildlife control log, inspection-ready.</p></div></div><div class="tool-price-pills"><span><b>$12</b>/month</span><span><b>$60</b>/6 months <em>save 17%</em></span></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div><div class="body-copy"><p>TrapLog is the daily activity log for licensed nuisance wildlife control operators. Record every control activity with the fields state inspectors ask for — client, address, date, provider, species, number removed, control method, disposition — and keep it current at the business location. Filter by date, client, or species, print an inspection-ready daily log, and export a CSV when annual-report time comes. Everything stays in your browser.</p><ul class="tool-features"><li>Log every control activity with state-required fields</li><li>Species, method, and disposition picklists built for NWCO work</li><li>Search and filter by date, client, or species</li><li>Print an inspection-ready daily activity log</li><li>CSV export for annual activity reports</li><li>Data stays in your browser — nothing uploaded</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock TrapLog.</h2></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $12</option><option value="6">6 months — $60 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>
+.tool-app-traplog { font-family: inherit; }
+.tool-app-traplog .tl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+.tool-app-traplog .tl-stat { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px; padding: 10px 12px; text-align: center; }
+.tool-app-traplog .tl-stat span { display: block; font-size: 12px; color: #4B5563; }
+.tool-app-traplog .tl-stat strong { font-size: 22px; color: #15803D; }
+.tool-app-traplog .tl-cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; }
+@media (max-width: 720px) { .tool-app-traplog .tl-cols { grid-template-columns: 1fr; } .tool-app-traplog .tl-stats { grid-template-columns: repeat(2, 1fr); } }
+.tool-app-traplog .tl-h { margin: 0 0 10px; font-size: 16px; color: #111827; }
+.tool-app-traplog .tl-form label { display: block; font-size: 13px; color: #374151; margin-bottom: 8px; }
+.tool-app-traplog .tl-form input, .tool-app-traplog .tl-form select, .tool-app-traplog .tl-form textarea { width: 100%; box-sizing: border-box; margin-top: 3px; padding: 7px 9px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px; }
+.tool-app-traplog .tl-formbtns { display: flex; gap: 8px; margin-top: 6px; }
+.tool-app-traplog .tl-btn { background: #15803D; color: #fff; border: none; border-radius: 8px; padding: 9px 16px; font-size: 14px; cursor: pointer; }
+.tool-app-traplog .tl-btn:hover { background: #166534; }
+.tool-app-traplog .tl-btn-ghost { background: #fff; color: #15803D; border: 1px solid #15803D; }
+.tool-app-traplog .tl-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.tool-app-traplog .tl-filters input, .tool-app-traplog .tl-filters select { padding: 7px 9px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 13px; width: 100%; box-sizing: border-box; }
+.tool-app-traplog .tl-list { list-style: none; margin: 0; padding: 0; max-height: 460px; overflow-y: auto; }
+.tool-app-traplog .tl-item { border: 1px solid #E5E7EB; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; background: #fff; }
+.tool-app-traplog .tl-item .tl-row1 { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tool-app-traplog .tl-item .tl-client { font-weight: 600; color: #111827; }
+.tool-app-traplog .tl-item .tl-date { font-size: 12px; color: #6B7280; white-space: nowrap; }
+.tool-app-traplog .tl-item .tl-meta { font-size: 13px; color: #374151; margin-top: 4px; }
+.tool-app-traplog .tl-item .tl-sub { font-size: 12px; color: #6B7280; margin-top: 4px; }
+.tool-app-traplog .tl-item .tl-actions { margin-top: 6px; display: flex; gap: 10px; }
+.tool-app-traplog .tl-item .tl-link { background: none; border: none; color: #15803D; font-size: 13px; cursor: pointer; padding: 0; text-decoration: underline; }
+.tool-app-traplog .tl-item .tl-del { color: #B91C1C; }
+.tool-app-traplog .tl-empty { color: #6B7280; font-size: 14px; padding: 14px; text-align: center; border: 1px dashed #D1D5DB; border-radius: 10px; }
+.tool-app-traplog .tl-export { display: flex; gap: 8px; margin-top: 12px; }
+.tool-app-traplog .tl-print { display: none; }
+@media print {
+  .tool-app-traplog .tl-stats, .tool-app-traplog .tl-cols, .tool-app-traplog .tl-export { display: none !important; }
+  .tool-app-traplog .tl-print { display: block !important; }
+  .tool-app-traplog .tl-print h2 { font-size: 18px; margin: 0 0 4px; }
+  .tool-app-traplog .tl-print p { font-size: 12px; color: #333; margin: 0 0 10px; }
+  .tool-app-traplog .tl-print table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .tool-app-traplog .tl-print th, .tool-app-traplog .tl-print td { border: 1px solid #999; padding: 4px 6px; text-align: left; }
+  .tool-app-traplog .tl-print th { background: #eee; }
+}
+</style>
+<div class="tool-app-traplog" id="toolAppRoot">
+  <div class="tl-stats">
+    <div class="tl-stat"><span>Activities</span><strong id="tl-stat-total">0</strong></div>
+    <div class="tl-stat"><span>Removed (30 days)</span><strong id="tl-stat-removed">0</strong></div>
+    <div class="tl-stat"><span>Species (30 days)</span><strong id="tl-stat-species">0</strong></div>
+    <div class="tl-stat"><span>Days logged (30 days)</span><strong id="tl-stat-days">0</strong></div>
+  </div>
+  <div class="tl-cols">
+    <div class="tl-col">
+      <h4 class="tl-h">Log an activity</h4>
+      <form id="tl-form" class="tl-form">
+        <label>Date<input id="tl-date" type="date" required></label>
+        <label>Client name<input id="tl-client" type="text" required maxlength="80" placeholder="Jane Smith"></label>
+        <label>Service address<input id="tl-address" type="text" maxlength="120" placeholder="123 Main St, Dallas TX"></label>
+        <label>Client phone<input id="tl-phone" type="tel" maxlength="30" placeholder="(214) 555-0100"></label>
+        <label>Provider / tech<input id="tl-tech" type="text" maxlength="80" placeholder="Your name or tech name"></label>
+        <label>Species<select id="tl-species"><option>Raccoon</option><option>Squirrel</option><option>Opossum</option><option>Skunk</option><option>Bat</option><option>Groundhog</option><option>Chipmunk</option><option>Mole / Vole</option><option>Snake</option><option>Bird</option><option>Fox</option><option>Coyote</option><option>Beaver</option><option>Feral cat</option><option>Other</option></select></label>
+        <label>Number removed<input id="tl-count" type="number" min="0" value="1"></label>
+        <label>Control method<select id="tl-method"><option>Live trap</option><option>Lethal trap</option><option>Exclusion / sealing</option><option>One-way door</option><option>Netting</option><option>Repellent</option><option>Inspection only</option><option>Other</option></select></label>
+        <label>Disposition<select id="tl-disposition"><option>Released on site</option><option>Relocated</option><option>Euthanized</option><option>Turned over to authorities</option><option>Escaped / not caught</option><option>N/A — inspection only</option></select></label>
+        <label>Notes<textarea id="tl-notes" rows="2" maxlength="300" placeholder="Trap location, damage found, follow-up needed..."></textarea></label>
+        <div class="tl-formbtns">
+          <button type="submit" class="tl-btn" id="tl-submit">Log activity</button>
+          <button type="button" class="tl-btn tl-btn-ghost" id="tl-cancel" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="tl-col">
+      <h4 class="tl-h">Activity log</h4>
+      <div class="tl-filters">
+        <input id="tl-search" type="text" maxlength="60" placeholder="Search client or address...">
+        <select id="tl-filter-species"><option value="">All species</option><option>Raccoon</option><option>Squirrel</option><option>Opossum</option><option>Skunk</option><option>Bat</option><option>Groundhog</option><option>Chipmunk</option><option>Mole / Vole</option><option>Snake</option><option>Bird</option><option>Fox</option><option>Coyote</option><option>Beaver</option><option>Feral cat</option><option>Other</option></select>
+        <input id="tl-from" type="date" aria-label="From date">
+        <input id="tl-to" type="date" aria-label="To date">
+      </div>
+      <ul id="tl-list" class="tl-list"></ul>
+      <div class="tl-export">
+        <button type="button" class="tl-btn" id="tl-print">Print daily log</button>
+        <button type="button" class="tl-btn tl-btn-ghost" id="tl-csv">Export CSV</button>
+      </div>
+    </div>
+  </div>
+  <div id="tl-print-area" class="tl-print" aria-hidden="true"></div>
+</div>
+<script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  var LS_KEY = 'toolapp-traplog-data';
+  var editingId = null;
+  function uid() { return 'id' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
+  function todayStr() {
+    var d = new Date();
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+  function load() {
+    try {
+      var d = JSON.parse(localStorage.getItem(LS_KEY));
+      if (d && d.entries) return d;
+    } catch (e) {}
+    return { entries: [] };
+  }
+  function save(d) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  function fmtDate(str) {
+    if (!str) return '';
+    var p = str.split('-');
+    return p.length === 3 ? (parseInt(p[1], 10) + '/' + parseInt(p[2], 10) + '/' + p[0]) : str;
+  }
+  function filtered(d) {
+    var q = $('tl-search').value.trim().toLowerCase();
+    var sp = $('tl-filter-species').value;
+    var from = $('tl-from').value, to = $('tl-to').value;
+    return d.entries.filter(function (e) {
+      if (sp && e.species !== sp) return false;
+      if (from && e.date < from) return false;
+      if (to && e.date > to) return false;
+      if (q && ((e.client || '') + ' ' + (e.address || '')).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    }).sort(function (a, b) { return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0); });
+  }
+  function renderStats(d) {
+    var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 29);
+    var recent = d.entries.filter(function (e) { return new Date(e.date + 'T00:00:00') >= cutoff; });
+    var removed = 0, species = {}, days = {};
+    recent.forEach(function (e) {
+      removed += parseInt(e.count, 10) || 0;
+      if (e.species) species[e.species] = 1;
+      days[e.date] = 1;
+    });
+    $('tl-stat-total').textContent = d.entries.length;
+    $('tl-stat-removed').textContent = removed;
+    $('tl-stat-species').textContent = Object.keys(species).length;
+    $('tl-stat-days').textContent = Object.keys(days).length;
+  }
+  function renderList(d) {
+    var list = $('tl-list');
+    var rows = filtered(d);
+    if (!rows.length) {
+      list.innerHTML = '<li class="tl-empty">No activities match. Log your first control activity to get started.</li>';
+      return;
+    }
+    list.innerHTML = rows.map(function (e) {
+      return '<li class="tl-item">' +
+        '<div class="tl-row1"><span class="tl-client">' + esc(e.client) + '</span>' +
+        '<span class="tl-date">' + esc(fmtDate(e.date)) + '</span></div>' +
+        '<div class="tl-meta">' + esc(e.species) + ' &times; ' + esc(String(e.count || 0)) +
+        ' &mdash; ' + esc(e.method) + ' &rarr; ' + esc(e.disposition) + '</div>' +
+        '<div class="tl-sub">' + esc([e.address, e.phone, e.tech].filter(Boolean).join(' · ')) + '</div>' +
+        (e.notes ? '<div class="tl-sub">Note: ' + esc(e.notes) + '</div>' : '') +
+        '<div class="tl-actions"><button type="button" class="tl-link" data-edit="' + e.id + '">Edit</button>' +
+        '<button type="button" class="tl-link tl-del" data-del="' + e.id + '">Delete</button></div></li>';
+    }).join('');
+    Array.prototype.forEach.call(list.querySelectorAll('[data-edit]'), function (b) {
+      b.addEventListener('click', function () { startEdit(b.getAttribute('data-edit')); });
+    });
+    Array.prototype.forEach.call(list.querySelectorAll('[data-del]'), function (b) {
+      b.addEventListener('click', function () {
+        if (!confirm('Delete this log entry?')) return;
+        var dd = load();
+        dd.entries = dd.entries.filter(function (e) { return e.id !== b.getAttribute('data-del'); });
+        save(dd); render();
+      });
+    });
+  }
+  function render() {
+    var d = load();
+    renderStats(d);
+    renderList(d);
+  }
+  function startEdit(id) {
+    var d = load();
+    var e = null;
+    for (var i = 0; i < d.entries.length; i++) if (d.entries[i].id === id) { e = d.entries[i]; break; }
+    if (!e) return;
+    editingId = id;
+    $('tl-date').value = e.date; $('tl-client').value = e.client || '';
+    $('tl-address').value = e.address || ''; $('tl-phone').value = e.phone || '';
+    $('tl-tech').value = e.tech || ''; $('tl-species').value = e.species || '';
+    $('tl-count').value = e.count || 0; $('tl-method').value = e.method || '';
+    $('tl-disposition').value = e.disposition || ''; $('tl-notes').value = e.notes || '';
+    $('tl-submit').textContent = 'Save changes';
+    $('tl-cancel').hidden = false;
+    $('tl-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function cancelEdit() {
+    editingId = null;
+    $('tl-form').reset();
+    $('tl-date').value = todayStr();
+    $('tl-submit').textContent = 'Log activity';
+    $('tl-cancel').hidden = true;
+  }
+  $('tl-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var d = load();
+    var rec = {
+      id: editingId || uid(),
+      date: $('tl-date').value, client: $('tl-client').value.trim(),
+      address: $('tl-address').value.trim(), phone: $('tl-phone').value.trim(),
+      tech: $('tl-tech').value.trim(), species: $('tl-species').value,
+      count: parseInt($('tl-count').value, 10) || 0, method: $('tl-method').value,
+      disposition: $('tl-disposition').value, notes: $('tl-notes').value.trim()
+    };
+    if (editingId) {
+      for (var i = 0; i < d.entries.length; i++) {
+        if (d.entries[i].id === editingId) { d.entries[i] = rec; break; }
+      }
+      cancelEdit();
+    } else {
+      d.entries.push(rec);
+      this.reset();
+      $('tl-date').value = todayStr();
+    }
+    save(d);
+    render();
+  });
+  $('tl-cancel').addEventListener('click', cancelEdit);
+  ['tl-search', 'tl-filter-species', 'tl-from', 'tl-to'].forEach(function (id) {
+    $(id).addEventListener('input', render);
+    $(id).addEventListener('change', render);
+  });
+  $('tl-csv').addEventListener('click', function () {
+    var rows = filtered(load());
+    var head = ['date', 'provider_tech', 'client', 'address', 'phone', 'species', 'number_removed', 'control_method', 'disposition', 'notes'];
+    var lines = [head.join(',')].concat(rows.map(function (e) {
+      return [e.date, e.tech, e.client, e.address, e.phone, e.species, e.count, e.method, e.disposition, e.notes]
+        .map(function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }).join(',');
+    }));
+    var blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'traplog-export.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { document.body.removeChild(a); }, 100);
+  });
+  $('tl-print').addEventListener('click', function () {
+    var rows = filtered(load());
+    var area = $('tl-print-area');
+    var head = ['Date', 'Provider / Tech', 'Client', 'Address', 'Phone', 'Species', 'Removed', 'Method', 'Disposition'];
+    area.innerHTML = '<h2>Daily Control Activity Log</h2><p>Printed ' + esc(todayStr()) +
+      ' &middot; ' + rows.length + ' entr' + (rows.length === 1 ? 'y' : 'ies') + '</p>' +
+      '<table><thead><tr>' + head.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function (e) {
+        return '<tr>' + [fmtDate(e.date), e.tech, e.client, e.address, e.phone, e.species, e.count, e.method, e.disposition]
+          .map(function (v) { return '<td>' + esc(v == null ? '' : v) + '</td>'; }).join('') + '</tr>';
+      }).join('') + '</tbody></table>';
+    window.print();
+  });
+  $('tl-date').value = todayStr();
+  render();
+})();
+</script><p class="tool-expiry" id="toolExpiry"></p></div></div><script>(function(){
+var SLUG="traplog";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Access active until '+d.toLocaleDateString()+'. Your PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$12<small>/month</small></div><ul><li>Full access to TrapLog</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#15803D"><h3>6 months</h3><div class="plan-price">$60<small> one-time</small></div><ul><li>Full access to TrapLog</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks TrapLog on any device with a browser.</p></details></div></section><section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/traplog-launch.html">Read the TrapLog launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="../../contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
