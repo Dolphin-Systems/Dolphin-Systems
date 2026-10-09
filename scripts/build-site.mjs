@@ -257,6 +257,11 @@ body.tool-unlocked #toolAccess{padding-block:34px 54px}
 .form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
 #toolApp{padding:34px}
 #toolAppRoot{margin-inline:auto}
+.page-hero.tool-index-hero{padding-block:56px 44px}
+.tool-index-grid{padding-bottom:56px}
+.product-grid .product-card.tool-card{min-height:0;display:flex;flex-direction:column}
+.tool-card .tool-foot{margin-top:auto;padding-top:16px}
+.tool-index-how{padding-block:60px}
 .tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
 .tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
@@ -392,10 +397,10 @@ function toolPageBody(tool) {
 
 function toolIndexBody(tools) {
   const cards = tools.map((tool, i) => toolCard(tool, './', i)).join('');
-  return `<section class="page-hero shell"><span class="kicker">The tool lab</span><h1>Small tools. <em>Real work.</em></h1>` +
+  return `<section class="page-hero shell tool-index-hero"><span class="kicker">The tool lab</span><h1>Small tools. <em>Real work.</em></h1>` +
   `<p>Useful software for recurring jobs, released regularly. Each tool is subscription-based and unlocks with a personal access PIN.</p></section>` +
-  `<section class="section shell section-tight"><div class="product-grid">${cards}</div></section>` +
-  `<section class="soft-section"><div class="shell split-section"><div><span class="kicker">How it works</span><h2>Three steps to any tool.</h2></div>` +
+  `<section class="section shell section-tight tool-index-grid"><div class="product-grid">${cards}</div></section>` +
+  `<section class="soft-section tool-index-how"><div class="shell split-section"><div><span class="kicker">How it works</span><h2>Three steps to any tool.</h2></div>` +
   `<div class="steps"><div><b>01</b><p>Request access on the tool's page.</p></div><div><b>02</b><p>Pay for 1 or 6 months.</p></div><div><b>03</b><p>Enter your PIN. The tool unlocks.</p></div></div></div></section>${cta('../contact.html')}`;
 }
 
