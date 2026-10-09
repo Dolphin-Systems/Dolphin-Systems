@@ -1,0 +1,55 @@
+{
+  "slug": "jobmargin-launch",
+  "title": "Meet JobMargin: know your margin before you bid",
+  "description": "A simple job margin calculator for contractors — real costs, real margins, before you quote.",
+  "category": "Tool Lab",
+  "date": "2026-10-09",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most contractors learn their true job margin a month after the job closes, when the receipts are finally tallied. By then the bid is ancient history and the money is gone. JobMargin closes that gap — you see the real numbers before you quote."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Enter the bid price, your labor hours and rate, materials, and subcontractor costs, plus your overhead percentage. JobMargin shows your total cost, profit, margin, and markup instantly. It also computes your break-even price and the exact bid you need to hit your target margin."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "General contractors and remodelers bidding fixed-price work",
+        "HVAC, plumbing, and electrical shops pricing jobs",
+        "Landscapers and painters quoting residential projects",
+        "Any freelancer who prices by the project, not the hour"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Type in the job name and the price you're thinking of bidding",
+        "Add labor hours, your rate, materials, and sub costs",
+        "Set your overhead percentage and target margin",
+        "Save the job to compare bids side by side later"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A healthy bid clears your target margin. A thin one might still be worth taking if it fills a gap in the schedule — now you can decide with numbers instead of a gut feeling."
+    },
+    {
+      "type": "paragraph",
+      "text": "JobMargin is $10 a month, or $50 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
