@@ -229,6 +229,7 @@ function toolSharedCss() {
 .tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
 .tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
 #toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+#toolLocked[hidden]{display:none}
 .tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
 .tool-lock-ico{font-size:40px}
 .tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
