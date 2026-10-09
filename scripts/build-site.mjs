@@ -519,6 +519,23 @@ async function build() {
     await writeFile(join(root, 'blog', `${post.slug}.html`), layout({ title: post.title, description: post.description, key: 'blog', body, prefix: '../', article: true }), 'utf8');
   }
   console.log(`Built ${pages.length + 2 + posts.length + tools.length} pages (${posts.length} blog posts, ${tools.length} tools).`);
+  // SEO: sitemap.xml + robots.txt (auto-includes new tools/posts on every build)
+  const siteBase = 'https://dolphinsystems.net';
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [];
+  for (const p of pages) {
+    if (p.file.includes('item.html')) continue;
+    urls.push({ loc: `${siteBase}/${p.file === 'index.html' ? '' : p.file}`, changefreq: p.file === 'index.html' ? 'weekly' : 'monthly', priority: p.file === 'index.html' ? '1.0' : '0.7' });
+  }
+  urls.push({ loc: `${siteBase}/blog/`, changefreq: 'weekly', priority: '0.8' });
+  for (const post of posts) urls.push({ loc: `${siteBase}/blog/${post.slug}.html`, changefreq: 'yearly', priority: '0.6' });
+  urls.push({ loc: `${siteBase}/product/`, changefreq: 'daily', priority: '0.9' });
+  for (const tool of tools) urls.push({ loc: `${siteBase}/product/${tool.slug}/`, changefreq: 'weekly', priority: '0.8' });
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`).join('\n') +
+    `\n</urlset>\n`;
+  await writeFile(join(root, 'sitemap.xml'), sitemap, 'utf8');
+  await writeFile(join(root, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteBase}/sitemap.xml\n`, 'utf8');
 }
 
 await build();
