@@ -238,9 +238,9 @@ section.tool-narrow{width:min(calc(100% - 64px),920px)}
 .tool-price-pills{margin:4px 0 0}
 body.tool-unlocked .tool-marketing{display:none}
 body.tool-unlocked #toolAccess{padding-block:34px 54px}
-#toolAccess{padding-block:54px}
-section.section.tool-marketing{padding-block:54px}
-.soft-section.tool-marketing{padding-block:56px}
+#toolAccess{padding-block:54px!important}
+section.section.tool-marketing{padding-block:54px!important}
+.soft-section.tool-marketing{padding-block:56px!important}
 .tool-slimbar{display:flex;align-items:center;gap:14px;padding:14px 2px;border-bottom:1px solid #dbe3f0;margin:0 0 26px}
 .tool-slimbar[hidden]{display:none}
 .tool-slimbar .tool-logo svg{width:38px;height:38px}
