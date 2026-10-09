@@ -227,9 +227,11 @@ function toolSharedCss() {
 .tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
 .tool-card .inline-link{margin-top:6px}
 .tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
-.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden;max-width:980px;margin-inline:auto}
+.tool-lock-wrap:has(#toolLocked[hidden]){max-width:none}
 #toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
 #toolLocked[hidden]{display:none}
+section.tool-narrow{width:min(calc(100% - 64px),920px)}
 .tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
 .tool-lock-ico{font-size:40px}
 .tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
@@ -338,11 +340,11 @@ function toolPageBody(tool) {
   const features = tool.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
   const appJs = String(tool.app_js).replace(/<\/(script)/gi, '<\\/$1');
   return `<style>${toolSharedCss()}</style>` +
-  `<section class="page-hero shell"><a class="inline-link" href="../../product/">← All tools</a>` +
+  `<section class="page-hero shell tool-narrow"><a class="inline-link" href="../../product/">← All tools</a>` +
   `<div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo.replace('<svg ', '<svg width="84" height="84" ')}</span>` +
   `<div><span class="kicker">Dolphin Systems tool</span><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(tool.tagline)}</p></div></div>` +
   `<div class="tool-price-pills"><span><b>$${monthly}</b>/month</span><span><b>$${sixMo}</b>/6 months <em>save ${savePct}%</em></span></div></section>` +
-  `<section class="section shell section-tight"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div>` +
+  `<section class="section shell section-tight tool-narrow"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div>` +
   `<div class="body-copy"><p>${escapeHtml(tool.description)}</p><ul class="tool-features">${features}</ul></div></div></section>` +
   `<section class="section shell" id="toolAccess"><div class="section-heading"><div><span class="kicker">The tool</span><h2>Unlock ${escapeHtml(tool.name)}.</h2></div></div>` +
   `<div class="tool-lock-wrap"><div id="toolLocked">` +
@@ -360,16 +362,16 @@ function toolPageBody(tool) {
   `<p class="form-note" id="reqMsg" hidden></p></div>` +
   `</div><div id="toolApp" hidden><style>${tool.app_css}</style>${tool.app_html}<script>${appJs}</script><p class="tool-expiry" id="toolExpiry"></p></div></div>` +
   `<script>${toolLockJs(tool.slug)}</script></section>` +
-  `<section class="soft-section"><div class="shell"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div>` +
+  `<section class="soft-section"><div class="shell tool-narrow"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div>` +
   `<div class="tool-pricing-grid">` +
   `<div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$${monthly}<small>/month</small></div><ul><li>Full access to ${escapeHtml(tool.name)}</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div>` +
   `<div class="tool-plan featured" style="--plan-accent:${escapeHtml(tool.accent)}"><h3>6 months</h3><div class="plan-price">$${sixMo}<small> one-time</small></div><ul><li>Full access to ${escapeHtml(tool.name)}</li><li>Save ${savePct}% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div>` +
   `</div></div></section>` +
-  `<section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div>` +
+  `<section class="section shell section-tight tool-narrow"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div>` +
   `<div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details>` +
   `<details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details>` +
   `<details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks ${escapeHtml(tool.name)} on any device with a browser.</p></details></div></section>` +
-  `<section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div>` +
+  `<section class="section shell section-tight tool-narrow"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div>` +
   `<div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/${escapeHtml(tool.slug)}-launch.html">Read the ${escapeHtml(tool.name)} launch notes ${arrow}</a></div></div></section>${cta('../../contact.html')}`;
 }
 
