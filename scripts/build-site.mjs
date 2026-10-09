@@ -238,12 +238,15 @@ section.tool-narrow{width:min(calc(100% - 64px),920px)}
 .tool-price-pills{margin:4px 0 0}
 body.tool-unlocked .tool-marketing{display:none}
 body.tool-unlocked #toolAccess{padding-block:34px 54px}
+#toolAccess{padding-block:54px}
+section.section.tool-marketing{padding-block:54px}
+.soft-section.tool-marketing{padding-block:56px}
 .tool-slimbar{display:flex;align-items:center;gap:14px;padding:14px 2px;border-bottom:1px solid #dbe3f0;margin:0 0 26px}
 .tool-slimbar[hidden]{display:none}
 .tool-slimbar .tool-logo svg{width:38px;height:38px}
 .tool-slimbar-text b{display:block;font-size:17px;line-height:1.25}
 .tool-slimbar .tool-expiry{font-size:13px;color:#0a7a4e;font-weight:600}
-.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center;display:flex;flex-direction:column;justify-content:center}
 .tool-lock-ico{font-size:40px}
 .tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
 #pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
