@@ -363,13 +363,78 @@ init();
 })();`;
 }
 
+function toolJsonLd(tool) {
+  const base = 'https://dolphinsystems.net';
+  const monthly = Number(tool.pricing.monthly);
+  const sixMo = Number(tool.pricing.six_month);
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": tool.name,
+        "description": tool.description,
+        "url": `${base}/product/${tool.slug}/`,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Dolphin Systems", "url": base },
+        "offers": [
+          { "@type": "Offer", "name": `${tool.name} — Monthly`, "price": monthly, "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "name": `${tool.name} — 6 months`, "price": sixMo, "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How do I get a PIN?", "acceptedAnswer": { "@type": "Answer", "text": "Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly." } },
+          { "@type": "Question", "name": "What happens when my subscription runs out?", "acceptedAnswer": { "@type": "Answer", "text": "The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed." } },
+          { "@type": "Question", "name": "Can I use my PIN on more than one device?", "acceptedAnswer": { "@type": "Answer", "text": `Yes. Your PIN unlocks ${tool.name} on any device with a browser.` } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": base + "/" },
+          { "@type": "ListItem", "position": 2, "name": "Tool Lab", "item": base + "/product/" },
+          { "@type": "ListItem", "position": 3, "name": tool.name }
+        ]
+      }
+    ]
+  };
+  return `<script type="application/ld+json">${JSON.stringify(data).replace(/<\//g, '<\\/')}</script>`;
+}
+
+function toolIndexJsonLd(tools) {
+  const base = 'https://dolphinsystems.net';
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Dolphin Systems Tool Lab",
+    "description": "Small subscription tools for recurring work.",
+    "itemListElement": tools.map((tool, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "SoftwareApplication",
+        "name": tool.name,
+        "description": tool.tagline,
+        "url": `${base}/product/${tool.slug}/`,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": Number(tool.pricing.monthly), "priceCurrency": "USD" }
+      }
+    }))
+  };
+  return `<script type="application/ld+json">${JSON.stringify(data).replace(/<\//g, '<\\/')}</script>`;
+}
+
 function toolPageBody(tool) {
   const monthly = Number(tool.pricing.monthly);
   const sixMo = Number(tool.pricing.six_month);
   const savePct = Math.round((1 - sixMo / (monthly * 6)) * 100);
   const features = tool.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
   const appJs = String(tool.app_js).replace(/<\/(script)/gi, '<\\/$1');
-  return `<style>${toolSharedCss()}</style>` +
+  return toolJsonLd(tool) + `<style>${toolSharedCss()}</style>` +
   `<section class="page-hero shell tool-narrow tool-marketing tool-intro"><a class="inline-link" href="../../product/">← All tools</a>` +
   `<div class="tool-intro-grid"><div><div class="tool-hero"><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo.replace('<svg ', '<svg width="52" height="52" ')}</span>` +
   `<div><span class="kicker">Dolphin Systems tool</span><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(tool.tagline)}</p></div></div>` +
@@ -442,7 +507,7 @@ async function build() {
     title: 'Tool lab',
     description: 'The Dolphin Systems tool lab: small subscription tools for recurring work.',
     key: 'products',
-    body: `<style>${toolSharedCss()}</style>` + toolIndexBody(tools),
+    body: toolIndexJsonLd(tools) + `<style>${toolSharedCss()}</style>` + toolIndexBody(tools),
     prefix: '../',
   }), 'utf8');
   const posts = await loadPosts();
