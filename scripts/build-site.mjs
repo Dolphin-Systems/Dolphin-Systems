@@ -261,6 +261,14 @@ section.section.tool-marketing{padding-block:54px!important}
 #toolApp{padding:34px}
 #toolAppRoot{margin-inline:auto}
 .page-hero.tool-index-hero{padding-block:56px 44px}
+.tool-intro{padding-block:48px 44px}
+.tool-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:22px}
+.tool-intro .tool-hero{gap:16px;margin:0 0 14px;align-items:center}
+.tool-intro .tool-logo svg{width:52px;height:52px}
+.tool-intro h1{font-size:clamp(38px,4.5vw,56px);margin:4px 0 6px}
+.tool-intro .tool-price-pills{margin:2px 0 0}
+.tool-intro-desc p{color:#445;margin:10px 0 0}
+@media(max-width:820px){.tool-intro-grid{grid-template-columns:1fr;gap:28px}}
 .tool-index-grid{padding-bottom:56px}
 .product-grid .product-card.tool-card{min-height:0;display:flex;flex-direction:column}
 .tool-card .tool-foot{margin-top:auto;padding-top:16px}
@@ -362,12 +370,11 @@ function toolPageBody(tool) {
   const features = tool.features.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
   const appJs = String(tool.app_js).replace(/<\/(script)/gi, '<\\/$1');
   return `<style>${toolSharedCss()}</style>` +
-  `<section class="page-hero shell tool-narrow tool-marketing"><a class="inline-link" href="../../product/">← All tools</a>` +
-  `<div class="tool-hero"><span class="tool-logo tool-logo-lg" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo.replace('<svg ', '<svg width="84" height="84" ')}</span>` +
+  `<section class="page-hero shell tool-narrow tool-marketing tool-intro"><a class="inline-link" href="../../product/">← All tools</a>` +
+  `<div class="tool-intro-grid"><div><div class="tool-hero"><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo.replace('<svg ', '<svg width="52" height="52" ')}</span>` +
   `<div><span class="kicker">Dolphin Systems tool</span><h1>${escapeHtml(tool.name)}</h1><p>${escapeHtml(tool.tagline)}</p></div></div>` +
-  `<div class="tool-price-pills"><span><b>$${monthly}</b>/month</span><span><b>$${sixMo}</b>/6 months <em>save ${savePct}%</em></span></div></section>` +
-  `<section class="section shell section-tight tool-narrow tool-marketing"><div class="split-section"><div><span class="kicker">What it does</span><h2>Built for a recurring job.</h2></div>` +
-  `<div class="body-copy"><p>${escapeHtml(tool.description)}</p><ul class="tool-features">${features}</ul></div></div></section>` +
+  `<div class="tool-price-pills"><span><b>$${monthly}</b>/month</span><span><b>$${sixMo}</b>/6 months <em>save ${savePct}%</em></span></div></div>` +
+  `<div class="tool-intro-desc"><span class="kicker">What it does</span><p>${escapeHtml(tool.description)}</p><ul class="tool-features">${features}</ul></div></div></section>` +
   `<section class="section shell" id="toolAccess"><div class="section-heading tool-marketing"><div><span class="kicker">The tool</span><h2>Unlock ${escapeHtml(tool.name)}.</h2></div></div>` +
   `<div class="tool-slimbar" id="toolSlimbar" hidden><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${tool.logo}</span><div class="tool-slimbar-text"><b>${escapeHtml(tool.name)}</b><span class="tool-expiry" id="toolExpiry"></span></div></div>` +
   `<div class="tool-lock-wrap"><div id="toolLocked">` +
