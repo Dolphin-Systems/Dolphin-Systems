@@ -256,6 +256,7 @@ body.tool-unlocked #toolAccess{padding-block:34px 54px}
 .hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
 .form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
 #toolApp{padding:34px}
+#toolAppRoot{margin-inline:auto}
 .tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
 .tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
