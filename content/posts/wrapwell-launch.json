@@ -1,0 +1,52 @@
+{
+  "slug": "wrapwell-launch",
+  "title": "WrapWell: close out client projects like a pro",
+  "description": "A close-out system for freelancers: wrap-up checklists, staged testimonial and referral asks, a testimonial wall, and final-invoice nudges.",
+  "category": "Tool launch",
+  "date": "2026-10-10",
+  "body": [
+    {
+      "text": "Projects don't end when the work ships. The handoff, the final invoice, the testimonial ask — that's the part that pays for the next project, and it's the part most freelancers skip. WrapWell is a close-out system so nothing falls through the cracks after delivery.",
+      "type": "paragraph"
+    },
+    {
+      "text": "What it does",
+      "type": "heading"
+    },
+    {
+      "text": "Track every close-out step for each project: deliverables handed over, credentials transferred or revoked, final invoice sent, then the four asks that build your pipeline — testimonial, review, referral, retainer offer. A staged message writer drafts each ask for you, day 0 through day 30, ready to copy and send.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Who it's for",
+      "type": "heading"
+    },
+    {
+      "items": [
+        "Solo freelancers closing 1–8 projects a month",
+        "Micro-agencies whose handoffs are ad hoc",
+        "Anyone whose portfolio hasn't been updated in months",
+        "Anyone still \"meaning to ask\" for testimonials"
+      ],
+      "type": "list"
+    },
+    {
+      "text": "How to use it",
+      "type": "heading"
+    },
+    {
+      "items": [
+        "Add each finished project with its final invoice",
+        "Work the close-out checklist until the progress bar is full",
+        "Generate each staged ask and send it on schedule",
+        "Collect answers in the testimonial wall and embed them on your site",
+        "Nudge overdue invoices with one polite message"
+      ],
+      "type": "list"
+    },
+    {
+      "text": "WrapWell is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription.",
+      "type": "paragraph"
+    }
+  ]
+}

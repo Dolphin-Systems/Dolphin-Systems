@@ -7,6 +7,7 @@
   <url><loc>https://dolphinsystems.net/about.html</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dolphinsystems.net/contact.html</loc><lastmod>2026-10-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dolphinsystems.net/blog/</loc><lastmod>2026-10-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dolphinsystems.net/blog/wrapwell-launch.html</loc><lastmod>2026-10-10</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dolphinsystems.net/blog/jobmargin-launch.html</loc><lastmod>2026-10-10</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dolphinsystems.net/blog/2026-10-08-measure-the-return-on-automation.html</loc><lastmod>2026-10-10</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://dolphinsystems.net/blog/traplog-launch.html</loc><lastmod>2026-10-10</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
@@ -44,4 +45,5 @@
   <url><loc>https://dolphinsystems.net/product/readscore/</loc><lastmod>2026-10-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dolphinsystems.net/product/scopeguard/</loc><lastmod>2026-10-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dolphinsystems.net/product/traplog/</loc><lastmod>2026-10-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dolphinsystems.net/product/wrapwell/</loc><lastmod>2026-10-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
