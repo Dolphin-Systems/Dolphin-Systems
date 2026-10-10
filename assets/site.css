@@ -144,3 +144,11 @@ a.product-card{text-decoration:none;color:inherit;display:block;transition:box-s
 @media(max-width:1080px){.lab-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:820px){.lab-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:620px){.lab-grid{grid-template-columns:repeat(2,1fr)}.lab-strip{padding:20px}}
+/* When the tool count leaves a single card alone in the last row, center it
+   instead of leaving dead space (the strip gains one card per daily drop). */
+.lab-grid>.lab-card:last-child:nth-child(6n+1){grid-column:1/-1;max-width:360px;width:100%;margin-inline:auto}
+@media(max-width:1080px){.lab-grid>.lab-card:last-child:nth-child(4n+1){grid-column:1/-1;max-width:360px;width:100%;margin-inline:auto}}
+@media(max-width:820px){.lab-grid>.lab-card:last-child:nth-child(3n+1){grid-column:1/-1;max-width:360px;width:100%;margin-inline:auto}}
+@media(max-width:620px){.lab-grid>.lab-card:last-child:nth-child(2n+1){grid-column:1/-1;max-width:360px;width:100%;margin-inline:auto}}
+/* Same treatment for the catalog grid's lone last card. */
+.product-grid>.product-card:last-child:nth-child(3n+1){grid-column:1/-1;max-width:430px;width:100%;margin-inline:auto}
