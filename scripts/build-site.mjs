@@ -203,10 +203,10 @@ function toolCard(tool, base, index) {
 function toolLabSection(tools) {
   if (!tools.length) return '';
   const items = tools.map((tool) => {
-    const logo = tool.logo.replace('<svg ', '<svg width="30" height="30" ');
-    return `<a href="./product/${escapeHtml(tool.slug)}/"><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span><span><b>${escapeHtml(tool.name)}</b><i>$${Number(tool.pricing.monthly)}/mo</i></span></a>`;
+    const logo = tool.logo.replace('<svg ', '<svg width="34" height="34" ');
+    return `<a class="lab-card" href="./product/${escapeHtml(tool.slug)}/"><span class="tool-logo" style="color:${escapeHtml(tool.accent)}" aria-hidden="true">${logo}</span><span><b>${escapeHtml(tool.name)}</b><i>$${Number(tool.pricing.monthly)}/mo</i></span></a>`;
   }).join('');
-  return `<section class="shell"><div class="lab-strip"><div class="lab-strip-head"><span class="kicker">The tool lab</span><p>Small paid utilities we also sell — each unlocks with a PIN.</p></div><div class="lab-items">${items}</div><a class="lab-link" href="./product/">All tools</a></div></section>`;
+  return `<section class="shell"><div class="lab-strip"><div class="lab-strip-head"><div><span class="kicker">The tool lab</span><h3>Small tools for recurring work.</h3><p>Each one unlocks with a personal PIN.</p></div><a class="button button-dark lab-cta" href="./product/">All tools ${arrow}</a></div><div class="lab-grid">${items}</div></div></section>`;
 }
 
 function liveToolsSection(tools) {
