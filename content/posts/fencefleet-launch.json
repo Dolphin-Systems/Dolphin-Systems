@@ -1,0 +1,51 @@
+{
+  "slug": "fencefleet-launch",
+  "title": "FenceFleet: know where every panel is",
+  "description": "Track panels, feet, and clamps across every job site, bill each hire on 28-day cycles with pro-rata math, and print invoices in one click.",
+  "category": "Tool launch",
+  "date": "2026-10-11",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Temp fence companies lose three to five percent of their panels every year. Nobody steals a whole yard at once. Panels just drift: a few left at a job site after pickup, a couple damaged and never written down, a mid-hire extension nobody billed. For a 200-panel operator that is four to six thousand dollars a year, gone quietly."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "FenceFleet tracks your whole fleet — panels, feet, and clamps — and shows what is out, what is available, and what was lost. Each job site gets its own hire record: deliveries, mid-hire additions, returns, and scheduled pickups. Billing runs on 28-day cycles with exact pro-rata math, so an extension that starts on a Tuesday is billed from that Tuesday, not from the next round number. When the hire closes, one click prints the invoice."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Temp fence rental companies tired of spreadsheet tracking",
+        "Event fencing outfits with short, overlapping hires",
+        "Contractors who rent fence to their own job sites",
+        "Anyone who has ever wondered where panel number 147 went"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Enter your fleet counts once: panels, feet, clamps, and what a replacement panel costs",
+        "Add a hire when panels leave the yard, with the site name and your rate",
+        "Record mid-hire additions and returns as they happen, including lost or damaged panels",
+        "Close the hire and print the invoice — or use the quick quote calculator before you quote a job"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Your data stays in your browser — nothing is uploaded anywhere. FenceFleet is $15 a month, or $75 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
