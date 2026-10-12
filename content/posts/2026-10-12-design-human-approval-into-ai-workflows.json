@@ -1,0 +1,152 @@
+{
+  "slug": "2026-10-12-design-human-approval-into-ai-workflows",
+  "title": "Design Human Approval Into AI Workflows",
+  "description": "Learn how to add risk tiers, approval queues, confidence thresholds, audit trails, and rollback to AI workflows so automation stays fast without taking unsafe actions.",
+  "date": "2026-10-12",
+  "category": "Guides",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most teams hit the same wall when they move an AI workflow toward production. The model can draft a reply, update a record, or trigger a downstream process, but someone asks the obvious question: what happens when it is wrong? The instinct is to add a human review step to everything. That works for a week, then the queue becomes the bottleneck and people start rubber-stamping approvals just to clear it."
+    },
+    {
+      "type": "paragraph",
+      "text": "A better approach is to design approval as a graded control, not a blanket gate. You decide up front which actions carry real risk, which ones can run automatically, and where a human needs to see the output before it affects a customer, a payment, or a system of record. This guide covers how to structure that in practice."
+    },
+    {
+      "type": "heading",
+      "text": "Start With Risk Tiers, Not Approval Rules"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before you write a single approval rule, classify the actions your workflow can take. Risk tiers are a simple way to do this. The point is not to be exhaustive. It is to make the default obvious: low-risk actions run, high-risk actions wait."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Tier 0 — Read-only. The workflow retrieves data, classifies an item, or writes to a scratch log. No approval needed.",
+        "Tier 1 — Reversible internal writes. It updates an internal note, tags a record, or drafts a message that is not sent. Approval can be after-the-fact or sampled.",
+        "Tier 2 — Customer-visible or hard-to-reverse. It sends an email, changes a price, or updates a record that feeds billing. Require review before execution.",
+        "Tier 3 — Financial, legal, or access-related. It issues a refund, changes permissions, or deletes data. Require review plus a second check or a named owner."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The tiers should map to real consequences, not to how confident the model sounds. A model that is 99% confident about a refund is still a Tier 3 action. A model that is 70% confident about tagging a support ticket is still Tier 1."
+    },
+    {
+      "type": "heading",
+      "text": "Use Confidence Thresholds as a Triage Signal"
+    },
+    {
+      "type": "paragraph",
+      "text": "Confidence scores are useful, but only when you treat them as one input among several. A common mistake is to set a single threshold, like 0.9, and route everything below it to a human. That produces two problems: the threshold is arbitrary, and the model's confidence is not always well-calibrated."
+    },
+    {
+      "type": "paragraph",
+      "text": "A more reliable pattern is to combine confidence with a small set of hard rules. For example: if the action is Tier 2 or above, always require approval regardless of confidence. If the action is Tier 1 and confidence is below your threshold, route to review. If the action is Tier 0, log it and move on."
+    },
+    {
+      "type": "paragraph",
+      "text": "You can also use confidence to decide how much context a reviewer sees. High-confidence drafts can be shown as a one-click approval. Low-confidence drafts should surface the source documents, the extracted fields, and any ambiguity the model flagged."
+    },
+    {
+      "type": "heading",
+      "text": "Design the Approval Queue Around Decisions, Not Messages"
+    },
+    {
+      "type": "paragraph",
+      "text": "A queue that shows 40 pending items with no priority will be ignored. Reviewers need to know what matters, what is time-sensitive, and what happens if they do nothing."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Sort by risk tier first, then by age. A Tier 3 item from this morning outranks a Tier 1 item from last week.",
+        "Show the proposed action and the evidence side by side. The reviewer should not have to open three other tools to make a decision.",
+        "Give every item an explicit default. If no one acts within the SLA, the workflow should either escalate or hold, never silently proceed.",
+        "Keep the approval surface small. One approve, one edit, one reject. Free-text comments are useful but should not be required for routine approvals.",
+        "Record who approved, when, and what they changed. This is your audit trail and your training data for future threshold tuning."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Build the Audit Trail Before You Need It"
+    },
+    {
+      "type": "paragraph",
+      "text": "Audit trails are often treated as a compliance afterthought. In practice, they are the fastest way to debug an AI workflow. When a customer says they received the wrong notice, you want to know what the model saw, what it proposed, who approved it, and what was actually executed."
+    },
+    {
+      "type": "paragraph",
+      "text": "A minimal audit record for each action should include the workflow run ID, the input payload or a hash of it, the model and prompt version, the proposed action, the approval decision, the final executed action, and timestamps for each step. Store this separately from your operational database so it is not overwritten by later updates."
+    },
+    {
+      "type": "paragraph",
+      "text": "This record also gives you something more valuable than compliance: a dataset. After a few hundred approvals, you can see which categories of proposals get edited most often. That tells you where to adjust prompts, add validation, or raise the approval tier."
+    },
+    {
+      "type": "heading",
+      "text": "Plan for Rollback From Day One"
+    },
+    {
+      "type": "paragraph",
+      "text": "Approval reduces the chance of a bad action, but it does not eliminate it. You still need a way to undo or compensate when something goes out that should not have. Rollback design depends on the action type."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Reversible writes: keep the previous value and a timestamp so you can restore it programmatically.",
+        "Sent messages: you cannot unsend, but you can trigger a correction workflow that notifies the recipient and logs the issue.",
+        "Financial actions: route through a system that supports reversal or credit, and never let the AI workflow be the only record of the transaction.",
+        "Access changes: keep an access snapshot before the change so you can restore the prior permission set."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Rollback should be a documented procedure, not an improvised one. Write down who can trigger it, what the expected recovery time is, and how you verify that the system is back to a known good state."
+    },
+    {
+      "type": "heading",
+      "text": "An End-to-End Example"
+    },
+    {
+      "type": "paragraph",
+      "text": "Consider a workflow that handles inbound customer requests. Email arrives, the system classifies it, extracts the account and the request type, and drafts a response. For a billing question, the draft might include a proposed refund."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Ingestion: the email is parsed and matched to an account. This is Tier 0. No approval.",
+        "Classification: the request is labeled as billing, technical, or general. Tier 0. Logged.",
+        "Draft generation: a response is written. Tier 1. It sits in a queue but does not send.",
+        "Refund proposal: the draft includes a refund amount. Tier 3. The workflow does not execute the refund. It creates a proposal with the account, amount, and supporting order data.",
+        "Approval: a billing owner reviews the proposal. They can approve, edit the amount, or reject with a reason.",
+        "Execution: only after approval does the workflow call the billing system. The audit record links the approval to the transaction."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The key design choice is that the AI never holds the credentials to issue a refund. It can propose one. The approval step is the only path to execution. This keeps the blast radius small even when the model is wrong."
+    },
+    {
+      "type": "heading",
+      "text": "Limitations to Be Honest About"
+    },
+    {
+      "type": "paragraph",
+      "text": "Human approval is not a guarantee of correctness. Reviewers get tired, queues get long, and a one-click approve button invites shallow review. Treat approval as a risk-reduction control, not a safety proof. Pair it with input validation, tool allowlists, and monitoring so that a single bad approval cannot cascade."
+    },
+    {
+      "type": "paragraph",
+      "text": "It also adds latency. If your process requires a response in under a minute, a human gate may be the wrong tool. In those cases, consider restricting the AI to drafting and letting a deterministic system handle the send, or pre-approving a narrow set of low-risk actions with tight bounds."
+    },
+    {
+      "type": "heading",
+      "text": "Practical Takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Design approval around consequences, not around model confidence alone. Classify actions into risk tiers, require review before execution for anything customer-visible or hard to reverse, keep an audit record for every step, and have a rollback plan before you go live. Start with one workflow, run it for two weeks, and use the approval data to tune thresholds and prompts. The goal is not to slow automation down. It is to make the fast path safe enough to trust."
+    }
+  ]
+}
