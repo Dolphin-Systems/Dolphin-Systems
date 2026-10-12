@@ -1,0 +1,55 @@
+{
+  "slug": "renewguard-launch",
+  "title": "RenewGuard: never get auto-renewed by surprise again",
+  "description": "Track contracts by their notice deadline - the last day to cancel or renegotiate - not just the renewal date, and see the yearly spend on the line.",
+  "date": "2026-10-12",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Auto-renewals cost small businesses real money. Not because the contract is bad. Because the deadline to do anything about it passed quietly, weeks before the renewal date anyone had in their calendar."
+    },
+    {
+      "type": "heading",
+      "text": "The date that actually matters"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most contracts do not ask you to act on the renewal date. They ask for notice 30, 60, or 90 days before it. Miss that notice window and you are in for another full term, often at a higher price. RenewGuard tracks the notice deadline for every contract, not just the renewal date."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add each contract, subscription, domain, license, or policy with its renewal date and notice days",
+        "See the exact notice deadline worked out for you, sorted closest first",
+        "See yearly spend tracked and how much money sits inside a closing notice window",
+        "Mark contracts renewed or cancelled, print a renewal report, or export a CSV"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Small businesses juggling 10 or more vendor contracts and subscriptions",
+        "Agencies and consultants with domains, licenses, and software renewing all year",
+        "Landlords and trades with insurance and certifications on different cycles",
+        "Anyone who has ever paid for a year of something they meant to cancel"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Add your contracts once. Check the list when you plan the month. Act before the notice deadline, while you still have a choice. Everything stays in your browser - nothing is uploaded anywhere."
+    },
+    {
+      "type": "paragraph",
+      "text": "RenewGuard is $11 a month, or $55 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
