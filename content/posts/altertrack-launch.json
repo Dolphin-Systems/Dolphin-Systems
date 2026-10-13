@@ -1,0 +1,47 @@
+{
+  "slug": "altertrack-launch",
+  "title": "AlterTrack: the ticket rack, without the paper",
+  "description": "A digital ticket board for alterations shops: log tickets, track due dates, find any customer in seconds, print claim tickets.",
+  "category": "Tool launch",
+  "date": "2026-10-13",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Paper tickets work until they don't. They fall off the garment, the ink smudges, and the pickup date lives in your head. AlterTrack is the digital version of the ticket rack: every alteration logged, every due date visible, every customer findable in seconds."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Log a ticket when the garment comes in: customer name and phone, the garment, what needs doing, measurements, the due date, the price and what they paid up front. The board shows Received, In Progress, Ready, and Picked Up at a glance, and you move tickets along with one click."
+    },
+    {
+      "type": "heading",
+      "text": "Built for the counter"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Search by name, phone, garment, or ticket number when a customer calls",
+        "Due-today and overdue tickets flagged so nothing sits in the rack too long",
+        "Balance owed on every open ticket, totaled across the whole rack",
+        "Print a claim ticket for the customer at drop-off",
+        "Everything saved in the browser: no account, no setup, no new hardware"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "paragraph",
+      "text": "Solo tailors, alteration shops, and dry-cleaner alteration counters that still run on paper tickets and want something better without monthly software headaches."
+    },
+    {
+      "type": "paragraph",
+      "text": "AlterTrack is $9 a month, or $45 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
