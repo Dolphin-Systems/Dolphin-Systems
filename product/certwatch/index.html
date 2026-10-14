@@ -6,10 +6,9 @@
   <meta name="description" content="CertWatch — Never miss an expired insurance cert again. A Dolphin Systems subscription tool.">
   <meta name="theme-color" content="#f7f9fd">
   <title>CertWatch — Dolphin Systems</title>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://dolphinsystems.net/#organization","name":"Dolphin Systems","legalName":"Rekha LLC","url":"https://dolphinsystems.net/","email":"hello@dolphinsystems.net","foundingDate":"2026-02-18","identifier":{"@type":"PropertyValue","propertyID":"New Mexico Entity ID","value":"0008083150"},"address":{"@type":"PostalAddress","addressRegion":"NM","addressCountry":"US"},"description":"Early-stage research and development in AI-native applications, agentic workflows, autonomous AI systems, and adaptive learning technologies."}</script>
   <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
-  <link rel="stylesheet" href="../../assets/site.css?v=20261012-company-info">
-  <script src="../../assets/site.js?v=20261012-company-info" defer></script>
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -528,7 +527,10 @@ reqForm.addEventListener('submit',function(e){
     if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
     else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
     reqMsg.hidden=false;
-  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+  }).catch(function(){ var mailto='mailto:hello@dolphinsystems.net?subject='+encodeURIComponent('PIN request: '+SLUG)+'&body='+encodeURIComponent('Tool: '+SLUG+'
+Plan: '+payload.plan+' month(s)
+Name: '+payload.name+'
+Contact: '+payload.contact); reqMsg.innerHTML='Our request server is offline right now. <a href="'+mailto+'">Tap here to email your request instead</a> — it opens your mail app with everything filled in.'; reqMsg.hidden=false; });
 });
 window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
 window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
@@ -540,7 +542,7 @@ init();
       <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
       <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
     </div>
-    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span><span class="footer-legal">Dolphin Systems is operated by Rekha LLC, a New Mexico limited liability company established in 2026.</span></div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
   </footer>
 </body>
 </html>

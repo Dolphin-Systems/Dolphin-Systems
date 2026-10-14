@@ -5,20 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const email = 'hello@dolphinsystems.net';
 const brandMark = 'assets/brand-mark.svg?v=20260923-ds-favicon';
-const assetVersion = '20261012-company-info';
-const organization = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': 'https://dolphinsystems.net/#organization',
-  name: 'Dolphin Systems',
-  legalName: 'Rekha LLC',
-  url: 'https://dolphinsystems.net/',
-  email,
-  foundingDate: '2026-02-18',
-  identifier: { '@type': 'PropertyValue', propertyID: 'New Mexico Entity ID', value: '0008083150' },
-  address: { '@type': 'PostalAddress', addressRegion: 'NM', addressCountry: 'US' },
-  description: 'Early-stage research and development in AI-native applications, agentic workflows, autonomous AI systems, and adaptive learning technologies.',
-};
+const assetVersion = '20260930-toollab2';
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -44,7 +31,6 @@ function layout({ title, description, key, body, prefix = './', article = false 
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="theme-color" content="#f7f9fd">
   <title>${escapeHtml(pageTitle)}</title>
-  <script type="application/ld+json">${JSON.stringify(organization)}</script>
   <link rel="icon" type="image/svg+xml" href="${prefix}${brandMark}">
   <link rel="stylesheet" href="${prefix}assets/site.css?v=${assetVersion}">
   <script src="${prefix}assets/site.js?v=${assetVersion}" defer></script>
@@ -70,7 +56,7 @@ function layout({ title, description, key, body, prefix = './', article = false 
       <div class="footer-links"><a href="${prefix}services.html">Services</a><a href="${prefix}products.html">Products</a><a href="${prefix}research.html">Research</a><a href="${prefix}about.html">About</a><a href="${prefix}blog/">Blog</a><a href="${prefix}contact.html">Contact</a></div>
       <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="${email.replace('@','|')}"><span data-email-show="${email.replace('@','|')}"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="${prefix}assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
     </div>
-    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span><span class="footer-legal">Dolphin Systems is operated by Rekha LLC, a New Mexico limited liability company established in 2026.</span></div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
   </footer>
 </body>
 </html>
@@ -116,24 +102,21 @@ const pages = [
     description: 'Dolphin Systems research interests: reliable automation, human oversight, and interoperable systems.',
     body: `<section class="page-hero shell"><span class="kicker">Research</span><h1>Ask better questions. <em>Build better systems.</em></h1><p>Our research interests come from the practical problems behind automation: how systems connect, how people stay in control, and how a workflow stays dependable when conditions change.</p></section>
     <section class="section shell section-tight"><div class="section-heading"><div><span class="kicker">Focus areas</span><h2>What we are examining.</h2></div><p class="section-aside">Focus areas are questions we are exploring, not published findings.</p></div><div class="research-list"><article><span>01</span><div><h3>Reliable automation</h3><p>How do we make an automated process observable, recoverable, and clear about its limits?</p></div></article><article><span>02</span><div><h3>Human oversight</h3><p>Where should a person review, approve, or override a system's decision?</p></div></article><article><span>03</span><div><h3>Systems that connect</h3><p>How can tools exchange the right information without creating a fragile chain of dependencies?</p></div></article></div></section>
-    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">Research &amp; Development · Concept Stage</span><h2>Synesis.</h2></div><div class="body-copy"><p>Synesis is an early-stage research initiative exploring personalized knowledge comprehension and adaptive learning. The concept aims to use AI reasoning, semantic embeddings, document understanding, and evolving learner profiles to adapt educational explanations to individual needs.</p><p>We are also exploring agentic workflows, tool-using AI systems, and autonomous business automation. These are research directions, not launched products or completed findings.</p></div></div></section>
-    <section class="section shell section-tight"><div class="split-section"><div><span class="kicker">Reference points</span><h2>Useful work to learn from.</h2></div><div class="body-copy"><p>We draw on open technical guidance as we think through these questions. These external references are starting points, not Dolphin Systems research publications.</p><div class="resource-links"><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer"><span>NIST / AI Risk Management Framework</span>${arrow}</a><a href="https://www.w3.org/standards/" target="_blank" rel="noopener noreferrer"><span>W3C / Web standards</span>${arrow}</a></div><p>When we publish our own notes or experiments, they will appear in the <a class="body-link" href="./blog/">blog</a>.</p></div></div></section>${cta()}`,
+    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">Reference points</span><h2>Useful work to learn from.</h2></div><div class="body-copy"><p>We draw on open technical guidance as we think through these questions. These external references are starting points, not Dolphin Systems research publications.</p><div class="resource-links"><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer"><span>NIST / AI Risk Management Framework</span>${arrow}</a><a href="https://www.w3.org/standards/" target="_blank" rel="noopener noreferrer"><span>W3C / Web standards</span>${arrow}</a></div><p>When we publish our own notes or experiments, they will appear in the <a class="body-link" href="./blog/">blog</a>.</p></div></div></section>${cta()}`,
   },
   {
     file: 'about.html', key: 'about', title: 'About',
-    description: 'Dolphin Systems is the public brand of Rekha LLC, a New Mexico company focused on AI research, development, and automation.',
+    description: 'Learn how Dolphin Systems approaches automation and system optimization: understand the work, design clearly, and improve what matters.',
     body: `<section class="page-hero shell"><span class="kicker">About Dolphin Systems</span><h1>Clarity before <em>complexity.</em></h1><p>Dolphin Systems focuses on automation and system optimization. We help make the connections between tools, processes, and people easier to see—and easier to improve.</p></section>
     <section class="statement"><div class="shell statement-grid"><span class="kicker">Our point of view</span><p>A system is only useful when the people who rely on it can understand what it does, trust what it produces, and change it when their work changes.</p></div></section>
     <section class="section shell"><div class="section-heading"><div><span class="kicker">Principles</span><h2>How we approach the work.</h2></div></div><div class="principle-grid"><article><span>01</span><h3>Look at the full path</h3><p>A slow handoff may be the real problem, even when the request sounds like a need for new software.</p></article><article><span>02</span><h3>Make decisions visible</h3><p>Clear rules, owners, and exceptions help a system stay useful after launch.</p></article><article><span>03</span><h3>Keep improving</h3><p>Work changes. A good system should make it possible to learn from use and adjust.</p></article></div></section>
-    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">What that means</span><h2>Technology in service of the work.</h2></div><div class="body-copy"><p>We do not begin with a tool list. We begin with the outcome, the people involved, and the constraints that matter. From there, we can decide where automation helps, where a connection is missing, and where the simplest fix is a better process.</p><a class="inline-link" href="./services.html">See our services ${arrow}</a></div></div></section>
-    <section class="section shell"><div class="split-section"><div><span class="kicker">Legal identity</span><h2>Company Information</h2></div><div class="body-copy"><p>Dolphin Systems is the public brand operated by Rekha LLC, a legally registered New Mexico limited liability company. Rekha LLC was formed on February 18, 2026, in New Mexico, United States (Entity ID 0008083150).</p><p>Dolphin Systems LLC is listed as an alternative business name in the formation documents; it is not a separate company. We are an early-stage business focused on research and development in AI-native applications and automation.</p><p>Business contact: <a class="body-link" href="mailto:${email}">${email}</a> · <a class="body-link" href="https://dolphinsystems.net/">dolphinsystems.net</a></p></div></div></section>${cta()}`,
+    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">What that means</span><h2>Technology in service of the work.</h2></div><div class="body-copy"><p>We do not begin with a tool list. We begin with the outcome, the people involved, and the constraints that matter. From there, we can decide where automation helps, where a connection is missing, and where the simplest fix is a better process.</p><a class="inline-link" href="./services.html">See our services ${arrow}</a></div></div></section>${cta()}`,
   },
   {
     file: 'contact.html', key: 'contact', title: 'Contact',
-    description: 'Contact Dolphin Systems, operated by Rekha LLC in New Mexico, at hello@dolphinsystems.net.',
+    description: 'Contact Dolphin Systems about automation, integrations, and system optimization.',
     body: `<section class="page-hero shell contact-hero"><span class="kicker">Contact</span><h1>What needs to <em>work better?</em></h1><p>Tell us about the process, tool, or handoff that is slowing you down. A short description is enough to start.</p><div class="contact-panel"><div><span class="kicker">Email us</span><a href="#" data-email-link="${email.replace('@','|')}" data-email-subject="Dolphin%20Systems%20inquiry"><span data-email-show="${email.replace('@','|')}"></span> ${arrow}</a><button class="chat-link chat-link-contact" type="button" data-open-lila><img class="chat-icon" src="./assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div><p>Helpful context: what happens today, where it gets stuck, and what a better outcome would look like.</p></div></section>
-    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">Before we build</span><h2>Start with the problem.</h2></div><div class="steps"><div><b>01</b><p>What work is repeated, delayed, or hard to track?</p></div><div><b>02</b><p>Which tools and people are involved today?</p></div><div><b>03</b><p>What would change if the system worked well?</p></div></div></div></section>
-    <section class="section shell"><div class="split-section"><div><span class="kicker">Company Information</span><h2>Who you are contacting.</h2></div><div class="body-copy"><p>Dolphin Systems is operated by Rekha LLC, a New Mexico limited liability company formed on February 18, 2026 (Entity ID 0008083150).</p><p>Business email: <a class="body-link" href="mailto:${email}">${email}</a><br>Website: <a class="body-link" href="https://dolphinsystems.net/">dolphinsystems.net</a></p></div></div></section>`,
+    <section class="soft-section"><div class="shell split-section"><div><span class="kicker">Before we build</span><h2>Start with the problem.</h2></div><div class="steps"><div><b>01</b><p>What work is repeated, delayed, or hard to track?</p></div><div><b>02</b><p>Which tools and people are involved today?</p></div><div><b>03</b><p>What would change if the system worked well?</p></div></div></div></section>`,
   },
   {
     file: 'products/item.html', key: 'products', prefix: '../', title: 'Product details',
@@ -372,7 +355,7 @@ reqForm.addEventListener('submit',function(e){
     if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
     else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
     reqMsg.hidden=false;
-  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+  }).catch(function(){ var mailto='mailto:hello@dolphinsystems.net?subject='+encodeURIComponent('PIN request: '+SLUG)+'&body='+encodeURIComponent('Tool: '+SLUG+'\nPlan: '+payload.plan+' month(s)\nName: '+payload.name+'\nContact: '+payload.contact); reqMsg.innerHTML='Our request server is offline right now. <a href="'+mailto+'">Tap here to email your request instead</a> — it opens your mail app with everything filled in.'; reqMsg.hidden=false; });
 });
 window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
 window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });

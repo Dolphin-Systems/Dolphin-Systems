@@ -479,7 +479,10 @@ reqForm.addEventListener('submit',function(e){
     if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
     else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
     reqMsg.hidden=false;
-  }).catch(function(){ reqMsg.textContent='Could not reach the server. Try again in a moment.'; reqMsg.hidden=false; });
+  }).catch(function(){ var mailto='mailto:hello@dolphinsystems.net?subject='+encodeURIComponent('PIN request: '+SLUG)+'&body='+encodeURIComponent('Tool: '+SLUG+'
+Plan: '+payload.plan+' month(s)
+Name: '+payload.name+'
+Contact: '+payload.contact); reqMsg.innerHTML='Our request server is offline right now. <a href="'+mailto+'">Tap here to email your request instead</a> — it opens your mail app with everything filled in.'; reqMsg.hidden=false; });
 });
 window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
 window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
