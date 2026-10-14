@@ -1,0 +1,52 @@
+{
+  "slug": "cashroute-launch",
+  "title": "CashRoute: back-office clarity for ATM operators",
+  "description": "Track your machines, audit processor statements for fee errors, forecast cash refills, and log uptime — one screen, no spreadsheets.",
+  "date": "2026-10-14",
+  "category": "Tool launch",
+  "body": [
+    {
+      "text": "Independent ATM operators run their back office on spreadsheets. Machines go offline invisibly, processor statements hide fee errors nobody reads, and cash forecasting is a manual second job. CashRoute replaces that spreadsheet with one screen.",
+      "type": "paragraph"
+    },
+    {
+      "text": "What it does",
+      "type": "heading"
+    },
+    {
+      "text": "Register each machine with its location and surcharge. Import a processor statement CSV and CashRoute flags the lines that look wrong — fees over 15% of gross, unregistered machines, volume swings of 40% or more. Log cash loads and get a days-remaining forecast per machine. Log outages and see trailing 30-day uptime. End the month with a per-machine report you can print.",
+      "type": "paragraph"
+    },
+    {
+      "text": "Who it's for",
+      "type": "heading"
+    },
+    {
+      "items": [
+        "Independent ATM route operators and deployers",
+        "Owner-operators running machines across multiple locations",
+        "Anyone reconciling processor statements by hand",
+        "Operators tired of surprise cash-outs at busy machines"
+      ],
+      "type": "list"
+    },
+    {
+      "text": "How to use it",
+      "type": "heading"
+    },
+    {
+      "items": [
+        "Register your machines with locations and surcharges",
+        "Import your processor statement CSV each cycle",
+        "Review the flagged lines for fee errors",
+        "Log cash loads to keep the refill forecast accurate",
+        "Print the monthly route report"
+      ],
+      "type": "list"
+    },
+    {
+      "text": "CashRoute is $12 a month, or $60 for six months. One recovered fee error pays for the year. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription.",
+      "type": "paragraph"
+    }
+  ]
+}
