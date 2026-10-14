@@ -1,0 +1,91 @@
+{
+  "slug": "2026-10-14-rag-for-internal-knowledge-a-practical-guide",
+  "title": "RAG for Internal Knowledge: A Practical Guide",
+  "description": "Learn how retrieval-augmented generation can make internal knowledge searchable and reliable, with concrete steps for chunking, retrieval, and access control.",
+  "date": "2026-10-14",
+  "category": "Explainer",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Your team probably has the answer somewhere. A policy in a PDF, a fix in a ticket, a decision buried in a Slack thread. The problem is not that knowledge is missing. It is that finding it takes longer than the work it supports. Retrieval-augmented generation (RAG) is one practical way to fix this: instead of relying on a model's training data, you give it access to your documents at query time and ask it to answer using only those sources."
+    },
+    {
+      "type": "heading",
+      "text": "What RAG actually does"
+    },
+    {
+      "type": "paragraph",
+      "text": "RAG combines two steps. First, retrieval: your system searches a knowledge base for passages relevant to the question. Second, generation: a language model writes an answer using those passages as context. The model does not memorize your documents. It reads the retrieved chunks and responds. This matters because internal knowledge changes constantly and often contains sensitive details that should not be baked into a model."
+    },
+    {
+      "type": "paragraph",
+      "text": "A simple flow looks like this: user question -> embed question -> search vector store -> retrieve top chunks -> build prompt with chunks -> model generates answer with citations -> return answer."
+    },
+    {
+      "type": "heading",
+      "text": "Chunking: the step most teams get wrong"
+    },
+    {
+      "type": "paragraph",
+      "text": "You cannot feed entire documents into a prompt reliably. You split them into chunks, usually by paragraph, section, or a fixed token count with overlap. Chunk size affects quality. Too small, and a chunk lacks context. Too large, and retrieval pulls in irrelevant text that dilutes the answer. A common starting point is 300 to 800 tokens with 10 to 20 percent overlap, but the right number depends on your content. Headers and section titles should travel with each chunk so the model knows what it is reading."
+    },
+    {
+      "type": "heading",
+      "text": "Embeddings and retrieval"
+    },
+    {
+      "type": "paragraph",
+      "text": "An embedding model converts each chunk into a vector, a numeric representation of meaning. When a user asks a question, you embed that question and search for chunks with similar vectors. This is semantic search: it can find relevant passages even when the wording differs. For better results, combine vector search with keyword search, often called hybrid retrieval. Vector search handles meaning; keyword search handles exact terms like product codes or error messages. Retrieve more chunks than you need, then rerank them by relevance before sending the top few to the model."
+    },
+    {
+      "type": "heading",
+      "text": "Citations and freshness"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every answer should cite its sources. If the model cannot point to a document, the user cannot verify the answer. Citations also make debugging easier when something is wrong. Freshness is equally important. If a policy changed last week, the old version should not surface. Track document timestamps, re-embed updated content, and remove or archive outdated sources. A stale knowledge base produces confident but wrong answers."
+    },
+    {
+      "type": "heading",
+      "text": "Access control: non-negotiable"
+    },
+    {
+      "type": "paragraph",
+      "text": "Internal knowledge is not uniformly shareable. HR documents, financial records, and customer contracts have different audiences. Your retrieval layer must enforce the same permissions as the source system. Do not rely on the model to withhold information it was given. Filter results before they reach the prompt, based on the user's identity and role. If a user lacks access to a document, that document should never appear in their retrieval results."
+    },
+    {
+      "type": "heading",
+      "text": "Evaluation: how to know it works"
+    },
+    {
+      "type": "paragraph",
+      "text": "Build a test set of real questions with known correct answers and sources. Measure two things separately: retrieval quality (did the right chunks come back?) and answer quality (was the response accurate and grounded?). Track failures. Common ones include missing documents, ambiguous questions, and chunks that contain the answer but rank too low. Fix retrieval before tuning the prompt. Most RAG problems are retrieval problems."
+    },
+    {
+      "type": "heading",
+      "text": "When no document supports an answer"
+    },
+    {
+      "type": "paragraph",
+      "text": "The assistant must be able to say it does not know. If retrieval returns nothing relevant, the correct response is to state that no supporting document was found, not to generate a plausible guess. This is a design choice, not a model limitation. Set a relevance threshold, and instruct the model to answer only from retrieved context. Then test it with questions your knowledge base cannot answer."
+    },
+    {
+      "type": "heading",
+      "text": "A practical starting point"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Pick one high-value knowledge domain, not everything at once.",
+        "Export documents with their permissions and timestamps intact.",
+        "Chunk with headers, test retrieval quality on real questions.",
+        "Add citations and a no-answer path from day one.",
+        "Monitor which questions fail and improve the source content, not just the prompt."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "RAG is not magic. It is a retrieval system with a language model attached. Treat the retrieval side with the same care you would give any search infrastructure, and the results will be useful. Treat it as an afterthought, and you will get confident answers that nobody trusts."
+    }
+  ]
+}
