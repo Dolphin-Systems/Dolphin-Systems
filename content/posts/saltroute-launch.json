@@ -1,0 +1,51 @@
+{
+  "slug": "saltroute-launch",
+  "title": "SaltRoute: refill routes for water treatment dealers",
+  "description": "Track customer equipment, get automatic salt refill due dates, and run your weekly delivery route from one screen — no printed tickets.",
+  "date": "2026-10-15",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Independent water treatment dealers sell equipment plus recurring service — salt deliveries, filter changes, sanitizations — and run it all on printed work tickets, handwritten notes, and memory. SaltRoute gives that recurring work a home."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Register every customer with their address, equipment type, model, and serial number. Set the salt refill and filter change cadence for each one. SaltRoute computes the next due date from your logged service history and builds your route list automatically: every stop due in the next seven days, with overdue stops flagged so they never slip again."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Independent water treatment and softener dealers",
+        "Salt delivery drivers planning their weekly route",
+        "Office managers and dispatchers at small dealer shops",
+        "Any recurring-service business that refills consumables on a cadence"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add each customer with their equipment and refill cadences",
+        "Check the Route tab for this week's stops, overdue first",
+        "Log each visit in one tap: salt bags, filter changes, notes",
+        "Export the route list as CSV for planning and invoice prep"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "SaltRoute is $19 a month, or $95 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
