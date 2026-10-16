@@ -1,0 +1,59 @@
+{
+  "slug": "hoodcadence-launch",
+  "title": "HoodCadence: never lose a recurring hood-cleaning account",
+  "description": "Track every restaurant against its NFPA-96 cleaning cadence, flag overdue sites, and print signed service reports after each visit.",
+  "category": "Tool launch",
+  "date": "2026-10-16",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "A missed hood-cleaning rebooking is a lost account. HoodCadence keeps every recurring account on its NFPA-96 schedule so none of them slip to a competitor."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Add each restaurant with its cooking type. HoodCadence applies the NFPA-96 cadence rule automatically: solid fuel means monthly, high volume means quarterly, moderate means semi-annual, low volume means annual. Enter the last cleaning date and the tool computes the next due date. Overdue sites and jobs due within 14 days are flagged at the top."
+    },
+    {
+      "type": "heading",
+      "text": "Service reports included"
+    },
+    {
+      "type": "paragraph",
+      "text": "After a visit, generate a printable NFPA-96 service report with grease-depth readings for hood, duct, and fan, deficiency notes, technician and customer signatures, and a certificate number. Marking the report also resets the cleaning date, so the schedule stays current with no extra bookkeeping."
+    },
+    {
+      "type": "heading",
+      "text": "Who it is for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Independent kitchen exhaust / hood cleaning companies",
+        "Hood cleaners tracking recurring restaurant accounts",
+        "Fire-safety service contractors with NFPA-96 schedules",
+        "Owner-operators replacing spreadsheets"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add each site with its cooking type",
+        "Enter the date of the last cleaning",
+        "Check the overdue and due-soon counts every morning",
+        "Mark a visit cleaned or print a service report after each job"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "HoodCadence is $10 a month, or $50 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
