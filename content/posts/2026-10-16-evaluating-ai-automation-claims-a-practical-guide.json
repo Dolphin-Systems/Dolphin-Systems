@@ -1,0 +1,137 @@
+{
+  "slug": "2026-10-16-evaluating-ai-automation-claims-a-practical-guide",
+  "title": "Evaluating AI Automation Claims: A Practical Guide",
+  "description": "A practical framework for evaluating AI automation claims, separating verified capabilities from marketing promises before committing to production workflows.",
+  "date": "2026-10-16",
+  "category": "Automation Strategy",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Every week brings a new AI automation announcement promising to transform how work gets done. The problem for operators is not finding these announcements; it is figuring out which ones describe something real, available, and useful for their systems. A release note can be technically accurate and still tell you almost nothing about whether the tool will survive contact with your actual data, your exception cases, or your compliance requirements."
+    },
+    {
+      "type": "paragraph",
+      "text": "This guide is not about any single product. It is a framework for reading automation claims critically, so you can decide quickly whether something deserves a pilot or a polite pass."
+    },
+    {
+      "type": "heading",
+      "text": "Start with availability, not capability"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most common failure in evaluating automation news is treating a demo as a shipped feature. Vendors describe what the system can do under ideal conditions. Your job is to determine what is generally available, what is gated behind a waitlist or enterprise tier, and what exists only on a roadmap slide."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Is the feature generally available today, or in limited preview?",
+        "Does it require a specific plan tier, region, or contract?",
+        "Are there documented API endpoints, or only a UI?",
+        "What are the published rate limits and quotas?",
+        "Is there an official changelog entry with a date?"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If you cannot answer these from primary documentation, the claim is not yet actionable. That does not make it false. It makes it unverified, and unverified claims should not enter a production workflow."
+    },
+    {
+      "type": "heading",
+      "text": "Distinguish deterministic behavior from probabilistic behavior"
+    },
+    {
+      "type": "paragraph",
+      "text": "AI features sit on a spectrum. Some are wrappers around deterministic rules with a language model handling the input format. Others let the model decide which actions to take. These are very different risk profiles."
+    },
+    {
+      "type": "paragraph",
+      "text": "A classification feature that routes a support ticket into one of five categories is probabilistic but low-stakes if the routing is reversible. An agent that can issue refunds or modify customer records is probabilistic and high-stakes. Before adopting anything, map where the system makes decisions versus where it follows fixed logic."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Does the tool take actions, or only produce suggestions?",
+        "Can its output be validated against a schema before use?",
+        "What happens when the model returns something unexpected?",
+        "Is there a human approval step before irreversible actions?",
+        "Can you replay a decision after the fact for auditing?"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Check the integration surface"
+    },
+    {
+      "type": "paragraph",
+      "text": "An automation tool is only as useful as its connections to the systems you already run. Marketing pages list logos; engineering pages list endpoints. Look for the latter."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Which systems have native, maintained connectors?",
+        "Which require custom API work on your side?",
+        "How are authentication and credential rotation handled?",
+        "What is the documented behavior when a downstream system is unavailable?",
+        "Are webhooks signed and idempotent?"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If a connector exists but has no documentation for error handling, assume you will be building that layer yourself. Budget for it."
+    },
+    {
+      "type": "heading",
+      "text": "Look for failure documentation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mature platforms document how they fail. Immature ones describe only the happy path. Search the official docs for retries, timeouts, dead-letter handling, and known limitations. A limitations page is a sign of engineering honesty, not weakness."
+    },
+    {
+      "type": "paragraph",
+      "text": "Ask specifically: what happens to an in-flight workflow when the vendor has an outage? Is work queued, dropped, or partially completed? Can you resume without duplicating side effects? These questions separate tools you can depend on from tools you can only demo."
+    },
+    {
+      "type": "heading",
+      "text": "A simple evaluation scorecard"
+    },
+    {
+      "type": "paragraph",
+      "text": "When you review a new automation release, score it against a short checklist before spending engineering time. The numbers below are illustrative, not benchmarks."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Availability: 0 if roadmap only, 1 if preview, 2 if generally available",
+        "Documentation: 0 if marketing only, 1 if partial, 2 if complete with limitations",
+        "Integration fit: 0 if no relevant connectors, 1 if partial, 2 if native and documented",
+        "Failure handling: 0 if undocumented, 1 if basic retries, 2 if full observability and replay",
+        "Reversibility: 0 if irreversible actions, 1 if manual rollback, 2 if automatic rollback"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A score below six usually means wait. A score of eight or above justifies a small, bounded pilot with clear success criteria."
+    },
+    {
+      "type": "heading",
+      "text": "Practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Treat every automation announcement as a hypothesis, not a fact. Verify availability in primary documentation, map where the system makes decisions versus follows rules, and confirm that failure behavior is documented before you commit. The goal is not to be skeptical of everything; it is to spend your limited engineering time on tools that will still work when the demo ends."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently asked questions"
+    },
+    {
+      "type": "list",
+      "items": [
+        "How long should an evaluation take? For a single feature, a few hours of documentation review is usually enough to decide whether a pilot is warranted. A pilot itself should be time-boxed to two to four weeks with defined success metrics.",
+        "What if the vendor has no public documentation? Ask their sales or support team for technical docs and a sandbox. If they cannot provide either, treat the feature as unavailable for planning purposes.",
+        "Do I need to evaluate every release? No. Only evaluate releases that touch systems you already depend on, or that address a workflow you have already identified as worth automating. Most announcements are not relevant to your stack."
+      ]
+    }
+  ]
+}
