@@ -1,0 +1,51 @@
+{
+  "slug": "tippool-launch",
+  "title": "TipPool: nightly tip-outs without the math",
+  "description": "Split the night's tips by hours worked, with penny-exact payouts and a printable tip-out sheet.",
+  "category": "Tool launch",
+  "date": "2026-10-17",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Tip-out math happens at closing time, when everyone is tired and the manager still has a restaurant to close. TipPool exists so splitting the night's tips takes a minute and the numbers always add up."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Enter the cash and card tips and your tip-out percentage for support staff. Add everyone on shift, mark them tipped or support, and set their hours. TipPool splits the pools by hours worked, rounds everything to the cent, and shows each person's share. Print a tip-out sheet for the night or save it to reload later."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Restaurant and bar managers closing out a shift",
+        "Shift leads splitting pooled tips by hours",
+        "Catering leads doing event payouts",
+        "Anyone dividing shared tips without an argument"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Enter the night's cash and card tips",
+        "Set the tip-out percentage for support staff",
+        "Add each person with their role and hours",
+        "Print the tip-out sheet or save the night for your records"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "TipPool is $8 a month, or $40 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
