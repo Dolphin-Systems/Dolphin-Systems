@@ -1,0 +1,107 @@
+{
+  "slug": "2026-10-17-build-an-event-driven-workflow-that-holds-up",
+  "title": "Build an Event-Driven Workflow That Holds Up",
+  "description": "A practical guide to triggers, payload contracts, queues, workers, retries, monitoring, and downstream integrations for reliable event-driven automation.",
+  "date": "2026-10-17",
+  "category": "Guides",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most broken automations don't fail loudly. They fail quietly: a webhook arrives twice, a payload field gets renamed upstream, or a worker dies mid-job and nobody notices until a customer asks where their order went. Event-driven workflows fix the timing problem that polling creates, but they introduce a new set of failure modes you have to design for. This guide walks through the components of a durable event-driven workflow and the decisions that matter at each stage."
+    },
+    {
+      "type": "paragraph",
+      "text": "The example we'll use throughout is an order-processing flow: an order is placed in a storefront, and several downstream systems need to react—inventory reservation, invoice generation, CRM update, and a fulfillment handoff. The same structure applies to support ticket routing, document intake, or any workflow where one system announces that something happened and others respond."
+    },
+    {
+      "type": "heading",
+      "text": "Why events instead of scheduled checks"
+    },
+    {
+      "type": "paragraph",
+      "text": "A polling job asks \"has anything changed?\" on a timer. It works, but it adds latency equal to the polling interval, burns API quota on empty responses, and can miss intermediate states if something changes twice between checks. An event-driven design flips the direction: the source system publishes a message when something happens, and your workflow reacts immediately. The tradeoff is that you now depend on the source's delivery behavior—its ordering, its retry semantics, and whether it can deliver duplicates."
+    },
+    {
+      "type": "heading",
+      "text": "The components, in order"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Trigger: the event source. This is usually a webhook endpoint you expose, or a subscription to a message stream. Treat everything arriving here as untrusted input until validated.",
+        "Payload contract: the agreed shape of the event. Document required fields, types, and which ones are optional. Version it so upstream changes don't silently break consumers.",
+        "Queue: a durable buffer between receipt and processing. The endpoint should acknowledge the event quickly and enqueue it. If your worker is busy or down, the queue holds the work instead of losing it.",
+        "Worker: the process that consumes queued events, applies business logic, and calls downstream systems. Workers should be idempotent—processing the same event twice must not create two invoices.",
+        "Retries: a defined policy for transient failures, ideally with exponential backoff and a maximum attempt count.",
+        "Dead-letter queue: where events go after retries are exhausted, so a human can inspect and replay them instead of losing them."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "A simple text diagram"
+    },
+    {
+      "type": "paragraph",
+      "text": "Storefront → webhook endpoint (validate, acknowledge) → queue → worker (idempotent) → inventory API, invoice service, CRM → success log. On failure: worker → retry with backoff → dead-letter queue → alert → human review → replay."
+    },
+    {
+      "type": "heading",
+      "text": "Design the payload contract before the code"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most common source of silent breakage is an undocumented payload change. Write down the contract: which fields are required, their types, and what the event means semantically. Include an event ID and a timestamp. The event ID is what makes idempotency possible—your worker records processed IDs and skips duplicates. If the upstream system doesn't provide a stable ID, derive one from a combination of fields, but be aware that derived IDs can collide if the source data changes."
+    },
+    {
+      "type": "paragraph",
+      "text": "Version the contract. When a field is added, consumers should ignore unknown fields rather than fail. When a field is removed or renamed, publish a new event version and run both in parallel until consumers migrate. This costs a little extra work up front and saves a painful outage later."
+    },
+    {
+      "type": "heading",
+      "text": "Idempotency and retries"
+    },
+    {
+      "type": "paragraph",
+      "text": "Webhooks get delivered more than once. Networks time out, senders retry, and your endpoint may process an event before the acknowledgment reaches the sender. Design every worker action to be safely repeatable. For the order example, that means checking whether an invoice already exists for the order ID before creating one, or using a unique constraint in the downstream system. Retries should only apply to failures that might succeed later—timeouts and 5xx responses—not to validation errors, which will fail the same way every time."
+    },
+    {
+      "type": "heading",
+      "text": "Monitoring that actually catches problems"
+    },
+    {
+      "type": "paragraph",
+      "text": "Log every event with a correlation ID, the event type, the processing outcome, and the duration. Alert on queue depth growing over a threshold, failure rate exceeding a baseline, and dead-letter queue entries. A dashboard showing events received versus events completed per hour will reveal a stalled worker faster than any single error alert. Keep a replay path: the ability to re-enqueue a dead-lettered event after a fix is what turns an incident into a minor delay."
+    },
+    {
+      "type": "heading",
+      "text": "Test cases to include"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Duplicate delivery: send the same event twice and confirm only one downstream record is created.",
+        "Missing required field: confirm the event is rejected with a clear error and routed to review, not silently dropped.",
+        "Downstream timeout: simulate a slow inventory API and confirm the retry policy engages without creating duplicate reservations.",
+        "Out-of-order events: deliver an update before its corresponding create and confirm the worker handles or parks it.",
+        "Poison event: send a malformed payload repeatedly and confirm it lands in the dead-letter queue after the retry limit.",
+        "Replay: fix a downstream issue, replay a dead-lettered event, and confirm it completes cleanly."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Limitations to plan for"
+    },
+    {
+      "type": "paragraph",
+      "text": "Event-driven design adds infrastructure: a queue, a worker runtime, and monitoring all need ownership. It also makes debugging harder than a simple script because work happens asynchronously. For low-volume workflows with tolerant timing, a scheduled poll may be the simpler and more reliable choice. Choose events when latency matters, when volume is high enough that polling wastes resources, or when the source system already publishes events you can consume."
+    },
+    {
+      "type": "heading",
+      "text": "Practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with the contract and the failure path, not the happy path. Define the payload, make the worker idempotent, add a queue and a dead-letter destination, and instrument the flow before you connect the third downstream system. A workflow that handles duplicates and failures gracefully is worth more than one that merely runs fast on the first try."
+    }
+  ]
+}
