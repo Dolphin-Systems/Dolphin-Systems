@@ -1,0 +1,51 @@
+{
+  "slug": "dripdesk-launch",
+  "title": "DripDesk: price your drip menu like a pro",
+  "description": "Build IV drip formulas from real ingredient costs, set a margin target, and print a clean menu card.",
+  "date": "2026-10-18",
+  "category": "Tool launch",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most IV clinics price their drip menu by gut feel. The ingredients cost one thing this month and another the next, the nurse adds an extra booster because the client asked, and nobody knows which drips actually make money. DripDesk fixes that: build every formula from real ingredient costs, set a margin target, and the menu prices itself."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pick ingredients from the cost library — saline bags, vitamins, glutathione, NAD+, the works — or add your own with your supplier's prices. Assemble formulas from seven ready-made templates or build from scratch. Ingredient costs roll up live, a margin dial gives you a suggested price, and you can print a clean menu card for the counter. Everything saves in your browser."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "IV hydration clinics and med spas",
+        "Mobile IV operators",
+        "Wellness studios adding drip services",
+        "Anyone building a drip menu from scratch"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Load a template or start a blank formula",
+        "Add ingredients — costs roll up live as you type",
+        "Set your target margin and take the suggested price, or set your own",
+        "Save formulas and print your menu card"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "DripDesk is $12 a month, or $60 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}

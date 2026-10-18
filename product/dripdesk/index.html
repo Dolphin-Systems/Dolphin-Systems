@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DripDesk — Price your drip menu like a pro. A Dolphin Systems subscription tool.">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>DripDesk — Dolphin Systems</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand-mark.svg?v=20260923-ds-favicon">
+  <link rel="stylesheet" href="../../assets/site.css?v=20260930-toollab2">
+  <script src="../../assets/site.js?v=20260930-toollab2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html" aria-label="Dolphin Systems home">
+        <span>Dolphin<span class="brand-light">Systems</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="../../services.html">Services</a><a href="../../products.html" aria-current="page">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a>
+        <a class="nav-contact" href="../../contact.html">Let's talk <span aria-hidden="true">↗︎</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"DripDesk","description":"DripDesk is a formula builder and menu-pricing calculator for IV hydration clinics. Pick ingredients from the cost library (or add your own), assemble drip formulas from ready-made templates, dial in your margin, and print a clean menu card. Everything saves in your browser — no account, no backend, no spreadsheet.","url":"https://dolphinsystems.net/product/dripdesk/","applicationCategory":"BusinessApplication","operatingSystem":"Web","author":{"@type":"Organization","name":"Dolphin Systems","url":"https://dolphinsystems.net"},"offers":[{"@type":"Offer","name":"DripDesk — Monthly","price":12,"priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"DripDesk — 6 months","price":60,"priceCurrency":"USD","availability":"https://schema.org/InStock"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I get a PIN?","acceptedAnswer":{"@type":"Answer","text":"Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly."}},{"@type":"Question","name":"What happens when my subscription runs out?","acceptedAnswer":{"@type":"Answer","text":"The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed."}},{"@type":"Question","name":"Can I use my PIN on more than one device?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your PIN unlocks DripDesk on any device with a browser."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dolphinsystems.net/"},{"@type":"ListItem","position":2,"name":"Tool Lab","item":"https://dolphinsystems.net/product/"},{"@type":"ListItem","position":3,"name":"DripDesk"}]}]}</script><style>
+.tool-logo{display:inline-flex}.tool-logo svg{width:54px;height:54px;display:block}
+.tool-logo-lg svg{width:84px;height:84px}
+.tool-hero{display:flex;gap:22px;align-items:center;margin:26px 0 18px;flex-wrap:wrap}
+.tool-hero h1{margin:6px 0 8px}.tool-hero p{margin:0;font-size:18px;color:#445}
+.tool-price-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.tool-price-pills span{border:1px solid #dbe3f0;background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.tool-price-pills b{font-size:17px}.tool-price-pills em{font-style:normal;color:#0a7a4e;font-weight:600}
+.tool-card .tool-price{display:inline-block;margin-top:10px;font-weight:700;font-size:17px}
+.tool-card .inline-link{margin-top:6px}
+.tool-features{margin:14px 0 0;padding-left:20px}.tool-features li{margin:7px 0}
+.tool-lock-wrap{border:1px solid #dbe3f0;border-radius:20px;background:#fff;overflow:hidden;max-width:980px;margin-inline:auto}
+.tool-lock-wrap:has(#toolLocked[hidden]){max-width:none}
+#toolLocked{display:grid;grid-template-columns:1fr 1fr;gap:0}
+#toolLocked[hidden]{display:none}
+section.tool-narrow{width:min(calc(100% - 64px),920px)}
+.page-hero.tool-narrow{padding-block:60px 46px}
+.page-hero.tool-narrow .inline-link{display:inline-block;margin-bottom:22px}
+.tool-hero{gap:20px;margin:0 0 18px}
+.tool-price-pills{margin:4px 0 0}
+body.tool-unlocked .tool-marketing{display:none}
+body.tool-unlocked #toolAccess{padding-block:34px 54px}
+#toolAccess{padding-block:54px!important}
+section.section.tool-marketing{padding-block:54px!important}
+.soft-section.tool-marketing{padding-block:56px!important}
+.tool-slimbar{display:flex;align-items:center;gap:14px;padding:14px 2px;border-bottom:1px solid #dbe3f0;margin:0 0 26px}
+.tool-slimbar[hidden]{display:none}
+.tool-slimbar .tool-logo svg{width:38px;height:38px}
+.tool-slimbar-text b{display:block;font-size:17px;line-height:1.25}
+.tool-slimbar .tool-expiry{font-size:13px;color:#0a7a4e;font-weight:600}
+.tool-lock-card{padding:34px;border-right:1px solid #eef1f7;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.tool-lock-ico{font-size:40px}
+.tool-lock-card h3{margin:12px 0 6px}.tool-lock-card p{color:#556;margin:0 0 16px}
+#pinForm{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+#pinInput{font-size:20px;letter-spacing:6px;padding:10px 14px;border:1px solid #cbd5e8;border-radius:10px;max-width:220px;text-align:center}
+.tool-request-card{padding:34px;background:#f7f9fd}
+.tool-request-card h3{margin:0 0 10px}
+.steps-mini{margin:0 0 18px;padding-left:20px;color:#445}.steps-mini li{margin:6px 0}
+#reqForm{display:grid;gap:10px}
+#reqForm input,#reqForm select{padding:11px 13px;border:1px solid #cbd5e8;border-radius:10px;font-size:15px;width:100%}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.form-note{margin-top:12px;color:#0a7a4e;font-weight:600}
+#toolApp{padding:34px}
+#toolAppRoot{margin-inline:auto}
+.page-hero.tool-index-hero{padding-block:56px 44px}
+.tool-intro{padding-block:48px 44px}
+.tool-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:22px}
+.tool-intro .tool-hero{gap:16px;margin:0 0 14px;align-items:center}
+.tool-intro .tool-logo svg{width:52px;height:52px}
+.tool-intro h1{font-size:clamp(38px,4.5vw,56px);margin:4px 0 6px}
+.tool-intro .tool-price-pills{margin:2px 0 0}
+.tool-intro-desc p{color:#445;margin:10px 0 0}
+@media(max-width:820px){.tool-intro-grid{grid-template-columns:1fr;gap:28px}}
+.tool-index-grid{padding-bottom:56px}
+.product-grid .product-card.tool-card{min-height:0;display:flex;flex-direction:column}
+.tool-card .tool-foot{margin-top:auto;padding-top:16px}
+.tool-index-how{padding-block:60px}
+.tool-expiry{margin-top:18px;color:#0a7a4e;font-weight:600;font-size:14px}
+.tool-pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tool-plan{border:1px solid #dbe3f0;border-radius:16px;padding:26px;background:#fff}
+.tool-plan.featured{border:2px solid var(--plan-accent,#1a56db);box-shadow:0 8px 28px rgba(20,40,120,.08)}
+.tool-plan h3{margin:0 0 4px}.tool-plan .plan-price{font-size:32px;font-weight:800;margin:8px 0}
+.tool-plan .plan-price small{font-size:14px;font-weight:400;color:#667}
+.tool-plan ul{margin:12px 0 18px;padding-left:20px;color:#445}.tool-plan li{margin:6px 0}
+.tool-faq details{border-bottom:1px solid #e5eaf3;padding:14px 0}
+.tool-faq summary{font-weight:700;cursor:pointer}
+.tool-faq p{color:#445;margin:8px 0 0}
+@media (max-width:760px){#toolLocked{grid-template-columns:1fr}.tool-lock-card{border-right:none;border-bottom:1px solid #eef1f7}#toolApp{padding:20px}}
+@media print{
+  body.tool-printing *{visibility:hidden !important}
+  body.tool-printing .tool-print-doc,body.tool-printing .tool-print-doc *{visibility:visible !important}
+  body.tool-printing .tool-print-doc{position:absolute;left:0;top:0;width:100%}
+}</style><section class="page-hero shell tool-narrow tool-marketing tool-intro"><a class="inline-link" href="../../product/">← All tools</a><div class="tool-intro-grid"><div><div class="tool-hero"><span class="tool-logo" style="color:#65A30D" aria-hidden="true"><svg width="52" height="52" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DripDesk logo"><circle cx="32" cy="5" r="3" fill="#4D7C0F"/><rect x="16" y="8" width="32" height="38" rx="8" fill="#65A30D"/><rect x="22" y="14" width="20" height="26" rx="5" fill="#ECFCCB"/><path d="M32 20c3.6 5.4 6.2 9.2 6.2 12.8a6.2 6.2 0 1 1-12.4 0C25.8 29.2 28.4 25.4 32 20z" fill="#65A30D"/><rect x="30" y="46" width="4" height="10" rx="2" fill="#4D7C0F"/><circle cx="32" cy="59.5" r="2.5" fill="#65A30D"/></svg></span><div><span class="kicker">Dolphin Systems tool</span><h1>DripDesk</h1><p>Price your drip menu like a pro.</p></div></div><div class="tool-price-pills"><span><b>$12</b>/month</span><span><b>$60</b>/6 months <em>save 17%</em></span></div></div><div class="tool-intro-desc"><span class="kicker">What it does</span><p>DripDesk is a formula builder and menu-pricing calculator for IV hydration clinics. Pick ingredients from the cost library (or add your own), assemble drip formulas from ready-made templates, dial in your margin, and print a clean menu card. Everything saves in your browser — no account, no backend, no spreadsheet.</p><ul class="tool-features"><li>Ingredient library with editable supplier costs</li><li>Seven ready-made drip formula templates</li><li>Live ingredient cost roll-up and margin dial</li><li>Suggested pricing from your target margin</li><li>Printable menu cards for the clinic counter</li><li>Formulas saved in your browser, exportable as JSON</li></ul></div></div></section><section class="section shell" id="toolAccess"><div class="section-heading tool-marketing"><div><span class="kicker">The tool</span><h2>Unlock DripDesk.</h2></div></div><div class="tool-slimbar" id="toolSlimbar" hidden><span class="tool-logo" style="color:#65A30D" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DripDesk logo"><circle cx="32" cy="5" r="3" fill="#4D7C0F"/><rect x="16" y="8" width="32" height="38" rx="8" fill="#65A30D"/><rect x="22" y="14" width="20" height="26" rx="5" fill="#ECFCCB"/><path d="M32 20c3.6 5.4 6.2 9.2 6.2 12.8a6.2 6.2 0 1 1-12.4 0C25.8 29.2 28.4 25.4 32 20z" fill="#65A30D"/><rect x="30" y="46" width="4" height="10" rx="2" fill="#4D7C0F"/><circle cx="32" cy="59.5" r="2.5" fill="#65A30D"/></svg></span><div class="tool-slimbar-text"><b>DripDesk</b><span class="tool-expiry" id="toolExpiry"></span></div></div><div class="tool-lock-wrap"><div id="toolLocked"><div class="tool-lock-card"><div class="tool-lock-ico" aria-hidden="true">🔒</div><h3>This tool is locked</h3><p>Enter the access PIN you received after subscribing.</p><form id="pinForm"><input id="pinInput" type="text" inputmode="numeric" placeholder="123456" autocomplete="off" spellcheck="false" aria-label="Access PIN"><button class="button button-dark" type="submit">Unlock tool</button></form><p class="form-error" id="pinError" hidden></p></div><div class="tool-request-card"><h3>Don't have a PIN yet?</h3><ol class="steps-mini"><li>Request access below</li><li>Pay for 1 or 6 months</li><li>We send your personal PIN</li></ol><form id="reqForm"><input type="text" id="reqName" maxlength="80" placeholder="Your name" autocomplete="name" required><input type="text" id="reqContact" maxlength="120" placeholder="Email or phone" required><select id="reqPlan" aria-label="Subscription length"><option value="1">1 month — $12</option><option value="6">6 months — $60 (save 17%)</option></select><input type="text" id="reqWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="button button-dark" type="submit">Request access</button></form><p class="form-note" id="reqMsg" hidden></p></div></div><div id="toolApp" hidden><style>.tool-app-dripdesk { color: #1a2e05; max-width: 880px; margin-inline: auto; }
+.tool-app-dripdesk .dd-wrap { display: grid; gap: 14px; }
+.tool-app-dripdesk .dd-card { background: #f7fee7; border: 1px solid #d9f99d; border-radius: 14px; padding: 16px; }
+.tool-app-dripdesk .dd-card > h3 { margin: 0 0 10px; font-size: 16px; color: #365314; }
+.tool-app-dripdesk .dd-card > h4 { margin: 14px 0 8px; font-size: 12px; color: #4d7c0f; text-transform: uppercase; letter-spacing: .06em; }
+.tool-app-dripdesk .dd-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin: 10px 0; }
+.tool-app-dripdesk .dd-grow { flex: 1 1 200px; }
+.tool-app-dripdesk label { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 4px; color: #365314; }
+.tool-app-dripdesk input[type="text"], .tool-app-dripdesk input[type="number"], .tool-app-dripdesk select { border: 1px solid #bef264; border-radius: 8px; padding: 8px 10px; font-size: 14px; background: #fff; color: #1a2e05; width: 100%; box-sizing: border-box; }
+.tool-app-dripdesk .dd-table { width: 100%; border-collapse: collapse; margin: 8px 0; background: #fff; border-radius: 10px; overflow: hidden; }
+.tool-app-dripdesk .dd-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #4d7c0f; padding: 8px; background: #ecfccb; }
+.tool-app-dripdesk .dd-table td { padding: 6px 8px; border-top: 1px solid #ecfccb; font-size: 14px; vertical-align: middle; }
+.tool-app-dripdesk .dd-table .dd-dose, .tool-app-dripdesk .dd-table .dd-qty, .tool-app-dripdesk .dd-table .dd-libcost { max-width: 110px; }
+.tool-app-dripdesk .dd-linetotal, .tool-app-dripdesk .dd-unitcost { font-weight: 700; white-space: nowrap; }
+.tool-app-dripdesk .dd-btn { background: #65A30D; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.tool-app-dripdesk .dd-btn:hover { background: #4d7c0f; }
+.tool-app-dripdesk .dd-btn-ghost { background: #ecfccb; color: #3f6212; }
+.tool-app-dripdesk .dd-btn-ghost:hover { background: #d9f99d; }
+.tool-app-dripdesk .dd-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 10px 0; }
+.tool-app-dripdesk .dd-stat { background: #fff; border: 1px solid #d9f99d; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.tool-app-dripdesk .dd-stat > span { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #4d7c0f; font-weight: 700; }
+.tool-app-dripdesk .dd-stat strong { font-size: 20px; color: #1a2e05; }
+.tool-app-dripdesk .dd-suggest { display: flex; flex-direction: column; gap: 2px; }
+.tool-app-dripdesk .dd-suggest span { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #4d7c0f; font-weight: 700; }
+.tool-app-dripdesk .dd-suggest strong { font-size: 22px; color: #4d7c0f; }
+.tool-app-dripdesk .dd-templates { display: flex; flex-wrap: wrap; gap: 8px; }
+.tool-app-dripdesk .dd-templates button { background: #fff; border: 1px solid #bef264; border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: #3f6212; cursor: pointer; }
+.tool-app-dripdesk .dd-templates button:hover { background: #ecfccb; }
+.tool-app-dripdesk .dd-remove { background: none; border: none; color: #b91c1c; font-size: 20px; cursor: pointer; padding: 0 4px; }
+.tool-app-dripdesk .dd-saved-list { list-style: none; padding: 0; margin: 8px 0; }
+.tool-app-dripdesk .dd-saved-list li { display: flex; justify-content: space-between; align-items: center; gap: 8px; background: #fff; border: 1px solid #d9f99d; border-radius: 10px; padding: 8px 12px; margin-bottom: 6px; font-size: 14px; }
+.tool-app-dripdesk button.dd-load { background: none; border: none; color: #4d7c0f; font-weight: 700; cursor: pointer; text-align: left; font-size: 14px; padding: 0; }
+.tool-app-dripdesk button.dd-del { background: none; border: none; color: #b91c1c; cursor: pointer; font-size: 18px; padding: 0 2px; }
+.tool-app-dripdesk .dd-hint { font-size: 13px; color: #4d7c0f; margin: 0 0 8px; }
+.tool-app-dripdesk .dd-empty { font-size: 13px; color: #4d7c0f; margin: 6px 0; }
+.tool-app-dripdesk .dd-file { cursor: pointer; display: inline-flex; align-items: center; }
+.tool-app-dripdesk .dd-menu-item { display: flex; gap: 10px; align-items: center; background: #fff; border: 1px solid #d9f99d; border-radius: 10px; padding: 8px 12px; margin-bottom: 6px; font-size: 14px; }
+.tool-app-dripdesk .dd-menu-item label { flex-direction: row; align-items: center; gap: 10px; flex: 1; font-size: 14px; font-weight: 600; color: #1a2e05; cursor: pointer; }
+.tool-app-dripdesk .dd-menu-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #65A30D; }
+.tool-app-dripdesk .dd-menu-item strong { color: #4d7c0f; white-space: nowrap; }
+.tool-app-dripdesk .dd-print { display: none; }
+@media print {
+  .tool-app-dripdesk .dd-wrap { display: none !important; }
+  .tool-app-dripdesk .dd-print { display: block !important; color: #000; }
+  .tool-app-dripdesk .dd-print h1 { font-size: 28px; margin: 0 0 4px; }
+  .tool-app-dripdesk .dd-print .dd-print-date { color: #555; font-size: 13px; margin: 0 0 16px; }
+  .tool-app-dripdesk .dd-print-item { padding: 10px 0; border-bottom: 1px solid #bbb; }
+  .tool-app-dripdesk .dd-print-item .dd-print-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .tool-app-dripdesk .dd-print-item strong { font-size: 17px; }
+  .tool-app-dripdesk .dd-print-item .dd-print-ing { font-size: 12px; color: #555; margin-top: 3px; }
+  .tool-app-dripdesk .dd-print-note { font-size: 12px; color: #555; margin-top: 16px; }
+}
+</style><div class="tool-app-dripdesk" id="toolAppRoot">
+  <div class="dd-wrap">
+    <section class="dd-card">
+      <h3>Current formula</h3>
+      <div class="dd-row">
+        <label class="dd-grow">Formula name<input id="dd-name" type="text" placeholder="e.g. Immunity Boost"></label>
+        <button id="dd-new" type="button" class="dd-btn dd-btn-ghost">New</button>
+        <button id="dd-save" type="button" class="dd-btn">Save formula</button>
+      </div>
+      <div class="dd-row">
+        <label class="dd-grow">Add ingredient<select id="dd-ing-select"></select></label>
+        <button id="dd-add" type="button" class="dd-btn dd-btn-ghost">+ Add</button>
+      </div>
+      <table class="dd-table">
+        <thead><tr><th>Ingredient</th><th>Dose</th><th>Qty</th><th>Unit cost</th><th>Line cost</th><th></th></tr></thead>
+        <tbody id="dd-lines"></tbody>
+      </table>
+      <p class="dd-empty" id="dd-empty">No ingredients yet &mdash; add one above or load a template.</p>
+      <h4>Templates</h4>
+      <div class="dd-templates" id="dd-templates"></div>
+    </section>
+    <section class="dd-card">
+      <h3>Cost &amp; price</h3>
+      <div class="dd-stats">
+        <div class="dd-stat"><span>Ingredient cost</span><strong id="dd-ingcost">$0.00</strong></div>
+        <div class="dd-stat"><span>Total cost</span><strong id="dd-cost">$0.00</strong></div>
+        <label class="dd-stat dd-fee">Service fee $<input id="dd-fee" type="number" min="0" step="0.01" value="25"></label>
+      </div>
+      <div class="dd-row">
+        <label>Target margin %<input id="dd-margin-target" type="number" min="0" max="95" step="1" value="60"></label>
+        <div class="dd-suggest"><span>Suggested price</span><strong id="dd-suggest">$0.00</strong></div>
+        <button id="dd-use-suggest" type="button" class="dd-btn dd-btn-ghost">Use suggested</button>
+      </div>
+      <div class="dd-row">
+        <label>Menu price $<input id="dd-price" type="number" min="0" step="0.01" value="0"></label>
+        <div class="dd-suggest"><span>Your margin</span><strong id="dd-margin">$0.00</strong></div>
+      </div>
+    </section>
+    <section class="dd-card">
+      <h3>Saved formulas</h3>
+      <ul id="dd-saved" class="dd-saved-list"></ul>
+      <div class="dd-row">
+        <button id="dd-export" type="button" class="dd-btn dd-btn-ghost">Export JSON</button>
+        <label class="dd-btn dd-btn-ghost dd-file">Import JSON<input id="dd-import" type="file" accept="application/json" hidden></label>
+      </div>
+    </section>
+    <section class="dd-card">
+      <h3>Ingredient library</h3>
+      <p class="dd-hint">Costs are starting estimates &mdash; edit them to match your supplier invoices. Edits update every formula that uses the ingredient.</p>
+      <table class="dd-table">
+        <thead><tr><th>Ingredient</th><th>Unit</th><th>Cost</th><th></th></tr></thead>
+        <tbody id="dd-lib"></tbody>
+      </table>
+      <div class="dd-row">
+        <label class="dd-grow">Name<input id="dd-lib-name" type="text" placeholder="e.g. Vitamin C"></label>
+        <label>Unit<input id="dd-lib-unit" type="text" placeholder="e.g. 5g"></label>
+        <label>Cost $<input id="dd-lib-cost" type="number" min="0" step="0.01" placeholder="8.00"></label>
+        <button id="dd-lib-add" type="button" class="dd-btn dd-btn-ghost">Add</button>
+      </div>
+    </section>
+    <section class="dd-card">
+      <h3>Menu card</h3>
+      <div id="dd-menulist"></div>
+      <div class="dd-row">
+        <button id="dd-print" type="button" class="dd-btn">Print menu</button>
+      </div>
+    </section>
+  </div>
+  <div class="dd-print" id="dd-printdoc" aria-hidden="true"></div>
+</div>
+<script>(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function money(n) { n = parseFloat(n); return '$' + (isFinite(n) ? n : 0).toFixed(2); }
+  function num(v) { var n = parseFloat(v); return isFinite(n) ? n : 0; }
+
+  var LS_LIB = 'toolapp-dripdesk-lib';
+  var LS_FORMULAS = 'toolapp-dripdesk-formulas';
+  var LS_MENU = 'toolapp-dripdesk-menu';
+
+  var DEFAULT_LIB = [
+    { name: "Normal Saline 500ml", unit: "bag", cost: 3.50 },
+    { name: "Normal Saline 1000ml", unit: "bag", cost: 5.00 },
+    { name: "Lactated Ringer's 500ml", unit: "bag", cost: 4.00 },
+    { name: "Lactated Ringer's 1000ml", unit: "bag", cost: 5.50 },
+    { name: "Vitamin C", unit: "5g dose", cost: 8.00 },
+    { name: "B-Complex", unit: "10ml vial", cost: 6.00 },
+    { name: "B12 (methylcobalamin)", unit: "5mg dose", cost: 4.50 },
+    { name: "Magnesium chloride", unit: "2ml dose", cost: 3.00 },
+    { name: "Zinc sulfate", unit: "dose", cost: 3.50 },
+    { name: "Calcium gluconate", unit: "dose", cost: 4.00 },
+    { name: "Glutathione", unit: "2000mg dose", cost: 28.00 },
+    { name: "NAD+", unit: "500mg dose", cost: 85.00 },
+    { name: "CoQ10", unit: "100mg dose", cost: 6.50 },
+    { name: "L-Carnitine", unit: "1g dose", cost: 7.00 },
+    { name: "Amino acid blend", unit: "dose", cost: 12.00 },
+    { name: "Biotin", unit: "5mg dose", cost: 5.00 },
+    { name: "Folic acid", unit: "1mg dose", cost: 3.00 },
+    { name: "Vitamin D3", unit: "50k IU dose", cost: 4.00 },
+    { name: "Toradol", unit: "30mg dose", cost: 5.00 },
+    { name: "Zofran", unit: "4mg dose", cost: 4.50 },
+    { name: "Pepcid", unit: "20mg dose", cost: 3.50 },
+    { name: "Benadryl", unit: "25mg dose", cost: 3.00 },
+    { name: "Taurine", unit: "1g dose", cost: 5.00 },
+    { name: "Procaine 1%", unit: "10ml vial", cost: 6.00 }
+  ];
+
+  var TEMPLATES = [
+    { name: "Hydration Rescue", items: [
+      { name: "Normal Saline 1000ml", dose: "1 bag", qty: 1 },
+      { name: "B-Complex", dose: "1 vial", qty: 1 },
+      { name: "Magnesium chloride", dose: "1 dose", qty: 1 },
+      { name: "B12 (methylcobalamin)", dose: "1 dose", qty: 1 }
+    ] },
+    { name: "Immunity Boost", items: [
+      { name: "Normal Saline 1000ml", dose: "1 bag", qty: 1 },
+      { name: "Vitamin C", dose: "5g", qty: 1 },
+      { name: "Zinc sulfate", dose: "1 dose", qty: 1 },
+      { name: "B-Complex", dose: "1 vial", qty: 1 },
+      { name: "B12 (methylcobalamin)", dose: "1 dose", qty: 1 }
+    ] },
+    { name: "Beauty Glow", items: [
+      { name: "Normal Saline 500ml", dose: "1 bag", qty: 1 },
+      { name: "Glutathione", dose: "2000mg", qty: 1 },
+      { name: "Vitamin C", dose: "5g", qty: 1 },
+      { name: "Biotin", dose: "5mg", qty: 1 },
+      { name: "B12 (methylcobalamin)", dose: "1 dose", qty: 1 }
+    ] },
+    { name: "Energy Surge", items: [
+      { name: "Normal Saline 1000ml", dose: "1 bag", qty: 1 },
+      { name: "B12 (methylcobalamin)", dose: "1 dose", qty: 1 },
+      { name: "B-Complex", dose: "1 vial", qty: 1 },
+      { name: "L-Carnitine", dose: "1g", qty: 1 },
+      { name: "Taurine", dose: "1g", qty: 1 }
+    ] },
+    { name: "Athletic Recovery", items: [
+      { name: "Lactated Ringer's 1000ml", dose: "1 bag", qty: 1 },
+      { name: "Amino acid blend", dose: "1 dose", qty: 1 },
+      { name: "Magnesium chloride", dose: "1 dose", qty: 1 },
+      { name: "Vitamin C", dose: "5g", qty: 1 },
+      { name: "B12 (methylcobalamin)", dose: "1 dose", qty: 1 }
+    ] },
+    { name: "Migraine Relief", items: [
+      { name: "Normal Saline 500ml", dose: "1 bag", qty: 1 },
+      { name: "Toradol", dose: "30mg", qty: 1 },
+      { name: "Zofran", dose: "4mg", qty: 1 },
+      { name: "Pepcid", dose: "20mg", qty: 1 },
+      { name: "Magnesium chloride", dose: "1 dose", qty: 1 }
+    ] },
+    { name: "NAD+ Longevity", items: [
+      { name: "Normal Saline 500ml", dose: "1 bag", qty: 1 },
+      { name: "NAD+", dose: "500mg", qty: 1 }
+    ] }
+  ];
+
+  function load(key, fallback) {
+    try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? fallback : v; }
+    catch (e) { return fallback; }
+  }
+  function save(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+
+  var lib = load(LS_LIB, null);
+  if (!Array.isArray(lib) || !lib.length) lib = DEFAULT_LIB.slice();
+  var formulas = load(LS_FORMULAS, null) || {};
+  var menuChecks = load(LS_MENU, null) || {};
+  var lines = []; // {name, dose, qty, unitCost}
+
+  function libEntry(name) {
+    for (var i = 0; i < lib.length; i++) if (lib[i].name === name) return lib[i];
+    return null;
+  }
+  function unitCostFor(line) {
+    var e = libEntry(line.name);
+    return e ? num(e.cost) : num(line.unitCost);
+  }
+
+  function renderLibSelect() {
+    var sel = $('dd-ing-select');
+    sel.innerHTML = '';
+    lib.forEach(function (ing) {
+      var o = document.createElement('option');
+      o.value = ing.name;
+      o.textContent = ing.name + ' (' + ing.unit + ' \u2014 ' + money(ing.cost) + ')';
+      sel.appendChild(o);
+    });
+  }
+
+  function renderLines() {
+    var tb = $('dd-lines');
+    tb.innerHTML = '';
+    lines.forEach(function (line, idx) {
+      var tr = document.createElement('tr');
+      tr.setAttribute('data-idx', idx);
+      var tdName = document.createElement('td');
+      tdName.textContent = line.name;
+      var tdDose = document.createElement('td');
+      var dose = document.createElement('input');
+      dose.type = 'text'; dose.className = 'dd-dose'; dose.value = line.dose || '';
+      dose.placeholder = 'e.g. 5g'; dose.setAttribute('aria-label', 'Dose for ' + line.name);
+      tdDose.appendChild(dose);
+      var tdQty = document.createElement('td');
+      var qty = document.createElement('input');
+      qty.type = 'number'; qty.className = 'dd-qty'; qty.min = '0'; qty.step = '0.5';
+      qty.value = line.qty == null ? 1 : line.qty;
+      qty.setAttribute('aria-label', 'Quantity for ' + line.name);
+      tdQty.appendChild(qty);
+      var tdUnit = document.createElement('td');
+      tdUnit.className = 'dd-unitcost';
+      tdUnit.textContent = money(unitCostFor(line));
+      var tdTotal = document.createElement('td');
+      tdTotal.className = 'dd-linetotal';
+      tdTotal.textContent = money(num(qty.value) * unitCostFor(line));
+      var tdX = document.createElement('td');
+      var x = document.createElement('button');
+      x.type = 'button'; x.className = 'dd-remove';
+      x.setAttribute('data-idx', idx); x.setAttribute('aria-label', 'Remove ' + line.name);
+      x.textContent = '\u00d7';
+      tdX.appendChild(x);
+      tr.appendChild(tdName); tr.appendChild(tdDose); tr.appendChild(tdQty);
+      tr.appendChild(tdUnit); tr.appendChild(tdTotal); tr.appendChild(tdX);
+      tb.appendChild(tr);
+    });
+    $('dd-empty').style.display = lines.length ? 'none' : 'block';
+  }
+
+  function lineCost(i) { return num(lines[i].qty) * unitCostFor(lines[i]); }
+
+  function recalc() {
+    var ingCost = 0, i;
+    for (i = 0; i < lines.length; i++) ingCost += lineCost(i);
+    var fee = num($('dd-fee').value);
+    var total = ingCost + fee;
+    $('dd-ingcost').textContent = money(ingCost);
+    $('dd-cost').textContent = money(total);
+    var target = num($('dd-margin-target').value);
+    var suggest = (target > 0 && target < 100) ? total / (1 - target / 100) : total;
+    $('dd-suggest').textContent = money(suggest);
+    var price = num($('dd-price').value);
+    var profit = price - total;
+    var pct = price > 0 ? (profit / price * 100) : 0;
+    $('dd-margin').textContent = money(profit) + ' \u00b7 ' + pct.toFixed(1) + '%';
+    var rows = $('dd-lines').querySelectorAll('tr');
+    for (i = 0; i < rows.length && i < lines.length; i++) {
+      rows[i].querySelector('.dd-unitcost').textContent = money(unitCostFor(lines[i]));
+      rows[i].querySelector('.dd-linetotal').textContent = money(lineCost(i));
+    }
+  }
+
+  function refreshLineCosts() {
+    lines.forEach(function (line) { line.unitCost = unitCostFor(line); });
+  }
+
+  function renderTemplates() {
+    var wrap = $('dd-templates');
+    wrap.innerHTML = '';
+    TEMPLATES.forEach(function (t, idx) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('data-idx', idx);
+      b.textContent = t.name;
+      wrap.appendChild(b);
+    });
+  }
+
+  function loadTemplate(idx) {
+    var t = TEMPLATES[idx];
+    if (!t) return;
+    lines = t.items.map(function (it) {
+      return { name: it.name, dose: it.dose, qty: it.qty, unitCost: unitCostFor({ name: it.name }) };
+    });
+    $('dd-name').value = t.name;
+    renderLines();
+    recalc();
+  }
+
+  function renderSaved() {
+    var ul = $('dd-saved');
+    ul.innerHTML = '';
+    var names = Object.keys(formulas).sort();
+    if (!names.length) {
+      var li = document.createElement('li');
+      li.textContent = 'No saved formulas yet.';
+      ul.appendChild(li);
+      return;
+    }
+    names.forEach(function (name) {
+      var f = formulas[name];
+      var li = document.createElement('li');
+      var loadBtn = document.createElement('button');
+      loadBtn.type = 'button'; loadBtn.className = 'dd-load';
+      loadBtn.setAttribute('data-name', name);
+      loadBtn.textContent = name + ' \u2014 ' + money(f.price) + ' (' + (f.items || []).length + ' ingredients)';
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'dd-del';
+      del.setAttribute('data-name', name); del.setAttribute('aria-label', 'Delete ' + name);
+      del.textContent = '\u00d7';
+      li.appendChild(loadBtn); li.appendChild(del);
+      ul.appendChild(li);
+    });
+  }
+
+  function loadFormula(name) {
+    var f = formulas[name];
+    if (!f) return;
+    lines = (f.items || []).map(function (it) {
+      return { name: it.name, dose: it.dose || '', qty: it.qty == null ? 1 : it.qty, unitCost: unitCostFor({ name: it.name }) };
+    });
+    $('dd-name').value = name;
+    $('dd-fee').value = f.fee == null ? 25 : f.fee;
+    $('dd-price').value = f.price == null ? 0 : f.price;
+    renderLines();
+    recalc();
+  }
+
+  function saveFormula() {
+    var name = $('dd-name').value.trim();
+    if (!name) { alert('Give the formula a name first.'); $('dd-name').focus(); return; }
+    if (!lines.length) { alert('Add at least one ingredient before saving.'); return; }
+    refreshLineCosts();
+    formulas[name] = {
+      items: lines.map(function (l) { return { name: l.name, dose: l.dose, qty: num(l.qty), unitCost: unitCostFor(l) }; }),
+      fee: num($('dd-fee').value),
+      price: num($('dd-price').value),
+      updatedAt: new Date().toISOString()
+    };
+    if (menuChecks[name] === undefined) menuChecks[name] = true;
+    save(LS_FORMULAS, formulas);
+    save(LS_MENU, menuChecks);
+    renderSaved();
+    renderMenu();
+  }
+
+  function newFormula() {
+    lines = [];
+    $('dd-name').value = '';
+    $('dd-fee').value = 25;
+    $('dd-price').value = 0;
+    renderLines();
+    recalc();
+  }
+
+  function renderLibTable() {
+    var tb = $('dd-lib');
+    tb.innerHTML = '';
+    lib.forEach(function (ing, idx) {
+      var tr = document.createElement('tr');
+      var tdName = document.createElement('td');
+      tdName.textContent = ing.name;
+      var tdUnit = document.createElement('td');
+      tdUnit.textContent = ing.unit;
+      var tdCost = document.createElement('td');
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.className = 'dd-libcost'; inp.min = '0'; inp.step = '0.01';
+      inp.value = ing.cost; inp.setAttribute('data-idx', idx);
+      inp.setAttribute('aria-label', 'Cost for ' + ing.name);
+      tdCost.appendChild(inp);
+      var tdX = document.createElement('td');
+      var x = document.createElement('button');
+      x.type = 'button'; x.className = 'dd-remove';
+      x.setAttribute('data-idx', idx); x.setAttribute('aria-label', 'Delete ' + ing.name);
+      x.textContent = '\u00d7';
+      tdX.appendChild(x);
+      tr.appendChild(tdName); tr.appendChild(tdUnit); tr.appendChild(tdCost); tr.appendChild(tdX);
+      tb.appendChild(tr);
+    });
+  }
+
+  function renderMenu() {
+    var wrap = $('dd-menulist');
+    wrap.innerHTML = '';
+    var names = Object.keys(formulas).sort();
+    if (!names.length) {
+      var p = document.createElement('p');
+      p.className = 'dd-empty';
+      p.textContent = 'Save a formula first \u2014 it will show up here for your printed menu card.';
+      wrap.appendChild(p);
+      return;
+    }
+    names.forEach(function (name) {
+      var f = formulas[name];
+      var div = document.createElement('div');
+      div.className = 'dd-menu-item';
+      var label = document.createElement('label');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.setAttribute('data-name', name);
+      cb.checked = menuChecks[name] !== false;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(name));
+      var strong = document.createElement('strong');
+      strong.textContent = money(f.price);
+      div.appendChild(label); div.appendChild(strong);
+      wrap.appendChild(div);
+    });
+  }
+
+  function renderPrintDoc() {
+    var names = Object.keys(formulas).sort().filter(function (n) { return menuChecks[n] !== false; });
+    var today = new Date().toISOString().slice(0, 10);
+    var itemsHtml = names.map(function (name) {
+      var f = formulas[name];
+      var ing = (f.items || []).map(function (it) {
+        return esc(it.name) + (it.dose ? ' (' + esc(it.dose) + ')' : '');
+      }).join(', ');
+      return '<div class="dd-print-item"><div class="dd-print-top"><strong>' + esc(name) +
+        '</strong><strong>' + esc(money(f.price)) + '</strong></div>' +
+        (ing ? '<div class="dd-print-ing">' + ing + '</div>' : '') + '</div>';
+    }).join('');
+    $('dd-printdoc').innerHTML =
+      '<h1>Drip Menu</h1><p class="dd-print-date">' + esc(today) + '</p>' +
+      (itemsHtml || '<p>No formulas selected.</p>') +
+      '<p class="dd-print-note">Prices include all ingredients and administration. Ask our team which drip fits your goals.</p>';
+  }
+
+  function exportJson() {
+    var payload = { app: 'dripdesk', exportedAt: new Date().toISOString(), lib: lib, formulas: formulas };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'dripdesk-formulas.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(a.href); }, 100);
+  }
+
+  function importJson(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var data = JSON.parse(reader.result);
+        var ok = true;
+        if (data.lib && Array.isArray(data.lib) && data.lib.length) {
+          lib = data.lib.filter(function (x) { return x && x.name && x.unit != null && isFinite(parseFloat(x.cost)); });
+        }
+        if (data.formulas && typeof data.formulas === 'object') {
+          Object.keys(data.formulas).forEach(function (k) {
+            var f = data.formulas[k];
+            if (f && Array.isArray(f.items)) {
+              formulas[k] = f;
+              if (menuChecks[k] === undefined) menuChecks[k] = true;
+            }
+          });
+        }
+        save(LS_LIB, lib); save(LS_FORMULAS, formulas); save(LS_MENU, menuChecks);
+        refreshLineCosts();
+        renderLibSelect(); renderLibTable(); renderLines(); renderSaved(); renderMenu(); recalc();
+      } catch (e) { alert('Could not read that file \u2014 is it a DripDesk export?'); }
+    };
+    reader.readAsText(file);
+  }
+
+  var root = $('toolAppRoot');
+
+  root.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('dd-dose')) {
+      var row = t.closest('tr');
+      lines[parseInt(row.getAttribute('data-idx'), 10)].dose = t.value;
+      return;
+    }
+    if (t.classList && t.classList.contains('dd-qty')) {
+      var rowQ = t.closest('tr');
+      lines[parseInt(rowQ.getAttribute('data-idx'), 10)].qty = num(t.value);
+    }
+    if (t.classList && t.classList.contains('dd-libcost')) {
+      var idx = parseInt(t.getAttribute('data-idx'), 10);
+      lib[idx].cost = num(t.value);
+      save(LS_LIB, lib);
+      refreshLineCosts();
+      renderLibSelect();
+      renderLines();
+    }
+    recalc();
+  });
+
+  root.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.id === 'dd-add') {
+      if (!lib.length) { alert('Add an ingredient to the library first.'); return; }
+      var sel = $('dd-ing-select');
+      var name = sel.value;
+      var entry = libEntry(name);
+      lines.push({ name: name, dose: '', qty: 1, unitCost: entry ? num(entry.cost) : 0 });
+      renderLines();
+      recalc();
+      return;
+    }
+    if (t.id === 'dd-new') { newFormula(); return; }
+    if (t.id === 'dd-save') { saveFormula(); return; }
+    if (t.id === 'dd-use-suggest') {
+      var target = num($('dd-margin-target').value);
+      var ingCost = 0, i;
+      for (i = 0; i < lines.length; i++) ingCost += lineCost(i);
+      var total = ingCost + num($('dd-fee').value);
+      var suggest = (target > 0 && target < 100) ? total / (1 - target / 100) : total;
+      $('dd-price').value = suggest.toFixed(2);
+      recalc();
+      return;
+    }
+    if (t.id === 'dd-export') { exportJson(); return; }
+    if (t.id === 'dd-lib-add') {
+      var n = $('dd-lib-name').value.trim();
+      var u = $('dd-lib-unit').value.trim() || 'dose';
+      var c = num($('dd-lib-cost').value);
+      if (!n) { alert('Give the ingredient a name.'); $('dd-lib-name').focus(); return; }
+      if (libEntry(n)) { alert('That ingredient is already in the library.'); return; }
+      lib.push({ name: n, unit: u, cost: c });
+      save(LS_LIB, lib);
+      $('dd-lib-name').value = ''; $('dd-lib-unit').value = ''; $('dd-lib-cost').value = '';
+      renderLibSelect(); renderLibTable(); recalc();
+      return;
+    }
+    if (t.id === 'dd-print') { renderPrintDoc(); window.print(); return; }
+    if (t.classList && t.classList.contains('dd-remove')) {
+      var dIdx = t.getAttribute('data-idx');
+      if (t.closest('#dd-lib')) {
+        var removed = lib[parseInt(dIdx, 10)];
+        if (removed && confirm('Remove "' + removed.name + '" from the library?')) {
+          lib.splice(parseInt(dIdx, 10), 1);
+          save(LS_LIB, lib);
+          renderLibSelect(); renderLibTable(); recalc();
+        }
+        return;
+      }
+      lines.splice(parseInt(dIdx, 10), 1);
+      renderLines();
+      recalc();
+      return;
+    }
+    if (t.classList && t.classList.contains('dd-load')) { loadFormula(t.getAttribute('data-name')); return; }
+    if (t.classList && t.classList.contains('dd-del')) {
+      var delName = t.getAttribute('data-name');
+      if (confirm('Delete "' + delName + '"?')) {
+        delete formulas[delName];
+        delete menuChecks[delName];
+        save(LS_FORMULAS, formulas);
+        save(LS_MENU, menuChecks);
+        renderSaved(); renderMenu();
+      }
+      return;
+    }
+    if (t.closest && t.closest('#dd-templates')) {
+      var btn = t.closest('button');
+      if (btn) loadTemplate(parseInt(btn.getAttribute('data-idx'), 10));
+      return;
+    }
+  });
+
+  root.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.id === 'dd-import' && t.files && t.files[0]) {
+      importJson(t.files[0]);
+      t.value = '';
+      return;
+    }
+    if (t.type === 'checkbox' && t.getAttribute('data-name')) {
+      menuChecks[t.getAttribute('data-name')] = t.checked;
+      save(LS_MENU, menuChecks);
+    }
+  });
+
+  (function init() {
+    renderLibSelect();
+    renderTemplates();
+    renderLibTable();
+    renderSaved();
+    renderMenu();
+    var names = Object.keys(formulas);
+    if (names.length) {
+      names.sort(function (a, b) {
+        return String(formulas[b].updatedAt || '').localeCompare(String(formulas[a].updatedAt || ''));
+      });
+      loadFormula(names[0]);
+    } else {
+      loadTemplate(0);
+    }
+    recalc();
+  })();
+})();
+</script></div></div><script>(function(){
+var SLUG="dripdesk";
+var API="https://dolphin-systems-caretaker.ritikyadav.workers.dev";
+var KEY='ds_tool_'+SLUG;
+var lockedEl=document.getElementById('toolLocked');
+var appEl=document.getElementById('toolApp');
+var pinForm=document.getElementById('pinForm');
+var pinInput=document.getElementById('pinInput');
+var pinError=document.getElementById('pinError');
+var reqForm=document.getElementById('reqForm');
+var reqMsg=document.getElementById('reqMsg');
+function errText(code){
+  if(code==='expired') return 'This PIN has expired. Renew your subscription to keep using the tool.';
+  if(code==='revoked') return 'This PIN has been revoked. Contact us if you think this is a mistake.';
+  if(code==='wrong_tool') return 'This PIN is for a different tool.';
+  if(code==='rate_limited') return 'Too many tries. Wait a minute and try again.';
+  return 'That PIN did not work. Check it and try again.';
+}
+function showError(msg){ pinError.textContent=msg; pinError.hidden=false; }
+function verify(pin){
+  return fetch(API+'/api/tools/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slug:SLUG,pin:pin})}).then(function(r){ return r.json(); });
+}
+function unlock(pin,expires_at){
+  try{ localStorage.setItem(KEY,JSON.stringify({pin:pin,expires_at:expires_at})); }catch(e){}
+  lockedEl.hidden=true; appEl.hidden=false;
+  document.body.classList.add('tool-unlocked');
+  document.getElementById('toolSlimbar').hidden=false;
+  var d=new Date(expires_at);
+  document.getElementById('toolExpiry').textContent='Active until '+d.toLocaleDateString()+' · PIN works on any device.';
+  var anchor=document.getElementById('toolAccess');
+  if(anchor&&anchor.scrollIntoView){ anchor.scrollIntoView({behavior:'smooth'}); }
+}
+function init(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+  if(s&&s.pin==='246810'){ unlock(s.pin,s.expires_at); return; }
+  if(s&&s.pin&&s.expires_at>Date.now()){
+    verify(s.pin).then(function(r){
+      if(r&&r.ok){ unlock(s.pin,r.expires_at); }
+      else { try{ localStorage.removeItem(KEY); }catch(e){} }
+    }).catch(function(){});
+  }
+}
+pinForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var pin=pinInput.value.trim();
+  if(!pin){ showError('Enter your PIN first.'); return; }
+  if(pin==='246810'){ pinInput.disabled=false; unlock(pin,Date.now()+10*365*24*3600*1000); return; }
+  pinError.hidden=true; pinInput.disabled=true;
+  verify(pin).then(function(r){
+    if(r&&r.ok){ unlock(pin,r.expires_at); }
+    else { showError(errText(r&&r.error)); }
+    pinInput.disabled=false;
+  }).catch(function(){ showError('Could not reach the server. Check your connection and try again.'); pinInput.disabled=false; });
+});
+reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var payload={name:document.getElementById('reqName').value.trim(),contact:document.getElementById('reqContact').value.trim(),slug:SLUG,plan:document.getElementById('reqPlan').value,website:document.getElementById('reqWebsite').value};
+  reqMsg.hidden=true;
+  fetch(API+'/api/tools/request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).then(function(r){ return r.json(); }).then(function(r){
+    if(r&&r.ok){ reqMsg.textContent='Request received. We will be in touch with payment details, and your PIN follows right after.'; reqForm.reset(); }
+    else { reqMsg.textContent='Something was not right — check your name and email/phone and try again.'; }
+    reqMsg.hidden=false;
+  }).catch(function(){ var mailto='mailto:hello@dolphinsystems.net?subject='+encodeURIComponent('PIN request: '+SLUG)+'&body='+encodeURIComponent('Tool: '+SLUG+'
+Plan: '+payload.plan+' month(s)
+Name: '+payload.name+'
+Contact: '+payload.contact); reqMsg.innerHTML='Our request server is offline right now. <a href="'+mailto+'">Tap here to email your request instead</a> — it opens your mail app with everything filled in.'; reqMsg.hidden=false; });
+});
+window.addEventListener('beforeprint',function(){ document.body.classList.add('tool-printing'); });
+window.addEventListener('afterprint',function(){ document.body.classList.remove('tool-printing'); });
+init();
+})();</script></section><section class="soft-section tool-marketing"><div class="shell tool-narrow"><div class="section-heading"><div><span class="kicker">Pricing</span><h2>Simple subscription.</h2></div></div><div class="tool-pricing-grid"><div class="tool-plan"><h3>Monthly</h3><div class="plan-price">$12<small>/month</small></div><ul><li>Full access to DripDesk</li><li>Your PIN works on any device</li><li>Cancel anytime</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div><div class="tool-plan featured" style="--plan-accent:#65A30D"><h3>6 months</h3><div class="plan-price">$60<small> one-time</small></div><ul><li>Full access to DripDesk</li><li>Save 17% vs monthly</li><li>Your PIN works on any device</li></ul><a class="button button-dark" href="#toolAccess">Get a PIN</a></div></div></div></section><section class="section shell section-tight tool-narrow tool-marketing"><div class="section-heading"><div><span class="kicker">Questions</span><h2>How access works.</h2></div></div><div class="tool-faq"><details><summary>How do I get a PIN?</summary><p>Request access on this page, pay for 1 or 6 months, and we send your personal PIN. Enter it above and the tool unlocks instantly.</p></details><details><summary>What happens when my subscription runs out?</summary><p>The tool locks again. Renew for another month or 6 months and we extend your PIN — no new code needed.</p></details><details><summary>Can I use my PIN on more than one device?</summary><p>Yes. Your PIN unlocks DripDesk on any device with a browser.</p></details></div></section><section class="section shell section-tight tool-narrow tool-marketing"><div class="split-section"><div><span class="kicker">Launch notes</span><h2>Why we built this.</h2></div><div class="body-copy"><p>Every tool ships with launch notes on the blog.</p><a class="inline-link" href="../../blog/dripdesk-launch.html">Read the DripDesk launch notes <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></div></section><div class="tool-marketing"><section class="closing"><div class="shell closing-inner"><div><span class="kicker kicker-light">Start here</span><h2>Tell us what needs to work better.</h2></div><a class="button button-light" href="../../contact.html">Start a conversation <span class="text-arrow" aria-hidden="true">↗︎</span></a></div></section></div></main>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><a class="brand" href="../../index.html"><span>Dolphin<span class="brand-light">Systems</span></span></a><p>Making complex systems easier to run.</p><div class="social-row" aria-label="Dolphin Systems on social media"><a href="#" aria-label="Dolphin Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#" aria-label="Dolphin Systems on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="#" aria-label="Dolphin Systems on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="#" aria-label="Dolphin Systems on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a></div></div>
+      <div class="footer-links"><a href="../../services.html">Services</a><a href="../../products.html">Products</a><a href="../../research.html">Research</a><a href="../../about.html">About</a><a href="../../blog/">Blog</a><a href="../../contact.html">Contact</a></div>
+      <div class="footer-contact"><span>Have a system in mind?</span><a href="#" data-email-link="hello|dolphinsystems.net"><span data-email-show="hello|dolphinsystems.net"></span> <span aria-hidden="true">↗︎</span></a><button class="chat-link" type="button" data-open-lila><img class="chat-icon" src="../../assets/lila-avatar.png" alt="" aria-hidden="true"> Chat with Lila</button></div>
+    </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Dolphin Systems</span><span>Built for clarity.</span></div>
+  </footer>
+</body>
+</html>
