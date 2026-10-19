@@ -1,0 +1,51 @@
+{
+  "slug": "cakeflow-launch",
+  "title": "CakeFlow: custom cake orders, from inquiry to pickup",
+  "description": "An order board for home bakers and cake shops — every order tracked from inquiry to pickup, with deposits and balances handled.",
+  "category": "Tool launch",
+  "date": "2026-10-19",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Custom cake orders live in too many places: DMs, texts, screenshots, and a notebook on the counter. CakeFlow puts every order in one board so nothing gets forgotten and no pickup day sneaks up on you."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every order becomes a card that moves through six stages: inquiry, quoted, booked, in production, ready, and done. Each card holds the customer, pickup date and time, servings, size, flavor, design notes, total price, and deposit collected. The board shows the balance still owed on every order, and a pickup list view sorts everything by date so you know what's coming this week."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Home bakers juggling orders in their DMs",
+        "Custom cake shops that need a simple order board",
+        "Cupcake and dessert-table businesses with weekly pickups",
+        "Anyone who's ever written an order on a sticky note and lost it"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Add an order with the customer, pickup date, cake details, and price",
+        "Move the card through the stages as the order progresses",
+        "Watch the stats bar for orders due this week and outstanding balances",
+        "Switch to the pickup list view for a clean day-by-day schedule"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "CakeFlow is $8 a month, or $40 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
