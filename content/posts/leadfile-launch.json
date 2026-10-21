@@ -1,0 +1,43 @@
+{
+  "slug": "leadfile-launch",
+  "title": "LeadFile: the lead-safe paperwork your jobs already need",
+  "description": "A simple job-by-job record keeper for the EPA's lead paint renovation rule \u2014 pamphlet delivery, test results, certified renovator, cleaning verification, and a printable compliance package.",
+  "category": "Tool launch",
+  "date": "2026-10-21",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "If you paint, remodel, or do any renovation work on homes built before 1978, the EPA's Renovation, Repair, and Painting rule applies to you. And enforcement is almost entirely about paperwork: firms have paid $10,000 to $22,500 per case, mostly for recordkeeping violations \u2014 not for how they did the work. The rule requires a record package for every covered job, kept for three years."
+    },
+    {
+      "type": "heading",
+      "text": "The records are the whole game"
+    },
+    {
+      "type": "paragraph",
+      "text": "For each job, the EPA wants proof of five things: the Renovate Right pamphlet went to the occupant, the lead test result (or a formal assumption of lead paint), a certified renovator assigned to the job, lead-safe training for the crew, and cleaning verification after the work. Miss any one of those records and the job is out of compliance \u2014 even if the work itself was perfect."
+    },
+    {
+      "type": "heading",
+      "text": "What LeadFile does"
+    },
+    {
+      "type": "list",
+      "items": [
+        "A job register with year built, start date, and a test-or-assume-lead path for every job",
+        "The five required records as a per-job checklist with dates, methods, and details",
+        "Firm and renovator certification expiry countdowns \u2014 a lapsed cert means work stops",
+        "A printable compliance package per job with signature lines, ready for your files",
+        "Local storage with one-click JSON backup for the 3-year retention rule"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Built for small crews"
+    },
+    {
+      "type": "paragraph",
+      "text": "No logins, no integrations, no annual contract. It runs entirely in your browser, so there is nothing to install and no data leaving your machine. One avoided fine pays for decades of it."
+    }
+  ]
+}
