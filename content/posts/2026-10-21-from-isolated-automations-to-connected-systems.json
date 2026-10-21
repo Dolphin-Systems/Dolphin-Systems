@@ -1,0 +1,121 @@
+{
+  "slug": "2026-10-21-from-isolated-automations-to-connected-systems",
+  "title": "From Isolated Automations to Connected Systems",
+  "description": "Single trigger-action recipes break down as operations grow. Here is how to move to connected, observable automation systems without a full rebuild.",
+  "date": "2026-10-21",
+  "category": "Automation Strategy",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Most companies do not start with an automation strategy. They start with a problem: a form submission that never reaches the right inbox, a spreadsheet that gets copied by hand every Monday, a CRM record that someone forgets to update. A quick trigger-action recipe solves it. Then another recipe solves the next problem. Eighteen months later there are forty of these recipes, and nobody can say which ones still run, which ones overlap, or what happens when one of them fails silently."
+    },
+    {
+      "type": "paragraph",
+      "text": "That is the normal path, and it is not a mistake. Isolated automations are a reasonable way to prove value quickly. The trouble starts when they accumulate without a shared foundation. This article covers what changes as you move from scattered recipes to a connected system, and how to get there in steps rather than a rewrite."
+    },
+    {
+      "type": "heading",
+      "text": "What isolated automations actually cost you"
+    },
+    {
+      "type": "paragraph",
+      "text": "A trigger-action recipe usually owns one narrow path: when this happens, do that. It is easy to build and easy to forget. The costs show up later, and they are rarely visible on any dashboard."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Duplicated logic. Three recipes update the same customer record in slightly different ways, and the last one to run wins.",
+        "No shared state. Each recipe starts from zero. It does not know whether an earlier step succeeded or was already handled.",
+        "Silent failure. A recipe fails, retries, fails again, and no one is notified because no one set up alerting.",
+        "Unclear ownership. The person who built it left. Nobody knows what it depends on.",
+        "Credential sprawl. Every recipe has its own API connection, often tied to a personal account."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "None of these are dramatic on their own. Together they create a system that works most of the time and cannot be trusted the rest of the time."
+    },
+    {
+      "type": "heading",
+      "text": "The progression: recipes, then workflows, then systems"
+    },
+    {
+      "type": "paragraph",
+      "text": "It helps to name the stages, because each one has different requirements."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Recipes. One trigger, one or two actions. Fine for low-risk, low-volume tasks.",
+        "Workflows. A defined sequence with validation, error handling, and a clear owner. This is where most teams should operate.",
+        "Connected systems. Multiple workflows share data contracts, state, and monitoring. Approvals and escalation are built in, not bolted on."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The jump from recipes to workflows is mostly discipline. The jump from workflows to a connected system is architecture. You do not need to make that jump all at once, but you do need to plan for it."
+    },
+    {
+      "type": "heading",
+      "text": "What a connected system includes"
+    },
+    {
+      "type": "paragraph",
+      "text": "A connected automation system is not one giant workflow. It is a set of modular pieces that agree on how to talk to each other. Four elements matter most."
+    },
+    {
+      "type": "paragraph",
+      "text": "Modular architecture. Each workflow does one job and exposes a clear input and output. An intake workflow classifies a request; a routing workflow assigns it; a notification workflow handles communication. If routing changes, intake does not need to be rebuilt."
+    },
+    {
+      "type": "paragraph",
+      "text": "Shared state. A single record of what happened, keyed to a stable identifier like an order number or ticket ID. Every workflow reads from and writes to that record rather than keeping its own notes. This is what prevents duplicate work and double-sends."
+    },
+    {
+      "type": "paragraph",
+      "text": "Approvals where risk is real. Not every step needs a human. Steps that send money, delete records, or contact customers usually do. The approval should be a defined stage in the workflow with a queue, a timeout, and a fallback, not an email someone might answer."
+    },
+    {
+      "type": "paragraph",
+      "text": "Observability. Logs, run history, and alerts that tell you when something failed, when it was slow, and when it produced an unexpected result. If you cannot answer \"did this run and what did it do,\" the automation is not production-ready."
+    },
+    {
+      "type": "heading",
+      "text": "A migration path that does not require a rewrite"
+    },
+    {
+      "type": "paragraph",
+      "text": "You rarely need to rebuild everything. A staged migration is usually cheaper and less risky."
+    },
+    {
+      "type": "list",
+      "items": [
+        "Inventory. List every automation, what it touches, who owns it, and when it last ran successfully. Retire anything nobody can explain.",
+        "Consolidate. Find recipes that touch the same data and merge them into one workflow with a single owner.",
+        "Standardize identifiers. Pick one key per entity (customer, order, ticket) and make every workflow use it. This is the single highest-leverage step.",
+        "Add monitoring before adding features. Alerting and run history first, new capability second.",
+        "Introduce approvals on the highest-risk steps only. Expand later based on what you learn."
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Limitations to be honest about"
+    },
+    {
+      "type": "paragraph",
+      "text": "Connected systems are more work to design and more work to maintain than a pile of recipes. They require someone to own the architecture, and that person needs enough context to make judgment calls. Shared state introduces a dependency: if the central record is wrong, everything downstream inherits the error. Approvals add latency, and poorly designed approval queues can become their own bottleneck."
+    },
+    {
+      "type": "paragraph",
+      "text": "There is also a real ceiling. Some processes are too variable or too low-volume to justify orchestration. For those, a simple recipe with a human in the loop is the right answer. The goal is not to connect everything; it is to connect the things that depend on each other."
+    },
+    {
+      "type": "heading",
+      "text": "Practical takeaway"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by inventorying what you already have running. Then pick the one data entity that appears in the most automations and standardize how it is identified and updated. Add monitoring to your three most important workflows. Only after that should you think about orchestration. The progression from isolated recipes to connected systems is a sequence of small, reversible decisions, not a single project."
+    }
+  ]
+}
