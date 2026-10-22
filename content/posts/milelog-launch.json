@@ -1,0 +1,51 @@
+{
+  "slug": "milelog-launch",
+  "title": "MileLog: mileage logs for tax season",
+  "description": "Log every business mile with date, purpose, and odometer readings - and get a clean deduction report at tax time.",
+  "category": "Tool launch",
+  "date": "2026-10-22",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "If you drive for work, the IRS lets you deduct every business mile. The catch: you need a log with the date, the business purpose, and the miles. Most people keep that log in their head until April, then reconstruct it from gas receipts. MileLog fixes that."
+    },
+    {
+      "type": "heading",
+      "text": "What it does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Log each trip with the date, purpose, and odometer readings. MileLog computes the miles and multiplies by the IRS mileage rate to show your running deduction total. Filter by month, export a CSV for your accountant, or print a report with a signature line."
+    },
+    {
+      "type": "heading",
+      "text": "Who it's for"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Freelancers and contractors who drive to clients",
+        "Delivery and rideshare drivers tracking deductible miles",
+        "Realtors, home health workers, and salespeople on the road",
+        "Anyone who has ever guessed their mileage at tax time"
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "How to use it"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Set your mileage rate (defaults to the current IRS rate)",
+        "Add each trip: date, business purpose, odometer or miles",
+        "Watch the deduction total grow as you log trips",
+        "Export a CSV or print the report for your tax return"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "MileLog is $8 a month, or $40 for six months. Pay the admin, request your unlock PIN, and the tool opens up for your whole subscription."
+    }
+  ]
+}
